@@ -1,0 +1,224 @@
+2019-11-06 18:06:22.214 parsl.dataflow.dflow:83 [DEBUG]  Starting DataFlowKernel with config
+Config(
+    app_cache=True, 
+    checkpoint_files=None, 
+    checkpoint_mode=None, 
+    checkpoint_period=None, 
+    data_management_max_threads=10, 
+    executors=[ThreadPoolExecutor(
+        label='threads', 
+        managed=True, 
+        max_threads=2, 
+        storage_access=None, 
+        thread_name_prefix='', 
+        working_dir=None
+    )], 
+    initialize_logging=True, 
+    lazy_errors=True, 
+    max_idletime=120.0, 
+    monitoring=None, 
+    retries=0, 
+    run_dir='runinfo', 
+    strategy='simple', 
+    usage_tracking=False
+)
+2019-11-06 18:06:22.215 parsl.dataflow.dflow:84 [INFO]  Parsl version: 0.9.0
+2019-11-06 18:06:22.215 parsl.dataflow.usage_tracking.usage:126 [DEBUG]  Tracking status: False
+2019-11-06 18:06:22.215 parsl.dataflow.usage_tracking.usage:127 [DEBUG]  Testing mode   : False
+2019-11-06 18:06:22.215 parsl.dataflow.dflow:110 [INFO]  Run id is: 1e170a67-1451-4df5-a7ff-72cd2e5189aa
+2019-11-06 18:06:22.265 parsl.dataflow.memoization:52 [INFO]  App caching initialized
+2019-11-06 18:06:22.266 parsl.dataflow.strategy:125 [DEBUG]  Scaling strategy: simple
+2019-11-06 18:06:22.267 parsl.dataflow.dflow:484 [DEBUG]  Adding output dependencies
+2019-11-06 18:06:22.267 parsl.dataflow.dflow:708 [INFO]  Task 0 submitted for App fun_1, waiting on tasks []
+2019-11-06 18:06:22.267 parsl.dataflow.dflow:714 [DEBUG]  Task 0 set to pending state with AppFuture: <AppFuture super=<AppFuture at 0x7f8ab976f9e8 state=pending>>
+2019-11-06 18:06:22.268 parsl.dataflow.dflow:452 [INFO]  Task 0 launched on executor threads
+2019-11-06 18:06:22.268 parsl.dataflow.dflow:288 [INFO]  Task 0 completed
+2019-11-06 18:06:22.268 parsl.dataflow.dflow:484 [DEBUG]  Adding output dependencies
+2019-11-06 18:06:22.268 parsl.dataflow.dflow:708 [INFO]  Task 1 submitted for App fun_1, waiting on tasks []
+2019-11-06 18:06:22.268 parsl.dataflow.dflow:714 [DEBUG]  Task 1 set to pending state with AppFuture: <AppFuture super=<AppFuture at 0x7f8ab96e0358 state=pending>>
+2019-11-06 18:06:22.270 parsl.dataflow.dflow:452 [INFO]  Task 1 launched on executor threads
+2019-11-06 18:06:22.270 parsl.app.errors:158 [DEBUG]  Reraising exception of type <class 'TypeError'>
+2019-11-06 18:06:22.270 parsl.dataflow.dflow:257 [DEBUG]  Task 1 failed
+2019-11-06 18:06:22.271 parsl.dataflow.dflow:279 [ERROR]  Task 1 failed after 0 retry attempts
+Traceback (most recent call last):
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/dataflow/dflow.py", line 254, in handle_exec_update
+    res.reraise()
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/app/errors.py", line 163, in reraise
+    reraise(t, v, tb)
+  File "/home/kalpani/.local/lib/python3.5/site-packages/six.py", line 692, in reraise
+    raise value.with_traceback(tb)
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/app/errors.py", line 172, in wrapper
+    return func(*args, **kwargs)
+  File "thread.py", line 11, in fun_1
+    return x*i
+TypeError: unsupported operand type(s) for *: 'AppFuture' and 'int'
+2019-11-06 18:06:22.271 parsl.app.errors:158 [DEBUG]  Reraising exception of type <class 'TypeError'>
+2019-11-06 18:06:22.271 parsl.dataflow.dflow:484 [DEBUG]  Adding output dependencies
+2019-11-06 18:06:22.271 parsl.dataflow.dflow:708 [INFO]  Task 2 submitted for App fun_1, waiting on tasks []
+2019-11-06 18:06:22.271 parsl.dataflow.dflow:714 [DEBUG]  Task 2 set to pending state with AppFuture: <AppFuture super=<AppFuture at 0x7f8ab96e0978 state=pending>>
+2019-11-06 18:06:22.272 parsl.dataflow.dflow:452 [INFO]  Task 2 launched on executor threads
+2019-11-06 18:06:22.272 parsl.dataflow.dflow:484 [DEBUG]  Adding output dependencies
+2019-11-06 18:06:22.272 parsl.dataflow.dflow:708 [INFO]  Task 3 submitted for App fun_1, waiting on tasks []
+2019-11-06 18:06:22.272 parsl.dataflow.dflow:714 [DEBUG]  Task 3 set to pending state with AppFuture: <AppFuture super=<AppFuture at 0x7f8ab96fc208 state=pending>>
+2019-11-06 18:06:22.272 parsl.dataflow.dflow:452 [INFO]  Task 3 launched on executor threads
+2019-11-06 18:06:22.272 parsl.dataflow.dflow:484 [DEBUG]  Adding output dependencies
+2019-11-06 18:06:22.273 parsl.app.errors:158 [DEBUG]  Reraising exception of type <class 'TypeError'>
+2019-11-06 18:06:22.273 parsl.app.errors:158 [DEBUG]  Reraising exception of type <class 'TypeError'>
+2019-11-06 18:06:22.273 parsl.dataflow.dflow:708 [INFO]  Task 4 submitted for App fun_1, waiting on tasks []
+2019-11-06 18:06:22.273 parsl.dataflow.dflow:257 [DEBUG]  Task 2 failed
+2019-11-06 18:06:22.273 parsl.dataflow.dflow:257 [DEBUG]  Task 3 failed
+2019-11-06 18:06:22.274 parsl.dataflow.dflow:714 [DEBUG]  Task 4 set to pending state with AppFuture: <AppFuture super=<AppFuture at 0x7f8ab96fc3c8 state=pending>>
+2019-11-06 18:06:22.274 parsl.dataflow.dflow:279 [ERROR]  Task 2 failed after 0 retry attempts
+Traceback (most recent call last):
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/dataflow/dflow.py", line 254, in handle_exec_update
+    res.reraise()
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/app/errors.py", line 163, in reraise
+    reraise(t, v, tb)
+  File "/home/kalpani/.local/lib/python3.5/site-packages/six.py", line 692, in reraise
+    raise value.with_traceback(tb)
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/app/errors.py", line 172, in wrapper
+    return func(*args, **kwargs)
+  File "thread.py", line 11, in fun_1
+    return x*i
+TypeError: unsupported operand type(s) for *: 'AppFuture' and 'int'
+2019-11-06 18:06:22.274 parsl.dataflow.dflow:279 [ERROR]  Task 3 failed after 0 retry attempts
+Traceback (most recent call last):
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/dataflow/dflow.py", line 254, in handle_exec_update
+    res.reraise()
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/app/errors.py", line 163, in reraise
+    reraise(t, v, tb)
+  File "/home/kalpani/.local/lib/python3.5/site-packages/six.py", line 692, in reraise
+    raise value.with_traceback(tb)
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/app/errors.py", line 172, in wrapper
+    return func(*args, **kwargs)
+  File "thread.py", line 11, in fun_1
+    return x*i
+TypeError: unsupported operand type(s) for *: 'AppFuture' and 'int'
+2019-11-06 18:06:22.274 parsl.dataflow.dflow:452 [INFO]  Task 4 launched on executor threads
+2019-11-06 18:06:22.274 parsl.app.errors:158 [DEBUG]  Reraising exception of type <class 'TypeError'>
+2019-11-06 18:06:22.275 parsl.app.errors:158 [DEBUG]  Reraising exception of type <class 'TypeError'>
+2019-11-06 18:06:22.275 parsl.dataflow.dflow:484 [DEBUG]  Adding output dependencies
+2019-11-06 18:06:22.275 parsl.app.errors:158 [DEBUG]  Reraising exception of type <class 'TypeError'>
+2019-11-06 18:06:22.276 parsl.dataflow.dflow:708 [INFO]  Task 5 submitted for App fun_1, waiting on tasks []
+2019-11-06 18:06:22.276 parsl.dataflow.dflow:257 [DEBUG]  Task 4 failed
+2019-11-06 18:06:22.276 parsl.dataflow.dflow:714 [DEBUG]  Task 5 set to pending state with AppFuture: <AppFuture super=<AppFuture at 0x7f8ab96fccf8 state=pending>>
+2019-11-06 18:06:22.276 parsl.dataflow.dflow:279 [ERROR]  Task 4 failed after 0 retry attempts
+Traceback (most recent call last):
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/dataflow/dflow.py", line 254, in handle_exec_update
+    res.reraise()
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/app/errors.py", line 163, in reraise
+    reraise(t, v, tb)
+  File "/home/kalpani/.local/lib/python3.5/site-packages/six.py", line 692, in reraise
+    raise value.with_traceback(tb)
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/app/errors.py", line 172, in wrapper
+    return func(*args, **kwargs)
+  File "thread.py", line 11, in fun_1
+    return x*i
+TypeError: unsupported operand type(s) for *: 'AppFuture' and 'int'
+2019-11-06 18:06:22.276 parsl.dataflow.dflow:452 [INFO]  Task 5 launched on executor threads
+2019-11-06 18:06:22.277 parsl.app.errors:158 [DEBUG]  Reraising exception of type <class 'TypeError'>
+2019-11-06 18:06:22.277 parsl.app.errors:158 [DEBUG]  Reraising exception of type <class 'TypeError'>
+2019-11-06 18:06:22.278 parsl.dataflow.dflow:257 [DEBUG]  Task 5 failed
+2019-11-06 18:06:22.278 parsl.dataflow.dflow:279 [ERROR]  Task 5 failed after 0 retry attempts
+Traceback (most recent call last):
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/dataflow/dflow.py", line 254, in handle_exec_update
+    res.reraise()
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/app/errors.py", line 163, in reraise
+    reraise(t, v, tb)
+  File "/home/kalpani/.local/lib/python3.5/site-packages/six.py", line 692, in reraise
+    raise value.with_traceback(tb)
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/app/errors.py", line 172, in wrapper
+    return func(*args, **kwargs)
+  File "thread.py", line 11, in fun_1
+    return x*i
+TypeError: unsupported operand type(s) for *: 'AppFuture' and 'int'
+2019-11-06 18:06:22.278 parsl.app.errors:158 [DEBUG]  Reraising exception of type <class 'TypeError'>
+2019-11-06 18:06:22.278 parsl.dataflow.dflow:484 [DEBUG]  Adding output dependencies
+2019-11-06 18:06:22.278 parsl.dataflow.dflow:708 [INFO]  Task 6 submitted for App fun_1, waiting on tasks []
+2019-11-06 18:06:22.278 parsl.dataflow.dflow:714 [DEBUG]  Task 6 set to pending state with AppFuture: <AppFuture super=<AppFuture at 0x7f8ab8687390 state=pending>>
+2019-11-06 18:06:22.278 parsl.dataflow.dflow:452 [INFO]  Task 6 launched on executor threads
+2019-11-06 18:06:22.279 parsl.app.errors:158 [DEBUG]  Reraising exception of type <class 'TypeError'>
+2019-11-06 18:06:22.279 parsl.dataflow.dflow:484 [DEBUG]  Adding output dependencies
+2019-11-06 18:06:22.279 parsl.dataflow.dflow:257 [DEBUG]  Task 6 failed
+2019-11-06 18:06:22.279 parsl.dataflow.dflow:708 [INFO]  Task 7 submitted for App fun_1, waiting on tasks []
+2019-11-06 18:06:22.279 parsl.dataflow.dflow:279 [ERROR]  Task 6 failed after 0 retry attempts
+Traceback (most recent call last):
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/dataflow/dflow.py", line 254, in handle_exec_update
+    res.reraise()
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/app/errors.py", line 163, in reraise
+    reraise(t, v, tb)
+  File "/home/kalpani/.local/lib/python3.5/site-packages/six.py", line 692, in reraise
+    raise value.with_traceback(tb)
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/app/errors.py", line 172, in wrapper
+    return func(*args, **kwargs)
+  File "thread.py", line 11, in fun_1
+    return x*i
+TypeError: unsupported operand type(s) for *: 'AppFuture' and 'int'
+2019-11-06 18:06:22.280 parsl.dataflow.dflow:714 [DEBUG]  Task 7 set to pending state with AppFuture: <AppFuture super=<AppFuture at 0x7f8ab8687b38 state=pending>>
+2019-11-06 18:06:22.280 parsl.app.errors:158 [DEBUG]  Reraising exception of type <class 'TypeError'>
+2019-11-06 18:06:22.280 parsl.dataflow.dflow:452 [INFO]  Task 7 launched on executor threads
+2019-11-06 18:06:22.281 parsl.app.errors:158 [DEBUG]  Reraising exception of type <class 'TypeError'>
+2019-11-06 18:06:22.281 parsl.dataflow.dflow:257 [DEBUG]  Task 7 failed
+2019-11-06 18:06:22.281 parsl.dataflow.dflow:279 [ERROR]  Task 7 failed after 0 retry attempts
+Traceback (most recent call last):
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/dataflow/dflow.py", line 254, in handle_exec_update
+    res.reraise()
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/app/errors.py", line 163, in reraise
+    reraise(t, v, tb)
+  File "/home/kalpani/.local/lib/python3.5/site-packages/six.py", line 692, in reraise
+    raise value.with_traceback(tb)
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/app/errors.py", line 172, in wrapper
+    return func(*args, **kwargs)
+  File "thread.py", line 11, in fun_1
+    return x*i
+TypeError: unsupported operand type(s) for *: 'AppFuture' and 'int'
+2019-11-06 18:06:22.281 parsl.app.errors:158 [DEBUG]  Reraising exception of type <class 'TypeError'>
+2019-11-06 18:06:22.281 parsl.dataflow.dflow:484 [DEBUG]  Adding output dependencies
+2019-11-06 18:06:22.281 parsl.dataflow.dflow:708 [INFO]  Task 8 submitted for App fun_1, waiting on tasks []
+2019-11-06 18:06:22.281 parsl.dataflow.dflow:714 [DEBUG]  Task 8 set to pending state with AppFuture: <AppFuture super=<AppFuture at 0x7f8ab868d128 state=pending>>
+2019-11-06 18:06:22.282 parsl.dataflow.dflow:452 [INFO]  Task 8 launched on executor threads
+2019-11-06 18:06:22.282 parsl.dataflow.dflow:484 [DEBUG]  Adding output dependencies
+2019-11-06 18:06:22.282 parsl.dataflow.dflow:708 [INFO]  Task 9 submitted for App fun_1, waiting on tasks []
+2019-11-06 18:06:22.282 parsl.dataflow.dflow:714 [DEBUG]  Task 9 set to pending state with AppFuture: <AppFuture super=<AppFuture at 0x7f8ab868d240 state=pending>>
+2019-11-06 18:06:22.282 parsl.app.errors:158 [DEBUG]  Reraising exception of type <class 'TypeError'>
+2019-11-06 18:06:22.282 parsl.dataflow.dflow:452 [INFO]  Task 9 launched on executor threads
+2019-11-06 18:06:22.283 parsl.dataflow.dflow:257 [DEBUG]  Task 8 failed
+2019-11-06 18:06:22.283 parsl.app.errors:158 [DEBUG]  Reraising exception of type <class 'TypeError'>
+2019-11-06 18:06:22.283 parsl.dataflow.dflow:279 [ERROR]  Task 8 failed after 0 retry attempts
+Traceback (most recent call last):
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/dataflow/dflow.py", line 254, in handle_exec_update
+    res.reraise()
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/app/errors.py", line 163, in reraise
+    reraise(t, v, tb)
+  File "/home/kalpani/.local/lib/python3.5/site-packages/six.py", line 692, in reraise
+    raise value.with_traceback(tb)
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/app/errors.py", line 172, in wrapper
+    return func(*args, **kwargs)
+  File "thread.py", line 11, in fun_1
+    return x*i
+TypeError: unsupported operand type(s) for *: 'AppFuture' and 'int'
+2019-11-06 18:06:22.283 parsl.dataflow.dflow:257 [DEBUG]  Task 9 failed
+2019-11-06 18:06:22.284 parsl.app.errors:158 [DEBUG]  Reraising exception of type <class 'TypeError'>
+2019-11-06 18:06:22.284 parsl.dataflow.dflow:279 [ERROR]  Task 9 failed after 0 retry attempts
+Traceback (most recent call last):
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/dataflow/dflow.py", line 254, in handle_exec_update
+    res.reraise()
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/app/errors.py", line 163, in reraise
+    reraise(t, v, tb)
+  File "/home/kalpani/.local/lib/python3.5/site-packages/six.py", line 692, in reraise
+    raise value.with_traceback(tb)
+  File "/home/kalpani/.local/lib/python3.5/site-packages/parsl/app/errors.py", line 172, in wrapper
+    return func(*args, **kwargs)
+  File "thread.py", line 11, in fun_1
+    return x*i
+TypeError: unsupported operand type(s) for *: 'AppFuture' and 'int'
+2019-11-06 18:06:22.284 parsl.app.errors:158 [DEBUG]  Reraising exception of type <class 'TypeError'>
+2019-11-06 18:06:22.285 parsl.dataflow.dflow:864 [INFO]  DFK cleanup initiated
+2019-11-06 18:06:22.285 parsl.dataflow.dflow:750 [INFO]  Summary of tasks in DFK:
+2019-11-06 18:06:22.285 parsl.dataflow.dflow:781 [INFO]  Tasks in state States.done: 0
+2019-11-06 18:06:22.285 parsl.dataflow.dflow:781 [INFO]  Tasks in state States.failed: 1, 2, 3, 4, 5, 6, 7, 8, 9
+2019-11-06 18:06:22.285 parsl.dataflow.dflow:788 [INFO]  End of summary
+2019-11-06 18:06:22.285 parsl.dataflow.dflow:888 [INFO]  Terminating flow_control and strategy threads
+2019-11-06 18:06:22.285 parsl.executors.threads:96 [DEBUG]  Done with executor shutdown
+2019-11-06 18:06:22.285 parsl.executors.threads:96 [DEBUG]  Done with executor shutdown
+2019-11-06 18:06:22.285 parsl.dataflow.dflow:920 [INFO]  DFK cleanup complete

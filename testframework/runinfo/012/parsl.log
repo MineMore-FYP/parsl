@@ -1,0 +1,37 @@
+2019-11-06 17:58:50.521 parsl.dataflow.dflow:83 [DEBUG]  Starting DataFlowKernel with config
+Config(
+    app_cache=True, 
+    checkpoint_files=None, 
+    checkpoint_mode=None, 
+    checkpoint_period=None, 
+    data_management_max_threads=10, 
+    executors=[ThreadPoolExecutor(
+        label='threads', 
+        managed=True, 
+        max_threads=2, 
+        storage_access=None, 
+        thread_name_prefix='', 
+        working_dir=None
+    )], 
+    initialize_logging=True, 
+    lazy_errors=True, 
+    max_idletime=120.0, 
+    monitoring=None, 
+    retries=0, 
+    run_dir='runinfo', 
+    strategy='simple', 
+    usage_tracking=False
+)
+2019-11-06 17:58:50.521 parsl.dataflow.dflow:84 [INFO]  Parsl version: 0.9.0
+2019-11-06 17:58:50.521 parsl.dataflow.usage_tracking.usage:126 [DEBUG]  Tracking status: False
+2019-11-06 17:58:50.521 parsl.dataflow.usage_tracking.usage:127 [DEBUG]  Testing mode   : False
+2019-11-06 17:58:50.522 parsl.dataflow.dflow:110 [INFO]  Run id is: fc3f84bf-ed99-4d38-acd4-4a6f2b85a2a2
+2019-11-06 17:58:50.572 parsl.dataflow.memoization:52 [INFO]  App caching initialized
+2019-11-06 17:58:50.572 parsl.dataflow.strategy:125 [DEBUG]  Scaling strategy: simple
+2019-11-06 17:58:50.573 parsl.dataflow.dflow:864 [INFO]  DFK cleanup initiated
+2019-11-06 17:58:50.573 parsl.dataflow.dflow:750 [INFO]  Summary of tasks in DFK:
+2019-11-06 17:58:50.573 parsl.dataflow.dflow:788 [INFO]  End of summary
+2019-11-06 17:58:50.573 parsl.dataflow.dflow:888 [INFO]  Terminating flow_control and strategy threads
+2019-11-06 17:58:50.573 parsl.executors.threads:96 [DEBUG]  Done with executor shutdown
+2019-11-06 17:58:50.573 parsl.executors.threads:96 [DEBUG]  Done with executor shutdown
+2019-11-06 17:58:50.573 parsl.dataflow.dflow:920 [INFO]  DFK cleanup complete
