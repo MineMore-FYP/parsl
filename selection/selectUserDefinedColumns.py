@@ -6,11 +6,20 @@ load(config)
 @python_app
 def selectUserDefinedColumns():
 	import pandas as pd
-	df = pd.read_csv("/home/amanda/FYP/testcsv/test.csv")
+	import os.path
+	import os,sys,inspect
+	currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+	parentdir = os.path.dirname(currentdir)
+	sys.path.insert(0,parentdir)
+
+	import userScript
+
+	df = pd.read_csv(userScript.inputDataset)
 	dfConcat = pd.DataFrame()
 
-	selectedColumns = ["GLOBALEVENTID","SQLDATE", "Year", "Actor2Code", "Actor2Name", "Actor2Religion1Code"]
+	#selectedColumns = ["GLOBALEVENTID","SQLDATE", "Year", "Actor2Code", "Actor2Name", "Actor2Religion1Code"]
 
+	selectedColumns = userScript.selectColumns	
 
 	if (selectedColumns != "all"):
 		dfConcat = pd.DataFrame()
@@ -26,7 +35,7 @@ def selectUserDefinedColumns():
 	    dfConcat = df.to_csv ("/home/amanda/FYP/testcsv/selection.csv", index = False, header=True)
 
 
-	ret  = "done"
+	ret  = "Select User Defined Columns complete"
 	return ret
 
 

@@ -13,6 +13,8 @@ inputDataset = "/home/rajini/FYP/testcsv/test.csv"
 #inputDataset = "/home/amanda/FYP/testcsv/test.csv"
 
 #inputDataset = "/home/rajini/FYP/testcsv/Combined.csv"
+#inputDataset = "/home/rajini/FYP/testcsv/test.csv"
+#inputDataset = "/home/amanda/FYP/testcsv/test.csv"
 
 #specify output locatiion
 outputDataset = "/home/rajini/FYP/testcsv/outputDataset.csv"
