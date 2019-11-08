@@ -1,21 +1,30 @@
+# importing pandas module
+import pandas as pd
+import sys
+import os,sys,inspect
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parentdir = os.path.dirname(currentdir)
+sys.path.insert(0,parentdir)
+
+import userScript
+
+# making data frame from csv file
+#drop values from index label
+
 from parsl import load, python_app
 from parsl.configs.local_threads import config
 load(config)
-from collections import OrderedDict
-
-selectFromRow = OrderedDict()
-selectFromRow['Year'] = [2018, 2019]
 
 @python_app
 def selectUserDefinedRows():
-	import pandas as pd
 	df = pd.read_csv("/home/rajini/FYP/testcsv/test.csv")
-	for key, value in selectFromRow.items():
+	print(userScript.selectFromRow)
+	for key, value in userScript.selectFromRow.items():
 		selectValues = []
 		n = 0
 
-		while n < len(selectFromRow[key]):
-			selectValues.append(selectFromRow[key][n])
+		while n < len(userScript.selectFromRow[key]):
+			selectValues.append(userScript.selectFromRow[key][n])
 			n = n+1
 		for i in selectValues:
 			print(i)
@@ -26,7 +35,8 @@ def selectUserDefinedRows():
 
 	dfAfterUserSelectedRows.to_csv ("/home/rajini/FYP/testcsv/rowSelection.csv", index = False, header=True)
 
-st = selectUserDefinedRows()
+	ret  = "done"
+	return ret
 
-print("test")
-print(st.result())
+
+print(selectUserDefinedRows().result())
