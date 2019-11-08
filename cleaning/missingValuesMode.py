@@ -36,7 +36,6 @@ def missingValuesMode():
     df1 = pd.DataFrame()
     
     for col in colNames:
-
         try:
             df1 = df[col].dropna()
             modeOfCol = statistics.mode(df1)
@@ -47,7 +46,7 @@ def missingValuesMode():
 
     df2.to_csv("/home/rajini/FYP/testcsv/missingValuesModeOUTPUT.csv", index = False, header=True)
 
-    ret  = "Missing values mode complete"
+    ret  = "Missing values Mode complete"
     return ret
 
 print(missingValuesMode().result())
