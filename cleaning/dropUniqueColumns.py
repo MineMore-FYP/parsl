@@ -14,7 +14,7 @@ def dropUniqueColumns():
 
     import userScript
 
-    df = pd.read_csv("/home/rajini/FYP/testcsv/test.csv")
+    df = pd.read_csv(userScript.inputDataset)
     numOfRows = df.shape[0]
 
     for col in df.columns:

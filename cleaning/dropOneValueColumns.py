@@ -16,7 +16,7 @@ def dropOneValueColumns():
 
     import userScript
 
-    df = pd.read_csv("/home/rajini/FYP/testcsv/test.csv")
+    df = pd.read_csv(userScript.inputDataset)
 
     for col in df.columns:
         if len(df[col].unique()) == 1:
