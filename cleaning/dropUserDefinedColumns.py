@@ -3,7 +3,6 @@ from parsl.configs.local_threads import config
 load(config)
 
 @python_app
-
 def dropUserDefinedColumns():
     import pandas as pd
     import numpy as np
