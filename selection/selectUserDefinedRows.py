@@ -1,13 +1,3 @@
-# importing pandas module
-import pandas as pd
-import sys
-import os,sys,inspect
-currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parentdir = os.path.dirname(currentdir)
-sys.path.insert(0,parentdir)
-
-import userScript
-
 # making data frame from csv file
 #drop values from index label
 
@@ -17,6 +7,16 @@ load(config)
 
 @python_app
 def selectUserDefinedRows():
+	# importing pandas module
+	import pandas as pd
+	import sys
+	import os,sys,inspect
+	currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+	parentdir = os.path.dirname(currentdir)
+	sys.path.insert(0,parentdir)
+
+	import userScript
+
 	df = pd.read_csv("/home/rajini/FYP/testcsv/test.csv")
 	print(userScript.selectFromRow)
 	for key, value in userScript.selectFromRow.items():
