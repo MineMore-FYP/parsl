@@ -5,6 +5,7 @@ import sys
 #Workflow
 
 #input   location
+
 #inputDataset = "/home/rajini/FYP/testcsv/test.csv"
 inputDataset = "/home/amanda/FYP/testcsv/test.csv"
 
@@ -22,8 +23,8 @@ selectColumns = ["GLOBALEVENTID","SQLDATE", "Year", "Actor2Code", "Actor2Name", 
 
 #select rows
 selectFromRow = OrderedDict()
-selectFromRow['Year'] = [2018, 2019]
-
+selectFromRow['Year'] = ["2018", "2019"]
+selectFromRow['Actor1Name'] = ["DUTCH"]
 
 #CLEANING
 #Drop unique columns
@@ -59,7 +60,7 @@ modeColumns = "all"
 
 #fill missing value with a constant
 #missingValueCons = OrderedDict()
-#missingValueCons["PID"] = 100045
+#missingValueCons["PID"] = [100045]
 #missingValueCons["SQ_FT"] = 1000
 
 #transformation
