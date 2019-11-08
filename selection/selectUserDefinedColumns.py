@@ -1,18 +1,29 @@
-def selectUserDefinedColumns:
+from parsl import load, python_app
+from parsl.configs.local_threads import config
+load(config)
+
+
+@python_app
+def selectUserDefinedColumns():
 	import pandas as pd
-	df = "/home/amanda/FYP/testcsv/test.csv"
+	df = pd.read_csv("/home/amanda/FYP/testcsv/test.csv")
+	dfConcat = pd.DataFrame()
 
-	selectedColumns = userScript.selectColumns
+	selectedColumns = ["GLOBALEVENTID","SQLDATE", "Year", "Actor2Code", "Actor2Name", "Actor2Religion1Code", "Actor2Type1Code", "EventCode", "EventRootCode", "QuadClass", "GoldsteinScale", "NumMentions", "NumSources", "NumArticles", "AvgTone", "Actor2Geo_FullName"]
 
-	if (selectedColumns != "all"):
-		dfConcat = pd.DataFrame()
 
-		for i in selectedColumns:
-		    df_i=df[i]
-		    dfAfterUserSelectedColumns=pd.concat([dfConcat, df_i], axis=1)
-		    dfConcat=dfAfterUserSelectedColumns
+#####FIX HERE########
 
-		    dfConcat.to_csv (userScript.outputDataset, index = False, header=True)
+	for i in selectedColumns:
+	    df_i=df[i]
+	    dfAfterUserSelectedColumns=pd.concat([dfConcat, df_i], axis=1)
+	    dfConcat=dfAfterUserSelectedColumns
+	dfConcat = df.to_csv ("/home/amanda/FYP/testcsv/selection.csv", index = False, header=True)
+	
+	returnval = "Select user defined cols done"
+	return returnval
 
-	else:
-	    dfConcat = df.to_csv (userScript.outputDataset, index = False, header=True)
+st = selectUserDefinedColumns()
+
+print("test")
+print(st.result())
