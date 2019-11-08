@@ -5,12 +5,20 @@ import sys
 #Workflow
 
 #input   location
+inputDataset = "/home/rajini/FYP/testcsv/test.csv"
+#inputDataset = "/home/amanda/FYP/testcsv/test.csv"
+#df = pd.read_csv(inputDataset)
+
 #inputDataset = "/home/rajini/FYP/testcsv/test.csv"
-inputDataset = "/home/amanda/FYP/testcsv/test.csv"
+#inputDataset = "/home/amanda/FYP/testcsv/test.csv"
+
+#inputDataset = "/home/rajini/FYP/testcsv/Combined.csv"
+#inputDataset = "/home/rajini/FYP/testcsv/test.csv"
+#inputDataset = "/home/amanda/FYP/testcsv/test.csv"
 
 #specify output locatiion
-#outputDataset = "/home/rajini/FYP/testcsv/outputDataset.csv"
-outputDataset = "/home/amanda/FYP/testcsv/out.csv"
+outputDataset = "/home/rajini/FYP/testcsv/outputDataset.csv"
+#outputDataset = "/home/amanda/FYP/testcsv/out.csv"
 
 #wait time between each step of workflow (in milli seconds)
 waitTime = 10000
@@ -23,7 +31,6 @@ selectColumns = ["GLOBALEVENTID","SQLDATE", "Year", "Actor2Code", "Actor2Name", 
 #select rows
 selectFromRow = OrderedDict()
 selectFromRow['Year'] = [2018, 2019]
-
 
 #CLEANING
 #Drop unique columns

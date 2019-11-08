@@ -11,20 +11,32 @@ import userScript
 # making data frame from csv file
 #drop values from index label
 
+from parsl import load, python_app
+from parsl.configs.local_threads import config
+load(config)
 
-df = pd.read_csv(sys.argv[1])
-for key, value in userScript.selectFromRow.items():
-	selectValues = []
-	n = 0
+@python_app
+def selectUserDefinedRows():
+	df = pd.read_csv("/home/rajini/FYP/testcsv/test.csv")
+	print(userScript.selectFromRow)
+	for key, value in userScript.selectFromRow.items():
+		selectValues = []
+		n = 0
 
-	while n < len(userScript.selectFromRow[key]):
-		selectValues.append(userScript.selectFromRow[key][n])
-		n = n+1
-	for i in selectValues:
-		print(i)
-		print(key)
-		dfAfterUserSelectedRows = df[df[key] == i]
-		df = dfAfterUserSelectedRows
+		while n < len(userScript.selectFromRow[key]):
+			selectValues.append(userScript.selectFromRow[key][n])
+			n = n+1
+		for i in selectValues:
+			print(i)
+			print(key)
+			dfAfterUserSelectedRows = df[df[key] == i]
+			df = dfAfterUserSelectedRows
 
 
-dfAfterUserSelectedRows.to_csv (sys.argv[1], index = False, header=True)
+	dfAfterUserSelectedRows.to_csv ("/home/rajini/FYP/testcsv/rowSelection.csv", index = False, header=True)
+
+	ret  = "done"
+	return ret
+
+
+print(selectUserDefinedRows().result())
