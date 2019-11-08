@@ -1,0 +1,88 @@
+2019-11-08 11:53:06.900 parsl.dataflow.dflow:83 [DEBUG]  Starting DataFlowKernel with config
+Config(
+    app_cache=True, 
+    checkpoint_files=None, 
+    checkpoint_mode=None, 
+    checkpoint_period=None, 
+    data_management_max_threads=10, 
+    executors=[ThreadPoolExecutor(
+        label='threads', 
+        managed=True, 
+        max_threads=2, 
+        storage_access=None, 
+        thread_name_prefix='', 
+        working_dir=None
+    )], 
+    initialize_logging=True, 
+    lazy_errors=True, 
+    max_idletime=120.0, 
+    monitoring=None, 
+    retries=0, 
+    run_dir='runinfo', 
+    strategy='simple', 
+    usage_tracking=False
+)
+2019-11-08 11:53:06.900 parsl.dataflow.dflow:84 [INFO]  Parsl version: 0.9.0
+2019-11-08 11:53:06.900 parsl.dataflow.usage_tracking.usage:126 [DEBUG]  Tracking status: False
+2019-11-08 11:53:06.900 parsl.dataflow.usage_tracking.usage:127 [DEBUG]  Testing mode   : False
+2019-11-08 11:53:06.900 parsl.dataflow.dflow:110 [INFO]  Run id is: e3c53406-b15a-4771-b183-996bc44329fe
+2019-11-08 11:53:06.950 parsl.dataflow.memoization:52 [INFO]  App caching initialized
+2019-11-08 11:53:06.950 parsl.dataflow.strategy:125 [DEBUG]  Scaling strategy: simple
+2019-11-08 11:53:06.951 parsl.dataflow.dflow:484 [DEBUG]  Adding output dependencies
+2019-11-08 11:53:06.951 parsl.dataflow.dflow:708 [INFO]  Task 0 submitted for App app_double, waiting on tasks []
+2019-11-08 11:53:06.952 parsl.dataflow.dflow:714 [DEBUG]  Task 0 set to pending state with AppFuture: <AppFuture super=<AppFuture at 0x7f6777cbf7b8 state=pending>>
+2019-11-08 11:53:06.952 parsl.dataflow.dflow:452 [INFO]  Task 0 launched on executor threads
+2019-11-08 11:53:06.952 parsl.dataflow.dflow:288 [INFO]  Task 0 completed
+2019-11-08 11:53:06.952 parsl.dataflow.dflow:484 [DEBUG]  Adding output dependencies
+2019-11-08 11:53:06.952 parsl.dataflow.dflow:708 [INFO]  Task 1 submitted for App app_double, waiting on tasks []
+2019-11-08 11:53:06.952 parsl.dataflow.dflow:714 [DEBUG]  Task 1 set to pending state with AppFuture: <AppFuture super=<AppFuture at 0x7f6777cbffd0 state=pending>>
+2019-11-08 11:53:06.953 parsl.dataflow.dflow:452 [INFO]  Task 1 launched on executor threads
+2019-11-08 11:53:06.953 parsl.dataflow.dflow:288 [INFO]  Task 1 completed
+2019-11-08 11:53:06.953 parsl.dataflow.dflow:484 [DEBUG]  Adding output dependencies
+2019-11-08 11:53:06.953 parsl.dataflow.dflow:708 [INFO]  Task 2 submitted for App app_double, waiting on tasks []
+2019-11-08 11:53:06.953 parsl.dataflow.dflow:714 [DEBUG]  Task 2 set to pending state with AppFuture: <AppFuture super=<AppFuture at 0x7f6777c2f278 state=pending>>
+2019-11-08 11:53:06.953 parsl.dataflow.dflow:452 [INFO]  Task 2 launched on executor threads
+2019-11-08 11:53:06.953 parsl.dataflow.dflow:484 [DEBUG]  Adding output dependencies
+2019-11-08 11:53:06.953 parsl.dataflow.dflow:708 [INFO]  Task 3 submitted for App app_double, waiting on tasks []
+2019-11-08 11:53:06.953 parsl.dataflow.dflow:714 [DEBUG]  Task 3 set to pending state with AppFuture: <AppFuture super=<AppFuture at 0x7f6777c2f4e0 state=pending>>
+2019-11-08 11:53:06.954 parsl.dataflow.dflow:452 [INFO]  Task 3 launched on executor threads
+2019-11-08 11:53:06.954 parsl.dataflow.dflow:288 [INFO]  Task 2 completed
+2019-11-08 11:53:06.954 parsl.dataflow.dflow:288 [INFO]  Task 3 completed
+2019-11-08 11:53:06.954 parsl.dataflow.dflow:484 [DEBUG]  Adding output dependencies
+2019-11-08 11:53:06.954 parsl.dataflow.dflow:708 [INFO]  Task 4 submitted for App app_double, waiting on tasks []
+2019-11-08 11:53:06.954 parsl.dataflow.dflow:714 [DEBUG]  Task 4 set to pending state with AppFuture: <AppFuture super=<AppFuture at 0x7f6777c2f668 state=pending>>
+2019-11-08 11:53:06.954 parsl.dataflow.dflow:452 [INFO]  Task 4 launched on executor threads
+2019-11-08 11:53:06.955 parsl.dataflow.dflow:484 [DEBUG]  Adding output dependencies
+2019-11-08 11:53:06.955 parsl.dataflow.dflow:708 [INFO]  Task 5 submitted for App app_double, waiting on tasks []
+2019-11-08 11:53:06.955 parsl.dataflow.dflow:714 [DEBUG]  Task 5 set to pending state with AppFuture: <AppFuture super=<AppFuture at 0x7f6777c2f780 state=pending>>
+2019-11-08 11:53:06.955 parsl.dataflow.dflow:288 [INFO]  Task 4 completed
+2019-11-08 11:53:06.955 parsl.dataflow.dflow:452 [INFO]  Task 5 launched on executor threads
+2019-11-08 11:53:06.955 parsl.dataflow.dflow:288 [INFO]  Task 5 completed
+2019-11-08 11:53:06.956 parsl.dataflow.dflow:484 [DEBUG]  Adding output dependencies
+2019-11-08 11:53:06.956 parsl.dataflow.dflow:708 [INFO]  Task 6 submitted for App app_double, waiting on tasks []
+2019-11-08 11:53:06.956 parsl.dataflow.dflow:714 [DEBUG]  Task 6 set to pending state with AppFuture: <AppFuture super=<AppFuture at 0x7f6777c2fa58 state=pending>>
+2019-11-08 11:53:06.956 parsl.dataflow.dflow:452 [INFO]  Task 6 launched on executor threads
+2019-11-08 11:53:06.956 parsl.dataflow.dflow:288 [INFO]  Task 6 completed
+2019-11-08 11:53:06.956 parsl.dataflow.dflow:484 [DEBUG]  Adding output dependencies
+2019-11-08 11:53:06.956 parsl.dataflow.dflow:708 [INFO]  Task 7 submitted for App app_double, waiting on tasks []
+2019-11-08 11:53:06.956 parsl.dataflow.dflow:714 [DEBUG]  Task 7 set to pending state with AppFuture: <AppFuture super=<AppFuture at 0x7f6777c2f940 state=pending>>
+2019-11-08 11:53:06.956 parsl.dataflow.dflow:452 [INFO]  Task 7 launched on executor threads
+2019-11-08 11:53:06.956 parsl.dataflow.dflow:288 [INFO]  Task 7 completed
+2019-11-08 11:53:06.956 parsl.dataflow.dflow:484 [DEBUG]  Adding output dependencies
+2019-11-08 11:53:06.956 parsl.dataflow.dflow:708 [INFO]  Task 8 submitted for App app_double, waiting on tasks []
+2019-11-08 11:53:06.957 parsl.dataflow.dflow:714 [DEBUG]  Task 8 set to pending state with AppFuture: <AppFuture super=<AppFuture at 0x7f6777c2fb70 state=pending>>
+2019-11-08 11:53:06.957 parsl.dataflow.dflow:452 [INFO]  Task 8 launched on executor threads
+2019-11-08 11:53:06.957 parsl.dataflow.dflow:288 [INFO]  Task 8 completed
+2019-11-08 11:53:06.957 parsl.dataflow.dflow:484 [DEBUG]  Adding output dependencies
+2019-11-08 11:53:06.957 parsl.dataflow.dflow:708 [INFO]  Task 9 submitted for App app_double, waiting on tasks []
+2019-11-08 11:53:06.957 parsl.dataflow.dflow:714 [DEBUG]  Task 9 set to pending state with AppFuture: <AppFuture super=<AppFuture at 0x7f6777c2fc50 state=pending>>
+2019-11-08 11:53:06.957 parsl.dataflow.dflow:452 [INFO]  Task 9 launched on executor threads
+2019-11-08 11:53:06.957 parsl.dataflow.dflow:288 [INFO]  Task 9 completed
+2019-11-08 11:53:06.957 parsl.dataflow.dflow:864 [INFO]  DFK cleanup initiated
+2019-11-08 11:53:06.957 parsl.dataflow.dflow:750 [INFO]  Summary of tasks in DFK:
+2019-11-08 11:53:06.957 parsl.dataflow.dflow:781 [INFO]  Tasks in state States.done: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+2019-11-08 11:53:06.957 parsl.dataflow.dflow:788 [INFO]  End of summary
+2019-11-08 11:53:06.957 parsl.dataflow.dflow:888 [INFO]  Terminating flow_control and strategy threads
+2019-11-08 11:53:06.958 parsl.executors.threads:96 [DEBUG]  Done with executor shutdown
+2019-11-08 11:53:06.958 parsl.executors.threads:96 [DEBUG]  Done with executor shutdown
+2019-11-08 11:53:06.958 parsl.dataflow.dflow:920 [INFO]  DFK cleanup complete
