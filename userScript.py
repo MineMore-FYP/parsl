@@ -24,7 +24,7 @@ selectColumns = ["GLOBALEVENTID","SQLDATE", "Year", "Actor2Code", "Actor2Name", 
 #select rows
 selectFromRow = OrderedDict()
 selectFromRow['Year'] = ["2018", "2019"]
-#selectFromRow['Actor1Name'] = ["DUTCH"]
+selectFromRow['Actor1Name'] = ["DUTCH"]
 
 #CLEANING
 #Drop unique columns
