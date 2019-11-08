@@ -3,6 +3,13 @@ import pandas
 import scipy
 import numpy
 from sklearn.preprocessing import MinMaxScaler
+
+import parsl
+from parsl import load, python_app
+from parsl.configs.local_threads import config
+
+load(config)
+
 import sys
 import os,sys,inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -12,23 +19,28 @@ sys.path.insert(0,parentdir)
 import userScript
 import dataType
 
-df = pandas.read_csv(sys.argv[1])
+df = pandas.read_csv("/home/kalpani/Documents/FYP/testcsv/test.csv")
 
-for key, value in userScript.userDefinedRescaleColumns.items():
-    if dataType.dataType(key, df) != "str":
-        lowerBound = value[0]
-        upperBound = value[1]
-        col = key
-        scaler = MinMaxScaler(feature_range=(lowerBound, upperBound))
+print(userScript.userDefinedRescaleColumns.items())
 
-        rescaleColumn = df.filter([col], axis=1)
-        df = df.drop(col, axis=1)
+@python_app
+def rescale():
+	for key, value in userScript.userDefinedRescaleColumns.items():
+		if dataType.dataType(key, df) != "str":
+			lowerBound = value[0]
+			upperBound = value[1]
+			col = key
+			scaler = MinMaxScaler(feature_range=(lowerBound, upperBound))
 
-        array = rescaleColumn.values
-        rescaled = scaler.fit_transform(array)
+			rescaleColumn = df.filter([col], axis=1)
+			df = df.drop(col, axis=1)
 
-        df[col] = rescaled
-    else:
-        print("The column, ", col, "is of type: string. Cannot rescale")
+			array = rescaleColumn.values
+			rescaled = scaler.fit_transform(array)
 
-df.to_csv (sys.argv[1], index = False, header=True)
+			df[col] = rescaled
+		else:
+			print("The column, ", col, "is of type: string. Cannot rescale")	    
+
+rescale()
+df.to_csv ("/home/kalpani/Documents/FYP/testcsv/test3.csv", index = False, header=True)

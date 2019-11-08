@@ -3,6 +3,13 @@ from sklearn.preprocessing import StandardScaler
 import pandas
 import numpy
 import scipy
+
+import parsl
+from parsl import load, python_app
+from parsl.configs.local_threads import config
+
+load(config)
+
 import sys
 import os,sys,inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -13,21 +20,25 @@ import userScript
 import dataType
 
 
-dataframe = pandas.read_csv(sys.argv[1])
+dataframe = pandas.read_csv("/home/kalpani/Documents/FYP/testcsv/test.csv")
 
 colNames = userScript.userDefinedStandardizeColumns
 
-for col in colNames:
-    if dataType.dataType(col, dataframe) != "str":
-        standardizeColumn = dataframe.filter([col], axis=1)
-        dataframe = dataframe.drop(col, axis=1)
+@python_app
+def standardize():
+	for col in colNames:
+		if dataType.dataType(col, dataframe) != "str":
+			standardizeColumn = dataframe.filter([col], axis=1)
+			dataframe = dataframe.drop(col, axis=1)
+		
+			array = standardizeColumn.values
+			scaler = StandardScaler().fit(array)
+			standardized = scaler.transform(array)
 
-        array = standardizeColumn.values
-        scaler = StandardScaler().fit(array)
-        standardized = scaler.transform(array)
+			dataframe[col] = standardized
+		else:
+			print("The column, ", col, "is of type: string. Cannot standardize")
 
-        dataframe[col] = standardized
-    else:
-        print("The column, ", col, "is of type: string. Cannot standardize")
 
-dataframe.to_csv (sys.argv[1], index = False, header=True)
+standardize()
+dataframe.to_csv ("/home/kalpani/Documents/FYP/testcsv/test4.csv", index = False, header=True)
