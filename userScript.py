@@ -60,7 +60,7 @@ modeColumns = "all"
 
 #fill missing value with a constant
 #missingValueCons = OrderedDict()
-#missingValueCons["PID"] = 100045
+#missingValueCons["PID"] = [100045]
 #missingValueCons["SQ_FT"] = 1000
 
 #transformation
