@@ -38,7 +38,7 @@ missingValues = ["n/a", "na", "--"]
 dropColumns = ["SQLDATE", "SOURCEURL"]
 
 #drop columns according to user defined empty value percentage
-userDefinedColPercentage = 30
+userDefinedColPercentage = 10
 
 #drop user defined rows
 dropFromRow = OrderedDict()

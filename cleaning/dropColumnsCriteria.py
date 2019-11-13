@@ -19,7 +19,7 @@ print(numOfCols)
 eachThreadCols = numOfCols//10
 
 #prints 0,1 cols
-#print(df.iloc[: , [0, 2]])
+print(df.iloc[: , np.r_[0 : 3]])
 #print(df.iloc[ : , numOfCols-1 ])
 
 #user defined percentage of maximum of allowed missing values
@@ -39,8 +39,9 @@ def dropColumnsCriteria(startColIndex, endColIndex, dFrame, maxPercentage, filen
 	  dfCol = df[colName]
 	  return dfCol.isnull().sum()
 	
+	df = pd.DataFrame()
 
-	df = dFrame.iloc[: , [startColIndex, endColIndex]]
+	df = dFrame.iloc[: , np.r_[startColIndex : endColIndex]]
 	print(df)
 
 	colNames = list(df)
@@ -133,8 +134,9 @@ def dropColumnsCriteria(startColIndex, endColIndex, dFrame):
 	return ret
 '''
 
-print(dropColumnsCriteria(8,8,df,maxPercentageOfMissingValues, "cleaning1").result())
+print(dropColumnsCriteria(0,8,df,maxPercentageOfMissingValues, "cleaning1").result())
 #print(dropColumnsCriteria(25,50,df,maxPercentageOfMissingValues, "cleaning2").result())
+
 
 
 
