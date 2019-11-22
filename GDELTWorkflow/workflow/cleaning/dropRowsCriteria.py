@@ -14,7 +14,7 @@ def dropRowsCriteria():
 
     import userScript
 
-    df = pd.read_csv("/home/amanda/FYP/testcsv/test.csv")
+    df = pd.read_csv("/home/amanda/FYP/ds/combined.csv")
 
     numOfColumns = len(df.columns)
     #user defined percentage
