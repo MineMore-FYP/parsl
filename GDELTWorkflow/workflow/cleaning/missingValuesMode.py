@@ -25,10 +25,9 @@ def missingValuesMode(startColIndex, endColIndex, dFrame, colsMode):
 
     df = pd.DataFrame()
     df = dFrame.iloc[: , np.r_[startColIndex : endColIndex]]	 
-
-    #drop unique columns
     numOfRows = df.shape[0]
 
+    #drop unique columns
     for col in df.columns:
         if len(df[col].unique()) == numOfRows:
             df.drop(col,inplace=True,axis=1)

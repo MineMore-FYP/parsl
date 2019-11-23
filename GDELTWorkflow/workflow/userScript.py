@@ -59,8 +59,14 @@ userDefinedRowPercentage = 10
 #Research how best to fill missing values
 #mode for user defined columns
 modeColumns = "all" #done
-
  
+
+#######################		TRANSFORMATION	####################################
+
+#Normalize
+userDefinedNormalizeColumns = ["AvgTone"]
+
+
 
 
 
