@@ -64,7 +64,7 @@ modeColumns = "all" #done
 #######################		TRANSFORMATION	####################################
 
 #Normalize
-userDefinedNormalizeColumns = ["AvgTone"]
+userDefinedNormalizeColumns = ["AvgTone", "QuadClass", "Actor1Geo_CountryCode"]
 
 
 

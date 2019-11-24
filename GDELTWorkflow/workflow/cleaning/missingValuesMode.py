@@ -70,7 +70,7 @@ dfNew = pd.DataFrame()
 
 #one col per thread
 if numOfCols <= maxThreads:
-	for i in range (maxThreads):
+	for i in range (numOfCols):
 		df1 = (missingValuesMode(0, i+1, df, colsToMode).result())
 		dfNew = pd.concat([dfNew, df1] , axis=1)
 
