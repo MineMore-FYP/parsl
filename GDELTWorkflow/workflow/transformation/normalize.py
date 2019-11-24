@@ -38,7 +38,8 @@ def normalize(startColIndex, endColIndex, dFrame, ccolsToNormalize):
 	print(colNames)
 	# Normalize The Column
 	# Create x, where x the 'scores' column's values as floats
-	x = df[colsToNormalize].values.astype(float)
+	x = df[ccolsToNormalize].values.astype(float)
+	print(x)
 
 	# Create a minimum and maximum processor object
 	min_max_scaler = preprocessing.MinMaxScaler()
@@ -47,12 +48,16 @@ def normalize(startColIndex, endColIndex, dFrame, ccolsToNormalize):
 
 	# Run the normalizer on the dataframe
 	df_normalized = pd.DataFrame(x_scaled)
+	j = 0
+	for i in ccolsToNormalize:
+		
+		df[i] = df_normalized[j]
+		j=j+1
+	return df
 
-	return df_normalized
 
-
-#print(normalize(0,7,df,'AvgTone').result())
-#this returns the one column that was normalized. 
+print(normalize(0,7,df,['AvgTone', 'QuadClass']).result())
+#this returns the column(s) that was normalized. 
 #drop the previous column and concat at the end.
 #parallelize the number of cols in the user script instruction - change for mode, normalize, encode
 
