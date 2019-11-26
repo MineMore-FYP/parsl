@@ -28,6 +28,9 @@ print(colsToNormalize)
 
 @python_app
 def normalize(startColIndex, endColIndex, dFrame, normalizeCols):
+	import pandas as pd
+	import numpy as np
+	from sklearn import preprocessing
 
 	df = pd.DataFrame()
 	df = dFrame.iloc[: , np.r_[startColIndex : endColIndex]]
