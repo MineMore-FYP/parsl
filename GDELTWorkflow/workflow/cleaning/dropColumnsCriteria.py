@@ -19,15 +19,15 @@ import threadconfig
 
 #user defined percentage of maximum of allowed missing values
 maxPercentageOfMissingValues= userScript.userDefinedColPercentage
+dropList = []
 
 
 @python_app
-def dropColumnsCriteria(startColIndex, endColIndex, dFrame, maxPercentage):
+def dropColumnsCriteria(startColIndex, endColIndex, dFrame, maxPercentage, dropList):
 
 	import pandas as pd
 	import numpy as np
-	import sys
-	import os,sys,inspect
+
 	
 	#function to count thr number of missing values in a given column
 	def countMissingValues(colName, df):
@@ -35,28 +35,24 @@ def dropColumnsCriteria(startColIndex, endColIndex, dFrame, maxPercentage):
 	  return dfCol.isnull().sum()
 	
 	df = pd.DataFrame()
-
 	df = dFrame.iloc[: , np.r_[startColIndex : endColIndex]]
-	#print(df)
 
 	colNames = list(df)
 	noOfRows = df.shape[0]
-	#print("Total Number of Rows : ",noOfRows, "\n")
-	#print("Column Name : ", colNames, "\n")
 
-	dfMissingValueCriteriaDropped=df
+#	dfMissingValueCriteriaDropped=df
 	
-	for i in colNames:
-	  noMissingValues = countMissingValues(i,df)
+	for col in df.columns:
+	  noMissingValues = countMissingValues(col,df)
 
 	  if ((noMissingValues/noOfRows)>(maxPercentage/100)):
-	    dfMissingValueCriteriaDropped = dfMissingValueCriteriaDropped.drop(i, axis=1)
+	    #dfMissingValueCriteriaDropped = dfMissingValueCriteriaDropped.drop(i, axis=1)
+	    dropList.append(col)
 
-	ret = dfMissingValueCriteriaDropped
+	#ret = dfMissingValueCriteriaDropped
 	
-	return ret
+	return dropList
 
- 
 
 
 #read csv with defined missing values
@@ -69,54 +65,48 @@ lasThreadCols = 0
 dfNew = pd.DataFrame()
 maxThreads = threadconfig.maxThreads
 
+results = []
 
-#not parallel
 if numOfCols <= maxThreads:
-	dfNew = (dropColumnsCriteria(0,numOfCols,df,maxPercentageOfMissingValues).result())
+	for i in range (numOfCols):
+		dList1 = dropColumnsCriteria(i, i+1, df, maxPercentageOfMissingValues, dropList)
+		results.append(dList1)
+#	dfNew = (dropColumnsCriteria(0,numOfCols,df,maxPercentageOfMissingValues).result())
 
-#parallel
+
 elif numOfCols > maxThreads:
 	print("test2")
 	if (numOfCols % maxThreads == 0):
 		eachThreadCols = numOfCols / maxThreads 
 		for i in range (maxThreads):
-			df1 = (dropColumnsCriteria(i,(i+eachThreadCols),df,maxPercentageOfMissingValues).result())
-			dfNew = pd.concat(dfNew, df1)
+			dList1 = dropColumnsCriteria(i,(i+eachThreadCols),df,maxPercentageOfMissingValues, dropList)
+			#dfNew = pd.concat(dfNew, df1)
+			results.append(dList1)
 		
 	else:
 		eachThreadCols = numOfCols // (maxThreads-1)
 		lasThreadCols = numOfCols % (maxThreads-1)
+		#for loop for the threads except the last one
 		for i in range (0,(maxThreads-1)*eachThreadCols, eachThreadCols):
 			print ("i", i)
 			print("i+eachThreadCols", (i+eachThreadCols))
-			df1 = (dropColumnsCriteria(i,(i+eachThreadCols),df,maxPercentageOfMissingValues).result())
-			dfNew = pd.concat([dfNew, df1], axis=1)
+			dList1 = dropColumnsCriteria(i,(i+eachThreadCols),df,maxPercentageOfMissingValues, dropList)
+			#dfNew = pd.concat([dfNew, df1], axis=1)
+			results.append(dList1)
 
+		#last thread 
 		print("last thread",(eachThreadCols * (maxThreads-1))	)
-		df2 = (dropColumnsCriteria((eachThreadCols * (maxThreads-1)),numOfCols,df,maxPercentageOfMissingValues).result())
-	
-		dfNew = pd.concat([dfNew, df2] , axis=1)
- 
+		dList2 = dropColumnsCriteria((eachThreadCols * (maxThreads-1)),numOfCols,df,maxPercentageOfMissingValues, dropList)
+		results.append(dList2)
+		#dfNew = pd.concat([dfNew, df2] , axis=1)
 
 
+# wait for all apps to complete
+[r.result() for r in results]
 
-#***********************the following runs in parallel. but needs to be put into a for loop. HOW do we do this? SEE ABOVE******************************
-#df1 = (dropColumnsCriteria(0,8,df,maxPercentageOfMissingValues).result())
-#df2 = (dropColumnsCriteria(8,59,df,maxPercentageOfMissingValues).result())
-
-
-#dfNew = pd.concat([df1, df2], axis=1)
-print(dfNew)
-dfNew.to_csv ("/home/amanda/FYP/testcsv/colcrit.csv", index = False, header=True)
-#43 cols
-
-
-
-#df3 = (dropColumnsCriteria(0,59,df,maxPercentageOfMissingValues).result())
-#df3.to_csv ("/home/amanda/FYP/testcsv/cleaning1.csv", index = False, header=True)
-#print (df3)
-#43 cols
-
+print(dropList)
+df.drop(dropList,inplace=True,axis=1)
+df.to_csv ("/home/amanda/FYP/testcsv/colcrit.csv", index = False, header=True)
 
 
 

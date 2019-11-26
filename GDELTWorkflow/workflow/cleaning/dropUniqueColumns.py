@@ -44,10 +44,13 @@ print(numOfCols)
 
 lasThreadCols = 0
 
+results = []
+
 #one col per thread
 if numOfCols <= maxThreads:
-	for i in range (maxThreads):
-		uList1 = (dropUniqueColumns(0, i+1, df, uniqueColList).result())
+	for i in range (numOfCols):
+		uList1 = dropUniqueColumns(0, i+1, df, uniqueColList)
+		results.append(uList1)
 		#dfNew = pd.concat([dfNew, df1] , axis=1)
 		
 
@@ -76,7 +79,8 @@ elif numOfCols > maxThreads:
 
 
 
-
+# wait for all apps to complete
+[r.result() for r in results]
 
 #dropUniqueColumns(0,58,df,uniqueColList).result()
 print(uniqueColList)
