@@ -17,6 +17,8 @@ df = pd.read_csv("/home/amanda/FYP/testcsv/test.csv")
 uniqueColList = []
 
 
+#use this function to drop columns that contain primary key like data
+
 @python_app
 def dropUniqueColumns(startColIndex, endColIndex, dFrame, uniqueColList):
    
@@ -28,7 +30,14 @@ def dropUniqueColumns(startColIndex, endColIndex, dFrame, uniqueColList):
 	numOfRows = df.shape[0]
 
 	for col in df.columns:
+		#print(col)
+		#dfNew = df[[col]]
+
+		#dfNew = dfNew.dropna()
+
+		#numOfRows = dfNew.shape[0]
 		if len(df[col].unique()) == numOfRows:
+			print(col)
 			#df.drop(col,inplace=True,axis=1)
 			uniqueColList.append(col)
 
@@ -40,16 +49,17 @@ def dropUniqueColumns(startColIndex, endColIndex, dFrame, uniqueColList):
 maxThreads = threadconfig.maxThreads
 
 numOfCols = df.shape[1]
-print(numOfCols)
 
 lasThreadCols = 0
 
 results = []
 
+
+
 #one col per thread
 if numOfCols <= maxThreads:
 	for i in range (numOfCols):
-		uList1 = dropUniqueColumns(0, i+1, df, uniqueColList)
+		uList1 = dropUniqueColumns(i, i+1, df, uniqueColList)
 		results.append(uList1)
 		#dfNew = pd.concat([dfNew, df1] , axis=1)
 		
@@ -59,21 +69,26 @@ elif numOfCols > maxThreads:
 	if (numOfCols % maxThreads == 0):
 		eachThreadCols = numOfCols / maxThreads 
 		for i in range (maxThreads):
-			dropUniqueColumns(i,(i+eachThreadCols),df,uniqueColList).result()
+			uList1 = dropUniqueColumns(i,(i+eachThreadCols),df,uniqueColList)
+			results.append(uList1)
 			#dfNew = pd.concat([dfNew, df1] , axis=1)
 		
 	else:
 		print("test3")
 		eachThreadCols = numOfCols // (maxThreads-1)
 		lasThreadCols = numOfCols % (maxThreads-1)
+		#for loop for the threads except the last one
 		for i in range (0,(maxThreads-1)*eachThreadCols, eachThreadCols):
 			print ("i", i)
 			print("i+eachThreadCols", (i+eachThreadCols))
-			dropUniqueColumns(i,(i+eachThreadCols),df,uniqueColList).result()
+			uList1 = dropUniqueColumns(i,(i+eachThreadCols),df,uniqueColList)
+			results.append(uList1)
 			#dfNew = pd.concat([dfNew, df1], axis=1)
 
+		#last thread
 		print("last thread", (eachThreadCols * (maxThreads-1)))
-		dropUniqueColumns((eachThreadCols * (maxThreads-1)),numOfCols,df,uniqueColList).result()
+		uList2 = dropUniqueColumns((eachThreadCols * (maxThreads-1)),numOfCols,df,uniqueColList)
+		results.append(uList2)
 	
 		#dfNew = pd.concat([dfNew, df2] , axis=1)
 
@@ -83,7 +98,7 @@ elif numOfCols > maxThreads:
 [r.result() for r in results]
 
 #dropUniqueColumns(0,58,df,uniqueColList).result()
-print(uniqueColList)
+#print(uniqueColList)
 df.drop(uniqueColList,inplace=True,axis=1)
 
 df.to_csv("/home/amanda/FYP/testcsv/dropUniqueColumnsOUTPUT.csv", index = False, header=True)

@@ -1,6 +1,9 @@
 from parsl import load, python_app
-from parsl.configs.local_threads import config
-load(config)
+#from parsl.configs.local_threads import config
+from parsl.config import Config
+from parsl.executors.threads import ThreadPoolExecutor
+import parsl
+#load(config)
 
 import pandas as pd
 import numpy as np
@@ -56,14 +59,26 @@ def dropColumnsCriteria(startColIndex, endColIndex, dFrame, maxPercentage, dropL
 
 
 #read csv with defined missing values
-df = pd.read_csv("/home/amanda/FYP/testcsv/RFout.csv")
+df = pd.read_csv("/home/amanda/FYP/testcsv/test.csv")
 numOfCols = df.shape[1]
 print(numOfCols)
 
 lasThreadCols = 0
 
 dfNew = pd.DataFrame()
-maxThreads = threadconfig.maxThreads
+
+maxThreads = 10
+local_threads = Config(
+    executors=[
+        ThreadPoolExecutor(
+            max_threads=maxThreads,
+            label='local_threads'
+        )
+    ]
+)
+
+parsl.load(local_threads)
+
 
 results = []
 
