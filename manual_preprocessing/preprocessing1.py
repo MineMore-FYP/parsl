@@ -58,6 +58,7 @@ ThirtyDays = [4,6,9,11]
 ThirtyOneDays = [1,3,5,7,8,10,12]
 TwentyEightDays = [2]
 
+# create records with zero values for unrest for all days, months and years
 for df in list_of_df:	
 	# get country name for dataframe from the first row of df 		
 	countryName = df.loc[0][3]
@@ -80,15 +81,42 @@ for df in list_of_df:
 					l=pd.Series([y,m,d,countryName,0])
 					df=df.append(l, ignore_index=True) 
 
-	df.to_csv("/home/rajini/Desktop/riots/filledDF/dfCountry"+countryName+".csv", sep=',', encoding='utf-8', index=False, header=False)
+	df.to_csv("/home/rajini/Desktop/riots/filledDF/dfFilledCountry"+countryName+".csv", sep=',', encoding='utf-8', index=False, header=False)
 	
 	#print(df)
 
-df.to_csv("/home/rajini/Desktop/riots/datapp.csv", sep=',', encoding='utf-8', index=False, header=False)
+loc2 = "/home/rajini/Desktop/riots/filledDF/"
+
+list_of_filled_df = []
+
+# run loop for all files in previously created dataframe folder
+for f in os.listdir(loc2):
+	if f.endswith(".csv"):
+		#print(f)
+		df = pd.read_csv(loc2+f,  sep = ',', header=None)
+		# append dataframe to a list
+		list_of_filled_df.append(df)
+		#print(list_of_filled_df)
+
+
+# handle duplicate zero records
+for df in list_of_filled_df:
+	countryName = df.loc[0][3]
+	# Select all duplicate rows based on multiple columns
+	# leave the first record (showing riot) and delete the next
+	# For the subset argument, specify the first n-1 columns
+	df = df.drop_duplicates(subset=df.columns[:-1], keep='first')	
+	df.to_csv("/home/rajini/Desktop/riots/removeDuplicateDF/dfRemoveDuplicate"+countryName+".csv", sep=',', encoding='utf-8', index=False, header=False)
+
+#print(list_of_filled_df[0])
+#print(list_of_filled_df[1])
+
+#df.to_csv("/home/rajini/Desktop/riots/datapp.csv", sep=',', encoding='utf-8', index=False, header=False)
 
 
 '''
 df.to_csv (sys.argv[1], index = False, header=True)
+
 '''
 '''
 with open("/home/amanda/FYP/ds/combined.csv", "w", newline='', encoding="utf8") as outcsv:
@@ -101,29 +129,5 @@ with open("/home/amanda/FYP/ds/combined.csv", "w", newline='', encoding="utf8") 
         with open(filename, 'r', newline='', encoding="utf8") as incsv:
             reader = csv.reader(incsv, delimiter='\t')
             writer.writerows(row + [0.0] for row in reader)
-
-
-
-def thirtyDayMonth():
-	numberOfDays=30
-	return numberOfDays
-
-def thirtyOneDayMonth():
-	numberOfDays=31
-
-def Feb():
-	numberOfDays=28
-
-Jan=thirtyOneDayMonth()
-Feb=Feb()
-March=thirtyOneDayMonth()
-April=thirtyDayMonth()
-May=thirtyOneDayMonth()
-June=thirtyDayMonth()
-July=thirtyOneDayMonth()
-Aug=thirtyOneDayMonth
-Sep=thirtyDayMonth()
-Oct=thirtyOneDayMonth()
-Nov=thirtyDayMonth()
-Dec=thirtyOneDayMonth()
 '''
+
