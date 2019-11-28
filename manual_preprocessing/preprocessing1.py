@@ -58,7 +58,8 @@ ThirtyDays = [4,6,9,11]
 ThirtyOneDays = [1,3,5,7,8,10,12]
 TwentyEightDays = [2]
 
-for df in list_of_df:				
+for df in list_of_df:	
+	# get country name for dataframe from the first row of df 		
 	countryName = df.loc[0][3]
 	#print(countryName)
 	for y in years:
@@ -67,31 +68,21 @@ for df in list_of_df:
 			if m in ThirtyOneDays:
 				for d in range (1,32):
 					l=pd.Series([y,m,d,countryName,0])
-					#print(l)
-					#pd.concat([df, l])
 					df=df.append(l, ignore_index=True) 
+
 			if m in ThirtyDays:
 				for d in range (1,31):
 					l=pd.Series([y,m,d,countryName,0])
-					#print(l)
-					#pd.concat([df, l])
 					df=df.append(l, ignore_index=True) 
+
 			if m in TwentyEightDays:
 				for d in range (1,29):
 					l=pd.Series([y,m,d,countryName,0])
-					#print(l)
-					#pd.concat([df, l])
 					df=df.append(l, ignore_index=True) 
-	print(df)
-'''
 
+	df.to_csv("/home/rajini/Desktop/riots/filledDF/dfCountry"+countryName+".csv", sep=',', encoding='utf-8', index=False, header=False)
 	
-'''
-
-	
-	
-			
-	
+	#print(df)
 
 df.to_csv("/home/rajini/Desktop/riots/datapp.csv", sep=',', encoding='utf-8', index=False, header=False)
 
