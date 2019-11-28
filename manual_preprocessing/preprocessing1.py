@@ -138,6 +138,13 @@ for df in list_of_duplicate_removed_df:
 	# convert int to string
 	for i in range (3):
 		df[i]=df[i].astype(str)
+
+		# add "0" in front of one digit months and dates (in order to derive proper SQL date)
+		for j in df.loc[:][i]:
+			if j in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
+				j="0"+j
+				#print(j)
+			df[j][i]=j
 	#print(df.dtypes)
 	
 	# obtain SQLDATE in column 1
@@ -150,14 +157,12 @@ for df in list_of_duplicate_removed_df:
 	
 	df.to_csv("/home/rajini/Desktop/riots/sqldateDF/dfsqldate"+countryName+".csv", sep=',', encoding='utf-8', index=False, header=False)
 
-
-##### 	ISSSUE TO RESOLVE : SQL DATE FOR ONE DIGIT NUMBERS
-
 #print(list_of_filled_df[0])
 #print(list_of_filled_df[1])
 
 #df.to_csv("/home/rajini/Desktop/riots/datapp.csv", sep=',', encoding='utf-8', index=False, header=False)
-
+ 
+#ISSSUE TO RESOLVE : SQL DATE FOR ONE DIGIT NUMBERS
 
 '''
 df.to_csv (sys.argv[1], index = False, header=True)
