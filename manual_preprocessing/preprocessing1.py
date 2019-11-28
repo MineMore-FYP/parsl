@@ -54,21 +54,34 @@ for df in list_of_df:
     print("--")
 '''
 
-ThirtyOneDays = [1,3]
+ThirtyDays = [4,6,9,11]
+ThirtyOneDays = [1,3,5,7,8,10,12]
+TwentyEightDays = [2]
 
-for df in list_of_df:
+for df in list_of_df:				
+	countryName = df.loc[0][3]
+	#print(countryName)
 	for y in years:
 		for m in range (1,13):
 			#print(m)
 			if m in ThirtyOneDays:
 				for d in range (1,32):
-					l=pd.Series([y,m,d,"",0])
+					l=pd.Series([y,m,d,countryName,0])
 					#print(l)
 					#pd.concat([df, l])
 					df=df.append(l, ignore_index=True) 
-			
-				
-			
+			if m in ThirtyDays:
+				for d in range (1,31):
+					l=pd.Series([y,m,d,countryName,0])
+					#print(l)
+					#pd.concat([df, l])
+					df=df.append(l, ignore_index=True) 
+			if m in TwentyEightDays:
+				for d in range (1,29):
+					l=pd.Series([y,m,d,countryName,0])
+					#print(l)
+					#pd.concat([df, l])
+					df=df.append(l, ignore_index=True) 
 	print(df)
 '''
 
