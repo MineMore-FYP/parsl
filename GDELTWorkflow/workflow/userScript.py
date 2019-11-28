@@ -31,7 +31,8 @@ inputDataFrame = pd.read_csv(inputDataset)
 
 #select columns
 #if "all" select everything. else give a list ["whatever1", "whatever2"]
-selectColumns = ["SQLDATE", "Actor1Geo_Type", "Actor1Geo_CountryCode", "QuadClass", "GoldsteinScale", "NumMentions", "AvgTone"] #done
+selectColumns = ["SQLDATE", "Actor1Geo_CountryCode", "Actor2Geo_CountryCode", "QuadClass", "GoldsteinScale", "NumMentions", "AvgTone"] #done
+#selectColumns = ["SQLDATE", "Actor1Geo_Type", "Actor1Geo_CountryCode","Actor2Geo_Type", "Actor2Geo_CountryCode", "QuadClass", "GoldsteinScale", "NumMentions", "AvgTone"] #done
 #selectColumns = ["SQLDATE"]
 
 
@@ -66,7 +67,13 @@ modeColumns = "all" #done
 #Normalize
 userDefinedNormalizeColumns = ["AvgTone"]
 
+#Split into rows
+userDefinedColumsToSplit = [["Actor1Geo_CountryCode", "Actor2Geo_CountryCode"]]
+
+
+#encoding
 userDefinedEncodeColumns = ["Actor1Geo_CountryCode"]
+
 
 
 
