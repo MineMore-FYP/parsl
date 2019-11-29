@@ -68,7 +68,8 @@ modeColumns = "all" #done
 userDefinedNormalizeColumns = ["AvgTone"]
 
 #Split into rows
-userDefinedColumsToSplit = [["Actor1Geo_CountryCode", "Actor2Geo_CountryCode"]]
+#add the new column name as last element of list item
+userDefinedColumsToAggregate = [["Actor1Geo_CountryCode", "Actor2Geo_CountryCode", "ActorGeo_CountryCode" ]]
 
 
 #encoding
