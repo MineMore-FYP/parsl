@@ -139,12 +139,15 @@ for df in list_of_duplicate_removed_df:
 	for i in range (3):
 		df[i]=df[i].astype(str)
 
+		count=0
+
 		# add "0" in front of one digit months and dates (in order to derive proper SQL date)
 		for j in df.loc[:][i]:
 			if j in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
-				j="0"+j
+				j=j.zfill(2)
 				#print(j)
-			df[j][i]=j
+				df.set_value([count], [i], j)
+			count=count+1
 	#print(df.dtypes)
 	
 	# obtain SQLDATE in column 1
@@ -153,7 +156,7 @@ for df in list_of_duplicate_removed_df:
 	# drop month and date columns
 	df = df.drop([1, 2], axis=1)
 
-	print(df)
+	#print(df)
 	
 	df.to_csv("/home/rajini/Desktop/riots/sqldateDF/dfsqldate"+countryName+".csv", sep=',', encoding='utf-8', index=False, header=False)
 
