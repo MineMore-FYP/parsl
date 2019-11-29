@@ -138,6 +138,16 @@ for df in list_of_duplicate_removed_df:
 	# convert int to string
 	for i in range (3):
 		df[i]=df[i].astype(str)
+
+		count=0
+
+		# add "0" in front of one digit months and dates (in order to derive proper SQL date)
+		for j in df.loc[:][i]:
+			if j in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
+				j=j.zfill(2)
+				#print(j)
+				df.set_value([count], [i], j)
+			count=count+1
 	#print(df.dtypes)
 	
 	# obtain SQLDATE in column 1
@@ -146,12 +156,42 @@ for df in list_of_duplicate_removed_df:
 	# drop month and date columns
 	df = df.drop([1, 2], axis=1)
 
-	print(df)
+	#df.columns = ['SQLDATE', 'ActorGeo_CountryCode', 'Indicator']
+
+	#print(df)
 	
 	df.to_csv("/home/rajini/Desktop/riots/sqldateDF/dfsqldate"+countryName+".csv", sep=',', encoding='utf-8', index=False, header=False)
+ 
 
+# COMBINE ALL DATAFRAMES
 
-##### 	ISSSUE TO RESOLVE : SQL DATE FOR ONE DIGIT NUMBERS
+loc4 = "/home/rajini/Desktop/riots/sqldateDF/"
+os.chdir(loc4)
+
+allFiles = os.listdir(loc4)
+
+# CSV file selection
+
+selectedFiles = []
+
+for filename in allFiles:
+    	selectedFiles.append(filename)
+
+#print(selectedFiles)
+
+# Create new CSV file to write all CSV files generated from previous step 
+with open("/home/rajini/Desktop/riots/combinedRiots.csv", "w", newline='', encoding="utf8") as outcsv:
+	writer = csv.writer(outcsv, delimiter=',')
+
+	# write the header
+	writer.writerow(["SQLDATE", "ActorGeo_CountryCode", "Indicator"]) 
+	
+	# write the actual content line by line
+	for filename in selectedFiles:
+		with open(filename, 'r', newline='', encoding="utf8") as incsv:
+			reader = csv.reader(incsv, delimiter=',')
+			writer.writerows(row for row in reader)
+'''
 
 #print(list_of_filled_df[0])
 #print(list_of_filled_df[1])
@@ -159,20 +199,5 @@ for df in list_of_duplicate_removed_df:
 #df.to_csv("/home/rajini/Desktop/riots/datapp.csv", sep=',', encoding='utf-8', index=False, header=False)
 
 
-'''
-df.to_csv (sys.argv[1], index = False, header=True)
-
-'''
-'''
-with open("/home/amanda/FYP/ds/combined.csv", "w", newline='', encoding="utf8") as outcsv:
-    writer = csv.writer(outcsv, delimiter=',')
-    writer.writerow(header) # write the header
-
-
-    # write the actual content line by line
-    for filename in selectedFiles:
-        with open(filename, 'r', newline='', encoding="utf8") as incsv:
-            reader = csv.reader(incsv, delimiter='\t')
-            writer.writerows(row + [0.0] for row in reader)
 '''
 
