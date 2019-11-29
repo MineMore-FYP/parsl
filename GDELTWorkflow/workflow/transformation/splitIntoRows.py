@@ -1,20 +1,80 @@
 import pandas as pd
 import numpy as np
 
+import parsl
+
+from parsl.config import Config
+from parsl.providers import AdHocProvider
+from parsl.channels import SSHChannel
+from parsl.addresses import address_by_query
+from parsl.executors import HighThroughputExecutor
+
+from parsl.providers import LocalProvider
+from parsl.channels import LocalChannel
+from parsl.executors import HighThroughputExecutor
+
+from datetime import datetime
+
 import os,sys,inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir)
 
-import userScript
+#from userScript import userDefinedColumsToAggregate
 
-df = pd.read_csv("/home/amanda/FYP/testcsv/test2.csv")
-columnsToAggregate = userScript.userDefinedColumsToAggregate
+user_opts = {'adhoc':
+             {'username': 'mpiuser',
+              'script_dir': '/home/mpiuser/Documents/FYP/parsl/GDELTWorkflow/workflow/transformation',
+              'remote_hostnames': ['10.0.0.1','10.0.0.2']
+             }
+}
+
+remote_htex = Config(
+    executors=[
+	
+        HighThroughputExecutor(
+            label='remote_htex',
+	    address = '10.0.0.1',
+            max_workers=2,
+            #address=address_by_query(),
+            worker_logdir_root=user_opts['adhoc']['script_dir'],
+            provider=AdHocProvider(
+                # Command to be run before starting a worker, such as:
+                # 'module load Anaconda; source activate parsl_env'.
+                worker_init="""
+		source /etc/profile
+		source ~/.profile
+		""",
+                channels=[SSHChannel(hostname=m,
+                                     username=user_opts['adhoc']['username'],
+                                     script_dir=user_opts['adhoc']['script_dir'],
+                ) for m in user_opts['adhoc']['remote_hostnames']]
+            )
+        ),
+	HighThroughputExecutor(
+            label="htex_Local",
+            worker_debug=True,
+            cores_per_worker=1,
+            provider=LocalProvider(
+                channel=LocalChannel(),
+                init_blocks=1,
+                max_blocks=1,
+            ),
+        )
+    ],
+    max_idletime=2.0,
+    #  AdHoc Clusters should not be setup with scaling strategy.
+    strategy=None,
+)
+
+df = pd.read_csv("/home/mpiuser/Documents/FYP/test4.csv")
+columnsToAggregate = [["Actor1Geo_CountryCode", "Actor2Geo_CountryCode", "ActorGeo_CountryCode" ]]
 
 import parsl
 from parsl import load, python_app
-from parsl.configs.local_threads import config
-load(config)
+#from parsl.configs.local_threads import config
+#load(config)
+parsl.load(remote_htex)
 
 @python_app
 def splitIntoRows(startRowIndex, endRowIndex, dFrame, columnsToAggregate):
@@ -96,6 +156,14 @@ def splitIntoRows(startRowIndex, endRowIndex, dFrame, columnsToAggregate):
 		return dfNew
 		#dfNew.to_csv ("/home/amanda/FYP/testcsv/RFout1.csv", index = False, header=True)
 
+def getDuration(startTime,endTime):
+	difference = endTime - startTime
+	#difference = difference.strftime("%H:%M:%S")
+	return difference
+
+startTime = datetime.now().replace(microsecond=0)
+print('Start Time: ' + str(startTime) + '\n')
+
 
 maxDivs = 10
 results = []
@@ -103,43 +171,21 @@ numOfRows = df.shape[0]
 
 #df1 = splitIntoRows(0,100,df,columnsToAggregate)
 #print(df1.result())
-'''
-if (numOfRows % maxDivs == 0):
-	eachDivRows = numOfRows / maxDivs 
-	for i in range (maxDivs):
-		df1 = splitIntoRows(i,(i+eachDivRows),df,columnsToAggregate)
-		results.append(df1)
-		#dfNew = pd.concat([dfNew, df1] , axis=0)
-		
-else:
-	eachDivRows = numOfRows // (maxDivs-1)
-	for i in range (0,(maxDivs-1)*eachDivRows, eachDivRows):
-		print ("i", i)
-		print("i+eachDivRows", (i+eachDivRows))
-		df1 = splitIntoRows(i, (i+eachDivRows), df, columnsToAggregate)
-		results.append(df1)
-		#dfNew = pd.concat([dfNew, df1], axis=0)
 
-	print("last division",(eachDivRows * (maxDivs-1))	)
-	df2 = splitIntoRows((eachDivRows * (maxDivs-1)), numOfRows, df, columnsToAggregate)
-	results.append(df2)
+for i in range(0,200000,2000):
+	df1 = splitIntoRows(i,i+2000,df,columnsToAggregate)
+	print(i)
+	results.append(df1)
+
+# Wait for all apps to finish and collect the results
+outputs = [i.result() for i in results]
+
+endTime = datetime.now().replace(microsecond=0)
+
+print('\nEnd Time: ' + str(endTime) + ' Caluculation Done!\n')
+print('Duration ' + str(getDuration(startTime,endTime)))
+
+# Print results
+print(outputs)
 
 
-newlist = []	
-for i in results:
-	newlist.append(i.result())
-
-for i in newlist:
-	
-	dfNew = pd.concat([dfNew, i], axis=0)
-
-
-#dfNew = newlist[0]
-print(dfNew)
-
-dfNew.drop("index",inplace=True,axis=1)
-print(dfNew)
-
-dfNew.to_csv ("/home/amanda/FYP/testcsv/splittt.csv", index = False, header=True)
-#print(removeDuplicateRows(50,100,df).result())
-'''

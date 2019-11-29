@@ -16,10 +16,10 @@ feature sclaing - standardize/ normalize
 split data - RF
 '''
 #input location
-inputDataset = "/home/amanda/FYP/ds/combined.csv"
+#inputDataset = "/home/amanda/FYP/ds/combined.csv"
 
 #specify output locatiion
-outputDataset = "/home/amanda/FYP/testcsv/RFout.csv"
+#outputDataset = "/home/amanda/FYP/testcsv/RFout.csv"
 
 #wait time between each step of workflow (in milli seconds)
 waitTime = 10000
