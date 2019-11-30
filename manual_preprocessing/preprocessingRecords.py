@@ -101,9 +101,34 @@ for df in list_of_filled_df:
 	df.to_csv("/home/rajini/Desktop/riots/removeDuplicateDF/dfRemoveDuplicate"+countryName+".csv", sep=',', encoding='utf-8', index=False, header=False)
 
 
+# COMBINE ALL DATAFRAMES
+
+loc4 = "/home/rajini/Desktop/riots/removeDuplicateDF/"
+os.chdir(loc4)
+
+allFiles = os.listdir(loc4)
+
+# CSV file selection
+
+selectedFiles = []
+
+for filename in allFiles:
+    	selectedFiles.append(filename)
+
+# Create new CSV file to write all CSV files generated from previous step 
+with open("/home/rajini/Desktop/riots/combinedRiots.csv", "w", newline='', encoding="utf8") as outcsv:
+	writer = csv.writer(outcsv, delimiter=',')
+
+	# write the header
+	writer.writerow(["Year", "Month", "Date", "ActorGeo_CountryCode", "Indicator"]) 
+	
+	# write the actual content line by line
+	for filename in selectedFiles:
+		with open(filename, 'r', newline='', encoding="utf8") as incsv:
+			reader = csv.reader(incsv, delimiter=',')
+			writer.writerows(row for row in reader)
+
 '''
-
-
 # CONCATENATE COLUMNS TO GET SQL DATE
 
 loc3 = "/home/rajini/Desktop/riots/removeDuplicateDF/"
@@ -156,41 +181,3 @@ for df in list_of_duplicate_removed_df:
 	df.to_csv("/home/rajini/Desktop/riots/sqldateDF/dfsqldate"+countryName+".csv", sep=',', encoding='utf-8', index=False, header=False)
 
 '''
- 
-
-# COMBINE ALL DATAFRAMES
-
-loc4 = "/home/rajini/Desktop/riots/removeDuplicateDF/"
-os.chdir(loc4)
-
-allFiles = os.listdir(loc4)
-
-# CSV file selection
-
-selectedFiles = []
-
-for filename in allFiles:
-    	selectedFiles.append(filename)
-
-# Create new CSV file to write all CSV files generated from previous step 
-with open("/home/rajini/Desktop/riots/combinedRiots.csv", "w", newline='', encoding="utf8") as outcsv:
-	writer = csv.writer(outcsv, delimiter=',')
-
-	# write the header
-	writer.writerow(["Year", "Month", "Date", "ActorGeo_CountryCode", "Indicator"]) 
-	
-	# write the actual content line by line
-	for filename in selectedFiles:
-		with open(filename, 'r', newline='', encoding="utf8") as incsv:
-			reader = csv.reader(incsv, delimiter=',')
-			writer.writerows(row for row in reader)
-'''
-
-#print(list_of_filled_df[0])
-#print(list_of_filled_df[1])
-
-#df.to_csv("/home/rajini/Desktop/riots/datapp.csv", sep=',', encoding='utf-8', index=False, header=False)
-
-
-'''
-
