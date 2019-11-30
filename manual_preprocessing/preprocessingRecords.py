@@ -6,7 +6,6 @@ import numpy as np
 
 #read original csv with riot information
 df = pd.read_csv("/home/rajini/Desktop/riots/data.csv", header=None)
-#print(df)
 
 # parameters : the years to generate records for
 years = [2018,2019]
@@ -22,7 +21,6 @@ dfCountry=df.loc[:][3]
 
 # determine unique countries; used to make seperate dataframe per country
 for i in df.loc[:][3].unique():
-	#print("dfCountry"+i)
 	dfCountry=pd.DataFrame()
 	k=0
 	for j in df[:][3]:
@@ -32,7 +30,6 @@ for i in df.loc[:][3].unique():
 			# matches appended to country dataframe 
 			dfCountry=dfCountry.append(l)
 		k=k+1
-	#print(dfCountry)
 	# write each country dataframe to csv file. (in seperate folder)
 	dfCountry.to_csv("/home/rajini/Desktop/riots/countryDF/dfCountry"+i+".csv", sep=',', encoding='utf-8', index=False, header=False)
 
@@ -46,7 +43,6 @@ list_of_df = []
 # run loop for all files in previously created dataframe folder
 for f in os.listdir(loc):
 	if f.endswith(".csv"):
-		#print(f)
 		df = pd.read_csv(loc+f,  sep = ',', header=None)
 		# append dataframe to a list
 		list_of_df.append(df)
@@ -59,7 +55,6 @@ TwentyEightDays = [2]
 for df in list_of_df:	
 	# get country name for dataframe from the first row of df 		
 	countryName = df.loc[0][3]
-	#print(countryName)
 	for y in years:
 		for m in range (1,13):
 			#print(m)
@@ -79,8 +74,6 @@ for df in list_of_df:
 					df=df.append(l, ignore_index=True) 
 
 	df.to_csv("/home/rajini/Desktop/riots/filledDF/dfFilledCountry"+countryName+".csv", sep=',', encoding='utf-8', index=False, header=False)
-	
-	#print(df)
 
 
 # REMOVE DUPLICATE ROWS 
@@ -92,12 +85,9 @@ list_of_filled_df = []
 # run loop for all files in previously created dataframe folder
 for f in os.listdir(loc2):
 	if f.endswith(".csv"):
-		#print(f)
 		df = pd.read_csv(loc2+f,  sep = ',', header=None)
 		# append dataframe to a list
 		list_of_filled_df.append(df)
-		#print(list_of_filled_df)
-
 
 # handle duplicate zero records
 for df in list_of_filled_df:
@@ -109,6 +99,9 @@ for df in list_of_filled_df:
 	# For the subset argument, specify the first n-1 columns
 	df = df.drop_duplicates(subset=df.columns[:-1], keep='first')	
 	df.to_csv("/home/rajini/Desktop/riots/removeDuplicateDF/dfRemoveDuplicate"+countryName+".csv", sep=',', encoding='utf-8', index=False, header=False)
+
+
+'''
 
 
 # CONCATENATE COLUMNS TO GET SQL DATE
@@ -161,11 +154,13 @@ for df in list_of_duplicate_removed_df:
 	#print(df)
 	
 	df.to_csv("/home/rajini/Desktop/riots/sqldateDF/dfsqldate"+countryName+".csv", sep=',', encoding='utf-8', index=False, header=False)
+
+'''
  
 
 # COMBINE ALL DATAFRAMES
 
-loc4 = "/home/rajini/Desktop/riots/sqldateDF/"
+loc4 = "/home/rajini/Desktop/riots/removeDuplicateDF/"
 os.chdir(loc4)
 
 allFiles = os.listdir(loc4)
@@ -177,14 +172,12 @@ selectedFiles = []
 for filename in allFiles:
     	selectedFiles.append(filename)
 
-#print(selectedFiles)
-
 # Create new CSV file to write all CSV files generated from previous step 
 with open("/home/rajini/Desktop/riots/combinedRiots.csv", "w", newline='', encoding="utf8") as outcsv:
 	writer = csv.writer(outcsv, delimiter=',')
 
 	# write the header
-	writer.writerow(["SQLDATE", "ActorGeo_CountryCode", "Indicator"]) 
+	writer.writerow(["Year", "Month", "Date", "ActorGeo_CountryCode", "Indicator"]) 
 	
 	# write the actual content line by line
 	for filename in selectedFiles:
