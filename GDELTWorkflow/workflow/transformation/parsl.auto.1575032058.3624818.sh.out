@@ -1,0 +1,1312 @@
+Actor1Geo_CountryCode
+['SQLDATE', 'QuadClass', 'GoldsteinScale', 'NumMentions', 'AvgTone', 'ActorGeo_CountryCode']
+SQLDATE           20180725
+QuadClass                1
+GoldsteinScale           3
+NumMentions              1
+AvgTone           -3.20088
+Name: 4, dtype: object
+SQLDATE           20180725
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions              1
+AvgTone           -3.20088
+Name: 5, dtype: object
+SQLDATE           20180725
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions              2
+AvgTone           -3.20088
+Name: 6, dtype: object
+SQLDATE           20180725
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions              6
+AvgTone           -3.20088
+Name: 9, dtype: object
+SQLDATE           20180725
+QuadClass                1
+GoldsteinScale         2.8
+NumMentions              2
+AvgTone           -3.20088
+Name: 10, dtype: object
+SQLDATE           20180725
+QuadClass                1
+GoldsteinScale         2.8
+NumMentions              1
+AvgTone           -3.20088
+Name: 11, dtype: object
+SQLDATE           20180725
+QuadClass                1
+GoldsteinScale         2.8
+NumMentions              6
+AvgTone           -3.20088
+Name: 12, dtype: object
+SQLDATE           20190625
+QuadClass                1
+GoldsteinScale           7
+NumMentions              1
+AvgTone          -0.416667
+Name: 36, dtype: object
+SQLDATE           20190625
+QuadClass                1
+GoldsteinScale           7
+NumMentions              1
+AvgTone          -0.416667
+Name: 37, dtype: object
+both null
+SQLDATE           20190625
+QuadClass                1
+GoldsteinScale           7
+NumMentions              1
+AvgTone          -0.416667
+Name: 50, dtype: object
+SQLDATE           20190625
+QuadClass                1
+GoldsteinScale           7
+NumMentions              1
+AvgTone          -0.416667
+Name: 51, dtype: object
+SQLDATE           20190718
+QuadClass                1
+GoldsteinScale           7
+NumMentions             60
+AvgTone           -1.42577
+Name: 84, dtype: object
+SQLDATE           20190718
+QuadClass                1
+GoldsteinScale           7
+NumMentions            256
+AvgTone           -1.40039
+Name: 85, dtype: object
+SQLDATE           20190718
+QuadClass                4
+GoldsteinScale        -7.2
+NumMentions            256
+AvgTone           -1.40039
+Name: 87, dtype: object
+SQLDATE           20190718
+QuadClass                4
+GoldsteinScale        -7.2
+NumMentions             60
+AvgTone           -1.42577
+Name: 88, dtype: object
+SQLDATE           20190718
+QuadClass                1
+GoldsteinScale           7
+NumMentions            256
+AvgTone           -1.40039
+Name: 89, dtype: object
+SQLDATE           20190718
+QuadClass                1
+GoldsteinScale           7
+NumMentions             60
+AvgTone           -1.42577
+Name: 90, dtype: object
+SQLDATE           20190718
+QuadClass                1
+GoldsteinScale           4
+NumMentions              1
+AvgTone           -2.74566
+Name: 94, dtype: object
+SQLDATE           20190724
+QuadClass                1
+GoldsteinScale           0
+NumMentions             22
+AvgTone           -1.55397
+Name: 97, dtype: object
+SQLDATE           20190724
+QuadClass                1
+GoldsteinScale           0
+NumMentions             14
+AvgTone           -1.56011
+Name: 98, dtype: object
+SQLDATE           20190724
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions             18
+AvgTone           -1.55397
+Name: 99, dtype: object
+SQLDATE           20190724
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions             14
+AvgTone           -1.56011
+Name: 100, dtype: object
+SQLDATE           20190724
+QuadClass                1
+GoldsteinScale         2.8
+NumMentions             18
+AvgTone           -1.55397
+Name: 101, dtype: object
+SQLDATE           20190724
+QuadClass                1
+GoldsteinScale         2.8
+NumMentions             14
+AvgTone           -1.56011
+Name: 102, dtype: object
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           0
+NumMentions             78
+AvgTone           -1.64177
+Name: 646, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           1
+NumMentions             50
+AvgTone           -1.64384
+Name: 647, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         2.8
+NumMentions             25
+AvgTone           -1.64384
+Name: 649, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           7
+NumMentions              1
+AvgTone            1.03306
+Name: 655, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           7
+NumMentions              1
+AvgTone            1.03306
+Name: 656, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           4
+NumMentions              2
+AvgTone            1.03306
+Name: 657, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           4
+NumMentions              1
+AvgTone            1.03306
+Name: 658, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           4
+NumMentions              5
+AvgTone            1.03306
+Name: 660, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           7
+NumMentions              2
+AvgTone                  0
+Name: 661, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           0
+NumMentions              2
+AvgTone           -2.28928
+Name: 682, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions              6
+AvgTone           -2.28928
+Name: 684, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions              2
+AvgTone           -2.28928
+Name: 685, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         3.4
+NumMentions             58
+AvgTone           -4.54387
+Name: 690, dtype: object
+SQLDATE           20190725
+QuadClass                2
+GoldsteinScale           7
+NumMentions              2
+AvgTone           -2.55164
+Name: 691, dtype: object
+SQLDATE           20190725
+QuadClass                2
+GoldsteinScale           7
+NumMentions              2
+AvgTone           -2.55164
+Name: 692, dtype: object
+SQLDATE           20190725
+QuadClass                2
+GoldsteinScale           7
+NumMentions              4
+AvgTone           -2.55164
+Name: 693, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           4
+NumMentions             23
+AvgTone           -4.26262
+Name: 694, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           4
+NumMentions              6
+AvgTone           -4.67993
+Name: 695, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           3
+NumMentions             20
+AvgTone           -3.67263
+Name: 698, dtype: object
+SQLDATE           20190725
+QuadClass                2
+GoldsteinScale          -2
+NumMentions              2
+AvgTone            -3.4375
+Name: 731, dtype: object
+SQLDATE           20190725
+QuadClass                2
+GoldsteinScale          -2
+NumMentions            146
+AvgTone           -5.02779
+Name: 733, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale        -0.4
+NumMentions              4
+AvgTone           -3.92577
+Name: 739, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         3.4
+NumMentions              4
+AvgTone           -3.20088
+Name: 741, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions              2
+AvgTone            -3.4375
+Name: 744, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           7
+NumMentions             52
+AvgTone           -3.12727
+Name: 746, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         0.4
+NumMentions              1
+AvgTone           -3.20088
+Name: 748, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         3.4
+NumMentions              1
+AvgTone           -3.20088
+Name: 751, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions              1
+AvgTone           -3.20088
+Name: 753, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         0.4
+NumMentions             72
+AvgTone           -6.41462
+Name: 756, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           0
+NumMentions              4
+AvgTone            2.97767
+Name: 768, dtype: object
+both null
+SQLDATE           20190725
+QuadClass                2
+GoldsteinScale           6
+NumMentions              4
+AvgTone            2.97767
+Name: 772, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale        -0.3
+NumMentions              2
+AvgTone           -3.20088
+Name: 778, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions              1
+AvgTone           -3.20088
+Name: 779, dtype: object
+SQLDATE           20190725
+QuadClass                2
+GoldsteinScale           7
+NumMentions              1
+AvgTone           -3.20088
+Name: 781, dtype: object
+SQLDATE           20190725
+QuadClass                2
+GoldsteinScale           7
+NumMentions              1
+AvgTone           -3.20088
+Name: 782, dtype: object
+SQLDATE           20190725
+QuadClass                2
+GoldsteinScale           7
+NumMentions              3
+AvgTone           -3.20088
+Name: 783, dtype: object
+SQLDATE           20190725
+QuadClass                2
+GoldsteinScale           5
+NumMentions              1
+AvgTone           -3.20088
+Name: 784, dtype: object
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale          -2
+NumMentions             44
+AvgTone           -6.41688
+Name: 785, dtype: object
+SQLDATE           20190725
+QuadClass                2
+GoldsteinScale           5
+NumMentions              2
+AvgTone           -3.20088
+Name: 788, dtype: object
+SQLDATE           20190725
+QuadClass                2
+GoldsteinScale           5
+NumMentions              2
+AvgTone           -3.20088
+Name: 789, dtype: object
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale          -2
+NumMentions              2
+AvgTone           -3.20088
+Name: 790, dtype: object
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale          -2
+NumMentions              2
+AvgTone           -3.20088
+Name: 791, dtype: object
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale          -5
+NumMentions              2
+AvgTone           -8.85806
+Name: 794, dtype: object
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale         -10
+NumMentions              2
+AvgTone            -3.4375
+Name: 796, dtype: object
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale         -10
+NumMentions              4
+AvgTone           -5.05234
+Name: 799, dtype: object
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale         -10
+NumMentions             48
+AvgTone           -5.52618
+Name: 800, dtype: object
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale          -5
+NumMentions             12
+AvgTone           -8.85806
+Name: 801, dtype: object
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale          -2
+NumMentions             66
+AvgTone           -6.41688
+Name: 803, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           7
+NumMentions              2
+AvgTone          -0.707676
+Name: 809, dtype: object
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale          -2
+NumMentions              1
+AvgTone          -0.416667
+Name: 829, dtype: object
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale          -2
+NumMentions              3
+AvgTone          -0.416667
+Name: 830, dtype: object
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale          -2
+NumMentions              4
+AvgTone          -0.416667
+Name: 832, dtype: object
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale          -2
+NumMentions              1
+AvgTone          -0.416667
+Name: 833, dtype: object
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           4
+NumMentions              6
+AvgTone            1.46477
+Name: 896, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           4
+NumMentions             24
+AvgTone            1.46477
+Name: 897, dtype: object
+both null
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           0
+NumMentions              1
+AvgTone          -0.294118
+Name: 904, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           1
+NumMentions              2
+AvgTone            1.30814
+Name: 909, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           1
+NumMentions              6
+AvgTone            1.30814
+Name: 910, dtype: object
+both null
+both null
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale          -2
+NumMentions             15
+AvgTone           -5.27738
+Name: 917, dtype: object
+both null
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           0
+NumMentions              8
+AvgTone           -5.46353
+Name: 967, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           0
+NumMentions             12
+AvgTone           -5.43407
+Name: 968, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           0
+NumMentions              4
+AvgTone           -5.05234
+Name: 969, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         2.8
+NumMentions              2
+AvgTone            -3.4375
+Name: 971, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           7
+NumMentions             52
+AvgTone           -3.12727
+Name: 973, dtype: object
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale        -4.4
+NumMentions              4
+AvgTone           -3.92577
+Name: 975, dtype: object
+both null
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions              4
+AvgTone           -3.92577
+Name: 984, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           0
+NumMentions             14
+AvgTone           -1.56011
+Name: 994, dtype: object
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale        -4.4
+NumMentions              4
+AvgTone           -3.92577
+Name: 997, dtype: object
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale         -10
+NumMentions             16
+AvgTone           -1.55149
+Name: 998, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           0
+NumMentions              1
+AvgTone           -4.32357
+Name: 1000, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         2.8
+NumMentions              2
+AvgTone          -0.285442
+Name: 1011, dtype: object
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale         -10
+NumMentions              2
+AvgTone           -4.51899
+Name: 1013, dtype: object
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale         -10
+NumMentions              1
+AvgTone           -4.32357
+Name: 1014, dtype: object
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale          -4
+NumMentions              2
+AvgTone           -3.20088
+Name: 1016, dtype: object
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale          -4
+NumMentions              5
+AvgTone           -3.20088
+Name: 1017, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         3.5
+NumMentions              1
+AvgTone           -3.20088
+Name: 1018, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           3
+NumMentions              8
+AvgTone           -3.20088
+Name: 1023, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           4
+NumMentions              2
+AvgTone            3.92185
+Name: 1050, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions              4
+AvgTone            3.92185
+Name: 1052, dtype: object
+SQLDATE           20190725
+QuadClass                2
+GoldsteinScale           9
+NumMentions             20
+AvgTone            3.92185
+Name: 1053, dtype: object
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale          -2
+NumMentions              2
+AvgTone            3.92185
+Name: 1054, dtype: object
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale          -2
+NumMentions              2
+AvgTone            3.92185
+Name: 1055, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           7
+NumMentions              2
+AvgTone            3.92185
+Name: 1056, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         3.4
+NumMentions             72
+AvgTone           -1.74863
+Name: 1061, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           1
+NumMentions             12
+AvgTone           -3.00958
+Name: 1064, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           1
+NumMentions             24
+AvgTone           -3.00958
+Name: 1065, dtype: object
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale        -4.4
+NumMentions             17
+AvgTone           -2.50085
+Name: 1066, dtype: object
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale        -4.4
+NumMentions             80
+AvgTone           -2.49311
+Name: 1067, dtype: object
+SQLDATE           20190725
+QuadClass                2
+GoldsteinScale         7.4
+NumMentions             40
+AvgTone            1.14808
+Name: 1068, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale        -0.4
+NumMentions              3
+AvgTone           -1.11664
+Name: 1070, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           4
+NumMentions              4
+AvgTone           -1.39211
+Name: 1073, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           7
+NumMentions             22
+AvgTone           0.936193
+Name: 1075, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         3.5
+NumMentions             16
+AvgTone           -1.55079
+Name: 1077, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions              6
+AvgTone            3.92185
+Name: 1086, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           4
+NumMentions            544
+AvgTone           -1.82095
+Name: 1091, dtype: object
+both null
+both null
+SQLDATE           20190725
+QuadClass                2
+GoldsteinScale           5
+NumMentions              4
+AvgTone           -3.20088
+Name: 1095, dtype: object
+SQLDATE           20190725
+QuadClass                2
+GoldsteinScale           5
+NumMentions              2
+AvgTone           -3.20088
+Name: 1096, dtype: object
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale          -2
+NumMentions              4
+AvgTone           -3.20088
+Name: 1097, dtype: object
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale          -2
+NumMentions              2
+AvgTone           -3.20088
+Name: 1098, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         2.8
+NumMentions              1
+AvgTone           -3.20088
+Name: 1104, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         2.8
+NumMentions            608
+AvgTone            -3.5982
+Name: 1107, dtype: object
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale        -4.4
+NumMentions              4
+AvgTone           -3.92577
+Name: 1220, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         2.8
+NumMentions              4
+AvgTone           -3.92577
+Name: 1228, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         3.4
+NumMentions              4
+AvgTone            -3.4375
+Name: 1235, dtype: object
+both null
+both null
+both null
+both null
+both null
+both null
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           0
+NumMentions              4
+AvgTone           -8.85806
+Name: 1265, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           0
+NumMentions             12
+AvgTone           -8.85806
+Name: 1266, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions              4
+AvgTone           -8.85806
+Name: 1268, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions             12
+AvgTone           -8.85806
+Name: 1269, dtype: object
+both null
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions              4
+AvgTone           -8.85806
+Name: 1280, dtype: object
+both null
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale          -2
+NumMentions             22
+AvgTone           -5.61056
+Name: 1293, dtype: object
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale          -2
+NumMentions             22
+AvgTone           -5.61056
+Name: 1294, dtype: object
+both null
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           0
+NumMentions              6
+AvgTone            3.92185
+Name: 1316, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         2.8
+NumMentions              6
+AvgTone            3.92185
+Name: 1317, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions            228
+AvgTone           -2.65467
+Name: 1320, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         2.8
+NumMentions            228
+AvgTone           -2.65467
+Name: 1323, dtype: object
+both null
+both null
+both null
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale          -2
+NumMentions              4
+AvgTone           -8.85806
+Name: 1334, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         3.4
+NumMentions              5
+AvgTone            1.51465
+Name: 1355, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         3.4
+NumMentions              4
+AvgTone            2.89855
+Name: 1356, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         3.4
+NumMentions              2
+AvgTone            2.89855
+Name: 1357, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         3.4
+NumMentions              2
+AvgTone            2.89855
+Name: 1358, dtype: object
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale          -5
+NumMentions              4
+AvgTone           -3.85289
+Name: 1359, dtype: object
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale          -5
+NumMentions             12
+AvgTone           -3.85289
+Name: 1360, dtype: object
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale          -5
+NumMentions              4
+AvgTone           -3.85289
+Name: 1361, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           1
+NumMentions              5
+AvgTone            1.51465
+Name: 1362, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions              1
+AvgTone            0.92068
+Name: 1364, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         3.4
+NumMentions              2
+AvgTone            2.89855
+Name: 1366, dtype: object
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         3.4
+NumMentions             15
+AvgTone            4.64127
+Name: 1431, dtype: object
+both null
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           0
+NumMentions             14
+AvgTone           -1.56011
+Name: 1438, dtype: object
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale          -5
+NumMentions             18
+AvgTone                  0
+Name: 1443, dtype: object
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale          -5
+NumMentions            126
+AvgTone          -0.158464
+Name: 1444, dtype: object
+both null
+SQLDATE            20190725
+QuadClass                 1
+GoldsteinScale          3.4
+NumMentions              48
+AvgTone          -0.0618812
+Name: 1457, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         3.4
+NumMentions             15
+AvgTone            4.64127
+Name: 1460, dtype: object
+both null
+SQLDATE            20190725
+QuadClass                 1
+GoldsteinScale          3.4
+NumMentions              32
+AvgTone          -0.0618812
+Name: 1476, dtype: object
+both null
+both null
+both null
+both null
+both null
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         2.8
+NumMentions              6
+AvgTone           -2.28928
+Name: 1503, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         2.8
+NumMentions              2
+AvgTone           -2.28928
+Name: 1504, dtype: object
+both null
+both null
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions             10
+AvgTone                  0
+Name: 1507, dtype: object
+both null
+both null
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale         -10
+NumMentions              3
+AvgTone           -2.81124
+Name: 1512, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         2.8
+NumMentions            125
+AvgTone                  0
+Name: 1513, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         2.8
+NumMentions            125
+AvgTone                  0
+Name: 1514, dtype: object
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+both null
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale          -5
+NumMentions            152
+AvgTone            -3.5982
+Name: 1648, dtype: object
+SQLDATE           20190725
+QuadClass                2
+GoldsteinScale          10
+NumMentions              2
+AvgTone           -8.67347
+Name: 1651, dtype: object
+both null
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         2.8
+NumMentions              3
+AvgTone           -2.55164
+Name: 1655, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           1
+NumMentions              3
+AvgTone           -2.55164
+Name: 1656, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         2.8
+NumMentions              1
+AvgTone           -2.55164
+Name: 1659, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         0.4
+NumMentions              3
+AvgTone                  0
+Name: 1660, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         0.4
+NumMentions              4
+AvgTone                  0
+Name: 1661, dtype: object
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale          -5
+NumMentions              4
+AvgTone           -3.85289
+Name: 1662, dtype: object
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale          -5
+NumMentions              4
+AvgTone           -3.85289
+Name: 1663, dtype: object
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale          -5
+NumMentions              8
+AvgTone           -3.85289
+Name: 1664, dtype: object
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale          -5
+NumMentions              4
+AvgTone           -3.85289
+Name: 1665, dtype: object
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale         -10
+NumMentions              2
+AvgTone           -8.67347
+Name: 1667, dtype: object
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale          -5
+NumMentions             43
+AvgTone           -9.93076
+Name: 1668, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions            608
+AvgTone            -3.5982
+Name: 1672, dtype: object
+both null
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale          -2
+NumMentions             72
+AvgTone           -6.41462
+Name: 1679, dtype: object
+SQLDATE           20190725
+QuadClass                2
+GoldsteinScale           7
+NumMentions              7
+AvgTone            -4.3921
+Name: 1693, dtype: object
+SQLDATE           20190725
+QuadClass                3
+GoldsteinScale          -2
+NumMentions              7
+AvgTone            -4.3921
+Name: 1696, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         2.8
+NumMentions              4
+AvgTone            3.92185
+Name: 1700, dtype: object
+SQLDATE           20190725
+QuadClass                2
+GoldsteinScale         8.5
+NumMentions             16
+AvgTone            3.92185
+Name: 1703, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           0
+NumMentions              8
+AvgTone            3.92185
+Name: 1704, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           1
+NumMentions              1
+AvgTone           -2.55164
+Name: 1706, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           1
+NumMentions              2
+AvgTone           -2.55164
+Name: 1707, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions              3
+AvgTone           -2.55164
+Name: 1712, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           1
+NumMentions              1
+AvgTone           -2.55164
+Name: 1713, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           1
+NumMentions              3
+AvgTone           -2.55164
+Name: 1715, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           1
+NumMentions              1
+AvgTone           -2.55164
+Name: 1716, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         3.4
+NumMentions              1
+AvgTone            3.44828
+Name: 1719, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         3.4
+NumMentions              1
+AvgTone            3.44828
+Name: 1720, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           0
+NumMentions             20
+AvgTone            2.97767
+Name: 1721, dtype: object
+SQLDATE           20190725
+QuadClass                2
+GoldsteinScale           6
+NumMentions             20
+AvgTone            2.97767
+Name: 1722, dtype: object
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale          -5
+NumMentions              5
+AvgTone           -3.04414
+Name: 1728, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale           0
+NumMentions              1
+AvgTone          -0.416667
+Name: 1732, dtype: object
+SQLDATE           20190725
+QuadClass                1
+GoldsteinScale         1.9
+NumMentions              2
+AvgTone          -0.294118
+Name: 1736, dtype: object
+SQLDATE           20190725
+QuadClass                4
+GoldsteinScale         -10
+NumMentions              2
+AvgTone            -3.4375
+Name: 1767, dtype: object

@@ -1,0 +1,22 @@
+2019-11-29 18:29:00.315 parsl:592 Rank:0 [INFO]  Python version: 3.5.2 (default, Oct  8 2019, 13:06:37) 
+[GCC 5.4.0 20160609]
+2019-11-29 18:29:00.315 parsl:593 Rank:0 [INFO]  Debug logging: False
+2019-11-29 18:29:00.315 parsl:594 Rank:0 [INFO]  Log dir: /home/mpiuser/Documents/FYP/parsl/GDELTWorkflow/workflow/transformation/remote_htex
+2019-11-29 18:29:00.315 parsl:595 Rank:0 [INFO]  Manager ID: e570839eaf3b
+2019-11-29 18:29:00.315 parsl:596 Rank:0 [INFO]  Block ID: 1
+2019-11-29 18:29:00.315 parsl:597 Rank:0 [INFO]  cores_per_worker: 1.0
+2019-11-29 18:29:00.315 parsl:598 Rank:0 [INFO]  mem_per_worker: None
+2019-11-29 18:29:00.315 parsl:599 Rank:0 [INFO]  task_url: tcp://10.0.0.1:54380
+2019-11-29 18:29:00.315 parsl:600 Rank:0 [INFO]  result_url: tcp://10.0.0.1:54934
+2019-11-29 18:29:00.316 parsl:601 Rank:0 [INFO]  max_workers: 2
+2019-11-29 18:29:00.316 parsl:602 Rank:0 [INFO]  poll_period: 10
+2019-11-29 18:29:00.316 parsl:603 Rank:0 [INFO]  Prefetch capacity: 0
+2019-11-29 18:29:00.316 parsl:108 Rank:0 [INFO]  Manager started
+2019-11-29 18:29:00.317 parsl:122 Rank:0 [INFO]  Manager connected
+2019-11-29 18:29:00.317 parsl:148 Rank:0 [INFO]  Manager will spawn 2 workers
+2019-11-29 18:29:00.340 parsl:199 Rank:0 [INFO]  [TASK PULL THREAD] starting
+2019-11-29 18:29:00.347 parsl:385 Rank:0 [INFO]  Loop start
+2019-11-29 18:35:45.550 parsl:265 Rank:0 [CRITICAL]  [TASK_PULL_THREAD] Missing contact with interchange beyond heartbeat_threshold
+2019-11-29 18:35:45.610 parsl:267 Rank:0 [CRITICAL]  [TASK_PULL_THREAD] Exiting
+2019-11-29 18:35:45.610 parsl:390 Rank:0 [CRITICAL]  [MAIN] Received kill event, terminating worker processes
+2019-11-29 18:35:45.612 parsl:304 Rank:0 [CRITICAL]  [RESULT_PUSH_THREAD] Exiting
