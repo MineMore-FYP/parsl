@@ -37,20 +37,35 @@ for i, j in dfOriginal.iterrows():
 	dfOriginal.set_value([i], ['month'], month)
 	dfOriginal.set_value([i], ['date'], date)	
 
+# function to generate a monthly dataframe from the Manually created dataset 
 def generateMonthlyDf(year,month):
-	print("Hello")
+	dfMonthly = pd.DataFrame(columns = ["Year", "Month", "Date", "ActorGeo_CountryCode", "Indicator"]) 
+	for p,q in dfManual.iterrows():
+		if dfManual.loc[p]["Year"]==year:
+			if dfManual.loc[p]["Month"]==month:
+				dfMonthly=dfMonthly.append(dfManual.loc[p][:], ignore_index=True)
+	return dfMonthly
 
-count=0
+
 for i in preprocessingRecords.years:
-	for j in range (12):
-		count=count+1
-		print(count)
-
+	for j in range (1,13):
+		y=str(i)
+		m=str(j)
+		dfName=y+m
+		dfName1=dfName
+		dfName=generateMonthlyDf(i,j)
+		print(dfName)
+		dfName.to_csv("/home/rajini/Desktop/riots/monthlyDF/"+dfName1+".csv", sep=',', encoding='utf-8', index=False, header=True)
+'''
 print(dfOriginal)
-
+'''
 #dfOriginal.to_csv("/home/rajini/Desktop/riots/labelledOriginalData.csv", sep=',', encoding='utf-8', index=False, header=True)
 
 '''
+
+	y=str(year)
+	m=str(month)
+	dfName=y+m
 # iterate over all records from gdelt dataset
 for i in range (numberOfRowsOriginal):
 	#print(dfOriginal.loc[i][:])
