@@ -76,22 +76,19 @@ def findMonthlyDf(loc, name):
 for i in range (numberOfRowsOriginal):
 	y=dfOriginal.loc[i]["year"]
 	m=dfOriginal.loc[i]["month"]
+	d=dfOriginal.loc[i]["date"]
+	c=dfOriginal.loc[i]["ActorGeo_CountryCode"]
 	dfName2=y+m
 	comparativeDF = findMonthlyDf(loc1,dfName2)
+	for m, n in comparativeDF.iterrows():
+		cmpDateInt=int(comparativeDF.loc[m]["Date"])
+		cmpDate=str(cmpDateInt)
+		cmpCountry=str(comparativeDF.loc[m]["ActorGeo_CountryCode"])
+		if cmpDate==d:
+			if cmpCountry==c:
+				if comparativeDF.loc[m]["Indicator"]==1:
+					dfOriginal.set_value([i], ["label"], 1)	
 
 
-'''
-	for j in range (numberOfRowsManual):
-		if (dfOriginal.loc[i][0]==dfManual.loc[j][0]):
-			if (dfOriginal.loc[i][1]==dfManual.loc[j][1]):
-				print("Hello")
-
-
-
-
-	y=str(year)
-	m=str(month)
-	dfName=y+m
-
-
-'''
+dfOriginal.to_csv("/home/rajini/Desktop/finalCSVOut.csv", sep=',', encoding='utf-8', index=False, header=True)			
+	
