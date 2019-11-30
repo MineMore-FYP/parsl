@@ -69,10 +69,8 @@ def findMonthlyDf(loc, name):
 			if (f == name):
 				df = pd.read_csv(loc+f,  sep = ',', header=0)
 				return df
-			
-#print(findMonthlyDf(loc1,"201811"))	
-
-# iterate over all records from gdelt dataset
+	
+# iterate over all records from gdelt dataset 
 for i in range (numberOfRowsOriginal):
 	y=dfOriginal.loc[i]["year"]
 	m=dfOriginal.loc[i]["month"]
@@ -80,12 +78,14 @@ for i in range (numberOfRowsOriginal):
 	c=dfOriginal.loc[i]["ActorGeo_CountryCode"]
 	dfName2=y+m
 	comparativeDF = findMonthlyDf(loc1,dfName2)
+	# find record with matching date and country from monthlyDF
 	for m, n in comparativeDF.iterrows():
 		cmpDateInt=int(comparativeDF.loc[m]["Date"])
 		cmpDate=str(cmpDateInt)
 		cmpCountry=str(comparativeDF.loc[m]["ActorGeo_CountryCode"])
 		if cmpDate==d:
 			if cmpCountry==c:
+				# set label to zero if corresponding record exists in monthlyDF
 				if comparativeDF.loc[m]["Indicator"]==1:
 					dfOriginal.set_value([i], ["label"], 1)	
 
