@@ -46,32 +46,52 @@ def generateMonthlyDf(year,month):
 				dfMonthly=dfMonthly.append(dfManual.loc[p][:], ignore_index=True)
 	return dfMonthly
 
-
+# call generateMonthlyDF function to all months in given years
 for i in preprocessingRecords.years:
 	for j in range (1,13):
 		y=str(i)
 		m=str(j)
+		# add "0" in front of one digit months
+		if m in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
+				m=m.zfill(2)
 		dfName=y+m
 		dfName1=dfName
 		dfName=generateMonthlyDf(i,j)
-		print(dfName)
 		dfName.to_csv("/home/rajini/Desktop/riots/monthlyDF/"+dfName1+".csv", sep=',', encoding='utf-8', index=False, header=True)
-'''
-print(dfOriginal)
-'''
-#dfOriginal.to_csv("/home/rajini/Desktop/riots/labelledOriginalData.csv", sep=',', encoding='utf-8', index=False, header=True)
 
-'''
+loc1 = "/home/rajini/Desktop/riots/monthlyDF/"
 
-	y=str(year)
-	m=str(month)
-	dfName=y+m
+# function to find dataframe for given month
+def findMonthlyDf(loc, name):	
+	name=name+".csv"
+	for f in os.listdir(loc):
+		if f.endswith(".csv"):
+			if (f == name):
+				df = pd.read_csv(loc+f,  sep = ',', header=0)
+				return df
+			
+#print(findMonthlyDf(loc1,"201811"))	
+
 # iterate over all records from gdelt dataset
 for i in range (numberOfRowsOriginal):
-	#print(dfOriginal.loc[i][:])
+	y=dfOriginal.loc[i]["year"]
+	m=dfOriginal.loc[i]["month"]
+	dfName2=y+m
+	comparativeDF = findMonthlyDf(loc1,dfName2)
+
+
+'''
 	for j in range (numberOfRowsManual):
 		if (dfOriginal.loc[i][0]==dfManual.loc[j][0]):
 			if (dfOriginal.loc[i][1]==dfManual.loc[j][1]):
 				print("Hello")
+
+
+
+
+	y=str(year)
+	m=str(month)
+	dfName=y+m
+
 
 '''
