@@ -6,6 +6,8 @@ import numpy as np
 
 import preprocessingRecords
 
+# CONSOLIDATE GDELT OUTPUT WITH ACTUAL EVENTS IN ORDER TO GENERATE A LABEL 
+
 # read original csv generated from gdelt
 dfOriginal = pd.read_csv("/home/rajini/output.csv", header=0)
 
@@ -38,26 +40,28 @@ for i, j in dfOriginal.iterrows():
 	dfOriginal.set_value([i], ['date'], date)	
 
 # function to generate a monthly dataframe from the Manually created dataset 
-def generateMonthlyDf(year,month):
+def generateMonthlyDf(year,month,country):
 	dfMonthly = pd.DataFrame(columns = ["Year", "Month", "Date", "ActorGeo_CountryCode", "Indicator"]) 
 	for p,q in dfManual.iterrows():
 		if dfManual.loc[p]["Year"]==year:
 			if dfManual.loc[p]["Month"]==month:
-				dfMonthly=dfMonthly.append(dfManual.loc[p][:], ignore_index=True)
+				if dfManual.loc[p]["ActorGeo_CountryCode"]==country:
+					dfMonthly=dfMonthly.append(dfManual.loc[p][:], ignore_index=True)
 	return dfMonthly
 
 # call generateMonthlyDF function to all months in given years
 for i in preprocessingRecords.years:
 	for j in range (1,13):
-		y=str(i)
-		m=str(j)
-		# add "0" in front of one digit months
-		if m in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
+		for c in preprocessingRecords.uniqueCountries:
+			y=str(i)
+			m=str(j)
+			# add "0" in front of one digit months
+			if m in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
 				m=m.zfill(2)
-		dfName=y+m
-		dfName1=dfName
-		dfName=generateMonthlyDf(i,j)
-		dfName.to_csv("/home/rajini/Desktop/riots/monthlyDF/"+dfName1+".csv", sep=',', encoding='utf-8', index=False, header=True)
+			dfName=y+m+c
+			dfName1=dfName
+			dfName=generateMonthlyDf(i,j,c)
+			dfName.to_csv("/home/rajini/Desktop/riots/monthlyDF/"+dfName1+".csv", sep=',', encoding='utf-8', index=False, header=True)
 
 loc1 = "/home/rajini/Desktop/riots/monthlyDF/"
 
@@ -76,7 +80,7 @@ for i in range (numberOfRowsOriginal):
 	m=dfOriginal.loc[i]["month"]
 	d=dfOriginal.loc[i]["date"]
 	c=dfOriginal.loc[i]["ActorGeo_CountryCode"]
-	dfName2=y+m
+	dfName2=y+m+c
 	comparativeDF = findMonthlyDf(loc1,dfName2)
 	# find record with matching date and country from monthlyDF
 	for m, n in comparativeDF.iterrows():
@@ -90,5 +94,5 @@ for i in range (numberOfRowsOriginal):
 					dfOriginal.set_value([i], ["label"], 1)	
 
 
-dfOriginal.to_csv("/home/rajini/Desktop/finalCSVOut.csv", sep=',', encoding='utf-8', index=False, header=True)			
+dfOriginal.to_csv("/home/rajini/Desktop/riots/finalCSVOut.csv", sep=',', encoding='utf-8', index=False, header=True)			
 	
