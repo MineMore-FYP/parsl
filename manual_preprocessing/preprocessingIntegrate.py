@@ -24,6 +24,8 @@ dfOriginal['month']=0
 dfOriginal['date']=0	
 dfOriginal['label']=0	
 
+
+#PARSL
 # iterating over rows of df original and generating values for Y,M,D from SQLDATE
 for i, j in dfOriginal.iterrows(): 
 	sqldate = dfOriginal.loc[i][0]
@@ -57,6 +59,7 @@ for i in preprocessingRecords.years:
 		dfName=y+m
 		dfName1=dfName
 		dfName=generateMonthlyDf(i,j)
+		#LETS NOT WRITE THIS TO A CSV. TAKE DFS
 		dfName.to_csv("/home/rajini/Desktop/riots/monthlyDF/"+dfName1+".csv", sep=',', encoding='utf-8', index=False, header=True)
 
 loc1 = "/home/rajini/Desktop/riots/monthlyDF/"
