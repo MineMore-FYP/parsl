@@ -86,12 +86,10 @@ for i in range (numberOfRowsOriginal):
 	for m, n in comparativeDF.iterrows():
 		cmpDateInt=int(comparativeDF.loc[m]["Date"])
 		cmpDate=str(cmpDateInt)
-		cmpCountry=str(comparativeDF.loc[m]["ActorGeo_CountryCode"])
 		if cmpDate==d:
-			if cmpCountry==c:
-				# set label to zero if corresponding record exists in monthlyDF
-				if comparativeDF.loc[m]["Indicator"]==1:
-					dfOriginal.set_value([i], ["label"], 1)	
+			# set label to zero if corresponding record exists in monthlyDF
+			if comparativeDF.loc[m]["Indicator"]==1:
+				dfOriginal.set_value([i], ["label"], 1)	
 
 
 dfOriginal.to_csv("/home/rajini/Desktop/riots/finalCSVOut.csv", sep=',', encoding='utf-8', index=False, header=True)			
