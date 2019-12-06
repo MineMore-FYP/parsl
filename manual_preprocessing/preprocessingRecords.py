@@ -4,6 +4,8 @@ import pandas as pd
 import csv
 import numpy as np
 
+# GENERATE COMPARATIVE DATAFRAME CONTAINING RIOT INFORMATION
+
 #read original csv with riot information
 df = pd.read_csv("/home/rajini/Desktop/riots/data.csv", header=None)
 
@@ -18,6 +20,7 @@ dfCountry=df.loc[:][3]
 
 
 # SEPERATE DATAFRAMES BY COUNTRY
+uniqueCountries=df.loc[:][3].unique()
 
 # determine unique countries; used to make seperate dataframe per country
 for i in df.loc[:][3].unique():
