@@ -6,11 +6,11 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	"strconv"
+	//"strconv"
 
 	//"io"
 	"log"
-	"time"
+	//"time"
 )
 
 func SendValue(s string, c chan string) {
@@ -30,6 +30,14 @@ func pythonCall(progName string, dataset string) {
 	//time.Sleep(2 * time.Millisecond)
 }
 
+func pythonCallNormal(progName string) {
+	cmd := exec.Command("python3", progName)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	log.Println(cmd.Run())
+	//time.Sleep(2 * time.Millisecond)
+}
+
 func pythonCallOneParam(progName string, dataset string, para string) {
 	cmd := exec.Command("python3", progName, dataset, para)
 	cmd.Stdout = os.Stdout
@@ -38,19 +46,31 @@ func pythonCallOneParam(progName string, dataset string, para string) {
 	//time.Sleep(2 * time.Millisecond)
 }
 
+
+
 func main() {
 
-	//get input dataset location
+	//check if input location is available
 	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.inputDataset")
-	//fmt.Println(cmd.Args)
-
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		fmt.Println(err)
+	}else if out!=nil {
+		//input dataset from disk
+		inputDataset := string(out)[:len(out)-1]
+		fmt.Print(inputDataset)
+		pythonCallNormal("workflow/selection/selectUserDefinedColumns.py")
+
+		//channel
+		//creat chan here
+
 	}
-	//input dataset from disk
-	inputDataset := string(out)[:len(out)-1]
-	//fmt.Print(inputDataset)
+
+	//get chan as parameter to next function
+
+
+/*
+
 
 	//get output dataset location
 	cmd1 := exec.Command("python", "-c", "from workflow import userScript; print userScript.outputDataset")
@@ -80,7 +100,7 @@ func main() {
 	}
 
 	///////////////////////////*****************SELECTION************************////////////////////////
-
+/*
 	//select user defined cols
 	go pythonCall("workflow/selection/selectUserDefinedColumns.py", inputDataset)
 	fmt.Println("test1")
@@ -98,80 +118,11 @@ func main() {
 	///////////////////////////*****************CLEANING************************////////////////////////
 
 	//drop unique cols
+	/*
 	go pythonCall("workflow/cleaning/dropUniqueColumns.py", output)
 	fmt.Println("test3")
 	time.Sleep(10000 * time.Millisecond)
 	fmt.Println("test4")
 	fmt.Println("Drop unique columns complete")
-
-	//channel
-	channel1 := make(chan string)
-	defer close(channel1)
-	go SendValue(outputDataset, channel1)
-	output1 := <-channel1
-	time.Sleep(10000 * time.Millisecond)
-
-	//#drop columns according to user defined empty value percentage
-	go pythonCall("workflow/cleaning/dropColumnsCriteria.py", output3)
-	fmt.Println("test9")
-	time.Sleep(10000 * time.Millisecond)
-	fmt.Println("test10")
-	fmt.Println("Drop user defined rows complete")
-
-	//channel
-	channel5 := make(chan string)
-	defer close(channel5)
-	go SendValue(outputDataset, channel5)
-	output5 := <-channel5
-	time.Sleep(10000 * time.Millisecond)
-
-	//drop rows according to user defined empty value percentage
-	go pythonCall("workflow/cleaning/dropRowsCriteria.py", output5)
-	fmt.Println("test11")
-	time.Sleep(10000 * time.Millisecond)
-	fmt.Println("test12")
-	fmt.Println("Drop row criteria complete")
-
-	//channel
-	channel6 := make(chan string)
-	defer close(channel6)
-	go SendValue(outputDataset, channel6)
-	output6 := <-channel6
-	time.Sleep(10000 * time.Millisecond)
-
-	//#remove duplicate rows
-	go pythonCall("workflow/cleaning/removeDuplicateRows.py", output6)
-	fmt.Println("test13")
-	time.Sleep(10000 * time.Millisecond)
-	fmt.Println("test14")
-	fmt.Println("Remove duplicate rows complete")
-
-	//channel
-	channel7 := make(chan string)
-	defer close(channel7)
-	go SendValue(outputDataset, channel7)
-	output7 := <-channel7
-	time.Sleep(10000 * time.Millisecond)
-
-	//mode for user defined columns
-	go pythonCall("workflow/cleaning/missingValuesMode.py", output8)
-	fmt.Println("test17")
-	time.Sleep(10000 * time.Millisecond)
-	fmt.Println("test18")
-	fmt.Println("Missing values mode complete")
-
-	//channel
-	channel9 := make(chan string)
-	defer close(channel9)
-	go SendValue(outputDataset, channel9)
-	output9 := <-channel9
-	time.Sleep(10000 * time.Millisecond)
-
-
-	fmt.Println("test27")
-
-	time.Sleep(60000 * time.Millisecond)
-	fmt.Println("test28")
-	fmt.Println("Workflow Complete")
+*/
 }
-

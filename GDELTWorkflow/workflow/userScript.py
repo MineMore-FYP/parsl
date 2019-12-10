@@ -16,26 +16,24 @@ feature sclaing - standardize/ normalize
 split data - RF
 '''
 #input location
-#inputDataset = "/home/amanda/FYP/ds/combined.csv"
+inputDataset = "/home/amanda/FYP/ds/combined.csv"
 
 #specify output locatiion
-#outputDataset = "/home/amanda/FYP/testcsv/RFout.csv"
+outputLocation = "/home/amanda/FYP/gdelt/"
 
 #wait time between each step of workflow (in milli seconds)
 waitTime = 10000
 
 #read csv to pandas df
-inputDataFrame = pd.read_csv(inputDataset)
+#inputDataFrame = pd.read_csv(inputDataset)
 
 #######################		SELECTION	####################################
 
 #select columns
 #if "all" select everything. else give a list ["whatever1", "whatever2"]
-selectColumns = ["SQLDATE", "Actor1Geo_CountryCode", "Actor2Geo_CountryCode", "QuadClass", "GoldsteinScale", "NumMentions", "AvgTone"] #done
+selectColumns = ["SQLDATE", "Actor1Geo_CountryCode", "Actor2Geo_CountryCode", "QuadClass", "GoldsteinScale", "NumMentions", "AvgTone"]
 #selectColumns = ["SQLDATE", "Actor1Geo_Type", "Actor1Geo_CountryCode","Actor2Geo_Type", "Actor2Geo_CountryCode", "QuadClass", "GoldsteinScale", "NumMentions", "AvgTone"] #done
 #selectColumns = ["SQLDATE"]
-
-
 
 #select rows
 selectFromRow = OrderedDict()
@@ -60,7 +58,7 @@ userDefinedRowPercentage = 10
 #Research how best to fill missing values
 #mode for user defined columns
 modeColumns = "all" #done
- 
+
 
 #######################		TRANSFORMATION	####################################
 
@@ -74,9 +72,3 @@ userDefinedColumsToAggregate = [["Actor1Geo_CountryCode", "Actor2Geo_CountryCode
 
 #encoding
 userDefinedEncodeColumns = ["Actor1Geo_CountryCode"]
-
-
-
-
-
-
