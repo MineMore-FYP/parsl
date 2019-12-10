@@ -7,11 +7,11 @@ import sys
 #input   location
 
 #inputDataset = "/home/rajini/FYP/testcsv/test.csv"
-inputDataset = "/home/amanda/FYP/testcsv/test.csv"
+inputDataset = "/home/amanda/FYP/ds/combined.csv"
 
 #specify output locatiion
 #outputDataset = "/home/rajini/FYP/testcsv/outputDataset.csv"
-outputDataset = "/home/amanda/FYP/testcsv/out.csv"
+outputDataset = "/home/amanda/FYP/gdelt/"
 
 #wait time between each step of workflow (in milli seconds)
 waitTime = 10000
@@ -19,7 +19,7 @@ waitTime = 10000
 #SELECTION
 #select columns
 #if "all" select everything. else give a list ["whatever1", "whatever2"]
-selectColumns = ["SQLDATE", "Actor1Geo_Type", "Actor1Geo_CountryCode", "QuadClass", "GoldsteinScale", "NumMentions", "AvgTone"]
+selectColumns = ["GLOBALEVENTID","SQLDATE", "Actor1Geo_Type", "Actor1Geo_CountryCode", "QuadClass", "GoldsteinScale", "NumMentions", "AvgTone"]
 
 #select rows
 selectFromRow = OrderedDict()

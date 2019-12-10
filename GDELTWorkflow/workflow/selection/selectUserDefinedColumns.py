@@ -10,7 +10,7 @@ import userScript
 #df = userScript.inputDataFrame
 df = pd.read_csv(userScript.inputDataset)
 selectedColumns = userScript.selectColumns
-outputDataset = userScript.outputLocation + "selectUserDefinedColumns"
+outputDataset = userScript.outputLocation + "selectUserDefinedColumns.csv"
 
 def selectUserDefinedColumns(df1):
 	df = df1
@@ -24,10 +24,10 @@ def selectUserDefinedColumns(df1):
 		    dfAfterUserSelectedColumns=pd.concat([dfConcat, df_i], axis=1)
 		    dfConcat=dfAfterUserSelectedColumns
 
-		    dfConcat.to_csv (outputDataset, index = False, header=True)
+		    dfConcat.to_csv (outputDataset, index = True, header=True)
 
 	else:
-		dfConcat = df.to_csv (outputDataset, index = False, header=True)
+		dfConcat = df.to_csv (outputDataset, index = True, header=True)
 	return "Selection of user defined columns done."
 
 
