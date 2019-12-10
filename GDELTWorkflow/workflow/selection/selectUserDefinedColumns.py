@@ -10,7 +10,7 @@ import userScript
 #df = userScript.inputDataFrame
 df = pd.read_csv(userScript.inputDataset)
 selectedColumns = userScript.selectColumns
-outputDataset = userScript.outputLocation + "selectUserDefinedColumns"
+outputDataset = userScript.outputLocation + "selectUserDefinedColumns.csv"
 
 def selectUserDefinedColumns(df1):
 	df = df1

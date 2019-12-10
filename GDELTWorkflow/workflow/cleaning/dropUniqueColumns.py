@@ -13,7 +13,7 @@ sys.path.insert(0,parentdir)
 import userScript
 import threadconfig
 
-df = pd.read_csv("/home/amanda/FYP/testcsv/test.csv")
+df = pd.read_csv("/home/amanda/FYP/gdelt/selectUserDefinedColumns.csv")
 uniqueColList = []
 
 
@@ -21,10 +21,10 @@ uniqueColList = []
 
 @python_app
 def dropUniqueColumns(startColIndex, endColIndex, dFrame, uniqueColList):
-   
+
 	import pandas as pd
 	import numpy as np
-	
+
 	df = pd.DataFrame()
 	df = dFrame.iloc[: , np.r_[startColIndex : endColIndex]]
 	numOfRows = df.shape[0]
@@ -41,7 +41,7 @@ def dropUniqueColumns(startColIndex, endColIndex, dFrame, uniqueColList):
 			#df.drop(col,inplace=True,axis=1)
 			uniqueColList.append(col)
 
-    
+
 	return uniqueColList
 
 
@@ -62,17 +62,17 @@ if numOfCols <= maxThreads:
 		uList1 = dropUniqueColumns(i, i+1, df, uniqueColList)
 		results.append(uList1)
 		#dfNew = pd.concat([dfNew, df1] , axis=1)
-		
+
 
 elif numOfCols > maxThreads:
 	print("test2")
 	if (numOfCols % maxThreads == 0):
-		eachThreadCols = numOfCols / maxThreads 
+		eachThreadCols = numOfCols // maxThreads
 		for i in range (maxThreads):
 			uList1 = dropUniqueColumns(i,(i+eachThreadCols),df,uniqueColList)
 			results.append(uList1)
 			#dfNew = pd.concat([dfNew, df1] , axis=1)
-		
+
 	else:
 		print("test3")
 		eachThreadCols = numOfCols // (maxThreads-1)
@@ -89,7 +89,7 @@ elif numOfCols > maxThreads:
 		print("last thread", (eachThreadCols * (maxThreads-1)))
 		uList2 = dropUniqueColumns((eachThreadCols * (maxThreads-1)),numOfCols,df,uniqueColList)
 		results.append(uList2)
-	
+
 		#dfNew = pd.concat([dfNew, df2] , axis=1)
 
 
@@ -101,5 +101,4 @@ elif numOfCols > maxThreads:
 #print(uniqueColList)
 df.drop(uniqueColList,inplace=True,axis=1)
 
-df.to_csv("/home/amanda/FYP/testcsv/dropUniqueColumnsOUTPUT.csv", index = False, header=True)
-
+df.to_csv("/home/amanda/FYP/gdelt/dropUniqueColumnsOUTPUT.csv", index = False, header=True)
