@@ -24,10 +24,10 @@ def selectUserDefinedColumns(df1):
 		    dfAfterUserSelectedColumns=pd.concat([dfConcat, df_i], axis=1)
 		    dfConcat=dfAfterUserSelectedColumns
 
-		    dfConcat.to_csv (outputDataset, index = True, header=True)
+		    dfConcat.to_csv (outputDataset, index = False, header=True)
 
 	else:
-		dfConcat = df.to_csv (outputDataset, index = True, header=True)
+		dfConcat = df.to_csv (outputDataset, index = False, header=True)
 	return "Selection of user defined columns done."
 
 

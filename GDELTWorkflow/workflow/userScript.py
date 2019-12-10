@@ -31,7 +31,7 @@ waitTime = 10000
 
 #select columns
 #if "all" select everything. else give a list ["whatever1", "whatever2"]
-selectColumns = ["SQLDATE", "Actor1Geo_CountryCode", "Actor2Geo_CountryCode", "QuadClass", "GoldsteinScale", "NumMentions", "AvgTone"]
+selectColumns = ["GLOBALEVENTID","SQLDATE", "Actor1Geo_CountryCode", "Actor2Geo_CountryCode", "QuadClass", "GoldsteinScale", "NumMentions", "AvgTone"]
 #selectColumns = ["SQLDATE", "Actor1Geo_Type", "Actor1Geo_CountryCode","Actor2Geo_Type", "Actor2Geo_CountryCode", "QuadClass", "GoldsteinScale", "NumMentions", "AvgTone"] #done
 #selectColumns = ["SQLDATE"]
 
