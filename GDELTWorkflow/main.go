@@ -46,6 +46,8 @@ func pythonCallOneParam(progName string, dataset string, para string) {
 	//time.Sleep(2 * time.Millisecond)
 }
 
+
+
 func main() {
 
 	//check if input location is available
@@ -53,16 +55,18 @@ func main() {
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		fmt.Println(err)
-	}	else if out!=nil {
+	}else if out!=nil {
 		//input dataset from disk
 		inputDataset := string(out)[:len(out)-1]
 		fmt.Print(inputDataset)
 		pythonCallNormal("workflow/selection/selectUserDefinedColumns.py")
 
 		//channel
+		//creat chan here
 
 	}
 
+	//get chan as parameter to next function
 
 
 /*
