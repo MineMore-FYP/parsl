@@ -2,7 +2,6 @@ import os
 from collections import OrderedDict
 import sys
 
-import pandas as pd
 
 #Workflow
 

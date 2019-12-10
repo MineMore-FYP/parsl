@@ -18,8 +18,8 @@ def selectUserDefinedColumns(df1):
 		dfConcat = pd.DataFrame()
 
 		for i in selectedColumns:
-		    print(i)
-		    print(df[i])
+		    #print(i)
+		    #print(df[i])
 		    df_i=df[i]
 		    dfAfterUserSelectedColumns=pd.concat([dfConcat, df_i], axis=1)
 		    dfConcat=dfAfterUserSelectedColumns
@@ -32,3 +32,4 @@ def selectUserDefinedColumns(df1):
 
 
 selectUserDefinedColumns(df)
+print("Module Completed: Select User Defined Columns")
