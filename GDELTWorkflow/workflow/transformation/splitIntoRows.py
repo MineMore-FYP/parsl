@@ -31,7 +31,7 @@ user_opts = {'adhoc':
 
 remote_htex = Config(
     executors=[
-	
+
         HighThroughputExecutor(
             label='remote_htex',
 	    address = '10.0.0.1',
@@ -100,7 +100,7 @@ def splitIntoRows(startRowIndex, endRowIndex, dFrame, columnsToAggregate):
 		newColumnList.append(newColumn)
 
 		print(newColumnList)
-	
+
 
 		dfNew = pd.DataFrame(columns = newColumnList)
 		#print(dfNew)
@@ -143,13 +143,13 @@ def splitIntoRows(startRowIndex, endRowIndex, dFrame, columnsToAggregate):
 				row = row.drop(labels=[column1,column2])
 				#print(row)
 				rowAdd1 = pd.Series([x], index=[newColumn])
-				rowAdd2 = pd.Series([y], index=[newColumn])	
+				rowAdd2 = pd.Series([y], index=[newColumn])
 				row1 = row.append(rowAdd1)
 				dfNew = dfNew.append(row1, ignore_index=True)
 				row2 = row.append(rowAdd2)
 				dfNew = dfNew.append(row2, ignore_index=True)
 				print(row)
-			
+
 
 
 		#print(dfNew)
@@ -187,5 +187,3 @@ print('Duration ' + str(getDuration(startTime,endTime)))
 
 # Print results
 print(outputs)
-
-

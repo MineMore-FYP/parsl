@@ -1,17 +1,31 @@
 package main
 
 import (
-	//"bufio"
-	//"encoding/csv"
-	"fmt"
-	"os"
-	"os/exec"
-	//"strconv"
-
-	//"io"
-	"log"
-	//"time"
+  "bufio"
+  "fmt"
+  "os"
+  "log"
+  "os/exec"
+  //"strings"
 )
+
+func scanner() string {
+  scanner := bufio.NewScanner(os.Stdin)
+  scanner.Scan()
+  //fmt.Println(scanner.Text())
+  return scanner.Text()
+}
+
+func appendFile(text string){
+	f, err := os.OpenFile("workflow/userScript.py", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Println(err)
+	}
+	defer f.Close()
+	if _, err := f.WriteString(text); err != nil {
+		log.Println(err)
+	}
+}
 
 func pythonCall(progName string, inChannel chan <- string) {
 	cmd := exec.Command("python3", progName)
@@ -37,29 +51,32 @@ func messagePassing(inChannel <- chan string, outChannel chan <- string ){
 	outChannel <- msg
 }
 
-func main(){
 
-	//check if input location is available
-	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.inputDataset")
-	out, err := cmd.CombinedOutput()
+func main() {
+  fmt.Println("Enter input dataset location: ")
+	inputDataset := scanner()
+  fmt.Println(inputDataset)
 
-	if err != nil {
-		fmt.Println(err)
-		// Exit with status 3.
-    os.Exit(3)
-	}
-	//input dataset from disk
-	//check if empty
-	inputDataset := string(out)[:len(out)-1]
-	fmt.Print(inputDataset)
+  appendFile("#input location\ninputDataset = " + "\""+inputDataset + "\"\n")
 
-	inChannelModule1 := make(chan string, 1)
+  fmt.Println("Enter output folder location: ")
+  outputLocation := scanner()
+  fmt.Println(outputLocation)
+
+  appendFile("#output locatiion\noutputLocation = " + "\"" + outputLocation + "\"\n")
+
+  fmt.Println("Enter columns to select: ")
+	selectColumns := scanner()
+
+  appendFile("selectColumns = " + selectColumns + "\n")
+
+  inChannelModule1 := make(chan string, 1)
 	outChannelModule1 := make(chan string, 1)
 
 	pythonCall("workflow/selection/selectUserDefinedColumns.py", inChannelModule1)
 	messagePassing(inChannelModule1, outChannelModule1)
 	fmt.Println(<-outChannelModule1)
-
+/*
 	//inChannelModule2 := make(chan string, 1)
 	outChannelModule2 := make(chan string, 1)
 
@@ -68,5 +85,7 @@ func main(){
 
 	//fmt.Println("jskdfkjdh")
 	fmt.Println(<- outChannelModule2)
+*/
+
 
 }
