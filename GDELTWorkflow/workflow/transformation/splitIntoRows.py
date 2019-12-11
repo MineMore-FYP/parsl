@@ -74,7 +74,7 @@ import parsl
 from parsl import load, python_app
 #from parsl.configs.local_threads import config
 #load(config)
-parsl.load(remote_htex)
+parsl.load(htex_Local)
 
 @python_app
 def splitIntoRows(startRowIndex, endRowIndex, dFrame, columnsToAggregate):
@@ -172,8 +172,8 @@ numOfRows = df.shape[0]
 #df1 = splitIntoRows(0,100,df,columnsToAggregate)
 #print(df1.result())
 
-for i in range(0,200000,2000):
-	df1 = splitIntoRows(i,i+2000,df,columnsToAggregate)
+for i in range(0,200000,200):
+	df1 = splitIntoRows(i,i+200,df,columnsToAggregate)
 	print(i)
 	results.append(df1)
 
