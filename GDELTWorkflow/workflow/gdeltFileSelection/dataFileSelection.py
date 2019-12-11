@@ -5,12 +5,9 @@
 
 import os
 import glob
+from datetime import datetime, timedelta
 
-#Kalpani
-#path = 'D:/FYP/ds'
-
-#Amanda
-path = '/home/amanda/FYP/ds'
+path = '/home/mpiuser/Downloads/data'
 os.chdir(path)
 
 allFiles = os.listdir(path)
@@ -49,13 +46,34 @@ def getMonthlyFiles(m):
 
 #def getAnnualFiles(m):
 
-#def getDateRangeFiles(m):
+def getDateRangeFiles():
+	startingDate = input("Enter starting date (YYYY.MM.DD): ")
+	endingDate = input("Enter ending date (YYYY.MM.DD): ")
+	startingDate_obj = datetime.strptime(startingDate, '%Y.%m.%d').date()
+	endingDate_obj = datetime.strptime(endingDate, '%Y.%m.%d').date()
+
+	#print(startingDate_obj)
+	#print(endingDate_obj)
+
+	delta = endingDate_obj - startingDate_obj       # as timedelta
+
+	selectedDays=[]
+	for i in range(delta.days + 1):
+		day = startingDate_obj + timedelta(days=i)
+		str_day = day.strftime('%Y%m%d')
+		selectedDays.append(str_day)
+	
+	return selectedDays
+
+#print(getDateRangeFiles())
             
 #def getDayOfTheWeekFiles(m):
-
+'''
 #userdefined month- input from swift script
 userMonth = "JULY"
+'''
 
+'''
 #for all files in directory select files with matching int of user defined month
 for filename in allFiles:
     #print(filename)
@@ -66,5 +84,18 @@ for filename in allFiles:
     #print(filenameMonth == desiredMonth)
     if filenameMonth == desiredMonth:
         selectedFiles.append(filename)
+'''
+
+selectedDays = getDateRangeFiles()
+print(selectedDays)
+
+for filename in allFiles:
+	
+	filenameNew=filename[0:8]
+	#print(filenameNew)
+	for i in selectedDays:
+		if i == filenameNew:
+			selectedFiles.append(filename)
+
 
 print(selectedFiles)
