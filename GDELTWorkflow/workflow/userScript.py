@@ -4,6 +4,10 @@ import sys
 
 
 #Workflow
+##selection/selectUserDefinedColumns.py
+##cleaning/dropUniqueColumns.py
+##cleaning/dropColumnsCriteria.py
+##cleaning/dropRowsCriteria.py
 
 '''
 Import df
@@ -21,13 +25,10 @@ inputDataset = "/home/amanda/FYP/ds/combined.csv"
 #specify output locatiion
 outputLocation = "/home/amanda/FYP/gdelt/"
 
-#wait time between each step of workflow (in milli seconds)
-waitTime = 10000
-
 #read csv to pandas df
 #inputDataFrame = pd.read_csv(inputDataset)
 
-#######################		SELECTION	####################################
+'''#######################		SELECTION	####################################'''
 
 #select columns
 #if "all" select everything. else give a list ["whatever1", "whatever2"]
@@ -40,7 +41,7 @@ selectFromRow = OrderedDict()
 selectFromRow['Year'] = ["2018", "2019"] #doesnt work
 
 
-#######################		CLEANING	####################################
+'''#######################		CLEANING	####################################'''
 
 #Run anyway - Drop unique columns #done
 
@@ -60,7 +61,7 @@ userDefinedRowPercentage = 10
 modeColumns = "all" #done
 
 
-#######################		TRANSFORMATION	####################################
+'''#######################		TRANSFORMATION	####################################'''
 
 #Normalize
 userDefinedNormalizeColumns = ["AvgTone"]
