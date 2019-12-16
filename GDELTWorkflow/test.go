@@ -1,22 +1,20 @@
 package main
 
 import (
-	//"bufio"
+	"bufio"
 	//"encoding/csv"
 	"fmt"
 	"os"
 	"os/exec"
 	//"strconv"
 
-	//"io"
+	"io/ioutil"
 	"log"
 	//"time"
 )
 
 func pythonCall(progName string, inChannel chan <- string) {
 	cmd := exec.Command("python3", progName)
-	//cmd.Stdout = os.Stdout
-	//cmd.Stderr = os.Stderr
 	out, err := cmd.CombinedOutput()
 	log.Println(cmd.Run())
 
@@ -42,7 +40,9 @@ func numOfFiles(folder string) int{
     return len(files)
 }
 
-func readLines(commandsArray [20]string, progName string){
+//reads a file and returns an array of comments beginning with ##
+func readLines( progName string) [20]string{
+		var commandsArray [20]string
     file, err := os.Open(progName)
     if err != nil {
         log.Fatal(err)
@@ -53,14 +53,21 @@ func readLines(commandsArray [20]string, progName string){
     i := 0
     for scanner.Scan() {
         command := scanner.Text()
-				if command[0:2] == "##" {
-					commandsArray[i] = command[2:len(command)]
-					i++
+				//fmt.Println(len(command))
+				if len(command) >1{
+					//fmt.Println("dh")
+					if command[0:2] == "##" {
+						//fmt.Println(command[2:len(command)])
+						commandsArray[i] = command[2:len(command)]
+						i++
+					}
 				}
     }
     if err := scanner.Err(); err != nil {
         log.Fatal(err)
     }
+
+		return commandsArray
 }
 
 func main(){
@@ -79,8 +86,9 @@ func main(){
 		//input dataset from disk
 		//check if empty
 		inputDataset := string(out)[:len(out)-1]
-		fmt.Print(inputDataset)
+		fmt.Print(inputDataset+"\n")
 	}
+
 
 	//check if output location is available
 	cmd1 := exec.Command("python", "-c", "from workflow import userScript; print userScript.outputLocation")
@@ -93,24 +101,19 @@ func main(){
 	} else if out1 == nil{
 		os.Exit(3)
 	} else {
-		//input dataset from disk
+		//output dataset from disk
 		//check if empty
-		outputDataset := string(out1)[:len(out)-1]
-		fmt.Print(outputDataset)
+		outputDataset := string(out1)[:len(out1)-1]
+		fmt.Print(outputDataset+"\n")
 	}
+
+
+	commandsArray := readLines("workflow/userScript.py")
+	fmt.Println(commandsArray)
+
+
 
 	//start module execution from here onwards
-
-	numOfWorkflowStages = numOfFiles("workflow/userScripts")
-
-	for i := 0; i < numOfFiles; i++ {
-		//each userScript files
-
-	}
-
-
-
-
 	inChannelModule1 := make(chan string, 1)
 	outChannelModule1 := make(chan string, 1)
 
@@ -126,6 +129,49 @@ func main(){
 
 	//fmt.Println("jskdfkjdh")
 	fmt.Println(<- outChannelModule2)
+
+	outChannelModule3 := make(chan string, 1)
+
+	pythonCall("workflow/cleaning/dropColumnsCriteria.py", outChannelModule2)
+	messagePassing(outChannelModule2, outChannelModule3)
+
+	fmt.Println(<- outChannelModule3)
+
+	outChannelModule4 := make(chan string, 1)
+
+	pythonCall("workflow/cleaning/dropRowsCriteria.py", outChannelModule3)
+	messagePassing(outChannelModule3, outChannelModule4)
+
+	fmt.Println(<- outChannelModule4)
+
+
+	outChannelModule5 := make(chan string, 1)
+
+	pythonCall("workflow/cleaning/missingValuesMode.py", outChannelModule4)
+	messagePassing(outChannelModule4, outChannelModule5)
+
+	fmt.Println(<- outChannelModule5)
+
+	outChannelModule6 := make(chan string, 1)
+
+	pythonCall("workflow/transformation/normalize.py", outChannelModule5)
+	messagePassing(outChannelModule5, outChannelModule6)
+
+	fmt.Println(<- outChannelModule6)
+
+	outChannelModule7 := make(chan string, 1)
+
+	pythonCall("workflow/transformation/splitIntoRows.py", outChannelModule6)
+	messagePassing(outChannelModule6, outChannelModule7)
+
+	fmt.Println(<- outChannelModule7)
+
+	outChannelModule8 := make(chan string, 1)
+
+	pythonCall("workflow/transformation/encode.py", outChannelModule8)
+	messagePassing(outChannelModule7, outChannelModule8)
+
+	fmt.Println(<- outChannelModule8)
 
 
 
