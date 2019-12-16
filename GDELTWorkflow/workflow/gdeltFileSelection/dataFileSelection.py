@@ -46,6 +46,7 @@ def getMonthlyFiles(m):
 
 #def getAnnualFiles(m):
 
+#select files for a given range
 def getDateRangeFiles():
 	startingDate = input("Enter starting date (YYYY.MM.DD): ")
 	endingDate = input("Enter ending date (YYYY.MM.DD): ")
