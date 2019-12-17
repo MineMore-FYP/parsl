@@ -23,7 +23,6 @@ def selectUserDefinedColumns(df1):
 		    df_i=df[i]
 		    dfAfterUserSelectedColumns=pd.concat([dfConcat, df_i], axis=1)
 		    dfConcat=dfAfterUserSelectedColumns
-
 		    dfConcat.to_csv (outputDataset, index = False, header=True)
 
 	else:

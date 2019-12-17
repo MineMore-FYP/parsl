@@ -16,6 +16,10 @@ sys.path.insert(0,parentdir)
 import userScript
 import threadconfig
 
+#read csv with defined missing values
+df = pd.read_csv(userScript.outputLocation + "dropUniqueColumns.csv")
+outputDataset = userScript.outputLocation + "dropColumnCriteria.csv"
+
 #prints 0,1 cols
 #print(df.iloc[: , np.r_[0 : 3]])
 #print(df.iloc[ : , numOfCols-1 ])
@@ -23,7 +27,6 @@ import threadconfig
 #user defined percentage of maximum of allowed missing values
 maxPercentageOfMissingValues= userScript.userDefinedColPercentage
 dropList = []
-
 
 @python_app
 def dropColumnsCriteria(startColIndex, endColIndex, dFrame, maxPercentage, dropList):
@@ -56,12 +59,7 @@ def dropColumnsCriteria(startColIndex, endColIndex, dFrame, maxPercentage, dropL
 	
 	return dropList
 
-
-
-#read csv with defined missing values
-df = pd.read_csv("/home/amanda/FYP/testcsv/test.csv")
 numOfCols = df.shape[1]
-print(numOfCols)
 
 lasThreadCols = 0
 
@@ -79,7 +77,6 @@ local_threads = Config(
 
 parsl.load(local_threads)
 
-
 results = []
 
 if numOfCols <= maxThreads:
@@ -90,7 +87,6 @@ if numOfCols <= maxThreads:
 
 
 elif numOfCols > maxThreads:
-	print("test2")
 	if (numOfCols % maxThreads == 0):
 		eachThreadCols = numOfCols / maxThreads 
 		for i in range (maxThreads):
@@ -103,14 +99,14 @@ elif numOfCols > maxThreads:
 		lasThreadCols = numOfCols % (maxThreads-1)
 		#for loop for the threads except the last one
 		for i in range (0,(maxThreads-1)*eachThreadCols, eachThreadCols):
-			print ("i", i)
-			print("i+eachThreadCols", (i+eachThreadCols))
+			#print ("i", i)
+			#print("i+eachThreadCols", (i+eachThreadCols))
 			dList1 = dropColumnsCriteria(i,(i+eachThreadCols),df,maxPercentageOfMissingValues, dropList)
 			#dfNew = pd.concat([dfNew, df1], axis=1)
 			results.append(dList1)
 
 		#last thread 
-		print("last thread",(eachThreadCols * (maxThreads-1))	)
+		#print("last thread",(eachThreadCols * (maxThreads-1))	)
 		dList2 = dropColumnsCriteria((eachThreadCols * (maxThreads-1)),numOfCols,df,maxPercentageOfMissingValues, dropList)
 		results.append(dList2)
 		#dfNew = pd.concat([dfNew, df2] , axis=1)
@@ -119,12 +115,6 @@ elif numOfCols > maxThreads:
 # wait for all apps to complete
 [r.result() for r in results]
 
-print(dropList)
 df.drop(dropList,inplace=True,axis=1)
-df.to_csv ("/home/amanda/FYP/testcsv/colcrit.csv", index = False, header=True)
-
-
-
-
-
-
+df.to_csv (outputDataset, index = False, header=True)
+print("Module Completed: Drop Columns based on User Defined Criteria")

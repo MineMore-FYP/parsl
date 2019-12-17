@@ -42,9 +42,7 @@ def dropUniqueColumns(startColIndex, endColIndex, dFrame, uniqueColList):
 			#df.drop(col,inplace=True,axis=1)
 			uniqueColList.append(col)
 
-
 	return uniqueColList
-
 
 
 maxThreads = threadconfig.maxThreads
@@ -54,7 +52,6 @@ numOfCols = df.shape[1]
 lasThreadCols = 0
 
 results = []
-
 
 
 #one col per thread
@@ -93,10 +90,8 @@ elif numOfCols > maxThreads:
 
 		#dfNew = pd.concat([dfNew, df2] , axis=1)
 
-
-
 # wait for all apps to complete
-[r.result() for r in results]
+#[r.result() for r in results]
 
 #dropUniqueColumns(0,58,df,uniqueColList).result()
 #print(uniqueColList)

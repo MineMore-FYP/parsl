@@ -28,7 +28,7 @@ def removeDuplicateRows(startRowIndex, endRowIndex, dFrame):
 
 
 #read csv with defined missing values
-df = pd.read_csv("/home/amanda/FYP/testcsv/test1.csv", index_col = False)
+df = pd.read_csv("/home/rajini/FYP/testcsv/test.csv", index_col = False)
 numOfRows = df.shape[0]
 print(numOfRows)
 
@@ -88,5 +88,5 @@ print(dfNew)
 dfNew.drop("index",inplace=True,axis=1)
 print(dfNew)
 
-dfNew.to_csv ("/home/amanda/FYP/testcsv/removeDuplicateRowsOUTPUT.csv", index = False, header=True)
+dfNew.to_csv ("/home/rajini/FYP/testcsv/removeDuplicateRowsOUTPUT.csv", index = False, header=True)
 #print(removeDuplicateRows(50,100,df).result())
