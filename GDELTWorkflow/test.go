@@ -111,69 +111,51 @@ func main(){
 	commandsArray := readLines("workflow/userScript.py")
 	fmt.Println(commandsArray)
 
-
-
 	//start module execution from here onwards
 	inChannelModule1 := make(chan string, 1)
 	outChannelModule1 := make(chan string, 1)
-
-	//pythonCall("workflow/"+commandsArray[0], inChannelModule1)
-	pythonCall("workflow/selection/selectUserDefinedColumns.py", inChannelModule1)
+	pythonCall("workflow/"+commandsArray[0], inChannelModule1)
+	//pythonCall("workflow/selection/selectUserDefinedColumns.py", inChannelModule1)
 	messagePassing(inChannelModule1, outChannelModule1)
 	fmt.Println(<-outChannelModule1)
 
-	//inChannelModule2 := make(chan string, 1)
 	outChannelModule2 := make(chan string, 1)
-
-	pythonCall("workflow/cleaning/dropUniqueColumns.py", outChannelModule1)
+	pythonCall("workflow/"+commandsArray[1], inChannelModule1)
+	//pythonCall("workflow/cleaning/dropUniqueColumns.py", outChannelModule1)
 	messagePassing(outChannelModule1, outChannelModule2)
-
-	//fmt.Println("jskdfkjdh")
 	fmt.Println(<- outChannelModule2)
 
 	outChannelModule3 := make(chan string, 1)
-
-	pythonCall("workflow/cleaning/dropColumnsCriteria.py", outChannelModule2)
+	pythonCall("workflow/"+commandsArray[2], inChannelModule1)
+	//pythonCall("workflow/cleaning/dropColumnsCriteria.py", outChannelModule2)
 	messagePassing(outChannelModule2, outChannelModule3)
-
 	fmt.Println(<- outChannelModule3)
-
+/*
 	outChannelModule4 := make(chan string, 1)
-
 	pythonCall("workflow/cleaning/dropRowsCriteria.py", outChannelModule3)
 	messagePassing(outChannelModule3, outChannelModule4)
-
 	fmt.Println(<- outChannelModule4)
 
-
 	outChannelModule5 := make(chan string, 1)
-
 	pythonCall("workflow/cleaning/missingValuesMode.py", outChannelModule4)
 	messagePassing(outChannelModule4, outChannelModule5)
-
 	fmt.Println(<- outChannelModule5)
 
 	outChannelModule6 := make(chan string, 1)
-
 	pythonCall("workflow/transformation/normalize.py", outChannelModule5)
 	messagePassing(outChannelModule5, outChannelModule6)
-
 	fmt.Println(<- outChannelModule6)
 
 	outChannelModule7 := make(chan string, 1)
-
 	pythonCall("workflow/transformation/splitIntoRows.py", outChannelModule6)
 	messagePassing(outChannelModule6, outChannelModule7)
-
 	fmt.Println(<- outChannelModule7)
 
 	outChannelModule8 := make(chan string, 1)
-
 	pythonCall("workflow/transformation/encode.py", outChannelModule8)
 	messagePassing(outChannelModule7, outChannelModule8)
-
 	fmt.Println(<- outChannelModule8)
 
-
+*/
 
 }
