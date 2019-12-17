@@ -117,6 +117,7 @@ func main(){
 	inChannelModule1 := make(chan string, 1)
 	outChannelModule1 := make(chan string, 1)
 
+	//pythonCall("workflow/"+commandsArray[0], inChannelModule1)
 	pythonCall("workflow/selection/selectUserDefinedColumns.py", inChannelModule1)
 	messagePassing(inChannelModule1, outChannelModule1)
 	fmt.Println(<-outChannelModule1)
