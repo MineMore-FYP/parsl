@@ -11,7 +11,6 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir)
 
 import userScript
-import threadconfig
 
 df = pd.read_csv(userScript.outputLocation + "selectUserDefinedColumns.csv")
 outputDataset = userScript.outputLocation + "dropUniqueColumns.csv"
@@ -45,7 +44,7 @@ def dropUniqueColumns(startColIndex, endColIndex, dFrame, uniqueColList):
 	return uniqueColList
 
 
-maxThreads = threadconfig.maxThreads
+maxThreads = 4
 
 numOfCols = df.shape[1]
 
