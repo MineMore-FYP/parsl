@@ -25,6 +25,17 @@ inputDataset = "/home/rajini/FYP/testcsv/test.csv"
 #specify output locatiion
 outputLocation = "/home/rajini/FYP/gdelt/"
 
+
+#GDELT variables
+#======================
+startingDate = '2019.11.26'
+endingDate = '2019.12.02'
+
+datafilesLocation = '/home/mpiuser/Downloads/data/'
+#select specific country records
+Actor1CountryCode = 'LKA'
+Actor2CountryCode = 'LKA'
+
 #read csv to pandas df
 #inputDataFrame = pd.read_csv(inputDataset)
 
