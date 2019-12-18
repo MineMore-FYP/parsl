@@ -11,10 +11,11 @@ import sys
 ##cleaning/dropRowsCriteria.py
 ##cleaning/removeDuplicateRows.py
 ##cleaning/missingValuesMode.py
+##transformation/normalize.py
 
 orderOfModules = ["selectUserDefinedColumns", "dropUniqueColumns",
 "dropColumnsCriteria","dropRowsCriteria","removeDuplicateRows",
-"missingValuesMode"]
+"missingValuesMode", "normalize"]
 
 
 
