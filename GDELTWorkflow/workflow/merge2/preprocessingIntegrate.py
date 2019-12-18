@@ -1,3 +1,4 @@
+
 import os
 import glob
 import pandas as pd
@@ -6,13 +7,26 @@ import numpy as np
 
 import preprocessingRecords
 
+import os.path
+import sys
+import os,sys,inspect
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parentdir = os.path.dirname(currentdir)
+sys.path.insert(0,parentdir)
+
+import userScript
+import userScript2
+#df = userScript.inputDataFrame
+
+outputDataset = userScript2.outputLocation + "splitDate.csv"
+
 # CONSOLIDATE GDELT OUTPUT WITH ACTUAL EVENTS IN ORDER TO GENERATE A LABEL 
 
 # read original csv generated from gdelt
-dfOriginal = pd.read_csv("/home/rajini/output.csv", header=0)
+dfOriginal = pd.read_csv(userScript.inputDataset, header=0)
 
 # read manual csv with riot information
-dfManual = pd.read_csv("/home/rajini/Desktop/riots/combinedRiots.csv", header=0)
+dfManual = pd.read_csv(userScript2.outputLocation+"combinedRiots.csv", header=0)
 
 # number of rows in gdelt generated dataset
 numberOfRowsOriginal = dfOriginal.shape[0]
@@ -45,8 +59,8 @@ for i, j in dfOriginal.iterrows():
 def generateMonthlyDf(year,month,country):
 	dfMonthly = pd.DataFrame(columns = ["Year", "Month", "Date", "ActorGeo_CountryCode", "Indicator"]) 
 	for p,q in dfManual.iterrows():
-		if dfManual.loc[p]["Year"]==year:
-			if dfManual.loc[p]["Month"]==month:
+		if (int(dfManual.loc[p]["Year"])==int(year)):
+			if (int(dfManual.loc[p]["Month"])==int(month)):
 				if dfManual.loc[p]["ActorGeo_CountryCode"]==country:
 					dfMonthly=dfMonthly.append(dfManual.loc[p][:], ignore_index=True)
 	return dfMonthly
@@ -61,14 +75,14 @@ for i in preprocessingRecords.years:
 			if m in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
 				m=m.zfill(2)
 				
-		dfName=y+m
-		dfName1=dfName
-		dfName=generateMonthlyDf(i,j)
-		#LETS NOT WRITE THIS TO A CSV. TAKE DFS
-		dfName.to_csv("/home/rajini/Desktop/riots/monthlyDF/"+dfName1+".csv", sep=',', encoding='utf-8', index=False, header=True)
+			dfName=y+m+c
+			dfName1=dfName
+			dfName=generateMonthlyDf(i,j,c)
+			#LETS NOT WRITE THIS TO A CSV. TAKE DFS
+			dfName.to_csv(userScript2.outputLocation+"monthlyDF/"+dfName1+".csv", sep=',', encoding='utf-8', index=False, header=True)
 
 
-loc1 = "/home/rajini/Desktop/riots/monthlyDF/"
+loc1 = userScript2.outputLocation
 
 # function to find dataframe for given month
 def findMonthlyDf(loc, name):	
@@ -79,6 +93,10 @@ def findMonthlyDf(loc, name):
 				df = pd.read_csv(loc+f,  sep = ',', header=0)
 				return df
 	
+'''
+
+### 	CANNOT TEST TILL WE GET PREPROCESSED DATASET
+
 # iterate over all records from gdelt dataset 
 for i in range (numberOfRowsOriginal):
 	y=dfOriginal.loc[i]["year"]
@@ -97,5 +115,6 @@ for i in range (numberOfRowsOriginal):
 				dfOriginal.set_value([i], ["label"], 1)	
 
 
-dfOriginal.to_csv("/home/rajini/Desktop/riots/finalCSVOut.csv", sep=',', encoding='utf-8', index=False, header=True)			
+dfOriginal.to_csv("/home/mpiuser/Desktop/finalCSVOut.csv", sep=',', encoding='utf-8', index=False, header=True)			
 	
+'''
