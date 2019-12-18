@@ -11,6 +11,7 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir)
 import userScript
 
+
 currentModule = "removeDuplicateRows"
 df = pd.DataFrame()
 
