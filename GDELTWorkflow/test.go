@@ -144,7 +144,7 @@ func main(){
 	fmt.Println(<- outChannelModule5)
 
 	outChannelModule6 := make(chan string, 1)
-	//pythonCall("workflow/transformation/missingValuesMode.py", outChannelModule5)
+	//pythonCall("workflow/cleaning/missingValuesMode.py", outChannelModule5)
 	pythonCall("workflow/"+commandsArray[5], outChannelModule5)
 	messagePassing(outChannelModule5, outChannelModule6)
 	fmt.Println(<- outChannelModule6)
