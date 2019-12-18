@@ -9,24 +9,12 @@ import os,sys,inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir)
-import userScript
 
+import userScript2
+#import threadconfig
 
-currentModule = "removeDuplicateRows"
-df = pd.DataFrame()
-
-for i in range(len(userScript.orderOfModules)):
-	#print(userScript.orderOfModules[i])
-	if currentModule == userScript.orderOfModules[i]:
-		if i == 0:
-			df = pd.read_csv(userScript.inputDataset)
-			break
-		else:
-			previousModule = userScript.orderOfModules[i-1]
-			df = pd.read_csv(userScript.outputLocation + previousModule + ".csv")
-			break
-
-outputDataset = userScript.outputLocation + currentModule + ".csv"
+df = pd.read_csv(userScript2.outputLocation + "selectUserDefinedColumns.csv")
+outputDataset = userScript2.outputLocation + "dropDuplicateRows.csv"
 
 @python_app
 def removeDuplicateRows(startRowIndex, endRowIndex, dFrame):
@@ -35,13 +23,18 @@ def removeDuplicateRows(startRowIndex, endRowIndex, dFrame):
 	df = dFrame.iloc[np.r_[startRowIndex : endRowIndex] , : ]
 	dfDroppedDuplicates = df.drop_duplicates()
 	dfDroppedDuplicates.reset_index(inplace=True)
-
+	
 	return dfDroppedDuplicates
 
+
+#read csv with defined missing values
 numOfRows = df.shape[0]
 #print(numOfRows)
+
+
 dfNew = pd.DataFrame()
 maxThreads = 4
+
 results = []
 
 #not parallel --> relatively small number of rows here
@@ -52,24 +45,39 @@ if numOfRows <= maxThreads:
 #parallel
 elif numOfRows > maxThreads:
 	#print("test2")
-	eachThreadRows = numOfRows // maxThreads
-	for i in range (0,(maxThreads*eachThreadRows), eachThreadRows):
-		df1 = removeDuplicateRows(i,(i+eachThreadRows),df)
-		results.append(df1)
-	if (numOfRows % maxThreads != 0):
+	if (numOfRows % maxThreads == 0):
+		eachThreadRows = numOfRows / maxThreads 
+		for i in range (maxThreads):
+			df1 = removeDuplicateRows(i,(i+eachThreadRows),df)
+			results.append(df1)
+			#dfNew = pd.concat([dfNew, df1] , axis=0)
+		
+	else:
+		eachThreadRows = numOfRows // (maxThreads-1)
+		for i in range (0,(maxThreads-1)*eachThreadRows, eachThreadRows):
+			#print ("i", i)
+			#print("i+eachThreadRows", (i+eachThreadRows))
+			df1 = removeDuplicateRows(i, (i+eachThreadRows), df)
+			results.append(df1)
+			#dfNew = pd.concat([dfNew, df1], axis=0)
+
+		print("last thread",(eachThreadRows * (maxThreads-1))	)
 		df2 = removeDuplicateRows((eachThreadRows * (maxThreads-1)), numOfRows, df)
 		results.append(df2)
+	
+		#dfNew = pd.concat([dfNew, df2] , axis=0)
+
 
 # wait for all apps to complete
-[r.result() for r in results]
+#[r.result() for r in results]
 
 
-newlist = []
+newlist = []	
 for i in results:
 	newlist.append(i.result())
 
-#concat all the dfs into one row wise
 for i in newlist:
+	
 	dfNew = pd.concat([dfNew, i], axis=0)
 
 
@@ -80,4 +88,4 @@ dfNew.drop("index",inplace=True,axis=1)
 #print(dfNew)
 
 dfNew.to_csv (outputDataset, index = False, header=True)
-print("Module Completed: Remove Duplicate Rows")
+#print(removeDuplicateRows(50,100,df).result())

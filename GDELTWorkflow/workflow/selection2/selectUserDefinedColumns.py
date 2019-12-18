@@ -5,24 +5,12 @@ import os,sys,inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir)
-import userScript
 
-currentModule = "selectUserDefinedColumns"
-df = pd.DataFrame()
-for i in range(len(userScript.orderOfModules)):
-	print(userScript.orderOfModules[i])
-	if currentModule == userScript.orderOfModules[i]:
-		if i == 0:
-			df = pd.read_csv(userScript.inputDataset)
-			break
-		else:
-			previousModule = userScript.orderOfModules[i-1]
-			df = pd.read_csv(userScript.outputLocation + previousModule + ".csv")
-			break
-
-outputDataset = userScript.outputLocation + currentModule + ".csv"
-selectedColumns = userScript.selectColumns
-
+import userScript2
+#df = userScript.inputDataFrame
+df = pd.read_csv(userScript2.inputDataset)
+selectedColumns = userScript2.selectColumns
+outputDataset = userScript2.outputLocation + "selectUserDefinedColumns.csv"
 
 def selectUserDefinedColumns(df1):
 	df = df1
