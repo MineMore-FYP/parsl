@@ -4,10 +4,16 @@ import sys
 
 
 #Workflow
+
 ##selection/selectUserDefinedColumns.py
 ##cleaning/dropUniqueColumns.py
 ##cleaning/dropColumnsCriteria.py
 ##cleaning/dropRowsCriteria.py
+
+orderOfModules = ["selectUserDefinedColumns", "dropUniqueColumns",
+"dropColumnsCriteria","dropRowsCriteria"]
+
+
 
 '''
 Import df
@@ -20,10 +26,10 @@ feature sclaing - standardize/ normalize
 split data - RF
 '''
 #input location
-inputDataset = "/home/rajini/FYP/testcsv/test.csv"
+inputDataset = "/home/amanda/FYP/testcsv/test5.csv"
 
 #specify output locatiion
-outputLocation = "/home/rajini/FYP/gdelt/"
+outputLocation = "/home/amanda/FYP/gdelt/"
 
 #read csv to pandas df
 #inputDataFrame = pd.read_csv(inputDataset)
@@ -51,8 +57,8 @@ missingValues = ["n/a", "na", "--"]
 #drop columns according to user defined empty value percentage
 userDefinedColPercentage = 50 #done
 
-#drop rows according to user defined empty value percentage
-userDefinedRowPercentage = 30
+#drop rows according to user defined empty value percentage. if 85.71% isnt empty, keep
+userDefinedRowPercentage = 85.71
 
 #drop duplicate rows - run anyway
 
