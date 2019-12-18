@@ -76,28 +76,14 @@ if numOfCols <= maxThreads:
 
 elif numOfCols > maxThreads:
 	eachThreadCols = numOfCols // maxThreads
-	if (numOfCols % maxThreads == 0):
-		#print("test2")
-		for i in range (0,(maxThreads)*eachThreadCols, eachThreadCols):
-			dList1 = dropColumnsCriteria(i,(i+eachThreadCols),df,maxPercentageOfMissingValues, dropList)
-			#dfNew = pd.concat(dfNew, df1)
-			results.append(dList1)
+	for i in range (0,(maxThreads)*eachThreadCols, eachThreadCols):
+		dList1 = dropColumnsCriteria(i,(i+eachThreadCols),df,maxPercentageOfMissingValues, dropList)
+		results.append(dList1)
 
-	else:
-		#print("test3")
-		#for loop for the threads
-		for i in range (0,(maxThreads*eachThreadCols), eachThreadCols):
-			#print ("i", i)
-			#print("i+eachThreadCols", (i+eachThreadCols))
-			dList1 = dropColumnsCriteria(i,(i+eachThreadCols),df,maxPercentageOfMissingValues, dropList)
-			#dfNew = pd.concat([dfNew, df1], axis=1)
-			results.append(dList1)
-
+	if (numOfCols % maxThreads != 0):
 		#non parallel
 		dList2 = dropColumnsCriteria((eachThreadCols * maxThreads),numOfCols,df,maxPercentageOfMissingValues, dropList)
 		results.append(dList2)
-		#dfNew = pd.concat([dfNew, df2] , axis=1)
-
 
 # wait for all apps to complete
 [r.result() for r in results]

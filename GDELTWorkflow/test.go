@@ -136,27 +136,27 @@ func main(){
 	pythonCall("workflow/"+commandsArray[3], outChannelModule3)
 	messagePassing(outChannelModule3, outChannelModule4)
 	fmt.Println(<- outChannelModule4)
-/*
+
 	outChannelModule5 := make(chan string, 1)
 	pythonCall("workflow/"+commandsArray[4], outChannelModule4)
-	//pythonCall("workflow/cleaning/missingValuesMode.py", outChannelModule4)
+	//pythonCall("workflow/cleaning/removeDuplicateRows.py", outChannelModule4)
 	messagePassing(outChannelModule4, outChannelModule5)
 	fmt.Println(<- outChannelModule5)
-
+/*
 	outChannelModule6 := make(chan string, 1)
-	//pythonCall("workflow/transformation/normalize.py", outChannelModule5)
+	//pythonCall("workflow/transformation/missingValuesMode.py", outChannelModule5)
 	pythonCall("workflow/"+commandsArray[5], outChannelModule5)
 	messagePassing(outChannelModule5, outChannelModule6)
 	fmt.Println(<- outChannelModule6)
 
 	outChannelModule7 := make(chan string, 1)
 	pythonCall("workflow/"+commandsArray[6], outChannelModule6)
-	//pythonCall("workflow/transformation/splitIntoRows.py", outChannelModule6)
+	//pythonCall("workflow/transformation/normalize.py", outChannelModule6)
 	messagePassing(outChannelModule6, outChannelModule7)
 	fmt.Println(<- outChannelModule7)
 
 	outChannelModule8 := make(chan string, 1)
-	//pythonCall("workflow/transformation/encode.py", outChannelModule8)
+	//pythonCall("workflow/transformation/spltintorows.py", outChannelModule8)
 	pythonCall("workflow/"+commandsArray[7], outChannelModule7)
 	messagePassing(outChannelModule7, outChannelModule8)
 	fmt.Println(<- outChannelModule8)

@@ -70,22 +70,11 @@ if numOfCols <= maxThreads:
 elif numOfCols > maxThreads:
 	#print("test1")
 	eachThreadCols = numOfCols // maxThreads
-	if (numOfCols % maxThreads == 0):
-		#print("test2")
-		for i in range (0,(maxThreads)*eachThreadCols, eachThreadCols):
-			uList1 = dropUniqueColumns(i,(i+eachThreadCols),df,uniqueColList)
-			results.append(uList1)
-			#dfNew = pd.concat([dfNew, df1] , axis=1)
+	for i in range (0,(maxThreads)*eachThreadCols, eachThreadCols):
+		uList1 = dropUniqueColumns(i,(i+eachThreadCols),df,uniqueColList)
+		results.append(uList1)
 
-	else:
-		#print("test3")
-		#for loop for the threads
-		for i in range (0,(maxThreads)*eachThreadCols, eachThreadCols):
-			#print ("i", i)
-			#print("i+eachThreadCols", (i+eachThreadCols))
-			uList1 = dropUniqueColumns(i,(i+eachThreadCols),df,uniqueColList)
-			results.append(uList1)
-
+	if (numOfCols % maxThreads != 0):
 		#non parallel
 		uList2 = dropUniqueColumns((eachThreadCols * maxThreads), numOfCols, df, uniqueColList)
 		results.append(uList2)
