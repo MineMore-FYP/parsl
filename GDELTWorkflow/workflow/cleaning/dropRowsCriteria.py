@@ -41,13 +41,9 @@ def dropRowsCriteria(startRowIndex, endRowIndex, dFrame, maxPercentageOfMissingV
 
 numOfRows = df.shape[0]
 #print(numOfRows)
-
-
 dfNew = pd.DataFrame()
 maxThreads = 3
-
 results = []
-
 
 #not parallel --> relatively small number of rows here
 if numOfRows <= maxThreads:
@@ -57,19 +53,11 @@ if numOfRows <= maxThreads:
 #parallel
 elif numOfRows > maxThreads:
 	#print("test2")
-	#if the number of rows are evenly divided by maxThreads
 	eachThreadRows = numOfRows // maxThreads
-	if (numOfRows % maxThreads == 0):
-		for i in range (0,(maxThreads*eachThreadRows), eachThreadRows):
-			df1 = dropRowsCriteria(i,(i+eachThreadRows),df, maxPercentageOfMissingValues)
-			results.append(df1)
-	else:
-		#print("test4")
-		for i in range (0,(maxThreads*eachThreadRows), eachThreadRows):
-			df1 = dropRowsCriteria(i, (i+eachThreadRows), df, maxPercentageOfMissingValues)
-			results.append(df1)
-
-
+	for i in range (0,(maxThreads*eachThreadRows), eachThreadRows):
+		df1 = dropRowsCriteria(i,(i+eachThreadRows),df, maxPercentageOfMissingValues)
+		results.append(df1)
+	if (numOfRows % maxThreads != 0):
 		df2 = dropRowsCriteria((eachThreadRows * maxThreads), numOfRows, df, maxPercentageOfMissingValues)
 		results.append(df2)
 
