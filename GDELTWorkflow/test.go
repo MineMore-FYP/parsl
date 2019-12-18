@@ -142,13 +142,13 @@ func main(){
 	//pythonCall("workflow/cleaning/removeDuplicateRows.py", outChannelModule4)
 	messagePassing(outChannelModule4, outChannelModule5)
 	fmt.Println(<- outChannelModule5)
-/*
+
 	outChannelModule6 := make(chan string, 1)
 	//pythonCall("workflow/transformation/missingValuesMode.py", outChannelModule5)
 	pythonCall("workflow/"+commandsArray[5], outChannelModule5)
 	messagePassing(outChannelModule5, outChannelModule6)
 	fmt.Println(<- outChannelModule6)
-
+/*
 	outChannelModule7 := make(chan string, 1)
 	pythonCall("workflow/"+commandsArray[6], outChannelModule6)
 	//pythonCall("workflow/transformation/normalize.py", outChannelModule6)
