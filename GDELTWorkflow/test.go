@@ -97,7 +97,7 @@ func main(){
 	if err1 != nil {
 		fmt.Println(err1)
 		// Exit with status 3.
-    os.Exit(3)
+		os.Exit(3)
 	} else if out1 == nil{
 		os.Exit(3)
 	} else {
@@ -148,17 +148,17 @@ func main(){
 	pythonCall("workflow/"+commandsArray[5], outChannelModule5)
 	messagePassing(outChannelModule5, outChannelModule6)
 	fmt.Println(<- outChannelModule6)
-
+/*
 	outChannelModule7 := make(chan string, 1)
 	pythonCall("workflow/"+commandsArray[6], outChannelModule6)
 	//pythonCall("workflow/transformation/normalize.py", outChannelModule6)
 	messagePassing(outChannelModule6, outChannelModule7)
 	fmt.Println(<- outChannelModule7)
-
+*/
 	outChannelModule8 := make(chan string, 1)
 	//pythonCall("workflow/transformation/splitIntoRows.py", outChannelModule8)
-	pythonCall("workflow/"+commandsArray[7], outChannelModule7)
-	messagePassing(outChannelModule7, outChannelModule8)
+	pythonCall("workflow/"+commandsArray[6], outChannelModule6)
+	messagePassing(outChannelModule6, outChannelModule8)
 	fmt.Println(<- outChannelModule8)
 
 }

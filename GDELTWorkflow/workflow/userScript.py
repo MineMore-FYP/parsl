@@ -11,16 +11,17 @@ import sys
 ##cleaning/dropRowsCriteria.py
 ##cleaning/removeDuplicateRows.py
 ##cleaning/missingValuesMode.py
-##transformation/normalize.py
+#transformation/normalize.py
 ##transformation/splitIntoRows.py
 
 orderOfModules = ["selectUserDefinedColumns", "dropUniqueColumns",
 "dropColumnsCriteria","dropRowsCriteria","removeDuplicateRows",
-"missingValuesMode", "normalize", "splitIntoRows"]
+"missingValuesMode", "splitIntoRows"]
 
 #input location
-#inputDataset = "/home/amanda/FYP/testcsv/test5.csv"
-inputDataset = "/home/mpiuser/FYP/testcsv/test.csv"
+
+inputDataset = "/home/amanda/FYP/testcsv/dropCountry.csv"
+
 
 #specify output locatiion
 #outputLocation = "/home/amanda/FYP/gdelt/"
@@ -47,8 +48,8 @@ Actor2CountryCode = 'LKA'
 selectColumns = ["GLOBALEVENTID","SQLDATE", "Actor1Geo_CountryCode", "Actor2Geo_CountryCode", "Actor1EthnicCode", "Actor2EthnicCode", "QuadClass", "GoldsteinScale", "NumMentions", "AvgTone"]
 
 #select rows
-selectFromRow = OrderedDict()
-selectFromRow['Year'] = ["2018", "2019"] #doesnt work
+#selectFromRow = OrderedDict()
+#selectFromRow['Year'] = ["2018", "2019"] #doesnt work
 
 
 '''#######################		CLEANING	####################################'''
@@ -79,7 +80,6 @@ userDefinedNormalizeColumns = ["AvgTone"]
 #Split into rows
 #add the new column name as last element of list item
 userDefinedColumsToAggregate = [["Actor1Geo_CountryCode", "Actor2Geo_CountryCode", "ActorGeo_CountryCode" ]]
-
 
 #encoding
 userDefinedEncodeColumns = ["Actor1Geo_CountryCode"]
