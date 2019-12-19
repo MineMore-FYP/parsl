@@ -11,25 +11,37 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir)
 import userScript
 
-currentModule = "dropUniqueColumns"
-df = pd.DataFrame()
-for i in range(len(userScript.orderOfModules)):
-	#print(userScript.orderOfModules[i])
-	if currentModule == userScript.orderOfModules[i]:
-		if i == 0:
-			df = pd.read_csv(userScript.inputDataset)
-			break
-		else:
-			previousModule = userScript.orderOfModules[i-1]
-			df = pd.read_csv(userScript.outputLocation + previousModule + ".csv")
-			break
 
-outputDataset = userScript.outputLocation + currentModule + ".csv"
+currentModule = "dropUniqueColumns"
 uniqueColList = []
 
+workflowNumber = sys.argv[1]
+
+if workflowNumber == "1":
+	orderOfModules = userScript.orderOfModules1
+	inputDataset = userScript.inputDataset1
+	outputLocation = userScript.outputLocation1
+elif workflowNumber == "2":
+	orderOfModules = userScript.orderOfModules2
+	inputDataset = userScript.inputDataset2
+	outputLocation = userScript.outputLocation2
+
+
+df = pd.DataFrame()
+for i in range(len(orderOfModules)):
+	print(orderOfModules[i])
+	if currentModule == orderOfModules[i]:
+		if i == 0:
+			df = pd.read_csv(inputDataset)
+			break
+		else:
+			previousModule = orderOfModules[i-1]
+			df = pd.read_csv(outputLocation + previousModule + ".csv")
+			break
+
+outputDataset = outputLocation + currentModule + ".csv"
 
 #use this function to drop columns that contain primary key like data
-
 @python_app
 def dropUniqueColumns(startColIndex, endColIndex, dFrame, uniqueColList):
 

@@ -20,12 +20,12 @@ orderOfModules = ["selectUserDefinedColumns", "dropUniqueColumns",
 
 #input location
 
-inputDataset = "/home/amanda/FYP/testcsv/dropCountry.csv"
+inputDataset1 = "/home/amanda/FYP/testcsv/dropCountry.csv"
 
 
 #specify output locatiion
-#outputLocation = "/home/amanda/FYP/gdelt/"
-outputLocation = "/home/mpiuser/FYP/gdelt/"
+outputLocation1 = "/home/amanda/FYP/gdelt/"
+#outputLocation = "/home/mpiuser/FYP/gdelt/"
 
 
 #GDELT variables
@@ -45,8 +45,8 @@ Actor2CountryCode = 'LKA'
 
 #select columns
 #if "all" select everything. else give a list ["whatever1", "whatever2"]
-selectColumns = ["GLOBALEVENTID","SQLDATE", "Actor1Geo_CountryCode", "Actor2Geo_CountryCode", "Actor1EthnicCode", "Actor2EthnicCode", "QuadClass", "GoldsteinScale", "NumMentions", "AvgTone"]
-
+selectColumns1 = ["GLOBALEVENTID","SQLDATE", "Actor1Geo_CountryCode", "Actor2Geo_CountryCode", "Actor1EthnicCode", "Actor2EthnicCode", "QuadClass", "GoldsteinScale", "NumMentions", "AvgTone"]
+selectColumns2 = ["fssfjfn"]
 #select rows
 #selectFromRow = OrderedDict()
 #selectFromRow['Year'] = ["2018", "2019"] #doesnt work
@@ -60,26 +60,26 @@ selectColumns = ["GLOBALEVENTID","SQLDATE", "Actor1Geo_CountryCode", "Actor2Geo_
 missingValues = ["n/a", "na", "--"]
 
 #drop columns according to user defined empty value percentage
-userDefinedColPercentage = 50
+userDefinedColPercentage1 = 50
 
 #drop rows according to user defined empty value percentage. if 85.71% isnt empty, keep
-userDefinedRowPercentage = 85.71
+userDefinedRowPercentage1 = 85.71
 
 #drop duplicate rows - run anyway
 
 #Research how best to fill missing values
 #mode for user defined columns
-modeColumns = "all"
+modeColumns1 = "all"
 
 
 '''#######################		TRANSFORMATION	####################################'''
 
 #Normalize
-userDefinedNormalizeColumns = ["AvgTone"]
+userDefinedNormalizeColumns1 = ["AvgTone"]
 
 #Split into rows
 #add the new column name as last element of list item
-userDefinedColumsToAggregate = [["Actor1Geo_CountryCode", "Actor2Geo_CountryCode", "ActorGeo_CountryCode" ]]
+userDefinedColumsToAggregate1 = [["Actor1Geo_CountryCode", "Actor2Geo_CountryCode", "ActorGeo_CountryCode" ]]
 
 #encoding
 userDefinedEncodeColumns = ["Actor1Geo_CountryCode"]
