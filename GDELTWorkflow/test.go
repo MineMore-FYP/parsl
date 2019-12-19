@@ -144,7 +144,7 @@ func main(){
 	fmt.Println(<- outChannelModule5)
 
 	outChannelModule6 := make(chan string, 1)
-	//pythonCall("workflow/transformation/missingValuesMode.py", outChannelModule5)
+	//pythonCall("workflow/cleaning/missingValuesMode.py", outChannelModule5)
 	pythonCall("workflow/"+commandsArray[5], outChannelModule5)
 	messagePassing(outChannelModule5, outChannelModule6)
 	fmt.Println(<- outChannelModule6)
@@ -154,13 +154,11 @@ func main(){
 	//pythonCall("workflow/transformation/normalize.py", outChannelModule6)
 	messagePassing(outChannelModule6, outChannelModule7)
 	fmt.Println(<- outChannelModule7)
-/*
+
 	outChannelModule8 := make(chan string, 1)
-	//pythonCall("workflow/transformation/spltintorows.py", outChannelModule8)
+	//pythonCall("workflow/transformation/splitIntoRows.py", outChannelModule8)
 	pythonCall("workflow/"+commandsArray[7], outChannelModule7)
 	messagePassing(outChannelModule7, outChannelModule8)
 	fmt.Println(<- outChannelModule8)
-
-*/
 
 }
