@@ -23,7 +23,7 @@ outputDataset = userScript2.outputLocation + "splitDate.csv"
 # CONSOLIDATE GDELT OUTPUT WITH ACTUAL EVENTS IN ORDER TO GENERATE A LABEL 
 
 # read original csv generated from gdelt
-dfOriginal = pd.read_csv(userScript.inputDataset, header=0)
+dfOriginal = pd.read_csv(userScript.outputLocation+"FINAL.csv", header=0)
 
 # read manual csv with riot information
 dfManual = pd.read_csv(userScript2.outputLocation+"combinedRiots.csv", header=0)
@@ -82,7 +82,7 @@ for i in preprocessingRecords.years:
 			dfName.to_csv(userScript2.outputLocation+"monthlyDF/"+dfName1+".csv", sep=',', encoding='utf-8', index=False, header=True)
 
 
-loc1 = userScript2.outputLocation
+loc1 = userScript2.outputLocation+"monthlyDF/"
 
 # function to find dataframe for given month
 def findMonthlyDf(loc, name):	
@@ -92,10 +92,8 @@ def findMonthlyDf(loc, name):
 			if (f == name):
 				df = pd.read_csv(loc+f,  sep = ',', header=0)
 				return df
-	
-'''
 
-### 	CANNOT TEST TILL WE GET PREPROCESSED DATASET
+# labelled as riot only if average tone is negative
 
 # iterate over all records from gdelt dataset 
 for i in range (numberOfRowsOriginal):
@@ -104,6 +102,7 @@ for i in range (numberOfRowsOriginal):
 	d=dfOriginal.loc[i]["date"]
 	c=dfOriginal.loc[i]["ActorGeo_CountryCode"]
 	dfName2=y+m+c
+	#print(dfName2)
 	comparativeDF = findMonthlyDf(loc1,dfName2)
 	# find record with matching date and country from monthlyDF
 	for m, n in comparativeDF.iterrows():
@@ -112,9 +111,9 @@ for i in range (numberOfRowsOriginal):
 		if cmpDate==d:
 			# set label to zero if corresponding record exists in monthlyDF
 			if comparativeDF.loc[m]["Indicator"]==1:
-				dfOriginal.set_value([i], ["label"], 1)	
-
-
-dfOriginal.to_csv("/home/mpiuser/Desktop/finalCSVOut.csv", sep=',', encoding='utf-8', index=False, header=True)			
+				if dfOriginal.loc[i]["AvgTone"]<0:
+					dfOriginal.set_value([i], ["label"], 1)	
 	
-'''
+
+dfOriginal.to_csv(userScript.outputLocation+"finalCSVOut.csv", sep=',', encoding='utf-8', index=False, header=True)			
+
