@@ -19,10 +19,13 @@ orderOfModules = ["selectUserDefinedColumns", "dropUniqueColumns",
 "missingValuesMode", "splitIntoRows"]
 
 #input location
+
 inputDataset = "/home/amanda/FYP/testcsv/dropCountry.csv"
 
+
 #specify output locatiion
-outputLocation = "/home/amanda/FYP/gdelt/"
+#outputLocation = "/home/amanda/FYP/gdelt/"
+outputLocation = "/home/mpiuser/FYP/gdelt/"
 
 
 #GDELT variables

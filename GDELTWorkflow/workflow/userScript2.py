@@ -4,20 +4,22 @@ import sys
 
 '''
 select columns
-drop duplicate rows
 drop unique columns
+drop duplicate rows
 missing values mode
+Add label column with value=1
+replace values (Sri Lanka)
+
 split date (y/m/d)
 rename rows (to same format as GDELT)
-replace values (Sri Lanka)
-Add label column with value=1
+
 '''
 
 #input location
-inputDataset = "/home/rajini/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
+inputDataset = "/home/mpiuser/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
 
 #specify output locatiion
-outputLocation = "/home/rajini/FYP/acled/"
+outputLocation = "/home/mpiuser/FYP/acled/"
 
 
 '''#######################		SELECTION	####################################'''
@@ -28,9 +30,9 @@ selectColumns = ["data_id", "event_date", "year", "country"]
 
 '''#######################		CLEANING	####################################'''
 
-#drop duplicate rows
-
 #Drop unique columns
+
+#drop duplicate rows
  
 #mode for missing values
 modeColumns = "all" 
@@ -38,13 +40,17 @@ modeColumns = "all"
 
 '''#######################		TRANSFORMATION	####################################'''
 
-#Normalize
-userDefinedNormalizeColumns = ["AvgTone"]
+#add label column 
+labelValue = 1
 
-#Split into rows
-#add the new column name as last element of list item
-userDefinedColumsToAggregate = [["Actor1Geo_CountryCode", "Actor2Geo_CountryCode", "ActorGeo_CountryCode" ]]
+#assign FIPS country code
+country = "CE"
+
+#split date to year, month and date
 
 
-#encoding
-userDefinedEncodeColumns = ["Actor1Geo_CountryCode"]
+'''#######################		MERGING 	####################################'''
+
+#generate labelled records for all days of the years
+generateRecordsYears = ["2019"]
+
