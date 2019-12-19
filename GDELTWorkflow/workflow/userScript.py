@@ -12,23 +12,12 @@ import sys
 ##cleaning/removeDuplicateRows.py
 ##cleaning/missingValuesMode.py
 ##transformation/normalize.py
+##transformation/splitIntoRows.py
 
 orderOfModules = ["selectUserDefinedColumns", "dropUniqueColumns",
 "dropColumnsCriteria","dropRowsCriteria","removeDuplicateRows",
-"missingValuesMode", "normalize"]
+"missingValuesMode", "normalize", "splitIntoRows"]
 
-
-
-'''
-Import df
-select columnss
-drop unique cols
-Drop missing value criteria
-fill missing values
-Convert categoricacl to numerical
-feature sclaing - standardize/ normalize
-split data - RF
-'''
 #input location
 inputDataset = "/home/amanda/FYP/testcsv/test5.csv"
 

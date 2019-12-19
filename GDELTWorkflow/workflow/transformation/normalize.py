@@ -99,7 +99,7 @@ elif numOfCols > maxThreads:
 		df1 = normalize(i,(i+eachThreadCols),df,colsToNormalize)
 		results.append(df1)
 	if (numOfCols % maxThreads != 0):
-		df2 = normalize((eachThreadCols * (maxThreads-1)),numOfCols,df,colsToNormalize)
+		df2 = normalize((eachThreadCols * maxThreads),numOfCols,df,colsToNormalize)
 		results.append(df2)
 
 # wait for all apps to complete
