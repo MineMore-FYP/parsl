@@ -13,8 +13,8 @@ import (
 	//"time"
 )
 
-func pythonCall(progName string, inChannel chan <- string) {
-	cmd := exec.Command("python3", progName)
+func pythonCall(progName string, inChannel chan <- string, workflowNumber string) {
+	cmd := exec.Command("python3", progName, workflowNumber)
 	out, err := cmd.CombinedOutput()
 	log.Println(cmd.Run())
 
@@ -114,51 +114,53 @@ func main(){
 	//start module execution from here onwards
 	inChannelModule1 := make(chan string, 1)
 	outChannelModule1 := make(chan string, 1)
-	pythonCall("workflow/"+commandsArray[0], inChannelModule1)
+	pythonCall("workflow/"+commandsArray[0], inChannelModule1,"1")
 	//pythonCall("workflow/selection/selectUserDefinedColumns.py", inChannelModule1)
 	messagePassing(inChannelModule1, outChannelModule1)
 	fmt.Println(<-outChannelModule1)
-
+/*
 	outChannelModule2 := make(chan string, 1)
-	pythonCall("workflow/"+commandsArray[1], outChannelModule1)
+	pythonCall("workflow/"+commandsArray[1], outChannelModule1, "1")
 	//pythonCall("workflow/cleaning/dropUniqueColumns.py", outChannelModule1)
 	messagePassing(outChannelModule1, outChannelModule2)
 	fmt.Println(<- outChannelModule2)
 
 	outChannelModule3 := make(chan string, 1)
-	pythonCall("workflow/"+commandsArray[2], outChannelModule2)
+	pythonCall("workflow/"+commandsArray[2], outChannelModule2, "1")
 	//pythonCall("workflow/cleaning/dropColumnsCriteria.py", outChannelModule2)
 	messagePassing(outChannelModule2, outChannelModule3)
 	fmt.Println(<- outChannelModule3)
 
 	outChannelModule4 := make(chan string, 1)
 	//pythonCall("workflow/cleaning/dropRowsCriteria.py", outChannelModule3)
-	pythonCall("workflow/"+commandsArray[3], outChannelModule3)
+	pythonCall("workflow/"+commandsArray[3], outChannelModule3, "1")
 	messagePassing(outChannelModule3, outChannelModule4)
 	fmt.Println(<- outChannelModule4)
 
 	outChannelModule5 := make(chan string, 1)
-	pythonCall("workflow/"+commandsArray[4], outChannelModule4)
+	pythonCall("workflow/"+commandsArray[4], outChannelModule4, "1")
 	//pythonCall("workflow/cleaning/removeDuplicateRows.py", outChannelModule4)
 	messagePassing(outChannelModule4, outChannelModule5)
 	fmt.Println(<- outChannelModule5)
 
 	outChannelModule6 := make(chan string, 1)
 	//pythonCall("workflow/cleaning/missingValuesMode.py", outChannelModule5)
-	pythonCall("workflow/"+commandsArray[5], outChannelModule5)
+	pythonCall("workflow/"+commandsArray[5], outChannelModule5, "1")
 	messagePassing(outChannelModule5, outChannelModule6)
 	fmt.Println(<- outChannelModule6)
+*/
 /*
 	outChannelModule7 := make(chan string, 1)
-	pythonCall("workflow/"+commandsArray[6], outChannelModule6)
+	pythonCall("workflow/"+commandsArray[6], outChannelModule6, "1")
 	//pythonCall("workflow/transformation/normalize.py", outChannelModule6)
 	messagePassing(outChannelModule6, outChannelModule7)
 	fmt.Println(<- outChannelModule7)
 */
+/*
 	outChannelModule8 := make(chan string, 1)
 	//pythonCall("workflow/transformation/splitIntoRows.py", outChannelModule8)
-	pythonCall("workflow/"+commandsArray[6], outChannelModule6)
+	pythonCall("workflow/"+commandsArray[6], outChannelModule6, "1")
 	messagePassing(outChannelModule6, outChannelModule8)
 	fmt.Println(<- outChannelModule8)
-
+*/
 }
