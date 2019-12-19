@@ -45,8 +45,8 @@ Actor2CountryCode = 'LKA'
 selectColumns = ["GLOBALEVENTID","SQLDATE", "Actor1Geo_CountryCode", "Actor2Geo_CountryCode", "Actor1EthnicCode", "Actor2EthnicCode", "QuadClass", "GoldsteinScale", "NumMentions", "AvgTone"]
 
 #select rows
-selectFromRow = OrderedDict()
-selectFromRow['Year'] = ["2018", "2019"] #doesnt work
+#selectFromRow = OrderedDict()
+#selectFromRow['Year'] = ["2018", "2019"] #doesnt work
 
 
 '''#######################		CLEANING	####################################'''
@@ -77,7 +77,6 @@ userDefinedNormalizeColumns = ["AvgTone"]
 #Split into rows
 #add the new column name as last element of list item
 userDefinedColumsToAggregate = [["Actor1Geo_CountryCode", "Actor2Geo_CountryCode", "ActorGeo_CountryCode" ]]
-
 
 #encoding
 userDefinedEncodeColumns = ["Actor1Geo_CountryCode"]
