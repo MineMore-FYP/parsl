@@ -11,16 +11,17 @@ import sys
 ##cleaning/dropRowsCriteria.py
 ##cleaning/removeDuplicateRows.py
 ##cleaning/missingValuesMode.py
-##transformation/normalize.py
+#transformation/normalize.py
 ##transformation/splitIntoRows.py
 
 orderOfModules = ["selectUserDefinedColumns", "dropUniqueColumns",
 "dropColumnsCriteria","dropRowsCriteria","removeDuplicateRows",
-"missingValuesMode", "normalize", "splitIntoRows"]
+"missingValuesMode", "splitIntoRows"]
 
 #input location
-#inputDataset = "/home/amanda/FYP/testcsv/test5.csv"
-inputDataset = "/home/mpiuser/FYP/testcsv/test.csv"
+
+inputDataset = "/home/amanda/FYP/testcsv/dropCountry.csv"
+
 
 #specify output locatiion
 #outputLocation = "/home/amanda/FYP/gdelt/"
