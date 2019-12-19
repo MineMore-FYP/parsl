@@ -148,13 +148,13 @@ func main(){
 	pythonCall("workflow/"+commandsArray[5], outChannelModule5)
 	messagePassing(outChannelModule5, outChannelModule6)
 	fmt.Println(<- outChannelModule6)
-/*
+
 	outChannelModule7 := make(chan string, 1)
 	pythonCall("workflow/"+commandsArray[6], outChannelModule6)
 	//pythonCall("workflow/transformation/normalize.py", outChannelModule6)
 	messagePassing(outChannelModule6, outChannelModule7)
 	fmt.Println(<- outChannelModule7)
-
+/*
 	outChannelModule8 := make(chan string, 1)
 	//pythonCall("workflow/transformation/spltintorows.py", outChannelModule8)
 	pythonCall("workflow/"+commandsArray[7], outChannelModule7)
