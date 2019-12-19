@@ -13,8 +13,8 @@ sys.path.insert(0,parentdir)
 import userScript2
 #import threadconfig
 
-df = pd.read_csv(userScript2.outputLocation + "selectUserDefinedColumns.csv")
-outputDataset = userScript2.outputLocation + "dropDuplicateRows.csv"
+df = pd.read_csv(userScript2.outputLocation + "dropUniqueColumns.csv")
+outputDataset = userScript2.outputLocation + "removeDuplicateRows.csv"
 
 @python_app
 def removeDuplicateRows(startRowIndex, endRowIndex, dFrame):
@@ -89,3 +89,5 @@ dfNew.drop("index",inplace=True,axis=1)
 
 dfNew.to_csv (outputDataset, index = False, header=True)
 #print(removeDuplicateRows(50,100,df).result())
+
+print("Module Completed: Remove Duplicate Rows")

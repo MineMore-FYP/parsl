@@ -29,10 +29,12 @@ feature sclaing - standardize/ normalize
 split data - RF
 '''
 #input location
-inputDataset = "/home/amanda/FYP/testcsv/test5.csv"
+#inputDataset = "/home/amanda/FYP/testcsv/test5.csv"
+inputDataset = "/home/mpiuser/FYP/testcsv/test.csv"
 
 #specify output locatiion
-outputLocation = "/home/amanda/FYP/gdelt/"
+#outputLocation = "/home/amanda/FYP/gdelt/"
+outputLocation = "/home/mpiuser/FYP/gdelt/"
 
 #read csv to pandas df
 #inputDataFrame = pd.read_csv(inputDataset)
