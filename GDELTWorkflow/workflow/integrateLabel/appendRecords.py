@@ -12,20 +12,40 @@ currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentfram
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir)
 
-import userScript2
+import userScript
 
-#read original csv with riot information
-df = pd.read_csv(userScript2.outputLocation + "splitDate.csv")
-outputLocation = userScript2.outputLocation 
+currentModule = "appendRecords"
+
+workflowNumber = sys.argv[1]
+
+if workflowNumber == "1":
+	orderOfModules = userScript.orderOfModules1
+	inputDataset = userScript.inputDataset1
+	outputLocation = userScript.outputLocation1
+	years = userScript.generateRecordsYears1
+elif workflowNumber == "2":
+	orderOfModules = userScript.orderOfModules2
+	inputDataset = userScript.inputDataset2
+	outputLocation = userScript.outputLocation2
+	years = userScript.generateRecordsYears2
+
+
+df = pd.DataFrame()
+for i in range(len(orderOfModules)):
+	#print(orderOfModules[i])
+	if currentModule == orderOfModules[i]:
+		if i == 0:
+			df = pd.read_csv(inputDataset)
+			break
+		else:
+			previousModule = orderOfModules[i-1]
+			df = pd.read_csv(outputLocation + previousModule + ".csv")
+			break
+
+#outputDataset = outputLocation + currentModule + ".csv"
 
 
 # GENERATE COMPARATIVE DATAFRAME CONTAINING RIOT INFORMATION
-
-#read original csv with riot information
-#df = pd.read_csv("/home/rajini/Desktop/riots/data.csv", header=None)
-
-# parameters : the years to generate records for
-years = userScript2.generateRecordsYears
 
 # locations in dataframe
 dfYear=df["year"]
@@ -151,55 +171,3 @@ with open(outputLocation+"combinedRiots.csv", "w", newline='', encoding="utf8") 
 			reader = csv.reader(incsv, delimiter=',')
 			writer.writerows(row for row in reader)	
 
-'''
-# CONCATENATE COLUMNS TO GET SQL DATE
-
-loc3 = "/home/rajini/Desktop/riots/removeDuplicateDF/"
-
-list_of_duplicate_removed_df = []
-
-# run loop for all files in previously created dataframe folder
-for f in os.listdir(loc3):
-	if f.endswith(".csv"):
-		#print(f)
-		df = pd.read_csv(loc3+f,  sep = ',', header=None)
-		# append dataframe to a list
-		list_of_duplicate_removed_df.append(df)
-		#print(list_of_filled_df)
-
-for df in list_of_duplicate_removed_df:
-	# get country name for dataframe from the first row of df 		
-	countryName = df.loc[0][3]
-
-	# convert float to int	
-	for i in range (3):
-		df[i]=df[i].astype(int)
-	#print(df.dtypes)
-
-	# convert int to string
-	for i in range (3):
-		df[i]=df[i].astype(str)
-
-		count=0
-
-		# add "0" in front of one digit months and dates (in order to derive proper SQL date)
-		for j in df.loc[:][i]:
-			if j in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
-				j=j.zfill(2)
-				#print(j)
-				df.set_value([count], [i], j)
-			count=count+1
-	#print(df.dtypes)
-	
-	# obtain SQLDATE in column 1
-	df[0] = df[0]+df[1]+df[2]
-
-	# drop month and date columns
-	df = df.drop([1, 2], axis=1)
-
-	#df.columns = ['SQLDATE', 'ActorGeo_CountryCode', 'Indicator']
-
-	#print(df)
-	
-	df.to_csv("/home/rajini/Desktop/riots/sqldateDF/dfsqldate"+countryName+".csv", sep=',', encoding='utf-8', index=False, header=False)
-'''

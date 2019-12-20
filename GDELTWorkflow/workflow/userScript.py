@@ -39,7 +39,7 @@ import sys
 #7
 ##integrateLabel/appendRecords.py
 #8
-##integrateLabel/Integrate.py
+##integrateLabel/integrate.py
 
 
 orderOfModules1 = ["selectUserDefinedColumns", "dropUniqueColumns",
@@ -47,7 +47,7 @@ orderOfModules1 = ["selectUserDefinedColumns", "dropUniqueColumns",
 "missingValuesMode", "splitIntoRows"]
 
 orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns", "removeDuplicateRows",
-"missingValuesMode", "addLabelColumn", "assignCountryCode", "splitDate", "appendRecords", "Integrate"]
+"missingValuesMode", "addLabelColumn", "assignCountryCode", "splitDate", "appendRecords", "integrate"]
 
 #input location
 

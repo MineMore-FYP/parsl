@@ -214,14 +214,16 @@ func main(){
 	pythonCall("workflow/"+commandsArray[5], outChannelModule27, "2")
 	messagePassing(outChannelModule27, outChannelModule28)
 	fmt.Println(<- outChannelModule28)
+
+}
 /*
 
 NEED TO CONNECT WITH RF WF
 	outChannelModule29 := make(chan string, 1)
-	//pythonCall("workflow/integrateLabels/Integrate.py", outChannelModule5)
+	//pythonCall("workflow/integrateLabels/integrate.py", outChannelModule5)
 	pythonCall("workflow/"+commandsArray[5], outChannelModule28, "2")
 	messagePassing(outChannelModule28, outChannelModule29)
 	fmt.Println(<- outChannelModule29)
-/*
 
-}
+*/
+
