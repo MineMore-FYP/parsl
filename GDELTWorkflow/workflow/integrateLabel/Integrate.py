@@ -5,7 +5,7 @@ import pandas as pd
 import csv
 import numpy as np
 
-import preprocessingRecords
+import appendRecords
 
 import os.path
 import sys
@@ -15,18 +15,43 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir)
 
 import userScript
-import userScript2
-#df = userScript.inputDataFrame
 
-outputDataset = userScript2.outputLocation + "splitDate.csv"
+currentModule = "integrate"
+
+workflowNumber = sys.argv[1]
+
+if workflowNumber == "1":
+	orderOfModules = userScript.orderOfModules1
+	inputDataset = userScript.inputDataset1
+	outputLocation = userScript.outputLocation1
+elif workflowNumber == "2":
+	orderOfModules = userScript.orderOfModules2
+	inputDataset = userScript.inputDataset2
+	outputLocation = userScript.outputLocation2
+
+
+df = pd.DataFrame()
+for i in range(len(orderOfModules)):
+	#print(orderOfModules[i])
+	if currentModule == orderOfModules[i]:
+		if i == 0:
+			df = pd.read_csv(inputDataset)
+			break
+		else:
+			previousModule = orderOfModules[i-1]
+			df = pd.read_csv(outputLocation + previousModule + ".csv")
+			break
+
+#outputDataset = outputLocation + currentModule + ".csv"
+
 
 # CONSOLIDATE GDELT OUTPUT WITH ACTUAL EVENTS IN ORDER TO GENERATE A LABEL 
 
 # read original csv generated from gdelt
-dfOriginal = pd.read_csv(userScript.outputLocation+"FINAL.csv", header=0)
+dfOriginal = pd.read_csv(userScript.outputLocation1+"FINAL.csv", header=0)
 
 # read manual csv with riot information
-dfManual = pd.read_csv(userScript2.outputLocation+"combinedRiots.csv", header=0)
+dfManual = pd.read_csv(userScript.outputLocation2+"combinedRiots.csv", header=0)
 
 # number of rows in gdelt generated dataset
 numberOfRowsOriginal = dfOriginal.shape[0]
@@ -41,7 +66,6 @@ dfOriginal['date']=0
 dfOriginal['label']=0	
 
 
-#PARSL
 # iterating over rows of df original and generating values for Y,M,D from SQLDATE
 for i, j in dfOriginal.iterrows(): 
 	sqldate = dfOriginal.loc[i][0]
@@ -66,9 +90,9 @@ def generateMonthlyDf(year,month,country):
 	return dfMonthly
 
 # call generateMonthlyDF function to all months in given years
-for i in preprocessingRecords.years:
+for i in appendRecords.years:
 	for j in range (1,13):
-		for c in preprocessingRecords.uniqueCountries:
+		for c in appendRecords.uniqueCountries:
 			y=str(i)
 			m=str(j)
 			# add "0" in front of one digit months
@@ -79,10 +103,10 @@ for i in preprocessingRecords.years:
 			dfName1=dfName
 			dfName=generateMonthlyDf(i,j,c)
 			#LETS NOT WRITE THIS TO A CSV. TAKE DFS
-			dfName.to_csv(userScript2.outputLocation+"monthlyDF/"+dfName1+".csv", sep=',', encoding='utf-8', index=False, header=True)
+			dfName.to_csv(userScript.outputLocation2+"monthlyDF/"+dfName1+".csv", sep=',', encoding='utf-8', index=False, header=True)
 
 
-loc1 = userScript2.outputLocation+"monthlyDF/"
+loc1 = userScript.outputLocation2+"monthlyDF/"
 
 # function to find dataframe for given month
 def findMonthlyDf(loc, name):	
@@ -115,5 +139,5 @@ for i in range (numberOfRowsOriginal):
 					dfOriginal.set_value([i], ["label"], 1)	
 	
 
-dfOriginal.to_csv(userScript.outputLocation+"finalCSVOut.csv", sep=',', encoding='utf-8', index=False, header=True)			
+dfOriginal.to_csv(userScript.outputLocation1+"finalCSVOut.csv", sep=',', encoding='utf-8', index=False, header=True)			
 

@@ -20,14 +20,25 @@ import sys
 ##transformation/normalize.py
 #7
 ##transformation/splitIntoRows.py
+#8
+##integrateLabel/addLabelColumn.py
+#9
+##integrateLabel/assignCountryCode.py
+#10
+##integrateLabel/splitDate.py
+#11
+##integrateLabel/appendRecords.py
+#12
+##integrateLabel/integrate.py
 
 
 orderOfModules1 = ["selectUserDefinedColumns", "dropUniqueColumns",
 "dropColumnsCriteria","dropRowsCriteria","removeDuplicateRows",
 "missingValuesMode", "splitIntoRows"]
 
-orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns", "removeDuplicateRows",
-"missingValuesMode"]
+orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns", "removeDuplicateRows", "missingValuesMode", "addLabelColumn", "assignCountryCode", "splitDate", "appendRecords", "integrate"]
+
+#orderOfModules3 = ["selectUserDefinedColumns","dropUniqueColumns", "removeDuplicateRows", "missingValuesMode", "addLabelColumn", "assignCountryCode", "splitDate", "appendRecords", "integrate"]
 
 #input location
 
@@ -37,7 +48,6 @@ inputDataset2 = "/home/mpiuser/Documents/FYP/ACLED2019-Sri_Lanka.csv"
 #specify output locatiion
 outputLocation1 = "/home/mpiuser/Documents/FYP/gdelt/"
 outputLocation2 = "/home/mpiuser/FYP/acled/"
-#outputLocation = "/home/mpiuser/FYP/gdelt/"
 
 
 #GDELT variables
@@ -86,6 +96,23 @@ modeColumns1 = "all"
 modeColumns2 = "all"
 
 
+'''#######################		INTEGRATE LABEL	####################################'''
+
+
+#add label column to ACLED 
+labelValue2 = 1
+
+#assign FIPS country code to ACLED 
+country2 = "CE"
+
+#split ACLED date to year, month and date
+
+#generate labelled records for all days of the years
+generateRecordsYears2 = ["2018", "2019"]
+
+#merge acled records with gdelt
+
+
 '''#######################		TRANSFORMATION	####################################'''
 
 #Normalize
@@ -97,3 +124,6 @@ userDefinedColumsToAggregate1 = [["Actor1Geo_CountryCode", "Actor2Geo_CountryCod
 
 #encoding
 userDefinedEncodeColumns = ["Actor1Geo_CountryCode"]
+
+
+

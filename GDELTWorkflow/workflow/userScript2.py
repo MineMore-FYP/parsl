@@ -9,7 +9,6 @@ drop duplicate rows
 missing values mode
 Add label column with value=1
 replace values (Sri Lanka)
-
 split date (y/m/d)
 rename rows (to same format as GDELT)
 
