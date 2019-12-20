@@ -110,7 +110,7 @@ country2 = "CE"
 #split ACLED date to year, month and date
 
 #generate labelled records for all days of the years
-generateRecordsYears = ["2018", "2019"]
+generateRecordsYears2 = ["2018", "2019"]
 
 #merge acled records with gdelt
 

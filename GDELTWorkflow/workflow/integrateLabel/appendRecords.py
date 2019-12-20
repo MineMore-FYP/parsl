@@ -42,7 +42,7 @@ for i in range(len(orderOfModules)):
 			df = pd.read_csv(outputLocation + previousModule + ".csv")
 			break
 
-#outputDataset = outputLocation + currentModule + ".csv"
+outputDataset = outputLocation + currentModule + ".csv"
 
 
 # GENERATE COMPARATIVE DATAFRAME CONTAINING RIOT INFORMATION
@@ -52,14 +52,6 @@ dfYear=df["year"]
 dfMonth=df["month"]
 dfDate=df["date"]
 dfCountry=df["country"]
-'''
-
-# locations in dataframe
-dfYear=df.loc[:][0]
-dfMonth=df.loc[:][1]
-dfDate=df.loc[:][2]
-dfCountry=df.loc[:][3]
-'''
 
 # SEPERATE DATAFRAMES BY COUNTRY
 uniqueCountries=df["country"].unique()
@@ -77,6 +69,7 @@ for i in df["country"].unique():
 		k=k+1
 	# write each country dataframe to csv file. (in seperate folder)
 	dfCountry.to_csv(outputLocation+"countryDF/dfCountry"+i+".csv", sep=',', encoding='utf-8', index=False, header=True)
+
 
 # INSERT NEW RECORD FOR EVERY DAY IN THE YEAR
 
@@ -99,6 +92,7 @@ TwentyEightDays = [2]
 for df in list_of_df:	
 	# get country name for dataframe from the first row of df 		
 	countryName = df.loc[1]["country"]
+
 	for y in years:
 		for m in range (1,13):
 			#print(m)
@@ -170,4 +164,7 @@ with open(outputLocation+"combinedRiots.csv", "w", newline='', encoding="utf8") 
 		with open(filename, 'r', newline='', encoding="utf8") as incsv:
 			reader = csv.reader(incsv, delimiter=',')
 			writer.writerows(row for row in reader)	
+
+print("Module Completed: Create labelled data record for all days in range")
+
 
