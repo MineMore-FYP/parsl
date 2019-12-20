@@ -21,23 +21,44 @@ import sys
 #7
 ##transformation/splitIntoRows.py
 
+#Workflow
+#0
+##selection/selectUserDefinedColumns.py
+#1
+##cleaning/dropUniqueColumns.py
+#2
+##cleaning/removeDuplicateRows.py
+#3
+##cleaning/missingValuesMode.py
+#4
+##integrateLabel/addLabelColumn.py
+#5
+##integrateLabel/assignCountryCode.py
+#6
+##integrateLabel/splitDate.py
+#7
+##integrateLabel/appendRecords.py
+#8
+##integrateLabel/Integrate.py
+
 
 orderOfModules1 = ["selectUserDefinedColumns", "dropUniqueColumns",
 "dropColumnsCriteria","dropRowsCriteria","removeDuplicateRows",
 "missingValuesMode", "splitIntoRows"]
 
 orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns", "removeDuplicateRows",
-"missingValuesMode"]
+"missingValuesMode", "addLabelColumn", "assignCountryCode", "splitDate", "appendRecords", "Integrate"]
 
 #input location
 
-inputDataset1 = "/home/amanda/FYP/testcsv/dropCountry.csv"
+#inputDataset1 = "/home/amanda/FYP/testcsv/dropCountry.csv"
+inputDataset1 = "/home/mpiuser/FYP/testcsv/dropCountry.csv"
 inputDataset2 = "/home/mpiuser/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
 
 #specify output locatiion
-outputLocation1 = "/home/amanda/FYP/gdelt/"
+#outputLocation1 = "/home/amanda/FYP/gdelt/"
+outputLocation1 = "/home/mpiuser/FYP/gdelt/"
 outputLocation2 = "/home/mpiuser/FYP/acled/"
-#outputLocation = "/home/mpiuser/FYP/gdelt/"
 
 
 #GDELT variables
@@ -86,6 +107,23 @@ modeColumns1 = "all"
 modeColumns2 = "all"
 
 
+'''#######################		INTEGRATE LABEL	####################################'''
+
+
+#add label column to ACLED 
+labelValue2 = 1
+
+#assign FIPS country code to ACLED 
+country2 = "CE"
+
+#split ACLED date to year, month and date
+
+#generate labelled records for all days of the years
+generateRecordsYears = ["2018", "2019"]
+
+#merge acled records with gdelt
+
+
 '''#######################		TRANSFORMATION	####################################'''
 
 #Normalize
@@ -97,3 +135,6 @@ userDefinedColumsToAggregate1 = [["Actor1Geo_CountryCode", "Actor2Geo_CountryCod
 
 #encoding
 userDefinedEncodeColumns = ["Actor1Geo_CountryCode"]
+
+
+

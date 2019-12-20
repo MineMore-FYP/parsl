@@ -24,5 +24,10 @@ inputDataset = "/home/mpiuser/FYP/testcsv/removeDuplicateRows.csv"
 #specify output locatiion
 outputLocation = "/home/mpiuser/FYP/kmeans/"
 
+#split into rows based on actor1 and actor2 Geo country codes
+
+#select rows for below country only
+ActorGeo_CountryCode = "CE"
+
 
 
