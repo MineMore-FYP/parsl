@@ -12,21 +12,35 @@ sys.path.insert(0,parentdir)
 import userScript
 
 currentModule = "dropRowsCriteria"
-df = pd.DataFrame()
 
-for i in range(len(userScript.orderOfModules)):
-	#print(userScript.orderOfModules[i])
-	if currentModule == userScript.orderOfModules[i]:
+workflowNumber = sys.argv[1]
+
+if workflowNumber == "1":
+	orderOfModules = userScript.orderOfModules1
+	inputDataset = userScript.inputDataset1
+	outputLocation = userScript.outputLocation1
+	maxPercentageOfMissingValues = userScript.userDefinedRowPercentage1
+elif workflowNumber == "2":
+	orderOfModules = userScript.orderOfModules2
+	inputDataset = userScript.inputDataset2
+	outputLocation = userScript.outputLocation2
+	maxPercentageOfMissingValues = userScript.userDefinedRowPercentage2
+
+df = pd.DataFrame()
+for i in range(len(orderOfModules)):
+	#print(orderOfModules[i])
+	if currentModule == orderOfModules[i]:
 		if i == 0:
-			df = pd.read_csv(userScript.inputDataset)
+			df = pd.read_csv(inputDataset)
 			break
 		else:
-			previousModule = userScript.orderOfModules[i-1]
-			df = pd.read_csv(userScript.outputLocation + previousModule + ".csv")
+			previousModule = orderOfModules[i-1]
+			df = pd.read_csv(outputLocation + previousModule + ".csv")
 			break
 
-outputDataset = userScript.outputLocation + currentModule + ".csv"
-maxPercentageOfMissingValues = userScript.userDefinedRowPercentage
+outputDataset = outputLocation + currentModule + ".csv"
+
+
 @python_app
 def dropRowsCriteria(startRowIndex, endRowIndex, dFrame, maxPercentageOfMissingValues):
 

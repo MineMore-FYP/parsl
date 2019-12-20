@@ -4,27 +4,39 @@ import sys
 
 
 #Workflow
-
+#0
 ##selection/selectUserDefinedColumns.py
+#1
 ##cleaning/dropUniqueColumns.py
+#2
 ##cleaning/dropColumnsCriteria.py
+#3
 ##cleaning/dropRowsCriteria.py
+#4
 ##cleaning/removeDuplicateRows.py
+#5
 ##cleaning/missingValuesMode.py
-#transformation/normalize.py
+#6
+##transformation/normalize.py
+#7
 ##transformation/splitIntoRows.py
 
-orderOfModules = ["selectUserDefinedColumns", "dropUniqueColumns",
+
+orderOfModules1 = ["selectUserDefinedColumns", "dropUniqueColumns",
 "dropColumnsCriteria","dropRowsCriteria","removeDuplicateRows",
 "missingValuesMode", "splitIntoRows"]
+
+orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns", "removeDuplicateRows",
+"missingValuesMode"]
 
 #input location
 
 inputDataset1 = "/home/amanda/FYP/testcsv/dropCountry.csv"
-
+inputDataset2 = "/home/mpiuser/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
 
 #specify output locatiion
 outputLocation1 = "/home/amanda/FYP/gdelt/"
+outputLocation2 = "/home/mpiuser/FYP/acled/"
 #outputLocation = "/home/mpiuser/FYP/gdelt/"
 
 
@@ -46,7 +58,8 @@ Actor2CountryCode = 'LKA'
 #select columns
 #if "all" select everything. else give a list ["whatever1", "whatever2"]
 selectColumns1 = ["GLOBALEVENTID","SQLDATE", "Actor1Geo_CountryCode", "Actor2Geo_CountryCode", "Actor1EthnicCode", "Actor2EthnicCode", "QuadClass", "GoldsteinScale", "NumMentions", "AvgTone"]
-selectColumns2 = ["fssfjfn"]
+selectColumns2 = ["data_id", "event_date", "year", "country"]
+
 #select rows
 #selectFromRow = OrderedDict()
 #selectFromRow['Year'] = ["2018", "2019"] #doesnt work
@@ -70,6 +83,7 @@ userDefinedRowPercentage1 = 85.71
 #Research how best to fill missing values
 #mode for user defined columns
 modeColumns1 = "all"
+modeColumns2 = "all"
 
 
 '''#######################		TRANSFORMATION	####################################'''
