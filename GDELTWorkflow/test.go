@@ -72,8 +72,10 @@ func readLines( progName string) [20]string{
 
 func main(){
 
+
+	// put block into a for loop and do twice or however many times
 	//check if input location is available
-	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.inputDataset")
+	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.inputDataset1")
 	out, err := cmd.CombinedOutput()
 
 	if err != nil {
@@ -91,7 +93,7 @@ func main(){
 
 
 	//check if output location is available
-	cmd1 := exec.Command("python", "-c", "from workflow import userScript; print userScript.outputLocation")
+	cmd1 := exec.Command("python", "-c", "from workflow import userScript; print userScript.outputLocation1")
 	out1, err1 := cmd1.CombinedOutput()
 
 	if err1 != nil {
@@ -118,7 +120,7 @@ func main(){
 	//pythonCall("workflow/selection/selectUserDefinedColumns.py", inChannelModule1)
 	messagePassing(inChannelModule1, outChannelModule1)
 	fmt.Println(<-outChannelModule1)
-/*
+
 	outChannelModule2 := make(chan string, 1)
 	pythonCall("workflow/"+commandsArray[1], outChannelModule1, "1")
 	//pythonCall("workflow/cleaning/dropUniqueColumns.py", outChannelModule1)
@@ -148,7 +150,7 @@ func main(){
 	pythonCall("workflow/"+commandsArray[5], outChannelModule5, "1")
 	messagePassing(outChannelModule5, outChannelModule6)
 	fmt.Println(<- outChannelModule6)
-*/
+
 /*
 	outChannelModule7 := make(chan string, 1)
 	pythonCall("workflow/"+commandsArray[6], outChannelModule6, "1")
@@ -156,11 +158,37 @@ func main(){
 	messagePassing(outChannelModule6, outChannelModule7)
 	fmt.Println(<- outChannelModule7)
 */
-/*
+
 	outChannelModule8 := make(chan string, 1)
 	//pythonCall("workflow/transformation/splitIntoRows.py", outChannelModule8)
-	pythonCall("workflow/"+commandsArray[6], outChannelModule6, "1")
+	pythonCall("workflow/"+commandsArray[7], outChannelModule6, "1")
 	messagePassing(outChannelModule6, outChannelModule8)
 	fmt.Println(<- outChannelModule8)
-*/
+
+//think - can an empty channel trigger functions too?
+	inChannelModule21 := make(chan string, 1)
+	outChannelModule21 := make(chan string, 1)
+	pythonCall("workflow/"+commandsArray[0], inChannelModule21,"2")
+	//pythonCall("workflow/selection/selectUserDefinedColumns.py", inChannelModule1)
+	messagePassing(inChannelModule21, outChannelModule21)
+	fmt.Println(<-outChannelModule21)
+
+	outChannelModule22 := make(chan string, 1)
+	pythonCall("workflow/"+commandsArray[1], outChannelModule21,"2")
+	//pythonCall("workflow/selection/dropUniqueColumns.py", inChannelModule1)
+	messagePassing(outChannelModule21, outChannelModule22)
+	fmt.Println(<-outChannelModule22)
+
+	outChannelModule23 := make(chan string, 1)
+	pythonCall("workflow/"+commandsArray[4], outChannelModule22, "2")
+	//pythonCall("workflow/cleaning/removeDuplicateRows.py", outChannelModule4)
+	messagePassing(outChannelModule22, outChannelModule23)
+	fmt.Println(<- outChannelModule23)
+
+	outChannelModule24 := make(chan string, 1)
+	//pythonCall("workflow/cleaning/missingValuesMode.py", outChannelModule5)
+	pythonCall("workflow/"+commandsArray[5], outChannelModule23, "2")
+	messagePassing(outChannelModule23, outChannelModule24)
+	fmt.Println(<- outChannelModule24)
+
 }
