@@ -30,6 +30,13 @@ func pythonCall(progName string, inChannel chan <- string, workflowNumber string
 	inChannel <- msg
 }
 
+func simplePythonCall(progName string){
+	cmd := exec.Command("python3", progName)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os. Stderr
+	log.Println(cmd.Run())
+}
+
 func messagePassing(inChannel <- chan string, outChannel chan <- string ){
 	msg := <- inChannel
 	outChannel <- msg
@@ -72,7 +79,12 @@ func readLines( progName string) [20]string{
 
 func main(){
 
-
+	//GDELT datafile selection and integration
+	simplePythonCall("workflow/gdeltFileSelection/dataFilesIntegration.py")
+	
+	//GDELT country selection
+	simplePythonCall("workflow/gdeltFileSelection/countrySelection.py") // make sure the name of the combined csv after country selection is equal to the name in input dataset for workflow
+	
 	// put block into a for loop and do twice or however many times
 	//check if input location is available
 	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.inputDataset1")

@@ -88,7 +88,7 @@ def getDateRangeFiles():
 		str_day = day.strftime('%Y%m%d')
 		selectedDays.append(str_day)
 	
-	print(selectedDays)
+	#print(selectedDays)
 
 	for filename in allFiles:
 	
@@ -109,4 +109,4 @@ def getDateRangeFiles():
 
 selectedFilesList = getDateRangeFiles()
 
-print(selectedFilesList)
+print("Selected files module completed")

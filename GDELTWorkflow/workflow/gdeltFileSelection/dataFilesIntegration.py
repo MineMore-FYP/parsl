@@ -17,7 +17,7 @@ path = userScript.datafilesLocation
 with open(path + "CSV.header.dailyupdates.txt") as csvfile:
     reader = csv.reader(csvfile, delimiter = "\t") # change contents to floats
     header = list(reader)[0]
-    print(header)
+    #print(header)
 
 
 with open(path + "combined.csv", "w", newline='', encoding='utf-8') as outcsv:
@@ -32,3 +32,4 @@ with open(path + "combined.csv", "w", newline='', encoding='utf-8') as outcsv:
             writer.writerows(row + [0.0] for row in reader)
 
 
+print("Integrated Selected files module completed")

@@ -42,13 +42,11 @@ orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns", "removeDuplic
 
 #input location
 
-#inputDataset1 = "/home/amanda/FYP/testcsv/dropCountry.csv"
-inputDataset1 = "/home/mpiuser/FYP/testcsv/dropCountry.csv"
-inputDataset2 = "/home/mpiuser/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
+inputDataset1 = "/home/mpiuser/Downloads/data/dropCountry.csv"
+inputDataset2 = "/home/mpiuser/Documents/FYP/ACLED2019-Sri_Lanka.csv"
 
 #specify output locatiion
-#outputLocation1 = "/home/amanda/FYP/gdelt/"
-outputLocation1 = "/home/mpiuser/FYP/gdelt/"
+outputLocation1 = "/home/mpiuser/Documents/FYP/gdelt/"
 outputLocation2 = "/home/mpiuser/FYP/acled/"
 
 
@@ -59,8 +57,8 @@ endingDate = '2019.12.02'
 
 datafilesLocation = '/home/mpiuser/Downloads/data/'
 #select specific country records
-Actor1CountryCode = 'LKA'
-Actor2CountryCode = 'LKA'
+Actor1CountryCode = 'CE'
+Actor2CountryCode = 'CE'
 
 #read csv to pandas df
 #inputDataFrame = pd.read_csv(inputDataset)
