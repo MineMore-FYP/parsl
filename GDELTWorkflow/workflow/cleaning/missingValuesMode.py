@@ -34,7 +34,7 @@ elif workflowNumber == "2":
 
 df = pd.DataFrame()
 for i in range(len(orderOfModules)):
-	print(orderOfModules[i])
+	#print(orderOfModules[i])
 	if currentModule == orderOfModules[i]:
 		if i == 0:
 			df = pd.read_csv(inputDataset)
