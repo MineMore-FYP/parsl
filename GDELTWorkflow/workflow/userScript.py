@@ -20,25 +20,15 @@ import sys
 ##transformation/normalize.py
 #7
 ##transformation/splitIntoRows.py
-
-#Workflow
-#0
-##selection/selectUserDefinedColumns.py
-#1
-##cleaning/dropUniqueColumns.py
-#2
-##cleaning/removeDuplicateRows.py
-#3
-##cleaning/missingValuesMode.py
-#4
-##integrateLabel/addLabelColumn.py
-#5
-##integrateLabel/assignCountryCode.py
-#6
-##integrateLabel/splitDate.py
-#7
-##integrateLabel/appendRecords.py
 #8
+##integrateLabel/addLabelColumn.py
+#9
+##integrateLabel/assignCountryCode.py
+#10
+##integrateLabel/splitDate.py
+#11
+##integrateLabel/appendRecords.py
+#12
 ##integrateLabel/integrate.py
 
 
@@ -46,8 +36,9 @@ orderOfModules1 = ["selectUserDefinedColumns", "dropUniqueColumns",
 "dropColumnsCriteria","dropRowsCriteria","removeDuplicateRows",
 "missingValuesMode", "splitIntoRows"]
 
-orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns", "removeDuplicateRows",
-"missingValuesMode", "addLabelColumn", "assignCountryCode", "splitDate", "appendRecords", "integrate"]
+orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns", "removeDuplicateRows", "missingValuesMode", "addLabelColumn", "assignCountryCode", "splitDate", "appendRecords", "integrate"]
+
+#orderOfModules3 = ["selectUserDefinedColumns","dropUniqueColumns", "removeDuplicateRows", "missingValuesMode", "addLabelColumn", "assignCountryCode", "splitDate", "appendRecords", "integrate"]
 
 #input location
 

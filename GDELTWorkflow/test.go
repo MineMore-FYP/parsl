@@ -165,6 +165,63 @@ func main(){
 	messagePassing(outChannelModule6, outChannelModule8)
 	fmt.Println(<- outChannelModule8)
 
+	//think - can an empty channel trigger functions too?
+	inChannelModule21 := make(chan string, 1)
+	outChannelModule21 := make(chan string, 1)
+	pythonCall("workflow/"+commandsArray[0], inChannelModule21,"2")
+	//pythonCall("workflow/selection/selectUserDefinedColumns.py", inChannelModule1)
+	messagePassing(inChannelModule21, outChannelModule21)
+	fmt.Println(<-outChannelModule21)
+
+	outChannelModule22 := make(chan string, 1)
+	pythonCall("workflow/"+commandsArray[1], outChannelModule21,"2")
+	//pythonCall("workflow/selection/dropUniqueColumns.py", inChannelModule1)
+	messagePassing(outChannelModule21, outChannelModule22)
+	fmt.Println(<-outChannelModule22)
+
+	outChannelModule23 := make(chan string, 1)
+	pythonCall("workflow/"+commandsArray[4], outChannelModule22, "2")
+	//pythonCall("workflow/cleaning/removeDuplicateRows.py", outChannelModule4)
+	messagePassing(outChannelModule22, outChannelModule23)
+	fmt.Println(<- outChannelModule23)
+
+	outChannelModule24 := make(chan string, 1)
+	//pythonCall("workflow/cleaning/missingValuesMode.py", outChannelModule5)
+	pythonCall("workflow/"+commandsArray[5], outChannelModule23, "2")
+	messagePassing(outChannelModule23, outChannelModule24)
+	fmt.Println(<- outChannelModule24)
+
+	outChannelModule25 := make(chan string, 1)
+	//pythonCall("workflow/integrateLabels/addLabelColumn.py", outChannelModule5)
+	pythonCall("workflow/"+commandsArray[8], outChannelModule24, "2")
+	messagePassing(outChannelModule24, outChannelModule25)
+	fmt.Println(<- outChannelModule25)
+
+	outChannelModule26 := make(chan string, 1)
+	//pythonCall("workflow/integrateLabels/assignCountryCode.py", outChannelModule5)
+	pythonCall("workflow/"+commandsArray[9], outChannelModule25, "2")
+	messagePassing(outChannelModule25, outChannelModule26)
+	fmt.Println(<- outChannelModule26)
+
+	outChannelModule27 := make(chan string, 1)
+	//pythonCall("workflow/integrateLabels/splitDate.py", outChannelModule5)
+	pythonCall("workflow/"+commandsArray[10], outChannelModule26, "2")
+	messagePassing(outChannelModule26, outChannelModule27)
+	fmt.Println(<- outChannelModule27)
+
+}
+
+/*
+	outChannelModule24 := make(chan string, 1)
+	//pythonCall("workflow/cleaning/missingValuesMode.py", outChannelModule5)
+	pythonCall("workflow/"+commandsArray[5], outChannelModule23, "2")
+	messagePassing(outChannelModule23, outChannelModule24)
+	fmt.Println(<- outChannelModule24)
+/*
+
+
+/*
+
 //think - can an empty channel trigger functions too?
 	inChannelModule21 := make(chan string, 1)
 	outChannelModule21 := make(chan string, 1)
@@ -214,8 +271,8 @@ func main(){
 	pythonCall("workflow/"+commandsArray[5], outChannelModule27, "2")
 	messagePassing(outChannelModule27, outChannelModule28)
 	fmt.Println(<- outChannelModule28)
+/*
 
-}
 /*
 
 NEED TO CONNECT WITH RF WF
