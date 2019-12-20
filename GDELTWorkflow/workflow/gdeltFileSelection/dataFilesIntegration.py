@@ -30,5 +30,3 @@ with open(path + "combined.csv", "w", newline='', encoding='utf-8') as outcsv:
         with open(filename, 'r', newline='', encoding='utf-8') as incsv:
             reader = csv.reader(incsv, delimiter="\t")
             writer.writerows(row + [0.0] for row in reader)
-
-
