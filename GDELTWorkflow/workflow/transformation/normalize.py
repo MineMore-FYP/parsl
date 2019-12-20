@@ -16,20 +16,32 @@ import dataType
 pd.options.mode.chained_assignment = None  # default='warn'
 
 currentModule = "normalize"
+workflowNumber = sys.argv[1]
+
+if workflowNumber == "1":
+	orderOfModules = userScript.orderOfModules1
+	inputDataset = userScript.inputDataset1
+	outputLocation = userScript.outputLocation1
+	colsToNormalize = userScript.userDefinedNormalizeColumns1
+elif workflowNumber == "2":
+	orderOfModules = userScript.orderOfModules2
+	inputDataset = userScript.inputDataset2
+	outputLocation = userScript.outputLocation2
+	colsToNormalize = userScript.userDefinedNormalizeColumns2
+
 df = pd.DataFrame()
-for i in range(len(userScript.orderOfModules)):
-	#print(userScript.orderOfModules[i])
-	if currentModule == userScript.orderOfModules[i]:
+for i in range(len(orderOfModules)):
+	print(orderOfModules[i])
+	if currentModule == orderOfModules[i]:
 		if i == 0:
-			df = pd.read_csv(userScript.inputDataset)
+			df = pd.read_csv(inputDataset)
 			break
 		else:
-			previousModule = userScript.orderOfModules[i-1]
-			df = pd.read_csv(userScript.outputLocation + previousModule + ".csv")
+			previousModule = orderOfModules[i-1]
+			df = pd.read_csv(outputLocation + previousModule + ".csv")
 			break
 
-outputDataset = userScript.outputLocation + currentModule + ".csv"
-colsToNormalize = userScript.userDefinedNormalizeColumns
+outputDataset = outputLocation + currentModule + ".csv"
 
 for i in colsToNormalize:
 	if dataType.dataType(i, df) == "str":

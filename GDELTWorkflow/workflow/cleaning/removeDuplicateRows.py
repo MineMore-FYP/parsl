@@ -13,20 +13,31 @@ import userScript
 
 
 currentModule = "removeDuplicateRows"
-df = pd.DataFrame()
+workflowNumber = sys.argv[1]
 
-for i in range(len(userScript.orderOfModules)):
-	#print(userScript.orderOfModules[i])
-	if currentModule == userScript.orderOfModules[i]:
+if workflowNumber == "1":
+	orderOfModules = userScript.orderOfModules1
+	inputDataset = userScript.inputDataset1
+	outputLocation = userScript.outputLocation1
+elif workflowNumber == "2":
+	orderOfModules = userScript.orderOfModules2
+	inputDataset = userScript.inputDataset2
+	outputLocation = userScript.outputLocation2
+
+
+df = pd.DataFrame()
+for i in range(len(orderOfModules)):
+	print(orderOfModules[i])
+	if currentModule == orderOfModules[i]:
 		if i == 0:
-			df = pd.read_csv(userScript.inputDataset)
+			df = pd.read_csv(inputDataset)
 			break
 		else:
-			previousModule = userScript.orderOfModules[i-1]
-			df = pd.read_csv(userScript.outputLocation + previousModule + ".csv")
+			previousModule = orderOfModules[i-1]
+			df = pd.read_csv(outputLocation + previousModule + ".csv")
 			break
 
-outputDataset = userScript.outputLocation + currentModule + ".csv"
+outputDataset = outputLocation + currentModule + ".csv"
 
 @python_app
 def removeDuplicateRows(startRowIndex, endRowIndex, dFrame):
