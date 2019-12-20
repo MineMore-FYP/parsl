@@ -10,7 +10,7 @@ import userScript
 path = userScript.datafilesLocation
 
 #read combined csv
-df = pd.read_csv(path + "combined.csv", index_col=False)
+df = pd.read_csv(path + "combined.csv", index_col=False, low_memory=False)
 #print(df)
 
 #select specific country records
