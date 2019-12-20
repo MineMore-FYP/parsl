@@ -139,5 +139,5 @@ for i in range (numberOfRowsOriginal):
 					dfOriginal.set_value([i], ["label"], 1)	
 	
 
-dfOriginal.to_csv(userScript.outputLocation1+"finalCSVOut.csv", sep=',', encoding='utf-8', index=False, header=True)	
+dfOriginal.to_csv(userScript.outputLocation1+"finalCSVOut.csv", sep=',', encoding='utf-8', index=False, header=True)			
 

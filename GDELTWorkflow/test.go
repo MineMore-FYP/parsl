@@ -227,6 +227,12 @@ func main(){
 	messagePassing(outChannelModule27, outChannelModule28)
 	fmt.Println(<- outChannelModule28)
 
+	outChannelModule29 := make(chan string, 1)
+	//pythonCall("workflow/integrateLabels/integrate.py", outChannelModule5)
+	pythonCall("workflow/"+commandsArray[12], outChannelModule28, "2")
+	messagePassing(outChannelModule28, outChannelModule29)
+	fmt.Println(<- outChannelModule29)
+
 }
 
 
