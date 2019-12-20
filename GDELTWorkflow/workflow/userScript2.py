@@ -52,5 +52,5 @@ country = "CE"
 '''#######################		MERGING 	####################################'''
 
 #generate labelled records for all days of the years
-generateRecordsYears = ["2019"]
+generateRecordsYears = ["2018", "2019"]
 
