@@ -30,6 +30,26 @@ func pythonCall(progName string, inChannel chan <- string, workflowNumber string
 	inChannel <- msg
 }
 
+
+func integratePythonCall(progName string, inChannel1 chan <- string, inChannel2 chan <- string, workflowNumber string) {
+	cmd := exec.Command("python3", progName, workflowNumber)
+	out, err := cmd.CombinedOutput()
+	log.Println(cmd.Run())
+
+	if err != nil {
+		fmt.Println(err)
+		// Exit with status 3.
+    os.Exit(3)
+	}
+	fmt.Println(string(out))
+	//check if msg is legit
+	msg := string(out)[:len(out)-1]
+	//msg := ("Module Completed: " + progName)
+	inChannel1 <- msg
+	inChannel2 <- msg
+}
+
+
 func simplePythonCall(progName string){
 	cmd := exec.Command("python3", progName)
 	cmd.Stdout = os.Stdout
@@ -39,6 +59,10 @@ func simplePythonCall(progName string){
 
 func messagePassing(inChannel <- chan string, outChannel chan <- string ){
 	msg := <- inChannel
+	outChannel <- msg
+}
+func integrateMessagePassing(inChannel1 <- chan string, inChannel2 <- chan string, outChannel chan <- string ){
+	msg := <- inChannel1 + inChannel2	
 	outChannel <- msg
 }
 
