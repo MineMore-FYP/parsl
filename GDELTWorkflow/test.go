@@ -62,8 +62,9 @@ func messagePassing(inChannel <- chan string, outChannel chan <- string ){
 	outChannel <- msg
 }
 func integrateMessagePassing(inChannel1 <- chan string, inChannel2 <- chan string, outChannel chan <- string ){
-	msg := <- inChannel1 + inChannel2
-	outChannel <- msg
+	msg1 := <- inChannel1
+	msg2 := <- inChannel2
+	outChannel <- msg1 + msg2
 }
 
 func numOfFiles(folder string) int{
@@ -245,18 +246,18 @@ func main(){
 	pythonCall("workflow/"+commandsArray[10], outChannelModule26, "2")
 	messagePassing(outChannelModule26, outChannelModule27)
 	fmt.Println(<- outChannelModule27)
-
+/*
 	outChannelModule28 := make(chan string, 1)
 	//pythonCall("workflow/integrateLabels/appendRecords.py", outChannelModule5)
 	pythonCall("workflow/"+commandsArray[11], outChannelModule27, "2")
 	messagePassing(outChannelModule27, outChannelModule28)
 	fmt.Println(<- outChannelModule28)
-
-	outChannelModule29 := make(chan string, 1)
+*/
+	outChannelModule9 := make(chan string, 1)
 	//pythonCall("workflow/integrateLabels/integrate.py", outChannelModule5)
-	pythonCall("workflow/"+commandsArray[12], outChannelModule28, "1")
-	messagePassing(outChannelModule28, outChannelModule29)
-	fmt.Println(<- outChannelModule29)
+	integratePythonCall("workflow/"+commandsArray[12], outChannelModule27, outChannelModule8, "1")
+	integrateMessagePassing(outChannelModule27, outChannelModule8, outChannelModule9)
+	fmt.Println(<- outChannelModule9)
 
 
 
