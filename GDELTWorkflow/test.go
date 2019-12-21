@@ -82,10 +82,10 @@ func main(){
 	simplePythonCall("workflow/parslConfig.py")
 	//GDELT datafile selection and integration
 	simplePythonCall("workflow/gdeltFileSelection/dataFilesIntegration.py")
-	
+
 	//GDELT country selection
 	simplePythonCall("workflow/gdeltFileSelection/countrySelection.py") // make sure the name of the combined csv after country selection is equal to the name in input dataset for workflow
-	
+
 	// put block into a for loop and do twice or however many times
 	//check if input location is available
 	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.inputDataset1")
@@ -129,21 +129,21 @@ func main(){
 	//start module execution from here onwards
 	inChannelModule1 := make(chan string, 1)
 	outChannelModule1 := make(chan string, 1)
-	pythonCall("workflow/"+commandsArray[0], inChannelModule1,"1")
+	go pythonCall("workflow/"+commandsArray[0], inChannelModule1,"1")
 	//pythonCall("workflow/selection/selectUserDefinedColumns.py", inChannelModule1)
-	messagePassing(inChannelModule1, outChannelModule1)
+	go messagePassing(inChannelModule1, outChannelModule1)
 	fmt.Println(<-outChannelModule1)
 
 	outChannelModule2 := make(chan string, 1)
-	pythonCall("workflow/"+commandsArray[1], outChannelModule1, "1")
+	go pythonCall("workflow/"+commandsArray[1], outChannelModule1, "1")
 	//pythonCall("workflow/cleaning/dropUniqueColumns.py", outChannelModule1)
-	messagePassing(outChannelModule1, outChannelModule2)
+	go messagePassing(outChannelModule1, outChannelModule2)
 	fmt.Println(<- outChannelModule2)
 
 	outChannelModule3 := make(chan string, 1)
-	pythonCall("workflow/"+commandsArray[2], outChannelModule2, "1")
+	go pythonCall("workflow/"+commandsArray[2], outChannelModule2, "1")
 	//pythonCall("workflow/cleaning/dropColumnsCriteria.py", outChannelModule2)
-	messagePassing(outChannelModule2, outChannelModule3)
+	go messagePassing(outChannelModule2, outChannelModule3)
 	fmt.Println(<- outChannelModule3)
 
 	outChannelModule4 := make(chan string, 1)
@@ -248,4 +248,3 @@ NEED TO CONNECT WITH RF WF
 	fmt.Println(<- outChannelModule29)
 
 */
-
