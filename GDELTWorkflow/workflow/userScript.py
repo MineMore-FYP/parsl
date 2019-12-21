@@ -127,7 +127,6 @@ generateRecordsYears2 = ["2018", "2019"]
 
 #merge acled records with gdelt
 
-
 '''#######################		TRANSFORMATION	####################################'''
 
 #Normalize
