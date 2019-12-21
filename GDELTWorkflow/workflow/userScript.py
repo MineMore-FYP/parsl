@@ -2,7 +2,6 @@ import os
 from collections import OrderedDict
 import sys
 
-
 #Workflow
 #0
 ##selection/selectUserDefinedColumns.py
@@ -41,13 +40,16 @@ orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns", "removeDuplic
 #orderOfModules3 = ["selectUserDefinedColumns","dropUniqueColumns", "removeDuplicateRows", "missingValuesMode", "addLabelColumn", "assignCountryCode", "splitDate", "appendRecords", "integrate"]
 
 #input location
-
-inputDataset1 = "/home/mpiuser/FYP/testcsv/dropCountry.csv"
-inputDataset2 = "/home/mpiuser/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
+#inputDataset1 = "/home/mpiuser/FYP/testcsv/dropCountry.csv"
+#inputDataset2 = "/home/mpiuser/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
+inputDataset1 = "/home/mpiuser/Downloads/data/dropCountry.csv"
+inputDataset2 = "/home/mpiuser/Downloads/data/ACLED2019-Sri_Lanka.csv"
 
 #specify output locatiion
-outputLocation1 = "/home/mpiuser/FYP/gdelt/"
-outputLocation2 = "/home/mpiuser/FYP/acled/"
+#outputLocation1 = "/home/mpiuser/FYP/gdelt/"
+#outputLocation2 = "/home/mpiuser/FYP/acled/"
+outputLocation1 = "/home/mpiuser/Documents/FYP/gdelt/"
+outputLocation2 = "/home/mpiuser/Documents/FYP/acled/"
 
 
 #GDELT variables

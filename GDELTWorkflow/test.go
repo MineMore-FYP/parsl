@@ -78,7 +78,8 @@ func readLines( progName string) [20]string{
 }
 
 func main(){
-
+	//configurations
+	simplePythonCall("workflow/parslConfig.py")
 	//GDELT datafile selection and integration
 	simplePythonCall("workflow/gdeltFileSelection/dataFilesIntegration.py")
 	
