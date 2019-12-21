@@ -233,6 +233,8 @@ func main(){
 	messagePassing(outChannelModule28, outChannelModule29)
 	fmt.Println(<- outChannelModule29)
 
+
+
 }
 
 
