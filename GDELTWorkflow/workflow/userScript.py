@@ -19,7 +19,7 @@ import sys
 #6
 ##transformation/normalize.py
 #7
-##transformation/splitIntoRows.py
+##transformation/combineColumns.py
 #8
 ##integrateLabel/addLabelColumn.py
 #9
@@ -34,7 +34,7 @@ import sys
 
 orderOfModules1 = ["selectUserDefinedColumns", "dropUniqueColumns",
 "dropColumnsCriteria","dropRowsCriteria","removeDuplicateRows",
-"missingValuesMode", "splitIntoRows"]
+"missingValuesMode", "combineColumns"]
 
 orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns", "removeDuplicateRows", "missingValuesMode", "addLabelColumn", "assignCountryCode", "splitDate", "appendRecords", "integrate"]
 
