@@ -163,7 +163,7 @@ for i in newlist:
 
 #dfNew = newlist[0]
 #print(dfNew)
-
+dfNew = dfNew.loc[(dfNew['ActorGeo_CountryCode'] == "CE")]
 dfNew.to_csv (outputDataset, index = False, header=True)
 print("Module Completed: Combine multiple columns.")
 

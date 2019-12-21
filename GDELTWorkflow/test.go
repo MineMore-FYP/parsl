@@ -30,6 +30,26 @@ func pythonCall(progName string, inChannel chan <- string, workflowNumber string
 	inChannel <- msg
 }
 
+
+func integratePythonCall(progName string, inChannel1 chan <- string, inChannel2 chan <- string, workflowNumber string) {
+	cmd := exec.Command("python3", progName, workflowNumber)
+	out, err := cmd.CombinedOutput()
+	log.Println(cmd.Run())
+
+	if err != nil {
+		fmt.Println(err)
+		// Exit with status 3.
+    os.Exit(3)
+	}
+	fmt.Println(string(out))
+	//check if msg is legit
+	msg := string(out)[:len(out)-1]
+	//msg := ("Module Completed: " + progName)
+	inChannel1 <- msg
+	inChannel2 <- msg
+}
+
+
 func simplePythonCall(progName string){
 	cmd := exec.Command("python3", progName)
 	cmd.Stdout = os.Stdout
@@ -40,6 +60,11 @@ func simplePythonCall(progName string){
 func messagePassing(inChannel <- chan string, outChannel chan <- string ){
 	msg := <- inChannel
 	outChannel <- msg
+}
+func integrateMessagePassing(inChannel1 <- chan string, inChannel2 <- chan string, outChannel chan <- string ){
+	msg1 := <- inChannel1
+	msg2 := <- inChannel2
+	outChannel <- msg1 + msg2
 }
 
 func numOfFiles(folder string) int{
@@ -82,10 +107,10 @@ func main(){
 	simplePythonCall("workflow/parslConfig.py")
 	//GDELT datafile selection and integration
 	simplePythonCall("workflow/gdeltFileSelection/dataFilesIntegration.py")
-	
+
 	//GDELT country selection
 	simplePythonCall("workflow/gdeltFileSelection/countrySelection.py") // make sure the name of the combined csv after country selection is equal to the name in input dataset for workflow
-	
+
 	// put block into a for loop and do twice or however many times
 	//check if input location is available
 	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.inputDataset1")
@@ -129,21 +154,21 @@ func main(){
 	//start module execution from here onwards
 	inChannelModule1 := make(chan string, 1)
 	outChannelModule1 := make(chan string, 1)
-	pythonCall("workflow/"+commandsArray[0], inChannelModule1,"1")
+	go pythonCall("workflow/"+commandsArray[0], inChannelModule1,"1")
 	//pythonCall("workflow/selection/selectUserDefinedColumns.py", inChannelModule1)
-	messagePassing(inChannelModule1, outChannelModule1)
+	go messagePassing(inChannelModule1, outChannelModule1)
 	fmt.Println(<-outChannelModule1)
 
 	outChannelModule2 := make(chan string, 1)
-	pythonCall("workflow/"+commandsArray[1], outChannelModule1, "1")
+	go pythonCall("workflow/"+commandsArray[1], outChannelModule1, "1")
 	//pythonCall("workflow/cleaning/dropUniqueColumns.py", outChannelModule1)
-	messagePassing(outChannelModule1, outChannelModule2)
+	go messagePassing(outChannelModule1, outChannelModule2)
 	fmt.Println(<- outChannelModule2)
 
 	outChannelModule3 := make(chan string, 1)
-	pythonCall("workflow/"+commandsArray[2], outChannelModule2, "1")
+	go pythonCall("workflow/"+commandsArray[2], outChannelModule2, "1")
 	//pythonCall("workflow/cleaning/dropColumnsCriteria.py", outChannelModule2)
-	messagePassing(outChannelModule2, outChannelModule3)
+	go messagePassing(outChannelModule2, outChannelModule3)
 	fmt.Println(<- outChannelModule3)
 
 	outChannelModule4 := make(chan string, 1)
@@ -178,7 +203,7 @@ func main(){
 	messagePassing(outChannelModule6, outChannelModule8)
 	fmt.Println(<- outChannelModule8)
 
-//think - can an empty channel trigger functions too?
+
 	inChannelModule21 := make(chan string, 1)
 	outChannelModule21 := make(chan string, 1)
 	pythonCall("workflow/"+commandsArray[0], inChannelModule21,"2")
@@ -221,18 +246,20 @@ func main(){
 	pythonCall("workflow/"+commandsArray[10], outChannelModule26, "2")
 	messagePassing(outChannelModule26, outChannelModule27)
 	fmt.Println(<- outChannelModule27)
-
+/*
 	outChannelModule28 := make(chan string, 1)
 	//pythonCall("workflow/integrateLabels/appendRecords.py", outChannelModule5)
 	pythonCall("workflow/"+commandsArray[11], outChannelModule27, "2")
 	messagePassing(outChannelModule27, outChannelModule28)
 	fmt.Println(<- outChannelModule28)
-
-	outChannelModule29 := make(chan string, 1)
+*/
+	outChannelModule9 := make(chan string, 1)
 	//pythonCall("workflow/integrateLabels/integrate.py", outChannelModule5)
-	pythonCall("workflow/"+commandsArray[12], outChannelModule28, "2")
-	messagePassing(outChannelModule28, outChannelModule29)
-	fmt.Println(<- outChannelModule29)
+	integratePythonCall("workflow/"+commandsArray[12], outChannelModule27, outChannelModule8, "1")
+	integrateMessagePassing(outChannelModule27, outChannelModule8, outChannelModule9)
+	fmt.Println(<- outChannelModule9)
+
+
 
 }
 
@@ -248,4 +275,3 @@ NEED TO CONNECT WITH RF WF
 	fmt.Println(<- outChannelModule29)
 
 */
-

@@ -33,23 +33,36 @@ import sys
 
 orderOfModules1 = ["selectUserDefinedColumns", "dropUniqueColumns",
 "dropColumnsCriteria","dropRowsCriteria","removeDuplicateRows",
-"missingValuesMode", "combineColumns"]
+"missingValuesMode", "combineColumns", "integrate"]
 
-orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns", "removeDuplicateRows", "missingValuesMode", "addLabelColumn", "assignCountryCode", "splitDate", "appendRecords", "integrate"]
+
+orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns",
+"removeDuplicateRows", "missingValuesMode", "addLabelColumn",
+"assignCountryCode", "splitDate", "appendRecords"]
 
 #orderOfModules3 = ["selectUserDefinedColumns","dropUniqueColumns", "removeDuplicateRows", "missingValuesMode", "addLabelColumn", "assignCountryCode", "splitDate", "appendRecords", "integrate"]
 
 #input location
+
+
+inputDataset1 = "/home/amanda/FYP/testcsv/dropCountry.csv"
+inputDataset2 = "/home/amanda/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
+
+#specify output locatiion
+outputLocation1 = "/home/amanda/FYP/gdelt/"
+outputLocation2 = "/home/amanda/FYP/acled/"
+
 #inputDataset1 = "/home/mpiuser/FYP/testcsv/dropCountry.csv"
 #inputDataset2 = "/home/mpiuser/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
-inputDataset1 = "/home/mpiuser/Downloads/data/dropCountry.csv"
-inputDataset2 = "/home/mpiuser/Downloads/data/ACLED2019-Sri_Lanka.csv"
+#inputDataset1 = "/home/mpiuser/Downloads/data/dropCountry.csv"
+#inputDataset2 = "/home/mpiuser/Downloads/data/ACLED2019-Sri_Lanka.csv"
 
 #specify output locatiion
 #outputLocation1 = "/home/mpiuser/FYP/gdelt/"
 #outputLocation2 = "/home/mpiuser/FYP/acled/"
-outputLocation1 = "/home/mpiuser/Documents/FYP/gdelt/"
-outputLocation2 = "/home/mpiuser/Documents/FYP/acled/"
+#outputLocation1 = "/home/mpiuser/Documents/FYP/gdelt/"
+#outputLocation2 = "/home/mpiuser/Documents/FYP/acled/"
+
 
 
 #GDELT variables
@@ -57,7 +70,7 @@ outputLocation2 = "/home/mpiuser/Documents/FYP/acled/"
 startingDate = '2019.11.26'
 endingDate = '2019.12.02'
 
-datafilesLocation = '/home/mpiuser/Downloads/data/'
+#datafilesLocation = '/home/mpiuser/Downloads/data/'
 #select specific country records
 Actor1CountryCode = 'CE'
 Actor2CountryCode = 'CE'
@@ -101,10 +114,10 @@ modeColumns2 = "all"
 '''#######################		INTEGRATE LABEL	####################################'''
 
 
-#add label column to ACLED 
+#add label column to ACLED
 labelValue2 = 1
 
-#assign FIPS country code to ACLED 
+#assign FIPS country code to ACLED
 country2 = "CE"
 
 #split ACLED date to year, month and date
@@ -113,7 +126,6 @@ country2 = "CE"
 generateRecordsYears2 = ["2018", "2019"]
 
 #merge acled records with gdelt
-
 
 '''#######################		TRANSFORMATION	####################################'''
 
@@ -126,6 +138,3 @@ userDefinedColumsToAggregate1 = [["Actor1Geo_CountryCode", "Actor2Geo_CountryCod
 
 #encoding
 userDefinedEncodeColumns = ["Actor1Geo_CountryCode"]
-
-
-
