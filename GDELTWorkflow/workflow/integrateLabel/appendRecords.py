@@ -153,7 +153,7 @@ for filename in allFiles:
     	selectedFiles.append(filename)
 
 # Create new CSV file to write all CSV files generated from previous step 
-with open(outputLocation+"combinedRiots.csv", "w", newline='', encoding="utf8") as outcsv:
+with open(outputLocation+currentModule+".csv", "w", newline='', encoding="utf8") as outcsv:
 	writer = csv.writer(outcsv, delimiter=',')
 
 	# write the header
