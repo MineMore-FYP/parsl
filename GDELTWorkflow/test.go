@@ -173,7 +173,7 @@ func main(){
 */
 
 	outChannelModule8 := make(chan string, 1)
-	//pythonCall("workflow/transformation/splitIntoRows.py", outChannelModule8)
+	//pythonCall("workflow/transformation/combineColumns.py", outChannelModule8)
 	pythonCall("workflow/"+commandsArray[7], outChannelModule6, "1")
 	messagePassing(outChannelModule6, outChannelModule8)
 	fmt.Println(<- outChannelModule8)

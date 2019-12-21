@@ -15,7 +15,7 @@ import userScript
 pd.options.mode.chained_assignment = None  # default='warn'
 
 
-currentModule = "splitIntoRows"
+currentModule = "combineColumns"
 workflowNumber = sys.argv[1]
 
 if workflowNumber == "1":
@@ -45,7 +45,7 @@ columnsToAggregate = [["Actor1Geo_CountryCode", "Actor2Geo_CountryCode", "ActorG
 
 
 @python_app
-def splitIntoRows(startRowIndex, endRowIndex, dFrame, columnsToAggregate):
+def combineColumns(startRowIndex, endRowIndex, dFrame, columnsToAggregate):
 	import pandas as pd
 	import numpy as np
 	df = pd.DataFrame()
@@ -130,12 +130,12 @@ results = []
 numOfRows = df.shape[0]
 results = []
 dfNew = pd.DataFrame()
-#df1 = splitIntoRows(0,100,df,columnsToAggregate)
+#df1 = combineColumns(0,100,df,columnsToAggregate)
 #print(df1.result())
 
 #not parallel --> relatively small number of rows here
 if numOfRows <= maxThreads:
-	df1 = splitIntoRows(0, numOfRows, df, columnsToAggregate)
+	df1 = combineColumns(0, numOfRows, df, columnsToAggregate)
 	results.append(df1)
 
 #parallel
@@ -143,10 +143,10 @@ elif numOfRows > maxThreads:
 	#print("test2")
 	eachThreadRows = numOfRows // maxThreads
 	for i in range (0,(maxThreads*eachThreadRows), eachThreadRows):
-		df1 = splitIntoRows(i,(i+eachThreadRows),df, columnsToAggregate)
+		df1 = combineColumns(i,(i+eachThreadRows),df, columnsToAggregate)
 		results.append(df1)
 	if (numOfRows % maxThreads != 0):
-		df2 = splitIntoRows((eachThreadRows * maxThreads), numOfRows, df, columnsToAggregate)
+		df2 = combineColumns((eachThreadRows * maxThreads), numOfRows, df, columnsToAggregate)
 		results.append(df2)
 
 # wait for all apps to complete
@@ -165,12 +165,12 @@ for i in newlist:
 #print(dfNew)
 
 dfNew.to_csv (outputDataset, index = False, header=True)
-print("Module Completed: Split into Rows.")
+print("Module Completed: Combine multiple columns.")
 
 
 '''
 for i in range(0,200000,200):
-	df1 = splitIntoRows(i,i+200,df,columnsToAggregate)
+	df1 = combineColumns(i,i+200,df,columnsToAggregate)
 	print(i)
 	results.append(df1)
 
