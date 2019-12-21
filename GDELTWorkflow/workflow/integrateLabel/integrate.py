@@ -43,7 +43,7 @@ for i in range(len(orderOfModules)):
 			dfOriginal = pd.read_csv(outputLocation + previousModule + ".csv")
 			break
 
-#outputDataset = outputLocation + currentModule + ".csv"
+outputDataset = outputLocation + currentModule + ".csv"
 
 # CONSOLIDATE GDELT OUTPUT WITH ACTUAL EVENTS IN ORDER TO GENERATE A LABEL
 
@@ -140,6 +140,6 @@ for i in range (numberOfRowsOriginal):
 					dfOriginal.set_value([i], ["label"], 1)
 
 
-dfOriginal.to_csv(userScript.outputLocation1+ currentModule + ".csv", sep=',', encoding='utf-8', index=False, header=True)
+dfOriginal.to_csv(outputDataset, sep=',', encoding='utf-8', index=False, header=True)
 
 print("Module Completed: Merge dataset complete")

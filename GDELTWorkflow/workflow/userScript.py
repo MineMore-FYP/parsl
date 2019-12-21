@@ -29,11 +29,12 @@ import sys
 ##integrateLabel/appendRecords.py
 #12
 ##integrateLabel/integrate.py
-
+#13
+##mining/randomForestClassification.py
 
 orderOfModules1 = ["selectUserDefinedColumns", "dropUniqueColumns",
 "dropColumnsCriteria","dropRowsCriteria","removeDuplicateRows",
-"missingValuesMode", "combineColumns", "integrate"]
+"missingValuesMode", "combineColumns", "integrate", "normalize","randomForestClassification"]
 
 
 orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns",

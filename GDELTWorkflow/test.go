@@ -189,14 +189,6 @@ func main(){
 	messagePassing(outChannelModule5, outChannelModule6)
 	fmt.Println(<- outChannelModule6)
 
-/*
-	outChannelModule7 := make(chan string, 1)
-	pythonCall("workflow/"+commandsArray[6], outChannelModule6, "1")
-	//pythonCall("workflow/transformation/normalize.py", outChannelModule6)
-	messagePassing(outChannelModule6, outChannelModule7)
-	fmt.Println(<- outChannelModule7)
-*/
-
 	outChannelModule8 := make(chan string, 1)
 	//pythonCall("workflow/transformation/combineColumns.py", outChannelModule8)
 	pythonCall("workflow/"+commandsArray[7], outChannelModule6, "1")
@@ -259,6 +251,17 @@ func main(){
 	integrateMessagePassing(outChannelModule27, outChannelModule8, outChannelModule9)
 	fmt.Println(<- outChannelModule9)
 
+	outChannelModule7 := make(chan string, 1)
+	pythonCall("workflow/"+commandsArray[6], outChannelModule9, "1")
+	//pythonCall("workflow/transformation/normalize.py", outChannelModule6)
+	messagePassing(outChannelModule9, outChannelModule7)
+	fmt.Println(<- outChannelModule7)
+
+	outChannelModule10 := make(chan string, 1)
+	//pythonCall("workflow/mining/randomForestClassification.py", outChannelModule5)
+	pythonCall("workflow/"+commandsArray[13], outChannelModule7, "1")
+	messagePassing(outChannelModule7, outChannelModule10)
+	fmt.Println(<- outChannelModule10)
 
 
 }
