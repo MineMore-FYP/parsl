@@ -62,7 +62,7 @@ func messagePassing(inChannel <- chan string, outChannel chan <- string ){
 	outChannel <- msg
 }
 func integrateMessagePassing(inChannel1 <- chan string, inChannel2 <- chan string, outChannel chan <- string ){
-	msg := <- inChannel1 + inChannel2	
+	msg := <- inChannel1 + inChannel2
 	outChannel <- msg
 }
 
@@ -202,7 +202,7 @@ func main(){
 	messagePassing(outChannelModule6, outChannelModule8)
 	fmt.Println(<- outChannelModule8)
 
-//think - can an empty channel trigger functions too?
+
 	inChannelModule21 := make(chan string, 1)
 	outChannelModule21 := make(chan string, 1)
 	pythonCall("workflow/"+commandsArray[0], inChannelModule21,"2")
@@ -254,7 +254,7 @@ func main(){
 
 	outChannelModule29 := make(chan string, 1)
 	//pythonCall("workflow/integrateLabels/integrate.py", outChannelModule5)
-	pythonCall("workflow/"+commandsArray[12], outChannelModule28, "2")
+	pythonCall("workflow/"+commandsArray[12], outChannelModule28, "1")
 	messagePassing(outChannelModule28, outChannelModule29)
 	fmt.Println(<- outChannelModule29)
 
