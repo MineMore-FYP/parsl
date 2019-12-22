@@ -31,10 +31,10 @@ def kmeans(n):
 	X_train, X_test,y_train,y_test =  train_test_split(X,y,test_size=0.20,random_state=70)
 	k_means = KMeans(n_clusters=n)
 	kmeans = k_means.fit(X_train.reshape(-1, 1))
-	centroids = kmeans.cluster_centers_
+	#centroids = kmeans.cluster_centers_
 	#print("x axis: "+i + " , y axis: " + j)
-	print(centroids)
-	print("\n")
+	#print(centroids)
+	#print("\n")
 	print("Training set")
 	print(X_train)
 	print(k_means.labels_[:])
@@ -52,8 +52,9 @@ def kmeans(n):
 	print('Accuracy:{0:f}'.format(score) + ' For ' + str(n) + ' clusters.\n' )
 				
 				
-	strng = 'kmeans done for ' + str(n) + ' clusters'
-	return strng			    						  			    	
+	#strng = 'kmeans done for ' + str(n) + ' clusters'
+	#pass all the input parameters and the score
+	return [n,score]		    						  			    	
 					    						    	
 
 results = []
@@ -65,7 +66,7 @@ for i in numberOfClusters:
 print ("Job Status: {}".format([r.done() for r in results]))
 
 # wait for all apps to complete
-[r.result() for r in results]
+return_array = [r.result() for r in results]
 
 # print each job status, they will now be finished
-print ("Job Status: {}".format([r.result() for r in results]))
+print ("Job Status: {}".format(return_array))
