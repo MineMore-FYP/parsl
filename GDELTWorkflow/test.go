@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	//"strconv"
+	"strconv"
 
 	"io/ioutil"
 	"log"
@@ -103,6 +103,49 @@ func readLines( progName string) [20]string{
 }
 
 func main(){
+	for i := 1; i<=2; i++{
+		//check if input location is available
+		fmt.Println((i))
+		//c1 := "python -c from workflow import userScript; print userScript.inputDataset" + strconv.Itoa(i)
+		cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.inputDataset" + strconv.Itoa(i))
+		//cmd := exec.Command(c1)
+		out, err := cmd.CombinedOutput()
+
+		if err != nil {
+			fmt.Println(err)
+			// Exit with status 3.
+	    os.Exit(3)
+		} else if out == nil{
+			os.Exit(3)
+		} else {
+			//input dataset from disk
+			//check if empty
+			inputDataset := string(out)[:len(out)-1]
+			fmt.Print(inputDataset+"\n")
+		}
+
+
+		//check if output location is available
+		cmd1 := exec.Command("python", "-c", "from workflow import userScript; print userScript.outputLocation" + strconv.Itoa(i))
+		out1, err1 := cmd1.CombinedOutput()
+
+		if err1 != nil {
+			fmt.Println(err1)
+			// Exit with status 3.
+			os.Exit(3)
+		} else if out1 == nil{
+			os.Exit(3)
+		} else {
+			//output dataset from disk
+			//check if empty
+			outputDataset := string(out1)[:len(out1)-1]
+			fmt.Print(outputDataset+"\n")
+		}
+	}
+
+	commandsArray := readLines("workflow/userScript.py")
+	fmt.Println(commandsArray)
+
 	//configurations
 	simplePythonCall("workflow/parslConfig.py")
 	//GDELT datafile selection and integration
@@ -111,46 +154,8 @@ func main(){
 	//GDELT country selection
 	simplePythonCall("workflow/gdeltFileSelection/countrySelection.py") // make sure the name of the combined csv after country selection is equal to the name in input dataset for workflow
 
-	// put block into a for loop and do twice or however many times
-	//check if input location is available
-	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.inputDataset1")
-	out, err := cmd.CombinedOutput()
 
-	if err != nil {
-		fmt.Println(err)
-		// Exit with status 3.
-    os.Exit(3)
-	} else if out == nil{
-		os.Exit(3)
-	} else {
-		//input dataset from disk
-		//check if empty
-		inputDataset := string(out)[:len(out)-1]
-		fmt.Print(inputDataset+"\n")
-	}
-
-
-	//check if output location is available
-	cmd1 := exec.Command("python", "-c", "from workflow import userScript; print userScript.outputLocation1")
-	out1, err1 := cmd1.CombinedOutput()
-
-	if err1 != nil {
-		fmt.Println(err1)
-		// Exit with status 3.
-		os.Exit(3)
-	} else if out1 == nil{
-		os.Exit(3)
-	} else {
-		//output dataset from disk
-		//check if empty
-		outputDataset := string(out1)[:len(out1)-1]
-		fmt.Print(outputDataset+"\n")
-	}
-
-
-	commandsArray := readLines("workflow/userScript.py")
-	fmt.Println(commandsArray)
-
+/*
 	//start module execution from here onwards
 	inChannelModule1 := make(chan string, 1)
 	outChannelModule1 := make(chan string, 1)
@@ -245,6 +250,8 @@ func main(){
 	messagePassing(outChannelModule27, outChannelModule28)
 	fmt.Println(<- outChannelModule28)
 */
+
+/*
 	outChannelModule9 := make(chan string, 1)
 	//pythonCall("workflow/integrateLabels/integrate.py", outChannelModule5)
 	integratePythonCall("workflow/"+commandsArray[12], outChannelModule27, outChannelModule8, "1")
@@ -262,7 +269,7 @@ func main(){
 	pythonCall("workflow/"+commandsArray[13], outChannelModule7, "1")
 	messagePassing(outChannelModule7, outChannelModule10)
 	fmt.Println(<- outChannelModule10)
-
+*/
 
 }
 
