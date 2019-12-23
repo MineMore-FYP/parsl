@@ -72,7 +72,7 @@ return_array = [r.result() for r in results]
 
 dfa=pd.DataFrame(return_array)
 dfa.columns = ["No_of_clusters", "Accuracy"]
-print(dfa)
+#print(dfa)
 
 dfa.to_csv (r'/home/mpiuser/Documents/FYP/gdelt/kmeans/' + Iteration_no + '_kmeans.csv', index = None, header=True)
 

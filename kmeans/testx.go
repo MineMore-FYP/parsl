@@ -38,8 +38,8 @@ func removeIt(ss Accuracy_class, ssSlice []Accuracy_class) []Accuracy_class {
 }
 
 type Accuracy_class struct {
-    Clusters string `json:"clusters"`
-    Accuracy string `json:"accuracy"`
+    Clusters int64 `json:"clusters"`
+    Accuracy float64 `json:"accuracy"`
 }
 
 func main(){
@@ -90,13 +90,18 @@ func main(){
 			} else if error != nil {
 			    log.Fatal(error)
 			}
+			var clusters int64
+			var accuracy float64
+			clusters, _ = strconv.ParseInt(line[0],10,0)
+			accuracy, _ = strconv.ParseFloat(line[1],64)
+			//fmt.Println(reflect.TypeOf(newc))
 			Accuracy_set = append(Accuracy_set, Accuracy_class{
-			    Clusters: line[0],
-			    Accuracy: line[1],
+			    Clusters: clusters,
+			    Accuracy: accuracy,
 			})
 		    }
 		    
-		    Accuracy_set = removeIt(Accuracy_class{"No_of_clusters", "Accuracy"}, Accuracy_set)
+		    //Accuracy_set = removeIt(Accuracy_class{"No_of_clusters", "Accuracy"}, Accuracy_set)
 		    
     	}
 	accuracyJson, _ := json.Marshal(Accuracy_set)
