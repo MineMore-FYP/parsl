@@ -4,64 +4,62 @@ import sys
 
 #Workflow
 #0
-##selection/selectUserDefinedColumns.py
+##gdeltFileSelection/dataFilesIntegration.py
 #1
-##cleaning/dropUniqueColumns.py
+##gdeltFileSelection/countrySelection.py
 #2
-##cleaning/dropColumnsCriteria.py
+##selection/selectUserDefinedColumns.py
 #3
-##cleaning/dropRowsCriteria.py
+##cleaning/dropUniqueColumns.py
 #4
-##cleaning/removeDuplicateRows.py
+##cleaning/dropColumnsCriteria.py
 #5
-##cleaning/missingValuesMode.py
+##cleaning/dropRowsCriteria.py
 #6
-##transformation/normalize.py
+##cleaning/removeDuplicateRows.py
 #7
-##transformation/combineColumns.py
+##cleaning/missingValuesMode.py
 #8
-##integrateLabel/addLabelColumn.py
+##transformation/normalize.py
 #9
-##integrateLabel/assignCountryCode.py
+##transformation/combineColumns.py
 #10
-##integrateLabel/splitDate.py
+##integrateLabel/addLabelColumn.py
 #11
-##integrateLabel/appendRecords.py
+##integrateLabel/assignCountryCode.py
 #12
-##integrateLabel/integrate.py
+##integrateLabel/splitDate.py
 #13
+##integrateLabel/appendRecords.py
+#14
+##integrateLabel/integrate.py
+#15
 ##mining/randomForestClassification.py
+#16
+##cleaning/dropUserDefinedColumns.py
 
 orderOfModules1 = ["dataFilesIntegration", "countrySelection", "selectUserDefinedColumns", "dropUniqueColumns",
 "dropColumnsCriteria","dropRowsCriteria","removeDuplicateRows",
 "missingValuesMode", "combineColumns", "integrate", "normalize","randomForestClassification"]
 
-
 orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns",
 "removeDuplicateRows", "missingValuesMode", "addLabelColumn",
 "assignCountryCode", "splitDate", "appendRecords"]
 
-#orderOfModules3 = ["selectUserDefinedColumns","dropUniqueColumns", "removeDuplicateRows", "missingValuesMode", "addLabelColumn", "assignCountryCode", "splitDate", "appendRecords", "integrate"]
+orderOfModules3 = ["dropUserDefinedColumns", "kmeans"]
 
-#GDELT variables
-#======================
-startingDate = '2019.11.26'
-endingDate = '2019.12.02'
-
-#datafilesLocation = '/home/mpiuser/Downloads/data/'
-#select specific country records
-Actor1CountryCode = 'CE'
-Actor2CountryCode = 'CE'
-
+#Gdelt FileSelection
+datafilesLocation = '/home/amanda/FYP/data/'
 
 #input location
 
 inputDataset1 = "/home/amanda/FYP/testcsv/dropCountry.csv"
 inputDataset2 = "/home/amanda/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
-
+inputDataset3 = "/home/amanda/FYP/gdelt/missingValuesMode.csv"
 #specify output locatiion
 outputLocation1 = "/home/amanda/FYP/gdelt/"
 outputLocation2 = "/home/amanda/FYP/acled/"
+outputLocation3 = "/home/amanda/FYP/gdelt/"
 
 #inputDataset1 = "/home/mpiuser/FYP/testcsv/dropCountry.csv"
 #inputDataset2 = "/home/mpiuser/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
@@ -79,6 +77,14 @@ outputLocation2 = "/home/amanda/FYP/acled/"
 #inputDataFrame = pd.read_csv(inputDataset)
 
 '''#######################		SELECTION	####################################'''
+#GDELT variables
+#======================
+startingDate = '2019.11.26'
+endingDate = '2019.12.02'
+
+#select specific country records
+Actor1CountryCode = 'CE'
+Actor2CountryCode = 'CE'
 
 #select columns
 #if "all" select everything. else give a list ["whatever1", "whatever2"]
@@ -109,6 +115,9 @@ userDefinedRowPercentage1 = 85.71
 #mode for user defined columns
 modeColumns1 = "all"
 modeColumns2 = "all"
+
+#drop columns
+dropCols3 = ["SQLDATE", "Actor1Geo_CountryCode", "Actor2Geo_CountryCode"]
 
 
 '''#######################		INTEGRATE LABEL	####################################'''

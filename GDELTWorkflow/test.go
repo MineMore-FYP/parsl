@@ -148,128 +148,126 @@ func main(){
 
 	//configurations
 	simplePythonCall("workflow/parslConfig.py")
-	//GDELT datafile selection and integration
-	simplePythonCall("workflow/gdeltFileSelection/dataFilesIntegration.py")
-
-	//GDELT country selection
-	simplePythonCall("workflow/gdeltFileSelection/countrySelection.py") // make sure the name of the combined csv after country selection is equal to the name in input dataset for workflow
 
 
-/*
 	//start module execution from here onwards
-	inChannelModule1 := make(chan string, 1)
+	inChannelModule0 := make(chan string, 1)
+	outChannelModule0 := make(chan string, 1)
+	go pythonCall("workflow/"+commandsArray[0], inChannelModule0,"1")
+	//pythonCall("workflow/gdeltFileSelection/dataFilesIntegration.py", inChannelModule1)
+	go messagePassing(inChannelModule0, outChannelModule0)
+	fmt.Println(<-outChannelModule0)
+
 	outChannelModule1 := make(chan string, 1)
-	go pythonCall("workflow/"+commandsArray[0], inChannelModule1,"1")
-	//pythonCall("workflow/selection/selectUserDefinedColumns.py", inChannelModule1)
-	go messagePassing(inChannelModule1, outChannelModule1)
+	go pythonCall("workflow/"+commandsArray[1], outChannelModule0,"1")
+	//pythonCall("workflow/gdeltFileSelection/countrySelection.py", inChannelModule1)
+	go messagePassing(outChannelModule0, outChannelModule1)
 	fmt.Println(<-outChannelModule1)
 
 	outChannelModule2 := make(chan string, 1)
-	go pythonCall("workflow/"+commandsArray[1], outChannelModule1, "1")
-	//pythonCall("workflow/cleaning/dropUniqueColumns.py", outChannelModule1)
+	go pythonCall("workflow/"+commandsArray[2], outChannelModule1, "1")
+	//pythonCall("workflow/selection/selectUserDefinedColumns.py", outChannelModule1)
 	go messagePassing(outChannelModule1, outChannelModule2)
 	fmt.Println(<- outChannelModule2)
 
 	outChannelModule3 := make(chan string, 1)
-	go pythonCall("workflow/"+commandsArray[2], outChannelModule2, "1")
-	//pythonCall("workflow/cleaning/dropColumnsCriteria.py", outChannelModule2)
+	go pythonCall("workflow/"+commandsArray[3], outChannelModule2, "1")
+	//pythonCall("workflow/cleaning/dropUniqueColumns.py", outChannelModule2)
 	go messagePassing(outChannelModule2, outChannelModule3)
 	fmt.Println(<- outChannelModule3)
 
 	outChannelModule4 := make(chan string, 1)
-	//pythonCall("workflow/cleaning/dropRowsCriteria.py", outChannelModule3)
-	pythonCall("workflow/"+commandsArray[3], outChannelModule3, "1")
-	messagePassing(outChannelModule3, outChannelModule4)
-	fmt.Println(<- outChannelModule4)
+	go pythonCall("workflow/"+commandsArray[4], outChannelModule3, "1")
+	//pythonCall("workflow/cleaning/dropColumnsCriteria.py", outChannelModule2)
+	go messagePassing(outChannelModule3, outChannelModule4)
+	fmt.Println(<- outChannelModule3)
 
 	outChannelModule5 := make(chan string, 1)
-	pythonCall("workflow/"+commandsArray[4], outChannelModule4, "1")
-	//pythonCall("workflow/cleaning/removeDuplicateRows.py", outChannelModule4)
-	messagePassing(outChannelModule4, outChannelModule5)
+	//pythonCall("workflow/cleaning/dropRowsCriteria.py", outChannelModule3)
+	go pythonCall("workflow/"+commandsArray[5], outChannelModule4, "1")
+	go messagePassing(outChannelModule4, outChannelModule5)
 	fmt.Println(<- outChannelModule5)
 
 	outChannelModule6 := make(chan string, 1)
-	//pythonCall("workflow/cleaning/missingValuesMode.py", outChannelModule5)
-	pythonCall("workflow/"+commandsArray[5], outChannelModule5, "1")
-	messagePassing(outChannelModule5, outChannelModule6)
+	go pythonCall("workflow/"+commandsArray[6], outChannelModule5, "1")
+	//pythonCall("workflow/cleaning/removeDuplicateRows.py", outChannelModule4)
+	go messagePassing(outChannelModule5, outChannelModule6)
 	fmt.Println(<- outChannelModule6)
+
+	outChannelModule7 := make(chan string, 1)
+	//pythonCall("workflow/cleaning/missingValuesMode.py", outChannelModule5)
+	go pythonCall("workflow/"+commandsArray[7], outChannelModule6, "1")
+	go messagePassing(outChannelModule6, outChannelModule7)
+	fmt.Println(<- outChannelModule7)
 
 	outChannelModule8 := make(chan string, 1)
 	//pythonCall("workflow/transformation/combineColumns.py", outChannelModule8)
-	pythonCall("workflow/"+commandsArray[7], outChannelModule6, "1")
-	messagePassing(outChannelModule6, outChannelModule8)
+	go pythonCall("workflow/"+commandsArray[9], outChannelModule7, "1")
+	go messagePassing(outChannelModule7, outChannelModule8)
 	fmt.Println(<- outChannelModule8)
 
 
 	inChannelModule21 := make(chan string, 1)
 	outChannelModule21 := make(chan string, 1)
-	pythonCall("workflow/"+commandsArray[0], inChannelModule21,"2")
+	pythonCall("workflow/"+commandsArray[2], inChannelModule21,"2")
 	//pythonCall("workflow/selection/selectUserDefinedColumns.py", inChannelModule1)
 	messagePassing(inChannelModule21, outChannelModule21)
 	fmt.Println(<-outChannelModule21)
 
 	outChannelModule22 := make(chan string, 1)
-	pythonCall("workflow/"+commandsArray[1], outChannelModule21,"2")
+	pythonCall("workflow/"+commandsArray[3], outChannelModule21,"2")
 	//pythonCall("workflow/selection/dropUniqueColumns.py", inChannelModule1)
 	messagePassing(outChannelModule21, outChannelModule22)
 	fmt.Println(<-outChannelModule22)
 
 	outChannelModule23 := make(chan string, 1)
-	pythonCall("workflow/"+commandsArray[4], outChannelModule22, "2")
+	pythonCall("workflow/"+commandsArray[6], outChannelModule22, "2")
 	//pythonCall("workflow/cleaning/removeDuplicateRows.py", outChannelModule4)
 	messagePassing(outChannelModule22, outChannelModule23)
 	fmt.Println(<- outChannelModule23)
 
 	outChannelModule24 := make(chan string, 1)
 	//pythonCall("workflow/cleaning/missingValuesMode.py", outChannelModule5)
-	pythonCall("workflow/"+commandsArray[5], outChannelModule23, "2")
+	pythonCall("workflow/"+commandsArray[7], outChannelModule23, "2")
 	messagePassing(outChannelModule23, outChannelModule24)
 	fmt.Println(<- outChannelModule24)
 
 	outChannelModule25 := make(chan string, 1)
 	//pythonCall("workflow/integrateLabels/addLabelColumn.py", outChannelModule5)
-	pythonCall("workflow/"+commandsArray[8], outChannelModule24, "2")
+	pythonCall("workflow/"+commandsArray[10], outChannelModule24, "2")
 	messagePassing(outChannelModule24, outChannelModule25)
 	fmt.Println(<- outChannelModule25)
 
 	outChannelModule26 := make(chan string, 1)
 	//pythonCall("workflow/integrateLabels/assignCountryCode.py", outChannelModule5)
-	pythonCall("workflow/"+commandsArray[9], outChannelModule25, "2")
+	pythonCall("workflow/"+commandsArray[11], outChannelModule25, "2")
 	messagePassing(outChannelModule25, outChannelModule26)
 	fmt.Println(<- outChannelModule26)
 
 	outChannelModule27 := make(chan string, 1)
 	//pythonCall("workflow/integrateLabels/splitDate.py", outChannelModule5)
-	pythonCall("workflow/"+commandsArray[10], outChannelModule26, "2")
+	pythonCall("workflow/"+commandsArray[12], outChannelModule26, "2")
 	messagePassing(outChannelModule26, outChannelModule27)
 	fmt.Println(<- outChannelModule27)
-/*
-	outChannelModule28 := make(chan string, 1)
-	//pythonCall("workflow/integrateLabels/appendRecords.py", outChannelModule5)
-	pythonCall("workflow/"+commandsArray[11], outChannelModule27, "2")
-	messagePassing(outChannelModule27, outChannelModule28)
-	fmt.Println(<- outChannelModule28)
-*/
 
-/*
 	outChannelModule9 := make(chan string, 1)
 	//pythonCall("workflow/integrateLabels/integrate.py", outChannelModule5)
-	integratePythonCall("workflow/"+commandsArray[12], outChannelModule27, outChannelModule8, "1")
+	integratePythonCall("workflow/"+commandsArray[14], outChannelModule27, outChannelModule8, "1")
 	integrateMessagePassing(outChannelModule27, outChannelModule8, outChannelModule9)
 	fmt.Println(<- outChannelModule9)
 
-	outChannelModule7 := make(chan string, 1)
-	pythonCall("workflow/"+commandsArray[6], outChannelModule9, "1")
-	//pythonCall("workflow/transformation/normalize.py", outChannelModule6)
-	messagePassing(outChannelModule9, outChannelModule7)
-	fmt.Println(<- outChannelModule7)
-
 	outChannelModule10 := make(chan string, 1)
-	//pythonCall("workflow/mining/randomForestClassification.py", outChannelModule5)
-	pythonCall("workflow/"+commandsArray[13], outChannelModule7, "1")
-	messagePassing(outChannelModule7, outChannelModule10)
+	pythonCall("workflow/"+commandsArray[8], outChannelModule9, "1")
+	//pythonCall("workflow/transformation/normalize.py", outChannelModule6)
+	messagePassing(outChannelModule9, outChannelModule10)
 	fmt.Println(<- outChannelModule10)
-*/
+
+	outChannelModule11 := make(chan string, 1)
+	//pythonCall("workflow/mining/randomForestClassification.py", outChannelModule5)
+	pythonCall("workflow/"+commandsArray[15], outChannelModule10, "1")
+	messagePassing(outChannelModule10, outChannelModule11)
+	fmt.Println(<- outChannelModule11)
+
 
 }
 
