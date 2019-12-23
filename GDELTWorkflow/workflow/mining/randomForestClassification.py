@@ -45,7 +45,7 @@ for i in range(len(orderOfModules)):
 
 
 @python_app
-def rfClassifier(estimators, dFrame):
+def rfClassifier(estimators, depth, split, features, dFrame):
 	dataset = dFrame
 	dataset.head()
 
@@ -64,7 +64,7 @@ def rfClassifier(estimators, dFrame):
 
 
 	from sklearn.ensemble import RandomForestClassifier
-	classifier = RandomForestClassifier(n_estimators=estimators, random_state=0)
+	classifier = RandomForestClassifier(n_estimators=estimators, max_depth = depth, min_samples_split=split, max_features=features, random_state=0)
 	classifier.fit(X_train, y_train)
 	y_pred = classifier.predict(X_test)
 
@@ -77,7 +77,10 @@ def rfClassifier(estimators, dFrame):
 	return x
 
 results = []
+print(rfClassifier(100, 3, 2, 'auto', df).result())
 
+
+'''
 for i in range(80,250,10):
 	x = rfClassifier(i, df)
 	#print(x)
@@ -85,3 +88,4 @@ for i in range(80,250,10):
 
 # wait for all apps to complete
 print("Job Status: {}".format([r.result() for r in results]))
+'''
