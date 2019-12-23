@@ -14,7 +14,7 @@ sys.path.insert(0,parentdir)
 import userScript
 '''
 
-pp = PdfPages('plot_Kmeans.pdf')
+pp = PdfPages('/home/mpiuser/Documents/FYP/gdelt/plot_Kmeans.pdf')
 
 i = "GoldsteinScale"
 j= "QuadClass"
