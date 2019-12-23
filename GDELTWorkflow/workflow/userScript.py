@@ -32,7 +32,7 @@ import sys
 #13
 ##mining/randomForestClassification.py
 
-orderOfModules1 = ["selectUserDefinedColumns", "dropUniqueColumns",
+orderOfModules1 = ["dataFilesIntegration", "countrySelection", "selectUserDefinedColumns", "dropUniqueColumns",
 "dropColumnsCriteria","dropRowsCriteria","removeDuplicateRows",
 "missingValuesMode", "combineColumns", "integrate", "normalize","randomForestClassification"]
 
@@ -43,8 +43,18 @@ orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns",
 
 #orderOfModules3 = ["selectUserDefinedColumns","dropUniqueColumns", "removeDuplicateRows", "missingValuesMode", "addLabelColumn", "assignCountryCode", "splitDate", "appendRecords", "integrate"]
 
-#input location
+#GDELT variables
+#======================
+startingDate = '2019.11.26'
+endingDate = '2019.12.02'
 
+#datafilesLocation = '/home/mpiuser/Downloads/data/'
+#select specific country records
+Actor1CountryCode = 'CE'
+Actor2CountryCode = 'CE'
+
+
+#input location
 
 inputDataset1 = "/home/amanda/FYP/testcsv/dropCountry.csv"
 inputDataset2 = "/home/amanda/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
@@ -64,17 +74,6 @@ outputLocation2 = "/home/amanda/FYP/acled/"
 #outputLocation1 = "/home/mpiuser/Documents/FYP/gdelt/"
 #outputLocation2 = "/home/mpiuser/Documents/FYP/acled/"
 
-
-
-#GDELT variables
-#======================
-startingDate = '2019.11.26'
-endingDate = '2019.12.02'
-
-#datafilesLocation = '/home/mpiuser/Downloads/data/'
-#select specific country records
-Actor1CountryCode = 'CE'
-Actor2CountryCode = 'CE'
 
 #read csv to pandas df
 #inputDataFrame = pd.read_csv(inputDataset)
