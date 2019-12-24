@@ -54,9 +54,14 @@ datafilesLocation = '/home/clusteruser/gdeltDataFiles/'
 
 #input location
 
-inputDataset1 = "/home/clusteruser/FYP/gdelt/countrySelection.csv"
-inputDataset2 = "/home/clusteruser/gdeltDataFiles/ACLED2019-Sri_Lanka.csv"
-inputDataset3 = "/home/clusteruser/FYP/gdelt/missingValuesMode.csv"
+inputDataset1 = "/home/amanda/FYP/gdelt/countrySelection.csv"
+inputDataset2 = "/home/amanda/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
+inputDataset3 = "/home/amanda/FYP/gdelt/missingValuesMode.csv"
+
+#inputDataset1 = "/home/clusteruser/FYP/gdelt/countrySelection.csv"
+#inputDataset2 = "/home/clusteruser/gdeltDataFiles/ACLED2019-Sri_Lanka.csv"
+#inputDataset3 = "/home/clusteruser/FYP/gdelt/missingValuesMode.csv"
+
 #specify output locatiion
 outputLocation1 = "/home/clusteruser/FYP/gdelt/"
 outputLocation2 = "/home/clusteruser/FYP/acled/"
