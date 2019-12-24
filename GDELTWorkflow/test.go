@@ -267,7 +267,14 @@ func main(){
 	pythonCall("workflow/"+commandsArray[15], outChannelModule10, "1")
 	messagePassing(outChannelModule10, outChannelModule11)
 	fmt.Println(<- outChannelModule11)
-
+/*
+	inChannelModule31
+	outChannelModule31 := make(chan string, 1)
+	//pythonCall("workflow/mining/randomForestClassification.py", outChannelModule5)
+	pythonCall("workflow/"+commandsArray[15], outChannelModule10, "1")
+	messagePassing(outChannelModule10, outChannelModule11)
+	fmt.Println(<- outChannelModule11)
+*/
 
 }
 
