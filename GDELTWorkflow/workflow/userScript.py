@@ -53,7 +53,7 @@ datafilesLocation = '/home/amanda/FYP/data/'
 
 #input location
 
-inputDataset1 = "/home/amanda/FYP/testcsv/dropCountry.csv"
+inputDataset1 = "/home/amanda/FYP/gdelt/countrySelection.csv"
 inputDataset2 = "/home/amanda/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
 inputDataset3 = "/home/amanda/FYP/gdelt/missingValuesMode.csv"
 #specify output locatiion
@@ -152,7 +152,7 @@ userDefinedEncodeColumns = ["Actor1Geo_CountryCode"]
 '''#######################		MINING   	####################################'''
 
 #random forest
-randomForestEstimatorRange1 = [80,150]
-randomForestDepthRange1 = [100,120]
-randomForestSplitRange1 = [2,4]
-randomForestFeaturesRange1 = [2,4]
+randomForestEstimatorRange1 = [80,90]
+randomForestDepthRange1 = [100,101]
+randomForestSplitRange1 = [2,3]
+randomForestFeaturesRange1 = [2,3]

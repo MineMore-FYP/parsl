@@ -36,7 +36,7 @@ outputDataset = outputLocation + currentModule + ".csv"
 
 
 #read combined csv
-df = pd.read_csv(inputDataset, index_col=False, low_memory=False)
+#df = pd.read_csv(inputDataset, index_col=False, low_memory=False)
 #print(df)
 
 #select specific country records
