@@ -24,10 +24,18 @@ if workflowNumber == "1":
 	orderOfModules = userScript.orderOfModules1
 	inputDataset = userScript.inputDataset1
 	outputLocation = userScript.outputLocation1
+	randomForestEstimatorRange = userScript.randomForestEstimatorRange1
+	randomForestDepthRange = userScript.randomForestDepthRange1
+	randomForestSplitRange = userScript.randomForestSplitRange1
+	randomForestFeaturesRange = userScript.randomForestFeaturesRange1
 elif workflowNumber == "2":
 	orderOfModules = userScript.orderOfModules2
 	inputDataset = userScript.inputDataset2
 	outputLocation = userScript.outputLocation2
+	randomForestEstimatorRange = userScript.randomForestEstimatorRange2
+	randomForestDepthRange = userScript.randomForestDepthRange2
+	randomForestSplitRange = userScript.randomForestSplitRange2
+	randomForestFeaturesRange = userScript.randomForestFeaturesRange2
 
 
 df = pd.DataFrame()
@@ -77,15 +85,16 @@ def rfClassifier(estimators, depth, split, features, dFrame):
 	return x
 
 results = []
-print(rfClassifier(100, 3, 2, 'auto', df).result())
+#print(rfClassifier(100, 3, 2, 'auto', df).result())
 
-
-'''
-for i in range(80,250,10):
-	x = rfClassifier(i, df)
-	#print(x)
-	results.append(x)
+for i in range(randomForestEstimatorRange[0],randomForestEstimatorRange[1]):
+	for j in range(randomForestDepthRange[0],randomForestDepthRange[1]):
+		for k in range(randomForestSplitRange[0],randomForestSplitRange[1]):
+			for l in range(randomForestFeaturesRange[0], randomForestFeaturesRange[1]):
+				print(l)
+				x = rfClassifier(i,j,k,l, df)
+				#print(x)
+				results.append(x)
 
 # wait for all apps to complete
 print("Job Status: {}".format([r.result() for r in results]))
-'''

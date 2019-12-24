@@ -147,3 +147,12 @@ userDefinedColumsToAggregate1 = [["Actor1Geo_CountryCode", "Actor2Geo_CountryCod
 
 #encoding
 userDefinedEncodeColumns = ["Actor1Geo_CountryCode"]
+
+
+'''#######################		MINING   	####################################'''
+
+#random forest
+randomForestEstimatorRange1 = [80,150]
+randomForestDepthRange1 = [100,120]
+randomForestSplitRange1 = [2,4]
+randomForestFeaturesRange1 = [2,4]
