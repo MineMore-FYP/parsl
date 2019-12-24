@@ -11,7 +11,7 @@ import (
 	"log"
 	//"time"
 	"strconv"
-	//"reflect"
+	"reflect"
 	"path/filepath"
 	"bufio"
     	"encoding/csv"
@@ -48,7 +48,7 @@ func main(){
 	
 	for i := 1;  i<=10; i++ {
 		
-		var x = simplePythonCall("kmeans.py", strconv.Itoa(i))
+		var x = simplePythonCall("kmeansModelTraining.py", strconv.Itoa(i))
 		fmt.Println(x)
 		
                 fmt.Printf("Kmeans with clusters 2,3,4,5,6,7 ran for " + strconv.Itoa(i) + " time(s).\n")
@@ -110,6 +110,10 @@ func main(){
 	//fmt.Println(string(accuracyJson))
 	var max = FindMaxAccuracy(Accuracy_set)
 	Display(max)
+	
+	var optimalClusters = strconv.FormatInt(max.Clusters, 10)
+	fmt.Println(reflect.TypeOf(optimalClusters))
+	simplePythonCall("knowledage_presentation.py", "3")
 }
 
 func FindMaxAccuracy(Accuracy_set []Accuracy_class) (max Accuracy_class) {
