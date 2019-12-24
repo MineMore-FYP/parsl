@@ -86,7 +86,7 @@ def rfClassifier(estimators, depth, split, features, dFrame):
 
 results = []
 #print(rfClassifier(100, 3, 2, 'auto', df).result())
-
+'''
 for i in range(randomForestEstimatorRange[0],randomForestEstimatorRange[1]):
 	for j in range(randomForestDepthRange[0],randomForestDepthRange[1]):
 		for k in range(randomForestSplitRange[0],randomForestSplitRange[1]):
@@ -95,6 +95,19 @@ for i in range(randomForestEstimatorRange[0],randomForestEstimatorRange[1]):
 				x = rfClassifier(i,j,k,l, df)
 				#print(x)
 				results.append(x)
+'''
+print(randomForestEstimatorRange)
+print(randomForestDepthRange)
+print(randomForestSplitRange)
+print(randomForestFeaturesRange)
+
+for i in range(randomForestEstimatorRange[0], randomForestEstimatorRange[1]):
+	for j in range (randomForestDepthRange[0], randomForestDepthRange[1]):
+		for k in range(randomForestSplitRange[0],randomForestSplitRange[1]):
+			for l in range(randomForestFeaturesRange[0],randomForestFeaturesRange[1]):
+				x = rfClassifier(i,j,k,l,df)
+				results.append(x)
 
 # wait for all apps to complete
 print("Job Status: {}".format([r.result() for r in results]))
+
