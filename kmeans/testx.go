@@ -15,7 +15,7 @@ import (
 	"path/filepath"
 	"bufio"
     	"encoding/csv"
-	"encoding/json"
+	//"encoding/json"
 	//"io.ReadSeeker"
 )
 
@@ -41,6 +41,8 @@ type Accuracy_class struct {
     Clusters int64 `json:"clusters"`
     Accuracy float64 `json:"accuracy"`
 }
+
+
 
 func main(){
 	
@@ -104,7 +106,24 @@ func main(){
 		    //Accuracy_set = removeIt(Accuracy_class{"No_of_clusters", "Accuracy"}, Accuracy_set)
 		    
     	}
-	accuracyJson, _ := json.Marshal(Accuracy_set)
-	fmt.Println(string(accuracyJson))
+	//accuracyJson, _ := json.Marshal(Accuracy_set)
+	//fmt.Println(string(accuracyJson))
+	var max = FindMaxAccuracy(Accuracy_set)
+	Display(max)
+}
+
+func FindMaxAccuracy(Accuracy_set []Accuracy_class) (max Accuracy_class) {
 	
+	max = Accuracy_set[0]
+	for _, accuracy_obj := range Accuracy_set {
+		if accuracy_obj.Accuracy > max.Accuracy {
+			max = accuracy_obj
+		}
+	}
+	return max
+}
+
+func Display(accuracy_obj Accuracy_class) {
+	fmt.Println("No of clusters: ", accuracy_obj.Clusters)
+	fmt.Println("Accuracy: ", accuracy_obj.Accuracy)
 }
