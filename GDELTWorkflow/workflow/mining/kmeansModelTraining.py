@@ -35,15 +35,15 @@ elif workflowNumber == "2":
 	orderOfModules = userScript.orderOfModules2
 	inputDataset = userScript.inputDataset2
 	outputLocation = userScript.outputLocation2
-	clusterLabel = userScript.clusterLabel2
-	otherInputs = userScript.otherInputs2
+	clusterLabel = userScript.clusterLabel1
+	otherInputs = userScript.otherInputs1
 	numberOfClusters = userScript.numberOfClusters
 elif workflowNumber == "3":
 	orderOfModules = userScript.orderOfModules3
 	inputDataset = userScript.inputDataset3
 	outputLocation = userScript.outputLocation3
-	clusterLabel = userScript.clusterLabel3
-	otherInputs = userScript.otherInputs3
+	clusterLabel = userScript.clusterLabel1
+	otherInputs = userScript.otherInputs1
 	numberOfClusters = userScript.numberOfClusters
 
 df = pd.DataFrame()
