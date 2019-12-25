@@ -3,6 +3,7 @@ import glob
 import pandas as pd
 from dataFileSelection import *
 import csv
+from pandas import DataFrame
 
 import sys,inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -36,7 +37,18 @@ with open(path + "CSV.header.dailyupdates.txt") as csvfile:
 	header = list(reader)[0]
 	#print(header)
 
+listDf = []
 
+df = pd.DataFrame(columns = header)
+for filename in modifiedSelectedFiles:
+	df_temp = pd.read_csv(path+  "modifiedSelectedFiles/" +filename, index_col=False)
+	listDf.append(df_temp)	
+	df = pd.concat(listDf, ignore_index=True)
+
+#print(df)
+
+df.to_csv(outputDataset, index = False, header=True)
+'''
 with open(outputDataset, "w", newline='', encoding='utf-8') as outcsv:
 	writer = csv.writer(outcsv, delimiter=',')
 	writer.writerow(header) # write the header
@@ -44,10 +56,12 @@ with open(outputDataset, "w", newline='', encoding='utf-8') as outcsv:
 
 	# write the actual content line by line
 	for filename in modifiedSelectedFiles:
-		with open(filename, 'r', newline='', encoding='utf-8') as incsv:
+		with open(path+  "modifiedSelectedFiles/" + filename, 'r', newline='', encoding='utf-8') as incsv:
 			print(filename)
-			reader = csv.reader(incsv, delimiter="\t")
-			writer.writerows(row + [0.0] for row in reader)
+			reader2 = csv.reader(incsv, delimiter="\t")
+			next(reader2)
+			writer.writerows(row + [0.0] for row in reader2)
 
+'''
 
 print("Integrated Selected files module completed")

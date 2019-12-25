@@ -101,7 +101,8 @@ def getDateRangeFiles():
 		for i in selectedDays:
 			if i == filenameNew:
 				selectedFiles.append(filename)
-						
+	
+	#selectedFiles = selectedFiles.sort()			
 	return selectedFiles
 
 
@@ -112,6 +113,8 @@ def getDateRangeFiles():
 
 
 selectedFilesList = getDateRangeFiles()
+
+print(selectedFilesList)
 print("File Selection Completed")
 
 modifiedSelectedFiles = []
@@ -121,21 +124,25 @@ with open(path + "CSV.header.dailyupdates.txt") as csvfile:
 	header = list(reader)[0]
 
 for filename in selectedFilesList:
+	print(filename)
 	filenameNew = filename[0:8] + '.csv'
+	print(filenameNew)
 	modifiedSelectedFiles.append(filenameNew)
-	with open(path+ filenameNew , "w", newline='', encoding='utf-8') as outcsv:
+	with open(path+  "modifiedSelectedFiles/" +filenameNew , "w", newline='', encoding='utf-8') as outcsv:
 		writer = csv.writer(outcsv, delimiter=',')
-		writer.writerow(header) # write the header
+		writer.writerow(header) # write the headers
 		# write the actual content line by line
-		with open(filename, 'r', newline='', encoding='utf-8') as incsv:
-			reader2 = csv.reader(incsv, delimiter="\t")
-			writer.writerows(row + [0.0] for row in reader2)
+		f = open(filename, 'r', newline='', encoding='utf-8')
+		z = csv.reader(f, delimiter='\t')
+		writer.writerows(row + [0.0] for row in z)
+		f.close()
+		
 	
 	
 print("Append headers to each file completed")
 	
 for filenameNew in modifiedSelectedFiles:
-	df = pd.read_csv(filenameNew, index_col=False, low_memory=False)
+	df = pd.read_csv(path+  "modifiedSelectedFiles/" + filenameNew, index_col=False, low_memory=False)
 	#print(df)
 
 	#select specific country records
@@ -143,12 +150,14 @@ for filenameNew in modifiedSelectedFiles:
 	#print(df2)
 
 	#write to a new csv
-	df2.to_csv(filenameNew, index = False, header=True)
+	df2.to_csv(path+  "modifiedSelectedFiles/" + filenameNew, index = False, header=True)
 
 print("Select country completed")
 
 
 
-
-
-
+'''
+		with open(filename, 'r', newline='', encoding='utf-8') as incsv:
+			reader2 = csv.reader(incsv, delimiter="\t")
+			writer.writerows(row + [0.0] for row in reader2)
+		'''
