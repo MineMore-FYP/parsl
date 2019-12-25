@@ -37,6 +37,8 @@ import sys
 ##mining/randomForestClassification.py
 #16
 ##cleaning/dropUserDefinedColumns.py
+#17
+##mining/kmeansModelTraining.py
 
 orderOfModules1 = ["dataFilesIntegration", "countrySelection", "selectUserDefinedColumns", "dropUniqueColumns",
 "dropColumnsCriteria","dropRowsCriteria","removeDuplicateRows",
@@ -48,20 +50,42 @@ orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns",
 
 orderOfModules3 = ["dropUserDefinedColumns", "kmeans"]
 
+
+'''############################File locations#################################'''
+'''
+When working - uncomment your location blocks or comments
+When commiting - comment again
+'''
+
 #Gdelt FileSelection
-datafilesLocation = '/home/mpiuser/Downloads/data/'
+#datafilesLocation = '/home/amanda/FYP/data/'
+#datafilesLocation = '/home/clusteruser/gdeltDataFiles/'
+#datafilesLocation = '/home/mpiuser/Downloads/data/'
+
 
 '''
 #=========================AMANDA==============================
 #input location
-#inputDataset1 = "/home/amanda/FYP/testcsv/dropCountry.csv"
-#inputDataset2 = "/home/amanda/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
-#inputDataset3 = "/home/amanda/FYP/gdelt/missingValuesMode.csv"
+inputDataset1 = "/home/amanda/FYP/gdelt/countrySelection.csv"
+inputDataset2 = "/home/amanda/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
+inputDataset3 = "/home/amanda/FYP/gdelt/missingValuesMode.csv"
 
 #specify output locatiion
-#outputLocation1 = "/home/amanda/FYP/gdelt/"
-#outputLocation2 = "/home/amanda/FYP/acled/"
-#outputLocation3 = "/home/amanda/FYP/gdelt/"
+outputLocation1 = "/home/amanda/FYP/gdelt/"
+outputLocation2 = "/home/amanda/FYP/acled/"
+outputLocation3 = "/home/amanda/FYP/gdelt/"
+'''
+
+'''
+#=========================CLUSTER==============================
+inputDataset1 = "/home/clusteruser/FYP/gdelt/countrySelection.csv"
+inputDataset2 = "/home/clusteruser/gdeltDataFiles/ACLED2019-Sri_Lanka.csv"
+inputDataset3 = "/home/clusteruser/FYP/gdelt/missingValuesMode.csv"
+
+#specify output locatiion
+outputLocation1 = "/home/clusteruser/FYP/gdelt/"
+outputLocation2 = "/home/clusteruser/FYP/acled/"
+outputLocation3 = "/home/clusteruser/FYP/gdelt/"
 '''
 
 '''
@@ -80,13 +104,15 @@ outputLocation3 = "/home/mpiuser/Documents/FYP/gdelt/"
 '''
 #======================RAJINI=================================
 #input location
-#inputDataset1 = "/home/mpiuser/FYP/testcsv/dropCountry.csv"
-#inputDataset2 = "/home/mpiuser/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
+inputDataset1 = "/home/mpiuser/FYP/testcsv/dropCountry.csv"
+inputDataset2 = "/home/mpiuser/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
 
 #specify output locatiion
-#outputLocation1 = "/home/mpiuser/FYP/gdelt/"
-#outputLocation2 = "/home/mpiuser/FYP/acled/"
+outputLocation1 = "/home/mpiuser/FYP/gdelt/"
+outputLocation2 = "/home/mpiuser/FYP/acled/"
 '''
+
+'''#############################################################################'''
 
 #read csv to pandas df
 #inputDataFrame = pd.read_csv(inputDataset)
@@ -95,7 +121,7 @@ outputLocation3 = "/home/mpiuser/Documents/FYP/gdelt/"
 #GDELT variables
 #======================
 startingDate = '2019.11.26'
-endingDate = '2019.12.02'
+endingDate = '2019.12.01'
 
 #select specific country records
 Actor1CountryCode = 'CE'
@@ -167,7 +193,7 @@ userDefinedEncodeColumns = ["Actor1Geo_CountryCode"]
 '''#######################		MINING   	####################################'''
 
 #random forest
-randomForestEstimatorRange1 = [80,150]
-randomForestDepthRange1 = [100,120]
-randomForestSplitRange1 = [2,4]
-randomForestFeaturesRange1 = [2,4]
+randomForestEstimatorRange1 = [80,90]
+randomForestDepthRange1 = [3,5]
+randomForestSplitRange1 = [2,3]
+randomForestFeaturesRange1 = [2,3]

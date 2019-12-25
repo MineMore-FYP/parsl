@@ -20,7 +20,7 @@ from python1 import *
 
 Iteration_no = sys.argv[1]
 @python_app
-def kmeans(n):	
+def kmeans(n):
 	import pandas as pd
 	from sklearn.cluster import KMeans
 	import numpy as np
@@ -28,10 +28,14 @@ def kmeans(n):
 	#from sklearn.cluster import KMeans
 	from sklearn.metrics import accuracy_score
 
+
+	#make this an input
 	df_hist = pd.read_csv('/home/mpiuser/Documents/FYP/gdelt/missingValuesMode.csv')
 	y = df_hist['QuadClass'].values
 	#df_hist = df_hist['GoldsteinScale']
-	df_hist = df_hist[['AvgTone', 'GoldsteinScale', 'NumMentions']] 
+	#make this an input
+	df_hist = df_hist[['AvgTone', 'GoldsteinScale', 'NumMentions']]
+	#whats going on here?
 	df_hist.to_csv('/home/mpiuser/Documents/FYP/gdelt/missingValuesMode2.csv')
 	X = df_hist.values.astype(np.float)
 
@@ -45,25 +49,25 @@ def kmeans(n):
 
 
 	k_means.predict(X_test)
-	
+
 	#print(k_means.labels_[:])
 	#print(y_test[:])
 
 	score = accuracy_score(y_test,k_means.predict(X_test))
 	#print('Accuracy:{0:f}'.format(score) + ' For ' + str(n) + ' clusters.\n' )
-				
-				
+
+
 	#.reshape(-1, 1)
 	#pass all the input parameters and the score
 	ClusterNo_accuracy = [n,score]
-	return ClusterNo_accuracy	    						  			    	
-					    						    	
+	return ClusterNo_accuracy
+
 
 results = []
 for i in numberOfClusters:
 	app_future = kmeans(i)
 	results.append(app_future)
-	
+
 # print each job status, initially all are running
 #print ("Job Status: {}".format([r.done() for r in results]))
 
