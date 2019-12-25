@@ -7,7 +7,6 @@ import numpy as np
 import time
 
 import os.path
-import sys
 import os,sys,inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
@@ -19,6 +18,7 @@ pd.options.mode.chained_assignment = None  # default='warn'
 
 currentModule = "randomForestClassification"
 workflowNumber = sys.argv[1]
+Iteration_no = sys.argv[2]
 
 if workflowNumber == "1":
 	orderOfModules = userScript.orderOfModules1
@@ -50,7 +50,7 @@ for i in range(len(orderOfModules)):
 			df = pd.read_csv(outputLocation + previousModule + ".csv")
 			break
 
-
+outputLocation = outputLocation + "rf/"
 
 @python_app
 def rfClassifier(estimators, depth, split, features, dFrame):
@@ -81,21 +81,13 @@ def rfClassifier(estimators, depth, split, features, dFrame):
 	#print(classification_report(y_test,y_pred))
 	#print(accuracy_score(y_test, y_pred))
 ##	return str(confusion_matrix(y_test,y_pred)) + '\n' + str(classification_report(y_test,y_pred)) + '\n' + str(accuracy_score(y_test, y_pred))
-	x = accuracy_score(y_test, y_pred)
-	return x
+	accuracyScore = accuracy_score(y_test, y_pred)
+	retArray = [estimators, depth, split,features, accuracyScore]
+	return retArray
 
 results = []
 #print(rfClassifier(100, 3, 2, 'auto', df).result())
-'''
-for i in range(randomForestEstimatorRange[0],randomForestEstimatorRange[1]):
-	for j in range(randomForestDepthRange[0],randomForestDepthRange[1]):
-		for k in range(randomForestSplitRange[0],randomForestSplitRange[1]):
-			for l in range(randomForestFeaturesRange[0], randomForestFeaturesRange[1]):
-				print(l)
-				x = rfClassifier(i,j,k,l, df)
-				#print(x)
-				results.append(x)
-'''
+
 print(randomForestEstimatorRange)
 print(randomForestDepthRange)
 print(randomForestSplitRange)
@@ -108,6 +100,15 @@ for i in range(randomForestEstimatorRange[0], randomForestEstimatorRange[1]):
 				x = rfClassifier(i,j,k,l,df)
 				results.append(x)
 
-# wait for all apps to complete
-print("Job Status: {}".format([r.result() for r in results]))
 
+# wait for all apps to complete
+return_array = [r.result() for r in results]
+
+dfa=pd.DataFrame(return_array)
+dfa.columns = ["Estimators","Depth","Split","MaxFeatures", "Accuracy"]
+#print(dfa)
+
+dfa.to_csv (outputLocation + Iteration_no + '_rf.csv', index = None, header=True)
+
+# wait for all apps to complete
+#print("Job Status: {}".format([r.result() for r in results]))

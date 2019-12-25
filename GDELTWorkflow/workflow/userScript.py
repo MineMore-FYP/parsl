@@ -81,13 +81,10 @@ outputLocation3 = "/home/amanda/FYP/gdelt/"
 inputDataset1 = "/home/clusteruser/FYP/gdelt/countrySelection.csv"
 inputDataset2 = "/home/clusteruser/gdeltDataFiles/ACLED2019-Sri_Lanka.csv"
 inputDataset3 = "/home/clusteruser/FYP/gdelt/missingValuesMode.csv"
-
-#specify output locatiion
 outputLocation1 = "/home/clusteruser/FYP/gdelt/"
 outputLocation2 = "/home/clusteruser/FYP/acled/"
 outputLocation3 = "/home/clusteruser/FYP/gdelt/"
 '''
-
 '''
 #=======================KALPANI===============================
 #input location
@@ -197,3 +194,8 @@ randomForestEstimatorRange1 = [80,90]
 randomForestDepthRange1 = [3,5]
 randomForestSplitRange1 = [2,3]
 randomForestFeaturesRange1 = [2,3]
+
+
+#k_means
+clusterLabel3 = ['QuadClass']
+otherInputs3 = ['AvgTone', 'GoldsteinScale', 'NumMentions']
