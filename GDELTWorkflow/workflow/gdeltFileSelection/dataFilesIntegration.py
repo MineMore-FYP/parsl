@@ -39,6 +39,7 @@ with open(path + "CSV.header.dailyupdates.txt") as csvfile:
 
 listDf = []
 
+#convert all csv data files to df s and concatenate those 
 df = pd.DataFrame(columns = header)
 for filename in modifiedSelectedFiles:
 	df_temp = pd.read_csv(path+  "modifiedSelectedFiles/" +filename, index_col=False)
@@ -47,6 +48,7 @@ for filename in modifiedSelectedFiles:
 
 #print(df)
 
+#convert final df to a csv
 df.to_csv(outputDataset, index = False, header=True)
 '''
 with open(outputDataset, "w", newline='', encoding='utf-8') as outcsv:

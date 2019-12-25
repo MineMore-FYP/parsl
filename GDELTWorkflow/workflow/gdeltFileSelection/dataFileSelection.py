@@ -114,7 +114,7 @@ def getDateRangeFiles():
 
 selectedFilesList = getDateRangeFiles()
 
-print(selectedFilesList)
+#print(selectedFilesList)
 print("File Selection Completed")
 
 modifiedSelectedFiles = []
@@ -124,10 +124,11 @@ with open(path + "CSV.header.dailyupdates.txt") as csvfile:
 	header = list(reader)[0]
 
 for filename in selectedFilesList:
-	print(filename)
+	#print(filename)
 	filenameNew = filename[0:8] + '.csv'
-	print(filenameNew)
+	#print(filenameNew)
 	modifiedSelectedFiles.append(filenameNew)
+	#create modified files inside a different folder which is in the gdelt folder
 	with open(path+  "modifiedSelectedFiles/" +filenameNew , "w", newline='', encoding='utf-8') as outcsv:
 		writer = csv.writer(outcsv, delimiter=',')
 		writer.writerow(header) # write the headers
@@ -149,15 +150,7 @@ for filenameNew in modifiedSelectedFiles:
 	df2 = df.loc[(df['Actor1Geo_CountryCode'] == userScript.Actor1CountryCode) | (df['Actor2Geo_CountryCode'] == userScript.Actor2CountryCode)]
 	#print(df2)
 
-	#write to a new csv
+	#overwrite the csv file
 	df2.to_csv(path+  "modifiedSelectedFiles/" + filenameNew, index = False, header=True)
 
-print("Select country completed")
-
-
-
-'''
-		with open(filename, 'r', newline='', encoding='utf-8') as incsv:
-			reader2 = csv.reader(incsv, delimiter="\t")
-			writer.writerows(row + [0.0] for row in reader2)
-		'''
+#print("Select country completed")
