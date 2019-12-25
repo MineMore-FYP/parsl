@@ -143,6 +143,7 @@ func readLines( progName string) [20]string{
 }
 
 func main(){
+	simplePythonCall1("logo.py")
 	for i := 1; i<=3; i++{
 		//check if input location is available
 		fmt.Println((i))
