@@ -50,34 +50,69 @@ orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns",
 
 orderOfModules3 = ["dropUserDefinedColumns", "kmeans"]
 
+
+'''############################File locations#################################'''
+'''
+When working - uncomment your location blocks or comments
+When commiting - comment again
+'''
+
 #Gdelt FileSelection
-datafilesLocation = '/home/amanda/FYP/data/'
+#datafilesLocation = '/home/amanda/FYP/data/'
 #datafilesLocation = '/home/clusteruser/gdeltDataFiles/'
+#datafilesLocation = '/home/mpiuser/Downloads/data/'
 
+
+'''
+#=========================AMANDA==============================
 #input location
-
 inputDataset1 = "/home/amanda/FYP/gdelt/countrySelection.csv"
 inputDataset2 = "/home/amanda/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
 inputDataset3 = "/home/amanda/FYP/gdelt/missingValuesMode.csv"
 
-#inputDataset1 = "/home/clusteruser/FYP/gdelt/countrySelection.csv"
-#inputDataset2 = "/home/clusteruser/gdeltDataFiles/ACLED2019-Sri_Lanka.csv"
-#inputDataset3 = "/home/clusteruser/FYP/gdelt/missingValuesMode.csv"
+#specify output locatiion
+outputLocation1 = "/home/amanda/FYP/gdelt/"
+outputLocation2 = "/home/amanda/FYP/acled/"
+outputLocation3 = "/home/amanda/FYP/gdelt/"
+'''
+
+'''
+#=========================CLUSTER==============================
+inputDataset1 = "/home/clusteruser/FYP/gdelt/countrySelection.csv"
+inputDataset2 = "/home/clusteruser/gdeltDataFiles/ACLED2019-Sri_Lanka.csv"
+inputDataset3 = "/home/clusteruser/FYP/gdelt/missingValuesMode.csv"
 
 #specify output locatiion
 outputLocation1 = "/home/clusteruser/FYP/gdelt/"
 outputLocation2 = "/home/clusteruser/FYP/acled/"
 outputLocation3 = "/home/clusteruser/FYP/gdelt/"
+'''
 
-#inputDataset1 = "/home/mpiuser/FYP/testcsv/dropCountry.csv"
-#inputDataset2 = "/home/mpiuser/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
-#inputDataset1 = "/home/mpiuser/Downloads/data/dropCountry.csv"
-#inputDataset2 = "/home/mpiuser/Downloads/data/ACLED2019-Sri_Lanka.csv"
+'''
+#=======================KALPANI===============================
+#input location
+inputDataset1 = "/home/mpiuser/Downloads/data/dropCountry.csv"
+inputDataset2 = "/home/mpiuser/Downloads/data/ACLED2019-Sri_Lanka.csv"
+inputDataset3 = "/home/mpiuser/Documents/FYP/gdelt/missingValuesMode.csv"
 
-outputLocation1 = "/home/amanda/FYP/gdelt/"
-outputLocation2 = "/home/amanda/FYP/acled/"
-outputLocation3 = "/home/amanda/FYP/gdelt/"
+#specify output locatiion
+outputLocation1 = "/home/mpiuser/Documents/FYP/gdelt/"
+outputLocation2 = "/home/mpiuser/Documents/FYP/acled/"
+outputLocation3 = "/home/mpiuser/Documents/FYP/gdelt/"
+'''
 
+'''
+#======================RAJINI=================================
+#input location
+inputDataset1 = "/home/mpiuser/FYP/testcsv/dropCountry.csv"
+inputDataset2 = "/home/mpiuser/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
+
+#specify output locatiion
+outputLocation1 = "/home/mpiuser/FYP/gdelt/"
+outputLocation2 = "/home/mpiuser/FYP/acled/"
+'''
+
+'''#############################################################################'''
 
 #read csv to pandas df
 #inputDataFrame = pd.read_csv(inputDataset)
