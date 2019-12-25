@@ -32,21 +32,22 @@ outputDataset = outputLocation + currentModule + ".csv"
 
 #create csv header
 with open(path + "CSV.header.dailyupdates.txt") as csvfile:
-    reader = csv.reader(csvfile, delimiter = "\t") # change contents to floats
-    header = list(reader)[0]
-    #print(header)
+	reader = csv.reader(csvfile, delimiter = "\t") # change contents to floats
+	header = list(reader)[0]
+	#print(header)
 
 
 with open(outputDataset, "w", newline='', encoding='utf-8') as outcsv:
-    writer = csv.writer(outcsv, delimiter=',')
-    writer.writerow(header) # write the header
+	writer = csv.writer(outcsv, delimiter=',')
+	writer.writerow(header) # write the header
 
 
-    # write the actual content line by line
-    for filename in selectedFilesList:
-        with open(filename, 'r', newline='', encoding='utf-8') as incsv:
-            reader = csv.reader(incsv, delimiter="\t")
-            writer.writerows(row + [0.0] for row in reader)
+	# write the actual content line by line
+	for filename in modifiedSelectedFiles:
+		with open(filename, 'r', newline='', encoding='utf-8') as incsv:
+			print(filename)
+			reader = csv.reader(incsv, delimiter="\t")
+			writer.writerows(row + [0.0] for row in reader)
 
 
 print("Integrated Selected files module completed")
