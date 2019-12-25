@@ -64,7 +64,7 @@ datafilesLocation = '/home/mpiuser/Downloads/data/'
 #outputLocation3 = "/home/amanda/FYP/gdelt/"
 '''
 
-
+'''
 #=======================KALPANI===============================
 #input location
 inputDataset1 = "/home/mpiuser/Downloads/data/dropCountry.csv"
@@ -75,7 +75,7 @@ inputDataset3 = "/home/mpiuser/Documents/FYP/gdelt/missingValuesMode.csv"
 outputLocation1 = "/home/mpiuser/Documents/FYP/gdelt/"
 outputLocation2 = "/home/mpiuser/Documents/FYP/acled/"
 outputLocation3 = "/home/mpiuser/Documents/FYP/gdelt/"
-
+'''
 
 '''
 #======================RAJINI=================================
