@@ -37,6 +37,8 @@ import sys
 ##mining/randomForestClassification.py
 #16
 ##cleaning/dropUserDefinedColumns.py
+#17
+##mining/kmeansModelTraining.py
 
 orderOfModules1 = ["dataFilesIntegration", "countrySelection", "selectUserDefinedColumns", "dropUniqueColumns",
 "dropColumnsCriteria","dropRowsCriteria","removeDuplicateRows",
@@ -49,8 +51,8 @@ orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns",
 orderOfModules3 = ["dropUserDefinedColumns", "kmeans"]
 
 #Gdelt FileSelection
-#datafilesLocation = '/home/amanda/FYP/data/'
-datafilesLocation = '/home/clusteruser/gdeltDataFiles/'
+datafilesLocation = '/home/amanda/FYP/data/'
+#datafilesLocation = '/home/clusteruser/gdeltDataFiles/'
 
 #input location
 
@@ -72,11 +74,9 @@ outputLocation3 = "/home/clusteruser/FYP/gdelt/"
 #inputDataset1 = "/home/mpiuser/Downloads/data/dropCountry.csv"
 #inputDataset2 = "/home/mpiuser/Downloads/data/ACLED2019-Sri_Lanka.csv"
 
-#specify output locatiion
-#outputLocation1 = "/home/mpiuser/FYP/gdelt/"
-#outputLocation2 = "/home/mpiuser/FYP/acled/"
-#outputLocation1 = "/home/mpiuser/Documents/FYP/gdelt/"
-#outputLocation2 = "/home/mpiuser/Documents/FYP/acled/"
+outputLocation1 = "/home/amanda/FYP/gdelt/"
+outputLocation2 = "/home/amanda/FYP/acled/"
+outputLocation3 = "/home/amanda/FYP/gdelt/"
 
 
 #read csv to pandas df
@@ -85,8 +85,8 @@ outputLocation3 = "/home/clusteruser/FYP/gdelt/"
 '''#######################		SELECTION	####################################'''
 #GDELT variables
 #======================
-startingDate = '2019.11.01'
-endingDate = '2019.11.06'
+startingDate = '2019.11.26'
+endingDate = '2019.12.01'
 
 #select specific country records
 Actor1CountryCode = 'CE'
