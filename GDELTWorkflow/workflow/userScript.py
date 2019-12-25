@@ -53,14 +53,14 @@ orderOfModules3 = ["dropUserDefinedColumns", "kmeans"]
 
 '''############################File locations#################################'''
 '''
-When working - uncomment your location blocks or comments
+When working - uncomment your location block or comments
 When commiting - comment again
 '''
 
 #Gdelt FileSelection
 #datafilesLocation = '/home/amanda/FYP/data/'
 #datafilesLocation = '/home/clusteruser/gdeltDataFiles/'
-#datafilesLocation = '/home/mpiuser/Downloads/data/'
+datafilesLocation = '/home/mpiuser/Downloads/data/'
 
 
 '''
@@ -85,7 +85,8 @@ outputLocation1 = "/home/clusteruser/FYP/gdelt/"
 outputLocation2 = "/home/clusteruser/FYP/acled/"
 outputLocation3 = "/home/clusteruser/FYP/gdelt/"
 '''
-'''
+
+
 #=======================KALPANI===============================
 #input location
 inputDataset1 = "/home/mpiuser/Downloads/data/dropCountry.csv"
@@ -96,7 +97,7 @@ inputDataset3 = "/home/mpiuser/Documents/FYP/gdelt/missingValuesMode.csv"
 outputLocation1 = "/home/mpiuser/Documents/FYP/gdelt/"
 outputLocation2 = "/home/mpiuser/Documents/FYP/acled/"
 outputLocation3 = "/home/mpiuser/Documents/FYP/gdelt/"
-'''
+
 
 '''
 #======================RAJINI=================================
@@ -197,5 +198,6 @@ randomForestFeaturesRange1 = [2,3]
 
 
 #k_means
-clusterLabel3 = ['QuadClass']
-otherInputs3 = ['AvgTone', 'GoldsteinScale', 'NumMentions']
+numberOfClusters = [2,3,4,5,6,7]
+clusterLabel1 = 'QuadClass'
+otherInputs1 = ['AvgTone', 'GoldsteinScale', 'NumMentions']
