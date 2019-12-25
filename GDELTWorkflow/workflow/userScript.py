@@ -51,28 +51,42 @@ orderOfModules3 = ["dropUserDefinedColumns", "kmeans"]
 #Gdelt FileSelection
 datafilesLocation = '/home/mpiuser/Downloads/data/'
 
+'''
+#=========================AMANDA==============================
 #input location
-
 #inputDataset1 = "/home/amanda/FYP/testcsv/dropCountry.csv"
 #inputDataset2 = "/home/amanda/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
 #inputDataset3 = "/home/amanda/FYP/gdelt/missingValuesMode.csv"
+
 #specify output locatiion
 #outputLocation1 = "/home/amanda/FYP/gdelt/"
 #outputLocation2 = "/home/amanda/FYP/acled/"
 #outputLocation3 = "/home/amanda/FYP/gdelt/"
+'''
 
-#inputDataset1 = "/home/mpiuser/FYP/testcsv/dropCountry.csv"
-#inputDataset2 = "/home/mpiuser/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
+
+#=======================KALPANI===============================
+#input location
 inputDataset1 = "/home/mpiuser/Downloads/data/dropCountry.csv"
 inputDataset2 = "/home/mpiuser/Downloads/data/ACLED2019-Sri_Lanka.csv"
 inputDataset3 = "/home/mpiuser/Documents/FYP/gdelt/missingValuesMode.csv"
 
 #specify output locatiion
-#outputLocation1 = "/home/mpiuser/FYP/gdelt/"
-#outputLocation2 = "/home/mpiuser/FYP/acled/"
 outputLocation1 = "/home/mpiuser/Documents/FYP/gdelt/"
 outputLocation2 = "/home/mpiuser/Documents/FYP/acled/"
 outputLocation3 = "/home/mpiuser/Documents/FYP/gdelt/"
+
+
+'''
+#======================RAJINI=================================
+#input location
+#inputDataset1 = "/home/mpiuser/FYP/testcsv/dropCountry.csv"
+#inputDataset2 = "/home/mpiuser/FYP/testcsv/ACLED2019-Sri_Lanka.csv"
+
+#specify output locatiion
+#outputLocation1 = "/home/mpiuser/FYP/gdelt/"
+#outputLocation2 = "/home/mpiuser/FYP/acled/"
+'''
 
 #read csv to pandas df
 #inputDataFrame = pd.read_csv(inputDataset)
