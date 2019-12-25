@@ -80,7 +80,7 @@ type Accuracy_class struct {
 }
 
 func FindMaxAccuracy(Accuracy_set []Accuracy_class) (max Accuracy_class) {
-	
+
 	max = Accuracy_set[0]
 	for _, accuracy_obj := range Accuracy_set {
 		if accuracy_obj.Accuracy > max.Accuracy {
@@ -143,7 +143,7 @@ func readLines( progName string) [20]string{
 }
 
 func main(){
-	for i := 1; i<=2; i++{
+	for i := 1; i<=3; i++{
 		//check if input location is available
 		fmt.Println((i))
 		//c1 := "python -c from workflow import userScript; print userScript.inputDataset" + strconv.Itoa(i)
@@ -307,24 +307,29 @@ func main(){
 	pythonCall("workflow/"+commandsArray[15], outChannelModule10, "1")
 	messagePassing(outChannelModule10, outChannelModule11)
 	fmt.Println(<- outChannelModule11)
-/*
-	inChannelModule31
+
+	inChannelModule31 := make(chan string,1)
 	outChannelModule31 := make(chan string, 1)
-	//pythonCall("workflow/mining/randomForestClassification.py", outChannelModule5)
-	pythonCall("workflow/"+commandsArray[15], outChannelModule10, "1")
-	messagePassing(outChannelModule10, outChannelModule11)
-	fmt.Println(<- outChannelModule11)
-*/
+	//pythonCall("workflow/cleaning/dropUserDefinedColumns.py", outChannelModule5)
+	go pythonCall("workflow/"+commandsArray[16], inChannelModule31, "3")
+	go messagePassing(inChannelModule31, outChannelModule31)
+	fmt.Println(<- outChannelModule31)
+
+	outChannelModule32 := make(chan string, 1)
+	//pythonCall("workflow/mining/kmeansModelTraining.py", outChannelModule5)
+	go pythonCall("workflow/"+commandsArray[17], outChannelModule31, "3")
+	go messagePassing(outChannelModule31, outChannelModule32)
+	fmt.Println(<- outChannelModule32)
 
 }
 
 /*
 	//==========================For kmeans - include in main loop========================
 	for i := 1;  i<=10; i++ {
-		
+
 		var x = simplePythonCall("kmeansModelTraining.py", strconv.Itoa(i))
 		fmt.Println(x)
-		
+
                 fmt.Printf("Kmeans with clusters 2,3,4,5,6,7 ran for " + strconv.Itoa(i) + " time(s).\n")
         }
 
@@ -348,17 +353,17 @@ func main(){
 			fmt.Println(err)
 			return
 		    }
-		     
-		    var mode = fi.Mode(); 
+
+		    var mode = fi.Mode();
 		    if mode.IsDir() == true {
 			continue
-		    }			
+		    }
 
 
 		csvFile, _ := os.Open(file)
-		
+
     		reader := csv.NewReader(bufio.NewReader(csvFile))
-		
+
 		    for {
 			line, error := reader.Read()
 			if error == io.EOF {
@@ -376,28 +381,17 @@ func main(){
 			    Accuracy: accuracy,
 			})
 		    }
-		    
+
 		    //Accuracy_set = removeIt(Accuracy_class{"No_of_clusters", "Accuracy"}, Accuracy_set)
-		    
+
     	}
 	//accuracyJson, _ := json.Marshal(Accuracy_set)
 	//fmt.Println(string(accuracyJson))
 	var max = FindMaxAccuracy(Accuracy_set)
 	Display(max)
-	
+
 	var optimalClusters = strconv.FormatInt(max.Clusters, 10)
 	fmt.Println(reflect.TypeOf(optimalClusters))
 	simplePythonCall("knowledage_presentation.py", "3")
-
-*/
-
-/*
-
-NEED TO CONNECT WITH RF WF
-	outChannelModule29 := make(chan string, 1)
-	//pythonCall("workflow/integrateLabels/integrate.py", outChannelModule5)
-	pythonCall("workflow/"+commandsArray[5], outChannelModule28, "2")
-	messagePassing(outChannelModule28, outChannelModule29)
-	fmt.Println(<- outChannelModule29)
 
 */
