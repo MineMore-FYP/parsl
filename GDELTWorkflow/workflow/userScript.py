@@ -39,6 +39,8 @@ import sys
 ##cleaning/dropUserDefinedColumns.py
 #17
 ##mining/kmeansModelTraining.py
+#18
+##mining/knowledge_presentation.py
 
 orderOfModules1 = ["dataFilesIntegration", "countrySelection", "selectUserDefinedColumns", "dropUniqueColumns",
 "dropColumnsCriteria","dropRowsCriteria","removeDuplicateRows",
@@ -48,7 +50,7 @@ orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns",
 "removeDuplicateRows", "missingValuesMode", "addLabelColumn",
 "assignCountryCode", "splitDate", "appendRecords"]
 
-orderOfModules3 = ["kmeansModelTraining"]
+orderOfModules3 = ["kmeansModelTraining","knowledge_presentation"]
 
 
 '''############################File locations#################################'''

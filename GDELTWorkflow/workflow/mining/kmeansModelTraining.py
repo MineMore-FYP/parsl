@@ -52,7 +52,6 @@ for i in range(len(orderOfModules)):
 	if currentModule == orderOfModules[i]:
 		if i == 0:
 			df = pd.read_csv(inputDataset)
-			print("sdfsdfdf")
 			break
 		else:
 			previousModule = orderOfModules[i-1]
@@ -85,7 +84,7 @@ def kmeans(n):
 	from sklearn.metrics import accuracy_score
 
 
-	k_means = KMeans(n_clusters=n)
+	k_means = KMeans(n_clusters=n,random_state=40)
 	kmeans = k_means.fit(X_train)
 
 	#print(k_means.labels_[:])
