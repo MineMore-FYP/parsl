@@ -4,7 +4,7 @@ load(config)
 import pandas as pd
 import numpy as np
 #from sklearn.cluster import KMeans
-#from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split
 #from sklearn.cluster import KMeans
 #from sklearn.metrics import accuracy_score
 #import matplotlib.pyplot as plt
@@ -30,18 +30,21 @@ if workflowNumber == "1":
 	outputLocation = userScript.outputLocation1
 	clusterLabel = userScript.clusterLabel1
 	otherInputs = userScript.otherInputs1
+	numberOfClusters=userScript.numberOfClusters
 elif workflowNumber == "2":
 	orderOfModules = userScript.orderOfModules2
 	inputDataset = userScript.inputDataset2
 	outputLocation = userScript.outputLocation2
-	clusterLabel = userScript.clusterLabel2
-	otherInputs = userScript.otherInputs2
+	clusterLabel = userScript.clusterLabel1
+	otherInputs = userScript.otherInputs1
+	numberOfClusters = userScript.numberOfClusters
 elif workflowNumber == "3":
 	orderOfModules = userScript.orderOfModules3
 	inputDataset = userScript.inputDataset3
 	outputLocation = userScript.outputLocation3
-	clusterLabel = userScript.clusterLabel3
-	otherInputs = userScript.otherInputs3
+	clusterLabel = userScript.clusterLabel1
+	otherInputs = userScript.otherInputs1
+	numberOfClusters = userScript.numberOfClusters
 
 df = pd.DataFrame()
 for i in range(len(orderOfModules)):
@@ -56,28 +59,29 @@ for i in range(len(orderOfModules)):
 			break
 outputLocation = outputLocation + "kmeans/"
 
+#make this an input
+#df = pd.read_csv('/home/mpiuser/Documents/FYP/gdelt/missingValuesMode.csv')
+#input
+y = df[clusterLabel].values
+#df_hist = df_hist['GoldsteinScale']
+#make this an input
+#df = df[['AvgTone', 'GoldsteinScale', 'NumMentions']]
+df = df[otherInputs]
+	
+X = df.values.astype(np.float)
+
+X_train, X_test,y_train,y_test =  train_test_split(X,y,test_size=0.20,random_state=70)
+
 @python_app
-def kmeans(n, clusterLabel, otherInputs, df):
+def kmeans(n):
 	import pandas as pd
 	from sklearn.cluster import KMeans
 	import numpy as np
-	from sklearn.model_selection import train_test_split
+	
 	#from sklearn.cluster import KMeans
 	from sklearn.metrics import accuracy_score
 
-	#make this an input
-	#df_hist = pd.read_csv('/home/mpiuser/Documents/FYP/gdelt/missingValuesMode.csv')
-	#input
-	y = df[clusterLabel].values
-	#df_hist = df_hist['GoldsteinScale']
-	#make this an input
-	#df = df[['AvgTone', 'GoldsteinScale', 'NumMentions']]
-	df = df[otherInputs]
-	#whats going on here?
-	#df_hist.to_csv('/home/mpiuser/Documents/FYP/gdelt/missingValuesMode2.csv')
-	X = df.values.astype(np.float)
-
-	X_train, X_test,y_train,y_test =  train_test_split(X,y,test_size=0.20,random_state=70)
+	
 	k_means = KMeans(n_clusters=n)
 	kmeans = k_means.fit(X_train)
 
@@ -101,7 +105,7 @@ def kmeans(n, clusterLabel, otherInputs, df):
 
 results = []
 for i in numberOfClusters:
-	app_future = kmeans(i, clusterLabel, otherInputs, df)
+	app_future = kmeans(i)
 	results.append(app_future)
 
 # print each job status, initially all are running
