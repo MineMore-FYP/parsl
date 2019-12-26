@@ -115,6 +115,82 @@ func Display(accuracy_obj Accuracy_class) {
 	fmt.Println("Accuracy: ", accuracy_obj.Accuracy)
 }
 
+func accuracySelection (inChannel chan <- string) {
+
+	var files []string
+	/*
+	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.outputLocation3")
+	out, err0 := cmd.CombinedOutput()
+	if err0 != nil {
+		fmt.Println(err0)
+		// Exit with status 3.
+    		os.Exit(3)
+	}
+	
+	path := string(out)
+    	subFolder := fmt.Sprintf("%s%s", path, "kmeans/")
+	*/
+	root := "/home/mpiuser/Documents/FYP/gdelt/kmeans/" 
+    	err1 := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+        	files = append(files, path)
+        	return nil
+    	})
+    	if err1 != nil {
+        	panic(err1)
+    	}
+
+	var Accuracy_set []Accuracy_class
+
+    	for _, file := range files {
+        	//if directory ignore
+		fi, err2 := os.Stat(file)
+		    if err2 != nil {
+			fmt.Println(err2)
+			return
+		    }
+
+		    var mode = fi.Mode();
+		    if mode.IsDir() == true {
+			continue
+		    }
+
+
+		csvFile, _ := os.Open(file)
+
+    		reader := csv.NewReader(bufio.NewReader(csvFile))
+
+		    for {
+			line, error := reader.Read()
+			if error == io.EOF {
+			    break
+			} else if error != nil {
+			    log.Fatal(error)
+			}
+			var clusters int64
+			var accuracy float64
+			clusters, _ = strconv.ParseInt(line[0],10,0)
+			accuracy, _ = strconv.ParseFloat(line[1],64)
+			//fmt.Println(reflect.TypeOf(newc))
+			Accuracy_set = append(Accuracy_set, Accuracy_class{
+			    Clusters: clusters,
+			    Accuracy: accuracy,
+			})
+		    }
+
+		    //Accuracy_set = removeIt(Accuracy_class{"No_of_clusters", "Accuracy"}, Accuracy_set)
+
+    	}
+	//accuracyJson, _ := json.Marshal(Accuracy_set)
+	//fmt.Println(string(accuracyJson))
+	var max = FindMaxAccuracy(Accuracy_set)
+	Display(max)
+
+	msg:= "Best accuracy selection done"
+	inChannel <- msg
+	
+
+}
+
 ///=====================================================
 
 func messagePassing(inChannel <- chan string, outChannel chan <- string ){
@@ -346,82 +422,5 @@ func main(){
 	accuracySelection(outChannelModule7)
 	go messagePassing(outChannelModule7, outChannelModule32)
 	fmt.Println(<- outChannelModule32)
-
-}
-
-
-func accuracySelection (inChannel chan <- string) {
-
-	var files []string
-	/*
-	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.outputLocation3")
-	out, err0 := cmd.CombinedOutput()
-	if err0 != nil {
-		fmt.Println(err0)
-		// Exit with status 3.
-    		os.Exit(3)
-	}
-	
-	path := string(out)
-    	subFolder := fmt.Sprintf("%s%s", path, "kmeans/")
-	*/
-	root := "/home/mpiuser/Documents/FYP/gdelt/kmeans/" 
-    	err1 := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
-        	files = append(files, path)
-        	return nil
-    	})
-    	if err1 != nil {
-        	panic(err1)
-    	}
-
-	var Accuracy_set []Accuracy_class
-
-    	for _, file := range files {
-        	//if directory ignore
-		fi, err2 := os.Stat(file)
-		    if err2 != nil {
-			fmt.Println(err2)
-			return
-		    }
-
-		    var mode = fi.Mode();
-		    if mode.IsDir() == true {
-			continue
-		    }
-
-
-		csvFile, _ := os.Open(file)
-
-    		reader := csv.NewReader(bufio.NewReader(csvFile))
-
-		    for {
-			line, error := reader.Read()
-			if error == io.EOF {
-			    break
-			} else if error != nil {
-			    log.Fatal(error)
-			}
-			var clusters int64
-			var accuracy float64
-			clusters, _ = strconv.ParseInt(line[0],10,0)
-			accuracy, _ = strconv.ParseFloat(line[1],64)
-			//fmt.Println(reflect.TypeOf(newc))
-			Accuracy_set = append(Accuracy_set, Accuracy_class{
-			    Clusters: clusters,
-			    Accuracy: accuracy,
-			})
-		    }
-
-		    //Accuracy_set = removeIt(Accuracy_class{"No_of_clusters", "Accuracy"}, Accuracy_set)
-
-    	}
-	//accuracyJson, _ := json.Marshal(Accuracy_set)
-	//fmt.Println(string(accuracyJson))
-	var max = FindMaxAccuracy(Accuracy_set)
-	Display(max)
-
-	msg:= "Best accuracy selection done"
-	inChannel <- msg
-	
 
 }

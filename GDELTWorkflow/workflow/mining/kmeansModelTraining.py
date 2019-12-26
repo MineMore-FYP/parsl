@@ -1,6 +1,5 @@
 from parsl import load, python_app
-from parsl.configs.local_threads import config
-load(config)
+
 import pandas as pd
 import numpy as np
 #from sklearn.cluster import KMeans
