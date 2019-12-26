@@ -62,7 +62,7 @@ When commiting - comment again
 #Gdelt FileSelection
 #datafilesLocation = '/home/amanda/FYP/data/'
 #datafilesLocation = '/home/clusteruser/gdeltDataFiles/'
-datafilesLocation = '/home/mpiuser/Downloads/data/'
+#datafilesLocation = '/home/mpiuser/Downloads/data/'
 
 
 '''
@@ -88,7 +88,7 @@ outputLocation2 = "/home/clusteruser/FYP/acled/"
 outputLocation3 = "/home/clusteruser/FYP/gdelt/"
 '''
 
-
+'''
 #=======================KALPANI===============================
 #input location
 inputDataset1 = "/home/mpiuser/Downloads/data/dropCountry.csv"
@@ -99,7 +99,7 @@ inputDataset3 = "/home/mpiuser/Documents/FYP/gdelt/missingValuesMode.csv"
 outputLocation1 = "/home/mpiuser/Documents/FYP/gdelt/"
 outputLocation2 = "/home/mpiuser/Documents/FYP/acled/"
 outputLocation3 = "/home/mpiuser/Documents/FYP/gdelt/"
-
+'''
 
 '''
 #======================RAJINI=================================
