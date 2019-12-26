@@ -286,6 +286,7 @@ func main(){
 	//configurations
 	simplePythonCall1("workflow/parslConfig.py")
 
+	//startingTime := time.Now()
 
 	//start module execution from here onwards
 	inChannelModule0 := make(chan string, 1)
@@ -336,14 +337,14 @@ func main(){
 	go pythonCall("workflow/"+commandsArray[7], outChannelModule6, "1")
 	go messagePassing(outChannelModule6, outChannelModule7)
 	fmt.Println(<- outChannelModule7)
-
+/*
 	outChannelModule8 := make(chan string, 1)
 	//pythonCall("workflow/transformation/combineColumns.py", outChannelModule8)
 	go pythonCall("workflow/"+commandsArray[9], outChannelModule7, "1")
 	go messagePassing(outChannelModule7, outChannelModule8)
 	fmt.Println(<- outChannelModule8)
 
-/*
+
 	inChannelModule21 := make(chan string, 1)
 	outChannelModule21 := make(chan string, 1)
 	pythonCall("workflow/"+commandsArray[2], inChannelModule21,"2")
@@ -422,5 +423,9 @@ func main(){
 	accuracySelection(outChannelModule7)
 	go messagePassing(outChannelModule7, outChannelModule32)
 	fmt.Println(<- outChannelModule32)
+
+	//endingTime := time.Now()
+	//diff := endingTime.Sub(startingTime)
+	//fmt.Println(diff)
 
 }

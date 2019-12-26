@@ -16,6 +16,7 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir)
 
 import userScript
+import parslConfig
 #ignore warnings printed on terminal
 pd.options.mode.chained_assignment = None  # default='warn'
 
@@ -121,7 +122,7 @@ dfa.columns = ["No_of_clusters", "Accuracy"]
 #print(dfa)
 
 dfa.to_csv (outputLocation + Iteration_no + '_kmeans.csv', index = None, header=True)
-print("Kmeans with clusters 2,3,4,5,6,7 ran for " + i + " time(s).\n")
+print("Kmeans with clusters 2,3,4,5,6,7 ran for " + Iteration_no + " time(s).\n")
 
 # print each job status, they will now be finished
 #print ("Job Status: {}".format(return_array))

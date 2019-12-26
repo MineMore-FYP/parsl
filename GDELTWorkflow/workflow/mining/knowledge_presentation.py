@@ -22,17 +22,23 @@ import userScript
 data = pd.read_csv('/home/mpiuser/Documents/FYP/gdelt/missingValuesMode.csv')
 dfin = DataFrame(data, columns = ['AvgTone', 'GoldsteinScale', 'NumMentions'])
 X = dfin.values
-n = 3 #int(sys.argv[1])
+
+n = 2 #int(sys.argv[1])
 
 
-kmeans = KMeans(n_clusters=n).fit(X)
+kmeans = KMeans(n_clusters=n, random_state= 0).fit(X)
+dfin['clusterNo'] = kmeans.labels_[:]
+print(np.unique(kmeans.labels_[:]))
+u = kmeans.labels_[:]
+zeros = np.sum(u == 0)
+ones = np.sum(u == 1)
+print(zeros)
+print(ones)
 centroids = kmeans.cluster_centers_
 print(centroids)
+#print(dfin)
 
-for i in range(0,n):
-	
-	
-cluster1Centroid = centroids[0].tolist()
+dfin.to_csv (userScript.outputLocation3 + 'kmeans/' + 'labeledKmeansOutput.csv', index = None, header=True)
 
 
 
