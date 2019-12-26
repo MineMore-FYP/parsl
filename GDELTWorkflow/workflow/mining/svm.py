@@ -26,8 +26,8 @@ svm_model_linear = SVC(kernel = 'linear', C = 1).fit(X, y)
 
 
 # model accuracy for X 
-accuracy = svm_model_linear.score(X, y) 
-print(accuracy)
+#accuracy = svm_model_linear.score(X, y) 
+#print(accuracy)
 
 svm_predictions = svm_model_linear.predict([[-0.25011820853917, 5.4, 2]])
 print(svm_predictions) 
