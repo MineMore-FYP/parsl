@@ -23,7 +23,14 @@ pd.options.mode.chained_assignment = None  # default='warn'
 currentModule = "kmeansModelTraining"
 workflowNumber = sys.argv[1]
 Iteration_no = sys.argv[2]
-
+'''
+print(workflowNumber)
+print(Iteration_no)
+print(userScript.clusterLabel1)
+print(userScript.otherInputs1)
+print(userScript.numberOfClusters)
+print(userScript.inputDataset3)
+'''
 if workflowNumber == "1":
 	orderOfModules = userScript.orderOfModules1
 	inputDataset = userScript.inputDataset1
@@ -42,9 +49,9 @@ elif workflowNumber == "3":
 	orderOfModules = userScript.orderOfModules3
 	inputDataset = userScript.inputDataset3
 	outputLocation = userScript.outputLocation3
-	clusterLabel = userScript.clusterLabel1
-	otherInputs = userScript.otherInputs1
-	numberOfClusters = userScript.numberOfClusters
+	clusterLabel = userScript.clusterLabel3
+	otherInputs = userScript.otherInputs3
+	numberOfClusters = userScript.numberOfClusters3
 
 df = pd.DataFrame()
 for i in range(len(orderOfModules)):
@@ -52,6 +59,7 @@ for i in range(len(orderOfModules)):
 	if currentModule == orderOfModules[i]:
 		if i == 0:
 			df = pd.read_csv(inputDataset)
+			print("sdfsdfdf")
 			break
 		else:
 			previousModule = orderOfModules[i-1]
@@ -59,6 +67,8 @@ for i in range(len(orderOfModules)):
 			break
 outputLocation = outputLocation + "kmeans/"
 
+
+print(df)
 #make this an input
 #df = pd.read_csv('/home/mpiuser/Documents/FYP/gdelt/missingValuesMode.csv')
 #input
@@ -119,6 +129,9 @@ dfa.columns = ["No_of_clusters", "Accuracy"]
 #print(dfa)
 
 dfa.to_csv (outputLocation + Iteration_no + '_kmeans.csv', index = None, header=True)
+print("Kmeans with clusters 2,3,4,5,6,7 ran for " + i + " time(s).\n")
 
 # print each job status, they will now be finished
 #print ("Job Status: {}".format(return_array))
+
+#print('Kmeans model traning completed')

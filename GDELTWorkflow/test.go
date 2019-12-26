@@ -11,6 +11,9 @@ import (
 	"io/ioutil"
 	"log"
 	//"time"
+	"path/filepath"
+	"encoding/csv"
+	"io"
 )
 
 func pythonCall(progName string, inChannel chan <- string, workflowNumber string) {
@@ -63,6 +66,23 @@ func simplePythonCall(progName string, itr string) string{
     	if err != nil { fmt.Println(err); }
     	//fmt.Println(reflect.TypeOf(out))
 	return string(out)
+}
+
+func miningPythonCall(progName string, inChannel chan <- string, workflowNumber string, itr string){
+	cmd := exec.Command("python3", progName, workflowNumber, itr)
+	out, err := cmd.CombinedOutput()
+	log.Println(cmd.Run())
+
+	if err != nil {
+		fmt.Println(err)
+		// Exit with status 3.
+    		os.Exit(3)
+	}
+	//fmt.Println(string(out))
+	//check if msg is legit
+	msg := string(out)
+	//msg := ("Module Completed: " + progName)
+	inChannel <- msg
 }
 
 func removeIt(ss Accuracy_class, ssSlice []Accuracy_class) []Accuracy_class {
@@ -247,7 +267,7 @@ func main(){
 	go messagePassing(outChannelModule7, outChannelModule8)
 	fmt.Println(<- outChannelModule8)
 
-
+/*
 	inChannelModule21 := make(chan string, 1)
 	outChannelModule21 := make(chan string, 1)
 	pythonCall("workflow/"+commandsArray[2], inChannelModule21,"2")
@@ -315,43 +335,52 @@ func main(){
 	go pythonCall("workflow/"+commandsArray[16], inChannelModule31, "3")
 	go messagePassing(inChannelModule31, outChannelModule31)
 	fmt.Println(<- outChannelModule31)
-
+*/
 	outChannelModule32 := make(chan string, 1)
-	//pythonCall("workflow/mining/kmeansModelTraining.py", outChannelModule5)
-	go pythonCall("workflow/"+commandsArray[17], outChannelModule31, "3")
-	go messagePassing(outChannelModule31, outChannelModule32)
+	for i := 1;  i<=10; i++ {
+
+		go miningPythonCall("workflow/mining/kmeansModelTraining.py", outChannelModule7, "3", strconv.Itoa(i))
+
+                //fmt.Printf("Kmeans with clusters 2,3,4,5,6,7 ran for " + strconv.Itoa(i) + " time(s).\n")
+        }
+	accuracySelection(outChannelModule7)
+	go messagePassing(outChannelModule7, outChannelModule32)
 	fmt.Println(<- outChannelModule32)
 
 }
 
-/*
-	//==========================For kmeans - include in main loop========================
-	for i := 1;  i<=10; i++ {
 
-		var x = simplePythonCall("kmeansModelTraining.py", strconv.Itoa(i))
-		fmt.Println(x)
-
-                fmt.Printf("Kmeans with clusters 2,3,4,5,6,7 ran for " + strconv.Itoa(i) + " time(s).\n")
-        }
+func accuracySelection (inChannel chan <- string) {
 
 	var files []string
-
-    	root := "/home/mpiuser/Documents/FYP/gdelt/kmeans/"
-    	err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+	/*
+	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.outputLocation3")
+	out, err0 := cmd.CombinedOutput()
+	if err0 != nil {
+		fmt.Println(err0)
+		// Exit with status 3.
+    		os.Exit(3)
+	}
+	
+	path := string(out)
+    	subFolder := fmt.Sprintf("%s%s", path, "kmeans/")
+	*/
+	root := "/home/mpiuser/Documents/FYP/gdelt/kmeans/" 
+    	err1 := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
         	files = append(files, path)
         	return nil
     	})
-    	if err != nil {
-        	panic(err)
+    	if err1 != nil {
+        	panic(err1)
     	}
 
 	var Accuracy_set []Accuracy_class
 
     	for _, file := range files {
         	//if directory ignore
-		fi, err := os.Stat(file)
-		    if err != nil {
-			fmt.Println(err)
+		fi, err2 := os.Stat(file)
+		    if err2 != nil {
+			fmt.Println(err2)
 			return
 		    }
 
@@ -391,8 +420,8 @@ func main(){
 	var max = FindMaxAccuracy(Accuracy_set)
 	Display(max)
 
-	var optimalClusters = strconv.FormatInt(max.Clusters, 10)
-	fmt.Println(reflect.TypeOf(optimalClusters))
-	simplePythonCall("knowledage_presentation.py", "3")
+	msg:= "Best accuracy selection done"
+	inChannel <- msg
+	
 
-*/
+}
