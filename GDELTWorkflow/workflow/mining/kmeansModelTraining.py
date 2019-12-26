@@ -37,14 +37,14 @@ if workflowNumber == "1":
 	outputLocation = userScript.outputLocation1
 	clusterLabel = userScript.clusterLabel1
 	otherInputs = userScript.otherInputs1
-	numberOfClusters=userScript.numberOfClusters
+	numberOfClusters=userScript.numberOfClusters1
 elif workflowNumber == "2":
 	orderOfModules = userScript.orderOfModules2
 	inputDataset = userScript.inputDataset2
 	outputLocation = userScript.outputLocation2
-	clusterLabel = userScript.clusterLabel1
-	otherInputs = userScript.otherInputs1
-	numberOfClusters = userScript.numberOfClusters
+	clusterLabel = userScript.clusterLabel3
+	otherInputs = userScript.otherInputs3
+	numberOfClusters = userScript.numberOfClusters2
 elif workflowNumber == "3":
 	orderOfModules = userScript.orderOfModules3
 	inputDataset = userScript.inputDataset3
@@ -77,7 +77,7 @@ y = df[clusterLabel].values
 #make this an input
 #df = df[['AvgTone', 'GoldsteinScale', 'NumMentions']]
 df = df[otherInputs]
-	
+
 X = df.values.astype(np.float)
 
 X_train, X_test,y_train,y_test =  train_test_split(X,y,test_size=0.20,random_state=70)
@@ -87,11 +87,11 @@ def kmeans(n):
 	import pandas as pd
 	from sklearn.cluster import KMeans
 	import numpy as np
-	
+
 	#from sklearn.cluster import KMeans
 	from sklearn.metrics import accuracy_score
 
-	
+
 	k_means = KMeans(n_clusters=n)
 	kmeans = k_means.fit(X_train)
 
