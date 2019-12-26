@@ -16,6 +16,7 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir)
 
 import userScript
+import parslConfig
 #ignore warnings printed on terminal
 pd.options.mode.chained_assignment = None  # default='warn'
 
@@ -51,7 +52,6 @@ for i in range(len(orderOfModules)):
 	if currentModule == orderOfModules[i]:
 		if i == 0:
 			df = pd.read_csv(inputDataset)
-			print("sdfsdfdf")
 			break
 		else:
 			previousModule = orderOfModules[i-1]
@@ -84,7 +84,7 @@ def kmeans(n):
 	from sklearn.metrics import accuracy_score
 
 
-	k_means = KMeans(n_clusters=n)
+	k_means = KMeans(n_clusters=n,random_state=40)
 	kmeans = k_means.fit(X_train)
 
 	#print(k_means.labels_[:])
@@ -121,7 +121,7 @@ dfa.columns = ["No_of_clusters", "Accuracy"]
 #print(dfa)
 
 dfa.to_csv (outputLocation + Iteration_no + '_kmeans.csv', index = None, header=True)
-print("Kmeans with clusters 2,3,4,5,6,7 ran for " + i + " time(s).\n")
+print("Kmeans with clusters 2,3,4,5,6,7 ran for " + Iteration_no + " time(s).\n")
 
 # print each job status, they will now be finished
 #print ("Job Status: {}".format(return_array))

@@ -110,7 +110,7 @@ func FindMaxAccuracy(Accuracy_set []Accuracy_class) (max Accuracy_class) {
 	return max
 }
 
-func Display(accuracy_obj Accuracy_class) {
+func Display(accuracy_obj Accuracy_class){
 	fmt.Println("No of clusters: ", accuracy_obj.Clusters)
 	fmt.Println("Accuracy: ", accuracy_obj.Accuracy)
 }
@@ -135,6 +135,7 @@ func accuracySelection (inChannel chan <- string) {
         	files = append(files, path)
         	return nil
     	})
+	fmt.Println(files)
     	if err1 != nil {
         	panic(err1)
     	}
@@ -182,14 +183,39 @@ func accuracySelection (inChannel chan <- string) {
     	}
 	//accuracyJson, _ := json.Marshal(Accuracy_set)
 	//fmt.Println(string(accuracyJson))
+	//fmt.Println(Accuracy_set)
 	var max = FindMaxAccuracy(Accuracy_set)
+	var n = max.Clusters
+	writeAccuracyFile(n)
 	Display(max)
+	//fmt.Println(display)
 
 	msg:= "Best accuracy selection done"
 	inChannel <- msg
 	
 
 }
+
+func writeAccuracyFile(n int64) {  
+    f, err := os.Create("/home/mpiuser/Documents/FYP/gdelt/test.txt")
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+    l, err := f.WriteString(strconv.FormatInt(n,10))
+    if err != nil {
+        fmt.Println(err)
+        f.Close()
+        return
+    }
+    fmt.Println(l, "bytes written successfully")
+    err = f.Close()
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+}
+
 
 ///=====================================================
 
@@ -286,7 +312,6 @@ func main(){
 	//configurations
 	simplePythonCall1("workflow/parslConfig.py")
 
-
 	//start module execution from here onwards
 	inChannelModule0 := make(chan string, 1)
 	outChannelModule0 := make(chan string, 1)
@@ -336,14 +361,14 @@ func main(){
 	go pythonCall("workflow/"+commandsArray[7], outChannelModule6, "1")
 	go messagePassing(outChannelModule6, outChannelModule7)
 	fmt.Println(<- outChannelModule7)
-
+/*
 	outChannelModule8 := make(chan string, 1)
 	//pythonCall("workflow/transformation/combineColumns.py", outChannelModule8)
 	go pythonCall("workflow/"+commandsArray[9], outChannelModule7, "1")
 	go messagePassing(outChannelModule7, outChannelModule8)
 	fmt.Println(<- outChannelModule8)
 
-/*
+
 	inChannelModule21 := make(chan string, 1)
 	outChannelModule21 := make(chan string, 1)
 	pythonCall("workflow/"+commandsArray[2], inChannelModule21,"2")
@@ -414,13 +439,16 @@ func main(){
 */
 	outChannelModule32 := make(chan string, 1)
 	for i := 1;  i<=10; i++ {
-
-		go miningPythonCall("workflow/mining/kmeansModelTraining.py", outChannelModule7, "3", strconv.Itoa(i))
-
-                //fmt.Printf("Kmeans with clusters 2,3,4,5,6,7 ran for " + strconv.Itoa(i) + " time(s).\n")
+		go miningPythonCall("workflow/" +commandsArray[17], outChannelModule7, "3", strconv.Itoa(i))
         }
 	accuracySelection(outChannelModule7)
 	go messagePassing(outChannelModule7, outChannelModule32)
 	fmt.Println(<- outChannelModule32)
+
+	outChannelModule33 := make(chan string, 1)
+	//pythonCall("workflow/cleaning/dropUserDefinedColumns.py", outChannelModule5)
+	go pythonCall("workflow/"+commandsArray[18], outChannelModule7, "3")
+	go messagePassing(outChannelModule7, outChannelModule33)
+	fmt.Println(<- outChannelModule33)
 
 }

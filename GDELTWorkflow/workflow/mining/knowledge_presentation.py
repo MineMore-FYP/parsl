@@ -15,24 +15,62 @@ sys.path.insert(0,parentdir)
 import userScript
 
 
+currentModule = "knowledge_presentation"
+workflowNumber = sys.argv[1]
 
+if workflowNumber == "1":
+	orderOfModules = userScript.orderOfModules1
+	inputDataset = userScript.inputDataset1
+	outputLocation = userScript.outputLocation1
+elif workflowNumber == "2":
+	orderOfModules = userScript.orderOfModules2
+	inputDataset = userScript.inputDataset2
+	outputLocation = userScript.outputLocation2
+elif workflowNumber == "3":
+	orderOfModules = userScript.orderOfModules3
+	inputDataset = "/home/mpiuser/Documents/FYP/gdelt/test.txt"
+	outputLocation = userScript.outputLocation3
+
+df = pd.DataFrame()
+for i in range(len(orderOfModules)):
+	#print(orderOfModules[i])
+	if currentModule == orderOfModules[i]:
+		if i == 0:
+			df = pd.read_csv(inputDataset)
+			break
+		elif i == 1:
+			previousModule = "missingValuesMode"
+			df = pd.read_csv(outputLocation + previousModule + ".csv")
+			break
+		else:
+			previousModule = orderOfModules[i-1]
+			df = pd.read_csv(outputLocation + previousModule + ".csv")
+			break
+#outputLocation = outputLocation + "kmeans/"
 
 #pp = PdfPages('/home/mpiuser/Documents/FYP/gdelt/plot_Kmeans.pdf')
 
-data = pd.read_csv('/home/mpiuser/Documents/FYP/gdelt/missingValuesMode.csv')
-dfin = DataFrame(data, columns = ['AvgTone', 'GoldsteinScale', 'NumMentions'])
+#data = pd.read_csv('/home/mpiuser/Documents/FYP/gdelt/missingValuesMode.csv')
+dfin = DataFrame(df, columns = ['AvgTone', 'GoldsteinScale', 'NumMentions'])
 X = dfin.values
-n = 3 #int(sys.argv[1])
+
+f= open(inputDataset, "r")
+n = int(f.read())#int(sys.argv[1])
 
 
-kmeans = KMeans(n_clusters=n).fit(X)
+kmeans = KMeans(n_clusters=n, random_state= 0).fit(X)
+dfin['clusterNo'] = kmeans.labels_[:]
+#print(np.unique(kmeans.labels_[:]))
+u = kmeans.labels_[:]
+zeros = np.sum(u == 0)
+ones = np.sum(u == 1)
+#print(zeros)
+#print(ones)
 centroids = kmeans.cluster_centers_
-print(centroids)
+#print(centroids)
+#print(dfin)
 
-for i in range(0,n):
-	
-	
-cluster1Centroid = centroids[0].tolist()
-
+dfin.to_csv (outputLocation + 'labeledKmeansOutput.csv', index = None, header=True)
+print("Module Completed: append label module after kmeans completed")
 
 
