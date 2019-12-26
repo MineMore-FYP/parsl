@@ -52,6 +52,7 @@ for i in range(len(orderOfModules)):
 	if currentModule == orderOfModules[i]:
 		if i == 0:
 			df = pd.read_csv(inputDataset)
+			print("sdfsdfdf")
 			break
 		else:
 			previousModule = orderOfModules[i-1]
@@ -59,6 +60,8 @@ for i in range(len(orderOfModules)):
 			break
 outputLocation = outputLocation + "kmeans/"
 
+
+print(df)
 #make this an input
 #df = pd.read_csv('/home/mpiuser/Documents/FYP/gdelt/missingValuesMode.csv')
 #input
@@ -119,6 +122,9 @@ dfa.columns = ["No_of_clusters", "Accuracy"]
 #print(dfa)
 
 dfa.to_csv (outputLocation + Iteration_no + '_kmeans.csv', index = None, header=True)
+print("Kmeans with clusters 2,3,4,5,6,7 ran for " + i + " time(s).\n")
 
 # print each job status, they will now be finished
 #print ("Job Status: {}".format(return_array))
+
+#print('Kmeans model traning completed')
