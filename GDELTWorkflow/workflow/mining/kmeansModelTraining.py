@@ -23,14 +23,7 @@ pd.options.mode.chained_assignment = None  # default='warn'
 currentModule = "kmeansModelTraining"
 workflowNumber = sys.argv[1]
 Iteration_no = sys.argv[2]
-'''
-print(workflowNumber)
-print(Iteration_no)
-print(userScript.clusterLabel1)
-print(userScript.otherInputs1)
-print(userScript.numberOfClusters)
-print(userScript.inputDataset3)
-'''
+
 if workflowNumber == "1":
 	orderOfModules = userScript.orderOfModules1
 	inputDataset = userScript.inputDataset1
