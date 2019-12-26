@@ -198,6 +198,6 @@ randomForestFeaturesRange1 = [2,3]
 
 
 #k_means
-numberOfClusters = [2,3,4,5,6,7]
-clusterLabel1 = 'QuadClass'
-otherInputs1 = ['AvgTone', 'GoldsteinScale', 'NumMentions']
+numberOfClusters3 = [2,3,4,5,6,7]
+clusterLabel3 = 'QuadClass'
+otherInputs3 = ['AvgTone', 'GoldsteinScale', 'NumMentions']
