@@ -429,20 +429,20 @@ func main(){
 	pythonCall("workflow/"+commandsArray[15], outChannelModule10, "1")
 	messagePassing(outChannelModule10, outChannelModule11)
 	fmt.Println(<- outChannelModule11)
-
-	inChannelModule31 := make(chan string,1)
+*/
+	//inChannelModule31 := make(chan string,1)
 	outChannelModule31 := make(chan string, 1)
 	//pythonCall("workflow/cleaning/dropUserDefinedColumns.py", outChannelModule5)
-	go pythonCall("workflow/"+commandsArray[16], inChannelModule31, "3")
-	go messagePassing(inChannelModule31, outChannelModule31)
+	go pythonCall("workflow/"+commandsArray[16], outChannelModule7, "3")
+	go messagePassing(outChannelModule7, outChannelModule31)
 	fmt.Println(<- outChannelModule31)
-*/
+
 	outChannelModule32 := make(chan string, 1)
 	for i := 1;  i<=10; i++ {
-		go miningPythonCall("workflow/" +commandsArray[17], outChannelModule7, "3", strconv.Itoa(i))
+		go miningPythonCall("workflow/" +commandsArray[17], outChannelModule31, "3", strconv.Itoa(i))
         }
-	accuracySelection(outChannelModule7)
-	go messagePassing(outChannelModule7, outChannelModule32)
+	accuracySelection(outChannelModule31)
+	go messagePassing(outChannelModule31, outChannelModule32)
 	fmt.Println(<- outChannelModule32)
 
 	outChannelModule33 := make(chan string, 1)

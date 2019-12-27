@@ -52,7 +52,7 @@ orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns",
 "removeDuplicateRows", "missingValuesMode", "addLabelColumn",
 "assignCountryCode", "splitDate", "appendRecords"]
 
-orderOfModules3 = ["kmeansModelTraining","knowledge_presentation","svm"]
+orderOfModules3 = ["dropUserDefinedColumns","kmeansModelTraining","knowledge_presentation","svm"]
 
 
 '''############################File locations#################################'''
