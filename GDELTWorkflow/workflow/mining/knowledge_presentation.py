@@ -46,9 +46,8 @@ for i in range(len(orderOfModules)):
 			previousModule = orderOfModules[i-1]
 			df = pd.read_csv(outputLocation + previousModule + ".csv")
 			break
-#outputLocation = outputLocation + "kmeans/"
 
-#pp = PdfPages('/home/mpiuser/Documents/FYP/gdelt/plot_Kmeans.pdf')
+outputDataset = outputLocation + currentModule + ".csv"
 
 #data = pd.read_csv('/home/mpiuser/Documents/FYP/gdelt/missingValuesMode.csv')
 dfin = DataFrame(df, columns = ['AvgTone', 'GoldsteinScale', 'NumMentions'])
@@ -70,7 +69,7 @@ centroids = kmeans.cluster_centers_
 #print(centroids)
 #print(dfin)
 
-dfin.to_csv (outputLocation + 'labeledKmeansOutput.csv', index = None, header=True)
+dfin.to_csv (outputDataset, index = None, header=True)
 print("Module Completed: append label module after kmeans completed")
 
 

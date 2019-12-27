@@ -41,6 +41,8 @@ import sys
 ##mining/kmeansModelTraining.py
 #18
 ##mining/knowledge_presentation.py
+#19
+##mining/svm.py
 
 orderOfModules1 = ["dataFilesIntegration", "countrySelection", "selectUserDefinedColumns", "dropUniqueColumns",
 "dropColumnsCriteria","dropRowsCriteria","removeDuplicateRows",
@@ -50,7 +52,7 @@ orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns",
 "removeDuplicateRows", "missingValuesMode", "addLabelColumn",
 "assignCountryCode", "splitDate", "appendRecords"]
 
-orderOfModules3 = ["kmeansModelTraining","knowledge_presentation"]
+orderOfModules3 = ["kmeansModelTraining","knowledge_presentation","svm"]
 
 
 '''############################File locations#################################'''
@@ -62,7 +64,7 @@ When commiting - comment again
 #Gdelt FileSelection
 #datafilesLocation = '/home/amanda/FYP/data/'
 #datafilesLocation = '/home/clusteruser/gdeltDataFiles/'
-#datafilesLocation = '/home/mpiuser/Downloads/data/'
+datafilesLocation = '/home/mpiuser/Downloads/data/'
 
 
 '''
@@ -88,7 +90,7 @@ outputLocation2 = "/home/clusteruser/FYP/acled/"
 outputLocation3 = "/home/clusteruser/FYP/gdelt/"
 '''
 
-'''
+
 #=======================KALPANI===============================
 #input location
 inputDataset1 = "/home/mpiuser/Downloads/data/dropCountry.csv"
@@ -99,7 +101,7 @@ inputDataset3 = "/home/mpiuser/Documents/FYP/gdelt/missingValuesMode.csv"
 outputLocation1 = "/home/mpiuser/Documents/FYP/gdelt/"
 outputLocation2 = "/home/mpiuser/Documents/FYP/acled/"
 outputLocation3 = "/home/mpiuser/Documents/FYP/gdelt/"
-'''
+
 
 '''
 #======================RAJINI=================================
@@ -203,3 +205,7 @@ randomForestFeaturesRange1 = [2,3]
 numberOfClusters3 = [2,3,4,5,6,7]
 clusterLabel3 = 'QuadClass'
 otherInputs3 = ['AvgTone', 'GoldsteinScale', 'NumMentions']
+
+#svm
+label3 = 'clusterNo'
+value3 = [-0.25011820853917, 5.4, 2]
