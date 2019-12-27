@@ -446,9 +446,16 @@ func main(){
 	fmt.Println(<- outChannelModule32)
 
 	outChannelModule33 := make(chan string, 1)
-	//pythonCall("workflow/cleaning/dropUserDefinedColumns.py", outChannelModule5)
+	//pythonCall("workflow/mining/knowledge_presentation.py", outChannelModule5)
 	go pythonCall("workflow/"+commandsArray[18], outChannelModule7, "3")
 	go messagePassing(outChannelModule7, outChannelModule33)
 	fmt.Println(<- outChannelModule33)
+
+	outChannelModule34 := make(chan string, 1)
+	//pythonCall("workflow/mining/svm.py", outChannelModule5)
+	go pythonCall("workflow/"+commandsArray[19], outChannelModule33, "3")
+	//fmt.Println("svm started")
+	go messagePassing(outChannelModule33, outChannelModule34)
+	fmt.Println(<- outChannelModule34)
 
 }
