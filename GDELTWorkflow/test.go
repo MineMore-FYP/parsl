@@ -10,7 +10,7 @@ import (
 
 	"io/ioutil"
 	"log"
-	//"time"
+	"time"
 	"path/filepath"
 	"encoding/csv"
 	"io"
@@ -90,7 +90,7 @@ func Display_rf(accuracy_obj Accuracy_class_rf){
 }
 
 func accuracySelection_rf (inChannel chan <- string) {
-
+	fmt.Println("Accuracy selection for kmeans started")
 	var files []string
 	/*
 	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.outputLocation3")
@@ -193,7 +193,7 @@ func simplePythonCall(progName string, itr string) string{
 	return string(out)
 }
 
-func miningPythonCall(progName string, inChannel chan <- string, workflowNumber string, itr string){
+func miningPythonCall(progName string, workflowNumber string, itr string) string{
 	cmd := exec.Command("python3", progName, workflowNumber, itr)
 	out, err := cmd.CombinedOutput()
 	log.Println(cmd.Run())
@@ -207,7 +207,7 @@ func miningPythonCall(progName string, inChannel chan <- string, workflowNumber 
 	//check if msg is legit
 	msg := string(out)
 	//msg := ("Module Completed: " + progName)
-	inChannel <- msg
+	return msg
 }
 
 func removeIt(ss Accuracy_class, ssSlice []Accuracy_class) []Accuracy_class {
@@ -241,7 +241,7 @@ func Display(accuracy_obj Accuracy_class){
 }
 
 func accuracySelection (inChannel chan <- string) {
-
+	fmt.Println("Accuracy selection for kmeans started")
 	var files []string
 	/*
 	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.outputLocation3")
@@ -551,7 +551,10 @@ func main(){
 
 	outChannelModule11 := make(chan string, 1)
 	for i := 1;  i<=10; i++ {
-		go miningPythonCall("workflow/" +commandsArray[15], outChannelModule10, "1", strconv.Itoa(i))
+		y := miningPythonCall("workflow/" +commandsArray[15], "1", strconv.Itoa(i))
+		time.Sleep(5000 * time.Millisecond)
+		fmt.Println(y)
+		
         }
 	accuracySelection_rf(outChannelModule10)
 	//pythonCall("workflow/mining/randomForestClassification.py", outChannelModule5)
@@ -568,16 +571,19 @@ func main(){
 
 	outChannelModule32 := make(chan string, 1)
 	for i := 1;  i<=10; i++ {
-		go miningPythonCall("workflow/" +commandsArray[17], outChannelModule31, "3", strconv.Itoa(i))
+		x := miningPythonCall("workflow/" +commandsArray[17], "3", strconv.Itoa(i))
+		time.Sleep(5000 * time.Millisecond)
+		fmt.Println(x)
         }
+	
 	accuracySelection(outChannelModule31)
-	go messagePassing(outChannelModule31, outChannelModule32)
+	messagePassing(outChannelModule31, outChannelModule32)
 	fmt.Println(<- outChannelModule32)
 
 	outChannelModule33 := make(chan string, 1)
 	//pythonCall("workflow/mining/knowledge_presentation.py", outChannelModule5)
-	go pythonCall("workflow/"+commandsArray[18], outChannelModule7, "3")
-	go messagePassing(outChannelModule7, outChannelModule33)
+	go pythonCall("workflow/"+commandsArray[18], outChannelModule32, "3")
+	go messagePassing(outChannelModule32, outChannelModule33)
 	fmt.Println(<- outChannelModule33)
 
 	outChannelModule34 := make(chan string, 1)

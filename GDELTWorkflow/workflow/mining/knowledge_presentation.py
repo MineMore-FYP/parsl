@@ -28,24 +28,13 @@ elif workflowNumber == "2":
 	outputLocation = userScript.outputLocation2
 elif workflowNumber == "3":
 	orderOfModules = userScript.orderOfModules3
-	inputDataset = "/home/mpiuser/Documents/FYP/gdelt/test.txt"
+	inputDataset = "/home/mpiuser/Documents/FYP/gdelt/kmeans.txt"
 	outputLocation = userScript.outputLocation3
 
 df = pd.DataFrame()
-for i in range(len(orderOfModules)):
-	#print(orderOfModules[i])
-	if currentModule == orderOfModules[i]:
-		if i == 0:
-			df = pd.read_csv(inputDataset)
-			break
-		elif i == 1:
-			previousModule = "missingValuesMode"
-			df = pd.read_csv(outputLocation + previousModule + ".csv")
-			break
-		else:
-			previousModule = orderOfModules[i-1]
-			df = pd.read_csv(outputLocation + previousModule + ".csv")
-			break
+previousModule = "dropUserDefinedColumns"
+df = pd.read_csv(outputLocation + previousModule + ".csv")
+
 
 outputDataset = outputLocation + currentModule + ".csv"
 
