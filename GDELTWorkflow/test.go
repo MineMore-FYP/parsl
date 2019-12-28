@@ -437,6 +437,8 @@ func main(){
 	//configurations
 	simplePythonCall1("workflow/parslConfig.py")
 
+	start := time.Now()
+
 	//start module execution from here onwards
 	inChannelModule0 := make(chan string, 1)
 	outChannelModule0 := make(chan string, 1)
@@ -592,5 +594,11 @@ func main(){
 	//fmt.Println("svm started")
 	go messagePassing(outChannelModule33, outChannelModule34)
 	fmt.Println(<- outChannelModule34)
+
+	end := time.Now()
+
+	duration := end.Sub(start)
+
+	fmt.Println("\nDuration: " + duration.String())
 
 }
