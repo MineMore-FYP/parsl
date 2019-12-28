@@ -164,15 +164,8 @@ func accuracySelection_rf (inChannel chan <- string) {
 		    //Accuracy_set = removeIt(Accuracy_class{"No_of_clusters", "Accuracy"}, Accuracy_set)
 
     	}
-	//accuracyJson, _ := json.Marshal(Accuracy_set)
-	//fmt.Println(string(accuracyJson))
-	//fmt.Println(Accuracy_set)
+	
 	var max = FindMaxAccuracy_rf(Accuracy_set)
-	/*
-	var estimatorsFinal = max.Estimators
-	var depthFinal = max.Depth
-	var splitFinal = max.Split
-	var maxfeauresFinal = max.MaxFeatures */
 	writeAccuracyFile_rf(max)
 	Display_rf(max)
 	//fmt.Println(display)
@@ -184,25 +177,6 @@ func accuracySelection_rf (inChannel chan <- string) {
 }
 
 func writeAccuracyFile_rf(accuracy_obj Accuracy_class_rf) {  
-/*
-    f, err := os.Create("/home/mpiuser/Documents/FYP/gdelt/rf.txt")
-    if err != nil {
-        fmt.Println(err)
-        return
-    }
-    l, err := f.WriteString(strconv.FormatInt(n,10))
-    if err != nil {
-        fmt.Println(err)
-        f.Close()
-        return
-    }
-    fmt.Println(l, "bytes written successfully")
-    err = f.Close()
-    if err != nil {
-        fmt.Println(err)
-        return
-    }
-*/
 
     accuracyJson, _ := json.Marshal(accuracy_obj)
     ioutil.WriteFile("/home/mpiuser/Documents/FYP/gdelt/rf.json", accuracyJson, 0644)
