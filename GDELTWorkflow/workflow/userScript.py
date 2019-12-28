@@ -194,6 +194,10 @@ userDefinedEncodeColumns = ["Actor1Geo_CountryCode"]
 
 '''#######################		MINING   	####################################'''
 
+#mining algorithm
+root1 = outputLocation1 + "rf/"
+root2 = outputLocation3 + "kmeans/"
+
 #random forest
 randomForestEstimatorRange1 = [80,90]
 randomForestDepthRange1 = [3,5]

@@ -84,7 +84,7 @@ def kmeans(n):
 	from sklearn.metrics import accuracy_score
 
 
-	k_means = KMeans(n_clusters=n,random_state=40)
+	k_means = KMeans(n_clusters=n)
 	kmeans = k_means.fit(X_train)
 
 	#print(k_means.labels_[:])
