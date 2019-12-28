@@ -63,7 +63,7 @@ func simplePythonCall1(progName string){
 //=========================functions for rf==========================
 
 type Accuracy_class_rf struct {
-    Estimators int64 `json:"clusters"`
+    Estimators int64 `json:"estimators"`
     Depth int64 `json:"depth"`
     Split int64 `json:"split"`
     MaxFeatures int64 `json:"maxfeatures"`
