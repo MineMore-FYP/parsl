@@ -60,7 +60,7 @@ for i in range(len(orderOfModules)):
 outputLocation = outputLocation + "kmeans/"
 
 
-print(df)
+#print(df)
 #make this an input
 #df = pd.read_csv('/home/mpiuser/Documents/FYP/gdelt/missingValuesMode.csv')
 #input
