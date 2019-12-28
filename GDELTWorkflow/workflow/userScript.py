@@ -46,7 +46,7 @@ import sys
 
 orderOfModules1 = ["dataFilesIntegration", "countrySelection", "selectUserDefinedColumns", "dropUniqueColumns",
 "dropColumnsCriteria","dropRowsCriteria","removeDuplicateRows",
-"missingValuesMode", "combineColumns", "integrate", "normalize","randomForestClassification"]
+"missingValuesMode", "combineColumns", "integrate", "normalize","randomForestClassification", "knowledge_presentation_rf"]
 
 orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns",
 "removeDuplicateRows", "missingValuesMode", "addLabelColumn",
