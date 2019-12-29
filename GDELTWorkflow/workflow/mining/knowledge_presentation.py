@@ -22,14 +22,18 @@ if workflowNumber == "1":
 	orderOfModules = userScript.orderOfModules1
 	inputDataset = userScript.inputDataset1
 	outputLocation = userScript.outputLocation1
+	kmeansAccuracy = outputLocation + userScript.kmeansAccuracy1
 elif workflowNumber == "2":
 	orderOfModules = userScript.orderOfModules2
 	inputDataset = userScript.inputDataset2
 	outputLocation = userScript.outputLocation2
+	kmeansAccuracy = outputLocation + userScript.kmeansAccuracy2
 elif workflowNumber == "3":
 	orderOfModules = userScript.orderOfModules3
-	inputDataset = "/home/mpiuser/Documents/FYP/gdelt/kmeans.txt"
+	#inputDataset = "/home/mpiuser/Documents/FYP/gdelt/kmeans.txt"
+	#inputDataset = "/home/amanda/FYP/gdelt/kmeans.txt"
 	outputLocation = userScript.outputLocation3
+	kmeansAccuracy = outputLocation + userScript.kmeansAccuracy3
 
 df = pd.DataFrame()
 previousModule = "dropUserDefinedColumns"
@@ -42,7 +46,7 @@ outputDataset = outputLocation + currentModule + ".csv"
 dfin = DataFrame(df, columns = ['AvgTone', 'GoldsteinScale', 'NumMentions'])
 X = dfin.values
 
-f= open(inputDataset, "r")
+f= open(kmeansAccuracy, "r")
 n = int(f.read())#int(sys.argv[1])
 
 
@@ -60,5 +64,3 @@ centroids = kmeans.cluster_centers_
 
 dfin.to_csv (outputDataset, index = None, header=True)
 print("Module Completed: append label module after kmeans completed")
-
-
