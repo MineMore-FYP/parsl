@@ -62,12 +62,12 @@ When commiting - comment again
 '''
 
 #Gdelt FileSelection
-#datafilesLocation = '/home/amanda/FYP/data/'
+datafilesLocation = '/home/amanda/FYP/data/'
 #datafilesLocation = '/home/clusteruser/gdeltDataFiles/'
-datafilesLocation = '/home/mpiuser/Downloads/data/'
+#datafilesLocation = '/home/mpiuser/Downloads/data/'
 
 
-'''
+
 #=========================AMANDA==============================
 #input location
 inputDataset1 = "/home/amanda/FYP/gdelt/countrySelection.csv"
@@ -78,7 +78,7 @@ inputDataset3 = "/home/amanda/FYP/gdelt/missingValuesMode.csv"
 outputLocation1 = "/home/amanda/FYP/gdelt/"
 outputLocation2 = "/home/amanda/FYP/acled/"
 outputLocation3 = "/home/amanda/FYP/gdelt/"
-'''
+
 
 '''
 #=========================CLUSTER==============================
@@ -90,7 +90,7 @@ outputLocation2 = "/home/clusteruser/FYP/acled/"
 outputLocation3 = "/home/clusteruser/FYP/gdelt/"
 '''
 
-
+'''
 #=======================KALPANI===============================
 #input location
 inputDataset1 = "/home/mpiuser/Downloads/data/dropCountry.csv"
@@ -101,7 +101,7 @@ inputDataset3 = "/home/mpiuser/Documents/FYP/gdelt/missingValuesMode.csv"
 outputLocation1 = "/home/mpiuser/Documents/FYP/gdelt/"
 outputLocation2 = "/home/mpiuser/Documents/FYP/acled/"
 outputLocation3 = "/home/mpiuser/Documents/FYP/gdelt/"
-
+'''
 
 '''
 #======================RAJINI=================================
@@ -204,11 +204,14 @@ randomForestDepthRange1 = [3,5]
 randomForestSplitRange1 = [2,3]
 randomForestFeaturesRange1 = [2,3]
 
+rfAccuracyJson1 = "rf.json"
+
 
 #k_means
 numberOfClusters3 = [2,3,4,5,6,7]
 clusterLabel3 = 'QuadClass'
 otherInputs3 = ['AvgTone', 'GoldsteinScale', 'NumMentions']
+kmeansAccuracy3 = "kmeans.txt"
 
 #svm
 label3 = 'clusterNo'

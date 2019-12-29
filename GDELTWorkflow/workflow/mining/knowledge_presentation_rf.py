@@ -23,17 +23,21 @@ workflowNumber = sys.argv[1]
 
 if workflowNumber == "1":
 	orderOfModules = userScript.orderOfModules1
-	inputDataset = "/home/mpiuser/Documents/FYP/gdelt/rf.json"
+	#inputDataset = "/home/mpiuser/Documents/FYP/gdelt/rf.json"
+	#inputDataset = "/home/amanda/FYP/gdelt/rf.json"
 	outputLocation = userScript.outputLocation1
+	rfAccuracyJson = outputLocation + userScript.rfAccuracyJson1
 elif workflowNumber == "2":
 	orderOfModules = userScript.orderOfModules2
-	inputDataset = userScript.inputDataset2
+	#inputDataset = userScript.inputDataset2
 	outputLocation = userScript.outputLocation2
+	rfAccuracyJson = outputLocation + userScript.rfAccuracyJson2
 elif workflowNumber == "3":
 	orderOfModules = userScript.orderOfModules3
-	inputDataset = "/home/mpiuser/Documents/FYP/gdelt/test.txt"
+	#inputDataset = "/home/mpiuser/Documents/FYP/gdelt/test.txt"
+	#inputDataset = "/home/amanda/FYP/gdelt/test.txt"
 	outputLocation = userScript.outputLocation3
-
+	rfAccuracyJson = outputLocation + userScript.rfAccuracyJson3
 df = pd.DataFrame()
 '''
 for i in range(len(orderOfModules)):
@@ -51,7 +55,7 @@ df = pd.read_csv("/home/mpiuser/Documents/FYP/gdelt/normalize.csv")
 #outputDataset = outputLocation + currentModule + ".csv"
 
 #read json file
-with open(inputDataset, 'r') as myfile:
+with open(rfAccuracyJson, 'r') as myfile:
     data=myfile.read()
 
 # parse file
@@ -80,5 +84,3 @@ classifier.fit(X, y)
 y_pred = classifier.predict([[-0.25011820853917, 5.4, 2,2]])
 print(y_pred)
 print("Module Completed: Rf knowledge presentation completed")
-
-

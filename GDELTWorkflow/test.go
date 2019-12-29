@@ -90,7 +90,7 @@ func Display_rf(accuracy_obj Accuracy_class_rf){
 }
 
 func accuracySelection_rf (inChannel chan <- string) {
-	fmt.Println("Accuracy selection for kmeans started")
+	fmt.Println("Accuracy selection for RF started")
 	var files []string
 	/*
 	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.outputLocation3")
@@ -104,7 +104,8 @@ func accuracySelection_rf (inChannel chan <- string) {
 	path := string(out)
     	subFolder := fmt.Sprintf("%s%s", path, "kmeans/")
 	*/
-	root := "/home/mpiuser/Documents/FYP/gdelt/rf/"
+	//root := "/home/mpiuser/Documents/FYP/gdelt/rf/"
+	root := "/home/amanda/FYP/gdelt/rf/"
     	err1 := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
         	files = append(files, path)
         	return nil
@@ -179,7 +180,8 @@ func accuracySelection_rf (inChannel chan <- string) {
 func writeAccuracyFile_rf(accuracy_obj Accuracy_class_rf) {  
 
     accuracyJson, _ := json.Marshal(accuracy_obj)
-    ioutil.WriteFile("/home/mpiuser/Documents/FYP/gdelt/rf.json", accuracyJson, 0644)
+    //ioutil.WriteFile("/home/mpiuser/Documents/FYP/gdelt/rf.json", accuracyJson, 0644)
+    ioutil.WriteFile("/home/amanda/FYP/gdelt/rf.json", accuracyJson, 0644)
     fmt.Println(string(accuracyJson))
 }
 
@@ -255,7 +257,8 @@ func accuracySelection (inChannel chan <- string) {
 	path := string(out)
     	subFolder := fmt.Sprintf("%s%s", path, "kmeans/")
 	*/
-	root := "/home/mpiuser/Documents/FYP/gdelt/kmeans/"
+	//root := "/home/mpiuser/Documents/FYP/gdelt/kmeans/"
+	root := "/home/amanda/FYP/gdelt/kmeans/"
     	err1 := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
         	files = append(files, path)
         	return nil
@@ -322,7 +325,8 @@ func accuracySelection (inChannel chan <- string) {
 }
 
 func writeAccuracyFile(n int64) {  
-    f, err := os.Create("/home/mpiuser/Documents/FYP/gdelt/kmeans.txt")
+    //f, err := os.Create("/home/mpiuser/Documents/FYP/gdelt/kmeans.txt")
+    f, err := os.Create("/home/amanda/FYP/gdelt/kmeans.txt")
     if err != nil {
         fmt.Println(err)
         return
