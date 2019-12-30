@@ -27,31 +27,25 @@ if workflowNumber == "1":
 	#inputDataset = "/home/amanda/FYP/gdelt/rf.json"
 	outputLocation = userScript.outputLocation1
 	rfAccuracyJson = outputLocation + userScript.rfAccuracyJson1
+	rfPredictFor = userScript.rfPredictFor1
 elif workflowNumber == "2":
 	orderOfModules = userScript.orderOfModules2
 	#inputDataset = userScript.inputDataset2
 	outputLocation = userScript.outputLocation2
 	rfAccuracyJson = outputLocation + userScript.rfAccuracyJson2
+	rfPredictFor = userScript.rfPredictFor2
 elif workflowNumber == "3":
 	orderOfModules = userScript.orderOfModules3
 	#inputDataset = "/home/mpiuser/Documents/FYP/gdelt/test.txt"
 	#inputDataset = "/home/amanda/FYP/gdelt/test.txt"
 	outputLocation = userScript.outputLocation3
 	rfAccuracyJson = outputLocation + userScript.rfAccuracyJson3
+	rfPredictFor = userScript.rfPredictFor3
+
 df = pd.DataFrame()
-'''
-for i in range(len(orderOfModules)):
-	#print(orderOfModules[i])
-	if currentModule == orderOfModules[i]:
-		if i == 0:
-			df = pd.read_csv(inputDataset)
-			break
-		else:
-			previousModule = orderOfModules[i-1]
-			df = pd.read_csv(outputLocation + previousModule + ".csv")
-			break
-'''
-df = pd.read_csv("/home/mpiuser/Documents/FYP/gdelt/normalize.csv")
+previousModule = "normalize"
+df = pd.read_csv(outputLocation + previousModule + ".csv")
+
 #outputDataset = outputLocation + currentModule + ".csv"
 
 #read json file
@@ -67,8 +61,8 @@ print("eur: " + str(obj['eur']))
 print("gbp: " + str(obj['gbp']))
 '''
 
-X = df['AvgTone', 'GoldsteinScale', 'NumMentions', 'QuadClass'].values
-y = df['label'].values
+X = df.iloc[:, 1:5].values
+y = df.iloc[:, 6].values
 
 #from sklearn.model_selection import train_test_split
 #X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
@@ -81,6 +75,6 @@ X = sc.fit_transform(X)
 
 classifier = RandomForestClassifier(n_estimators=obj['estimators'], max_depth = obj['depth'], min_samples_split=obj['split'], max_features=obj['maxfeatures'], random_state=0)
 classifier.fit(X, y)
-y_pred = classifier.predict([[-0.25011820853917, 5.4, 2,2]])
+y_pred = classifier.predict(rfPredictFor)
 print(y_pred)
 print("Module Completed: Rf knowledge presentation completed")

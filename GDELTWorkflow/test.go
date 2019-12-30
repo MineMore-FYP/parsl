@@ -390,8 +390,8 @@ func numOfFiles(folder string) int{
 }
 
 //reads a file and returns an array of comments beginning with ##
-func readLines( progName string) [20]string{
-		var commandsArray [20]string
+func readLines( progName string) [30]string{
+		var commandsArray [30]string
     file, err := os.Open(progName)
     if err != nil {
         log.Fatal(err)
@@ -586,13 +586,18 @@ func main(){
 		y := miningPythonCall("workflow/" +commandsArray[15], "1", strconv.Itoa(i))
 		time.Sleep(5000 * time.Millisecond)
 		fmt.Println(y)
-
-        }
+	}
 	accuracySelection_rf(outChannelModule10, 1)
 	//pythonCall("workflow/mining/randomForestClassification.py", outChannelModule5)
 	//miningPythonCall("workflow/"+commandsArray[15], outChannelModule10, "1", "2")
 	messagePassing(outChannelModule10, outChannelModule11)
 	fmt.Println(<- outChannelModule11)
+
+	outChannelModule12 := make(chan string, 1)
+	pythonCall("workflow/"+commandsArray[20], outChannelModule11, "1")
+	//pythonCall("workflow/mining/knowledge_presentation_rf.py", outChannelModule6)
+	messagePassing(outChannelModule11, outChannelModule12)
+	fmt.Println(<- outChannelModule12)
 
 	//inChannelModule31 := make(chan string,1)
 	outChannelModule31 := make(chan string, 1)
