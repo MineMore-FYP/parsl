@@ -89,9 +89,24 @@ func Display_rf(accuracy_obj Accuracy_class_rf){
 	fmt.Println("Accuracy: ", accuracy_obj.Accuracy)
 }
 
-func accuracySelection_rf (inChannel chan <- string) {
+func accuracySelection_rf (inChannel chan <- string, workflowNumber int) {
 	fmt.Println("Accuracy selection for RF started")
 	var files []string
+
+	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.outputLocation" + strconv.Itoa(workflowNumber))
+	out, err := cmd.CombinedOutput()
+
+	if err != nil {
+		fmt.Println(err)
+		// Exit with status 3.
+		os.Exit(3)
+	} else if out == nil{
+		os.Exit(3)
+	}
+	root := string(out)[:len(out)-1]  + "rf/"
+	accuracyJsonFile := string(out)[:len(out)-1] + "rf.json"
+
+
 	/*
 	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.outputLocation3")
 	out, err0 := cmd.CombinedOutput()
@@ -100,42 +115,42 @@ func accuracySelection_rf (inChannel chan <- string) {
 		// Exit with status 3.
     		os.Exit(3)
 	}
-	
+
 	path := string(out)
     	subFolder := fmt.Sprintf("%s%s", path, "kmeans/")
 	*/
 	//root := "/home/mpiuser/Documents/FYP/gdelt/rf/"
-	root := "/home/amanda/FYP/gdelt/rf/"
-    	err1 := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
-        	files = append(files, path)
-        	return nil
-    	})
+	//root := "/home/amanda/FYP/gdelt/rf/"
+  err1 := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+  files = append(files, path)
+  return nil})
+
 	fmt.Println(files)
-    	if err1 != nil {
-        	panic(err1)
-    	}
+  if err1 != nil {
+  	panic(err1)
+  }
 
 	var Accuracy_set []Accuracy_class_rf
 
-    	for _, file := range files {
-        	//if directory ignore
+  for _, file := range files {
+  	//if directory ignore
 		fi, err2 := os.Stat(file)
-		    if err2 != nil {
+		if err2 != nil {
 			fmt.Println(err2)
 			return
-		    }
+		}
 
-		    var mode = fi.Mode();
-		    if mode.IsDir() == true {
+		var mode = fi.Mode();
+		if mode.IsDir() == true {
 			continue
-		    }
+		}
 
 
 		csvFile, _ := os.Open(file)
 
-    		reader := csv.NewReader(bufio.NewReader(csvFile))
+    reader := csv.NewReader(bufio.NewReader(csvFile))
 
-		    for {
+		for {
 			line, error := reader.Read()
 			if error == io.EOF {
 			    break
@@ -160,28 +175,27 @@ func accuracySelection_rf (inChannel chan <- string) {
 			    MaxFeatures: maxfeatures,
 			    Accuracy: accuracy,
 			})
-		    }
+		}
 
-		    //Accuracy_set = removeIt(Accuracy_class{"No_of_clusters", "Accuracy"}, Accuracy_set)
+		//Accuracy_set = removeIt(Accuracy_class{"No_of_clusters", "Accuracy"}, Accuracy_set)
+	}
 
-    	}
-	
 	var max = FindMaxAccuracy_rf(Accuracy_set)
-	writeAccuracyFile_rf(max)
+	writeAccuracyFile_rf(max, accuracyJsonFile)
 	Display_rf(max)
 	//fmt.Println(display)
 
 	msg:= "Best accuracy selection for rf done"
 	inChannel <- msg
-	
 
 }
 
-func writeAccuracyFile_rf(accuracy_obj Accuracy_class_rf) {  
+func writeAccuracyFile_rf(accuracy_obj Accuracy_class_rf, accuracyJsonFile string) {
 
     accuracyJson, _ := json.Marshal(accuracy_obj)
     //ioutil.WriteFile("/home/mpiuser/Documents/FYP/gdelt/rf.json", accuracyJson, 0644)
-    ioutil.WriteFile("/home/amanda/FYP/gdelt/rf.json", accuracyJson, 0644)
+    //ioutil.WriteFile("/home/amanda/FYP/gdelt/rf.json", accuracyJson, 0644)
+		ioutil.WriteFile(accuracyJsonFile, accuracyJson, 0644)
     fmt.Println(string(accuracyJson))
 }
 
@@ -242,9 +256,22 @@ func Display(accuracy_obj Accuracy_class){
 	fmt.Println("Accuracy: ", accuracy_obj.Accuracy)
 }
 
-func accuracySelection (inChannel chan <- string) {
+func accuracySelection (inChannel chan <- string, workflowNumber int) {
 	fmt.Println("Accuracy selection for kmeans started")
 	var files []string
+	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.outputLocation" + strconv.Itoa(workflowNumber))
+	out, err := cmd.CombinedOutput()
+
+	if err != nil {
+		fmt.Println(err)
+		// Exit with status 3.
+		os.Exit(3)
+	} else if out == nil{
+		os.Exit(3)
+	}
+	root := string(out)[:len(out)-1]  + "kmeans/"
+	accuracyKmeansFile := string(out)[:len(out)-1] + "kmeans.txt"
+
 	/*
 	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.outputLocation3")
 	out, err0 := cmd.CombinedOutput()
@@ -253,80 +280,79 @@ func accuracySelection (inChannel chan <- string) {
 		// Exit with status 3.
     		os.Exit(3)
 	}
-	
+
 	path := string(out)
     	subFolder := fmt.Sprintf("%s%s", path, "kmeans/")
 	*/
 	//root := "/home/mpiuser/Documents/FYP/gdelt/kmeans/"
-	root := "/home/amanda/FYP/gdelt/kmeans/"
-    	err1 := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
-        	files = append(files, path)
-        	return nil
-    	})
+	//root := "/home/amanda/FYP/gdelt/kmeans/"
+  err1 := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+  	files = append(files, path)
+    return nil
+  })
 	fmt.Println(files)
-    	if err1 != nil {
-        	panic(err1)
-    	}
+  	if err1 != nil {
+    	panic(err1)
+    }
 
 	var Accuracy_set []Accuracy_class
 
-    	for _, file := range files {
-        	//if directory ignore
+  for _, file := range files {
+  	//if directory ignore
 		fi, err2 := os.Stat(file)
-		    if err2 != nil {
+		if err2 != nil {
 			fmt.Println(err2)
 			return
-		    }
+		}
 
-		    var mode = fi.Mode();
-		    if mode.IsDir() == true {
+		var mode = fi.Mode();
+		if mode.IsDir() == true {
 			continue
-		    }
-
+		}
 
 		csvFile, _ := os.Open(file)
 
-    		reader := csv.NewReader(bufio.NewReader(csvFile))
+    reader := csv.NewReader(bufio.NewReader(csvFile))
 
-		    for {
+    for {
 			line, error := reader.Read()
 			if error == io.EOF {
-			    break
+				break
 			} else if error != nil {
-			    log.Fatal(error)
+				log.Fatal(error)
 			}
+
 			var clusters int64
 			var accuracy float64
 			clusters, _ = strconv.ParseInt(line[0],10,0)
 			accuracy, _ = strconv.ParseFloat(line[1],64)
 			//fmt.Println(reflect.TypeOf(newc))
 			Accuracy_set = append(Accuracy_set, Accuracy_class{
-			    Clusters: clusters,
-			    Accuracy: accuracy,
+			Clusters: clusters,
+			Accuracy: accuracy,
 			})
-		    }
+		}
 
-		    //Accuracy_set = removeIt(Accuracy_class{"No_of_clusters", "Accuracy"}, Accuracy_set)
+		//Accuracy_set = removeIt(Accuracy_class{"No_of_clusters", "Accuracy"}, Accuracy_set)
+  }
 
-    	}
 	//accuracyJson, _ := json.Marshal(Accuracy_set)
 	//fmt.Println(string(accuracyJson))
 	//fmt.Println(Accuracy_set)
 	var max = FindMaxAccuracy(Accuracy_set)
 	var n = max.Clusters
-	writeAccuracyFile(n)
+	writeAccuracyFile(n, accuracyKmeansFile)
 	Display(max)
 	//fmt.Println(display)
 
 	msg:= "Best accuracy selection for kmeans done"
 	inChannel <- msg
-	
 
 }
 
-func writeAccuracyFile(n int64) {  
+func writeAccuracyFile(n int64, accuracyKmeansFile string) {
     //f, err := os.Create("/home/mpiuser/Documents/FYP/gdelt/kmeans.txt")
-    f, err := os.Create("/home/amanda/FYP/gdelt/kmeans.txt")
+    f, err := os.Create(accuracyKmeansFile)
     if err != nil {
         fmt.Println(err)
         return
@@ -364,8 +390,8 @@ func numOfFiles(folder string) int{
 }
 
 //reads a file and returns an array of comments beginning with ##
-func readLines( progName string) [20]string{
-		var commandsArray [20]string
+func readLines( progName string) [30]string{
+		var commandsArray [30]string
     file, err := os.Open(progName)
     if err != nil {
         log.Fatal(err)
@@ -560,13 +586,18 @@ func main(){
 		y := miningPythonCall("workflow/" +commandsArray[15], "1", strconv.Itoa(i))
 		time.Sleep(5000 * time.Millisecond)
 		fmt.Println(y)
-		
-        }
-	accuracySelection_rf(outChannelModule10)
+	}
+	accuracySelection_rf(outChannelModule10, 1)
 	//pythonCall("workflow/mining/randomForestClassification.py", outChannelModule5)
 	//miningPythonCall("workflow/"+commandsArray[15], outChannelModule10, "1", "2")
 	messagePassing(outChannelModule10, outChannelModule11)
 	fmt.Println(<- outChannelModule11)
+
+	outChannelModule12 := make(chan string, 1)
+	pythonCall("workflow/"+commandsArray[20], outChannelModule11, "1")
+	//pythonCall("workflow/mining/knowledge_presentation_rf.py", outChannelModule6)
+	messagePassing(outChannelModule11, outChannelModule12)
+	fmt.Println(<- outChannelModule12)
 
 	//inChannelModule31 := make(chan string,1)
 	outChannelModule31 := make(chan string, 1)
@@ -580,9 +611,9 @@ func main(){
 		x := miningPythonCall("workflow/" +commandsArray[17], "3", strconv.Itoa(i))
 		time.Sleep(5000 * time.Millisecond)
 		fmt.Println(x)
-        }
-	
-	accuracySelection(outChannelModule31)
+  }
+
+	accuracySelection(outChannelModule31, 3)
 	messagePassing(outChannelModule31, outChannelModule32)
 	fmt.Println(<- outChannelModule32)
 
