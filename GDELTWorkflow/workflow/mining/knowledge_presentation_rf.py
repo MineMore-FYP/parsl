@@ -51,7 +51,8 @@ for i in range(len(orderOfModules)):
 			df = pd.read_csv(outputLocation + previousModule + ".csv")
 			break
 '''
-df = pd.read_csv("/home/mpiuser/Documents/FYP/gdelt/normalize.csv")
+previousModule = "normalize"
+df = pd.read_csv(outputLocation + previousModule + ".csv")
 #outputDataset = outputLocation + currentModule + ".csv"
 
 #read json file
@@ -67,8 +68,8 @@ print("eur: " + str(obj['eur']))
 print("gbp: " + str(obj['gbp']))
 '''
 
-X = df['AvgTone', 'GoldsteinScale', 'NumMentions', 'QuadClass'].values
-y = df['label'].values
+X = df.iloc[:, 1:5].values
+y = df.iloc[:, 6].values
 
 #from sklearn.model_selection import train_test_split
 #X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
