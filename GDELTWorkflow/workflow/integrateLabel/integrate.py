@@ -111,12 +111,13 @@ loc1 = userScript.outputLocation2+"monthlyDF/"
 # function to find dataframe for given month
 def findMonthlyDf(loc, name):
 	name=name+".csv"
+	df = pd.DataFrame()
 	for f in os.listdir(loc):
 		if f.endswith(".csv"):
 			if (f == name):
 				df = pd.read_csv(loc+f,  sep = ',', header=0)
 				df.fillna('O', inplace=True)
-				return df
+	return df
 
 # labelled as riot only if average tone is negative
 
@@ -129,15 +130,18 @@ for i in range (numberOfRowsOriginal):
 	dfName2=y+m+c
 	#print(dfName2)
 	comparativeDF = findMonthlyDf(loc1,dfName2)
+	if comparativeDF.empty == True:
+   		print('data anomaly')	
 	# find record with matching date and country from monthlyDF
-	for m, n in comparativeDF.iterrows():
-		cmpDateInt=int(comparativeDF.loc[m]["Date"])
-		cmpDate=str(cmpDateInt)
-		if cmpDate==d:
-			# set label to zero if corresponding record exists in monthlyDF
-			if comparativeDF.loc[m]["Indicator"]==1:
-				if dfOriginal.loc[i]["AvgTone"]<0:
-					dfOriginal.set_value([i], ["label"], 1)
+	else: 
+		for m, n in comparativeDF.iterrows():
+			cmpDateInt=int(comparativeDF.loc[m]["Date"])
+			cmpDate=str(cmpDateInt)
+			if cmpDate==d:
+				# set label to zero if corresponding record exists in monthlyDF
+				if comparativeDF.loc[m]["Indicator"]==1:
+					if dfOriginal.loc[i]["AvgTone"]<0:
+						dfOriginal.set_value([i], ["label"], 1)
 
 
 dfOriginal.to_csv(outputDataset, sep=',', encoding='utf-8', index=False, header=True)
