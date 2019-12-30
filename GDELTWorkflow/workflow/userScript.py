@@ -43,6 +43,8 @@ import sys
 ##mining/knowledge_presentation.py
 #19
 ##mining/svm.py
+#20
+##mining/knowledge_presentation_rf.py
 
 orderOfModules1 = ["dataFilesIntegration", "countrySelection", "selectUserDefinedColumns", "dropUniqueColumns",
 "dropColumnsCriteria","dropRowsCriteria","removeDuplicateRows",
@@ -205,6 +207,7 @@ randomForestSplitRange1 = [2,3]
 randomForestFeaturesRange1 = [2,3]
 
 rfAccuracyJson1 = "rf.json"
+rfPredictFor1 = [[-0.25011820853917, 5.4, 2,2]]
 
 
 #k_means
