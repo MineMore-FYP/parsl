@@ -66,7 +66,7 @@ When commiting - comment again
 
 #Gdelt FileSelection
 #datafilesLocation = '/home/amanda/FYP/data/'
-datafilesLocation = '/home/clusteruser/gdeltDataFiles/'
+#datafilesLocation = '/home/clusteruser/gdeltDataFiles/'
 #datafilesLocation = '/home/mpiuser/Downloads/data/'
 
 
@@ -81,7 +81,7 @@ inputDataset3 = "/home/amanda/FYP/gdelt/missingValuesMode.csv"
 outputLocation1 = "/home/amanda/FYP/gdelt/"
 outputLocation2 = "/home/amanda/FYP/acled/"
 outputLocation3 = "/home/amanda/FYP/gdelt/"
-
+'''
 
 '''
 #=========================CLUSTER==============================
@@ -91,7 +91,7 @@ inputDataset3 = "/home/clusteruser/FYP/gdelt/missingValuesMode.csv"
 outputLocation1 = "/home/clusteruser/FYP/gdelt/"
 outputLocation2 = "/home/clusteruser/FYP/acled/"
 outputLocation3 = "/home/clusteruser/FYP/gdelt/"
-
+'''
 
 '''
 #=======================KALPANI===============================
@@ -125,7 +125,7 @@ outputLocation2 = "/home/mpiuser/FYP/acled/"
 '''#######################		SELECTION	####################################'''
 #GDELT variables
 #======================
-startingDate = '2019.08.01'
+startingDate = '2019.11.29'
 endingDate = '2019.12.01'
 
 #select specific country records
