@@ -1,0 +1,3 @@
+2020-01-01 13:57:04.796 worker_log:467 Rank:3 [INFO]  Worker 3 started
+2020-01-01 13:57:04.937 worker_log:478 Rank:3 [INFO]  Received task 3
+2020-01-01 13:57:13.541 worker_log:496 Rank:3 [INFO]  Completed task 3
