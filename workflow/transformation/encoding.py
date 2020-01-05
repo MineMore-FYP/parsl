@@ -5,9 +5,6 @@ import sys
 
 import parsl
 from parsl import load, python_app
-from parsl.configs.local_threads import config
-
-load(config)
 
 # Import LabelEncoder
 from sklearn import preprocessing

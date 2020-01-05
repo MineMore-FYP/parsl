@@ -1,6 +1,4 @@
 from parsl import load, python_app
-from parsl.configs.local_threads import config
-load(config)
 
 @python_app
 def missingValuesInterpolate():

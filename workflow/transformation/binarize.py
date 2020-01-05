@@ -6,9 +6,6 @@ import scipy
 
 import parsl
 from parsl import load, python_app
-from parsl.configs.local_threads import config
-
-load(config)
 
 import os,sys,inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))

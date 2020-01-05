@@ -1,6 +1,4 @@
 from parsl import load, python_app
-from parsl.configs.local_threads import config
-load(config)
 
 import pandas as pd
 import numpy as np
@@ -10,7 +8,7 @@ currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentfram
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir)
 import userScript
-
+import parslConfig
 
 currentModule = "dropUniqueColumns"
 uniqueColList = []

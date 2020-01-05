@@ -6,9 +6,6 @@ from sklearn.preprocessing import MinMaxScaler
 
 import parsl
 from parsl import load, python_app
-from parsl.configs.local_threads import config
-
-load(config)
 
 import sys
 import os,sys,inspect

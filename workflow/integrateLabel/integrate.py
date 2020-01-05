@@ -17,6 +17,7 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir)
 
 import userScript
+import parslConfig
 
 currentModule = "integrate"
 workflowNumber = sys.argv[1]
