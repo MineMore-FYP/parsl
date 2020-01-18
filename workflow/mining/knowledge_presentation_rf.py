@@ -45,11 +45,11 @@ elif workflowNumber == "3":
 	rfAccuracyJson = outputLocation + userScript.rfAccuracyJson3
 	#rfPredictFor = userScript.rfPredictFor3
 	datafilesLocation = userScript.datafilesLocation
-
+'''
 df = pd.DataFrame()
 previousModule = "normalize"
 df = pd.read_csv(outputLocation + previousModule + ".csv")
-
+'''
 #outputDataset = outputLocation + currentModule + ".csv"
 
 #read json file
@@ -64,28 +64,22 @@ print("usd: " + str(obj['usd']))
 print("eur: " + str(obj['eur']))
 print("gbp: " + str(obj['gbp']))
 '''
-
+'''
 X = df.iloc[:, 1:5].values
 y = df.iloc[:, 9].values
-
-#from sklearn.model_selection import train_test_split
-#X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
-
-# Feature Scaling
-sc = StandardScaler()
-X = sc.fit_transform(X)
-#X_test = sc.transform(X_test)
-
-
-classifier = RandomForestClassifier(n_estimators=obj['estimators'], max_depth = obj['depth'], min_samples_split=obj['split'], max_features=obj['maxfeatures'], random_state=0)
-classifier.fit(X, y)
+'''
 
 #preparing test set for prediction
-df_test = pd.read_csv(datafilesLocation + "test_rf.csv")
-test_selected = df_test.iloc[:, 1:5].values
+df_test = pd.read_csv(datafilesLocation + "rf_test_set.csv")
+X_test = df_test.iloc[:, 1:5].values
 y_test = df_test.iloc[:, 9].values
+
+classifier = RandomForestClassifier(n_estimators=obj['estimators'], max_depth = obj['depth'], min_samples_split=obj['split'], max_features=obj['maxfeatures'], random_state=0)
+classifier.fit(X_test, y_test)
+
+
 #print(test_selected)
-y_pred = classifier.predict(test_selected)
+y_pred = classifier.predict(X_test)
 
 df_test['predicted_label'] = y_pred
 
@@ -95,4 +89,4 @@ print("Accuracy : " + str(accuracyScore))
 
 df_test.to_csv(outputLocation + currentModule + '.csv', index = None, header=True)
 
-print("Module Completed: Rf knowledge presentation completed")
+print("Module Completed: Rf testing completed")

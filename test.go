@@ -718,7 +718,7 @@ func main(){
 	//pythonCall("workflow/transformation/normalize.py", outChannelModule6)
 	messagePassing(outChannelModule27, outChannelModule11)
 	fmt.Println(<- outChannelModule11)
-/*
+
 	outChannelModule12 := make(chan string, 1)
 	for i := 1;  i<=10; i++ {
 		y := miningPythonCall("workflow/" +commandsArray[16], "1", strconv.Itoa(i))
@@ -736,7 +736,7 @@ func main(){
 	//pythonCall("workflow/mining/knowledge_presentation_rf.py", outChannelModule6)
 	messagePassing(outChannelModule12, outChannelModule13)
 	fmt.Println(<- outChannelModule13)
-*/
+
 	outChannelModule41 := make(chan string, 1)
 	for i := 1;  i<=10; i++ {
 		y := miningPythonCall("workflow/" +commandsArray[22], "4", strconv.Itoa(i))
