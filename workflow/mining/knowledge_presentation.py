@@ -38,34 +38,38 @@ elif workflowNumber == "3":
 	outputLocation = userScript.outputLocation3
 	kmeansAccuracy = outputLocation + userScript.kmeansAccuracy3
 	datafilesLocation = userScript.datafilesLocation
-
+'''
 df = pd.DataFrame()
 previousModule = "dropUserDefinedColumns"
 df = pd.read_csv(outputLocation + previousModule + ".csv")
-
+'''
 
 outputDataset = outputLocation + currentModule + ".csv"
 
+'''
 #data = pd.read_csv('/home/mpiuser/Documents/FYP/gdelt/missingValuesMode.csv')
 dfin = DataFrame(df, columns = ['AvgTone', 'GoldsteinScale', 'NumMentions', 'QuadClass'])
 X = dfin.values
 y = df['label']
+'''
 
+#read json
 f= open(kmeansAccuracy, "r")
 n = int(f.read()) #int(sys.argv[1])
 
 
-kmeans = KMeans(n_clusters=n, random_state= 0).fit(X)
-#dfin['clusterNo'] = kmeans.labels_[:]
-
-centroids = kmeans.cluster_centers_
-
 #preparing test set for prediction
-df_test = pd.read_csv(datafilesLocation + "test_kmeans.csv")
-test_selected = DataFrame(df_test, columns = ['AvgTone', 'GoldsteinScale', 'NumMentions', 'QuadClass']).values
+df_test = pd.read_csv(datafilesLocation + "kmeans_test_set.csv")
+X_test = DataFrame(df_test, columns = ['AvgTone', 'GoldsteinScale', 'NumMentions', 'QuadClass']).values
 y_test = df_test['label'].values
+
+kmeans = KMeans(n_clusters=n, random_state= 0).fit(X_test)
+#dfin['clusterNo'] = kmeans.labels_[:]
+#centroids = kmeans.cluster_centers_
+
+
 #print(test_selected)
-y_pred = kmeans.predict(test_selected)
+y_pred = kmeans.predict(X_test)
 
 df_test['predicted_label'] = y_pred
 
@@ -76,7 +80,7 @@ print("Accuracy : " + str(accuracyScore))
 #df_test['SQLDATE'] = df['SQLDATE']
 
 df_test.to_csv (outputDataset, index = None, header=True)
-print("Module Completed: append label module after kmeans completed")
+print("Module Completed: Kmeans testing")
 
 '''
 #print(np.unique(kmeans.labels_[:]))

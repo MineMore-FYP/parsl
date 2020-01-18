@@ -135,8 +135,8 @@ outputLocation2 = "/home/mpiuser/FYP/acled/"
 '''#######################		SELECTION	####################################'''
 #GDELT variables
 #======================
-startingDate = '2019.12.02'
-endingDate = '2019.12.05'
+startingDate = '2019.11.26'
+endingDate = '2019.11.30'
 
 #select specific country records
 Actor1CountryCode = 'CE'

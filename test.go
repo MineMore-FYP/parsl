@@ -224,7 +224,7 @@ func Display_svm(accuracy_obj Accuracy_class_svm){
 }
 
 func accuracySelection_svm (inChannel chan <- string, workflowNumber int) {
-	fmt.Println("Accuracy selection for RF started")
+	fmt.Println("Accuracy selection for SVM started")
 	var files []string
 
 	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.outputLocation" + strconv.Itoa(workflowNumber))
@@ -312,7 +312,7 @@ func accuracySelection_svm (inChannel chan <- string, workflowNumber int) {
 	Display_svm(max)
 	//fmt.Println(display)
 
-	msg:= "Best accuracy selection for rf done"
+	msg:= "Best accuracy selection for SVM done"
 	inChannel <- msg
 
 }
@@ -756,17 +756,17 @@ func main(){
 	messagePassing(outChannelModule41, outChannelModule42)
 	fmt.Println(<- outChannelModule42)
 
-/*
+
 	//inChannelModule31 := make(chan string,1)
 	outChannelModule31 := make(chan string, 1)
 	//pythonCall("workflow/cleaning/dropUserDefinedColumns.py", outChannelModule5)
-	go pythonCall("workflow/"+commandsArray[16], outChannelModule9, "3")
-	go messagePassing(outChannelModule9, outChannelModule31)
+	go pythonCall("workflow/"+commandsArray[5], outChannelModule10, "3")
+	go messagePassing(outChannelModule10, outChannelModule31)
 	fmt.Println(<- outChannelModule31)
 
 	outChannelModule32 := make(chan string, 1)
 	for i := 1;  i<=10; i++ {
-		x := miningPythonCall("workflow/" +commandsArray[17], "3", strconv.Itoa(i))
+		x := miningPythonCall("workflow/" +commandsArray[18], "3", strconv.Itoa(i))
 		time.Sleep(5000 * time.Millisecond)
 		fmt.Println(x)
   	}
@@ -777,10 +777,10 @@ func main(){
 
 	outChannelModule33 := make(chan string, 1)
 	//pythonCall("workflow/mining/knowledge_presentation.py", outChannelModule5)
-	go pythonCall("workflow/"+commandsArray[18], outChannelModule32, "3")
+	go pythonCall("workflow/"+commandsArray[19], outChannelModule32, "3")
 	go messagePassing(outChannelModule32, outChannelModule33)
 	fmt.Println(<- outChannelModule33)
-
+/*
 	outChannelModule34 := make(chan string, 1)
 	//pythonCall("workflow/mining/svm.py", outChannelModule5)
 	go pythonCall("workflow/"+commandsArray[19], outChannelModule33, "3")
