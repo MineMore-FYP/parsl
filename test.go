@@ -200,6 +200,135 @@ func writeAccuracyFile_rf(accuracy_obj Accuracy_class_rf, accuracyJsonFile strin
 }
 
 
+//=========================functions for svm==========================
+
+type Accuracy_class_svm struct {
+    C float64 `json:"c"`
+    Accuracy float64 `json:"accuracy"`
+}
+
+func FindMaxAccuracy_svm(Accuracy_set []Accuracy_class_svm) (max Accuracy_class_svm) {
+
+	max = Accuracy_set[0]
+	for _, accuracy_obj := range Accuracy_set {
+		if accuracy_obj.Accuracy > max.Accuracy {
+			max = accuracy_obj
+		}
+	}
+	return max
+}
+
+func Display_svm(accuracy_obj Accuracy_class_svm){
+	fmt.Println("C: ", accuracy_obj.C)
+	fmt.Println("Accuracy: ", accuracy_obj.Accuracy)
+}
+
+func accuracySelection_svm (inChannel chan <- string, workflowNumber int) {
+	fmt.Println("Accuracy selection for RF started")
+	var files []string
+
+	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.outputLocation" + strconv.Itoa(workflowNumber))
+	out, err := cmd.CombinedOutput()
+
+	if err != nil {
+		fmt.Println(err)
+		// Exit with status 3.
+		os.Exit(3)
+	} else if out == nil{
+		os.Exit(3)
+	}
+	root := string(out)[:len(out)-1]  + "svm/"
+	accuracyJsonFile := string(out)[:len(out)-1] + "svm.json"
+
+
+	/*
+	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.outputLocation3")
+	out, err0 := cmd.CombinedOutput()
+	if err0 != nil {
+		fmt.Println(err0)
+		// Exit with status 3.
+    		os.Exit(3)
+	}
+
+	path := string(out)
+    	subFolder := fmt.Sprintf("%s%s", path, "kmeans/")
+	*/
+	//root := "/home/mpiuser/Documents/FYP/gdelt/rf/"
+	//root := "/home/amanda/FYP/gdelt/rf/"
+  err1 := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+  files = append(files, path)
+  return nil})
+
+	fmt.Println(files)
+  if err1 != nil {
+  	panic(err1)
+  }
+
+	var Accuracy_set []Accuracy_class_svm
+
+  for _, file := range files { //remove file range
+  	//if directory ignore
+		fi, err2 := os.Stat(file)
+		if err2 != nil {
+			fmt.Println(err2)
+			return
+		}
+
+		var mode = fi.Mode();
+		if mode.IsDir() == true {
+			continue
+		}
+
+
+		csvFile, _ := os.Open(file)
+
+    reader := csv.NewReader(bufio.NewReader(csvFile))
+
+		for {
+			line, error := reader.Read()
+			if error == io.EOF {
+			    break
+			} else if error != nil {
+			    log.Fatal(error)
+			}
+			
+			var c float64
+			var accuracy float64
+			
+			c, _ = strconv.ParseFloat(line[0],64)
+			accuracy, _ = strconv.ParseFloat(line[1],64)
+			//fmt.Println(reflect.TypeOf(newc))
+			Accuracy_set = append(Accuracy_set, Accuracy_class_svm{
+			    C: c,
+			    Accuracy: accuracy,
+			})
+		}
+
+		//Accuracy_set = removeIt(Accuracy_class{"No_of_clusters", "Accuracy"}, Accuracy_set)
+	}
+
+	var max = FindMaxAccuracy_svm(Accuracy_set)
+	writeAccuracyFile_svm(max, accuracyJsonFile)
+	Display_svm(max)
+	//fmt.Println(display)
+
+	msg:= "Best accuracy selection for rf done"
+	inChannel <- msg
+
+}
+
+func writeAccuracyFile_svm(accuracy_obj Accuracy_class_svm, accuracyJsonFile string) {
+
+    accuracyJson, _ := json.Marshal(accuracy_obj)
+    //ioutil.WriteFile("/home/mpiuser/Documents/FYP/gdelt/rf.json", accuracyJson, 0644)
+    //ioutil.WriteFile("/home/amanda/FYP/gdelt/rf.json", accuracyJson, 0644)
+		ioutil.WriteFile(accuracyJsonFile, accuracyJson, 0644)
+    fmt.Println(string(accuracyJson))
+}
+
+
+
+
 //========================functions for kmeans===================
 func simplePythonCall(progName string, itr string) string{
 	cmd := exec.Command("python3", progName, itr)
@@ -596,7 +725,7 @@ func main(){
 		time.Sleep(5000 * time.Millisecond)
 		fmt.Println(y)
 	}
-	accuracySelection_rf(outChannelModule10, 1)
+	accuracySelection_rf(outChannelModule11, 1)
 	//pythonCall("workflow/mining/randomForestClassification.py", outChannelModule5)
 	//miningPythonCall("workflow/"+commandsArray[16], outChannelModule11, "1", "2")
 	messagePassing(outChannelModule11, outChannelModule12)
@@ -609,8 +738,14 @@ func main(){
 	fmt.Println(<- outChannelModule13)
 */
 	outChannelModule41 := make(chan string, 1)
-	pythonCall("workflow/"+commandsArray[22], outChannelModule11, "4")
+	for i := 1;  i<=10; i++ {
+		y := miningPythonCall("workflow/" +commandsArray[22], "4", strconv.Itoa(i))
+		time.Sleep(5000 * time.Millisecond)
+		fmt.Println(y)
+	}
+	//pythonCall("workflow/"+commandsArray[22], outChannelModule11, "4")
 	//pythonCall("workflow/mining/knowledge_presentation_rf.py", outChannelModule6)
+	accuracySelection_svm(outChannelModule11, 1)
 	messagePassing(outChannelModule11, outChannelModule41)
 	fmt.Println(<- outChannelModule41)
 	

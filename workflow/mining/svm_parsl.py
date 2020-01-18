@@ -17,7 +17,7 @@ pd.options.mode.chained_assignment = None  # default='warn'
 
 currentModule = "svm_parsl"
 workflowNumber = sys.argv[1]
-#Iteration_no = sys.argv[2]
+Iteration_no = sys.argv[2]
 
 if workflowNumber == "1":
 	orderOfModules = userScript.orderOfModules1
@@ -56,7 +56,7 @@ for i in range(len(orderOfModules)):
 			df = pd.read_csv(outputLocation + previousModule + ".csv")
 			break
 
-#outputLocation = outputLocation + "svm/"
+outputLocation = outputLocation + "svm/"
 
 @python_app
 def svmClassifier(c, dFrame):
@@ -106,8 +106,8 @@ dfa = pd.DataFrame(return_array)
 dfa.columns = ["C", "Accuracy"]
 #print(dfa)
 
-dfa.to_csv (outputLocation + 'svm.csv', index = None, header=True)
-print("SVM model selection module completed.\n")
+dfa.to_csv (outputLocation + Iteration_no + '_svm.csv', index = None, header=True)
+print("SVM model selection ran for " + Iteration_no + " time(s)\n")
 
 # wait for all apps to complete
 #print("Job Status: {}".format([r.result() for r in results]))
