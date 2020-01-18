@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 import numpy as np
 from matplotlib.backends.backend_pdf import PdfPages
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 import sys
 
 import os,sys,inspect
@@ -23,17 +24,20 @@ if workflowNumber == "1":
 	inputDataset = userScript.inputDataset1
 	outputLocation = userScript.outputLocation1
 	kmeansAccuracy = outputLocation + userScript.kmeansAccuracy1
+	datafilesLocation = userScript.datafilesLocation
 elif workflowNumber == "2":
 	orderOfModules = userScript.orderOfModules2
 	inputDataset = userScript.inputDataset2
 	outputLocation = userScript.outputLocation2
 	kmeansAccuracy = outputLocation + userScript.kmeansAccuracy2
+	datafilesLocation = userScript.datafilesLocation
 elif workflowNumber == "3":
 	orderOfModules = userScript.orderOfModules3
 	#inputDataset = "/home/mpiuser/Documents/FYP/gdelt/kmeans.txt"
 	#inputDataset = "/home/amanda/FYP/gdelt/kmeans.txt"
 	outputLocation = userScript.outputLocation3
 	kmeansAccuracy = outputLocation + userScript.kmeansAccuracy3
+	datafilesLocation = userScript.datafilesLocation
 
 df = pd.DataFrame()
 previousModule = "dropUserDefinedColumns"
@@ -43,24 +47,46 @@ df = pd.read_csv(outputLocation + previousModule + ".csv")
 outputDataset = outputLocation + currentModule + ".csv"
 
 #data = pd.read_csv('/home/mpiuser/Documents/FYP/gdelt/missingValuesMode.csv')
-dfin = DataFrame(df, columns = ['AvgTone', 'GoldsteinScale', 'NumMentions'])
+dfin = DataFrame(df, columns = ['AvgTone', 'GoldsteinScale', 'NumMentions', 'QuadClass'])
 X = dfin.values
+y = df['label']
 
 f= open(kmeansAccuracy, "r")
-n = int(f.read())#int(sys.argv[1])
+n = int(f.read()) #int(sys.argv[1])
 
 
 kmeans = KMeans(n_clusters=n, random_state= 0).fit(X)
-dfin['clusterNo'] = kmeans.labels_[:]
+#dfin['clusterNo'] = kmeans.labels_[:]
+
+centroids = kmeans.cluster_centers_
+
+#preparing test set for prediction
+df_test = pd.read_csv(datafilesLocation + "test_kmeans.csv")
+test_selected = DataFrame(df_test, columns = ['AvgTone', 'GoldsteinScale', 'NumMentions', 'QuadClass']).values
+y_test = df_test['label'].values
+#print(test_selected)
+y_pred = kmeans.predict(test_selected)
+
+df_test['predicted_label'] = y_pred
+
+accuracyScore = accuracy_score(y_test, y_pred)
+
+print("Accuracy : " + str(accuracyScore))
+
+#df_test['SQLDATE'] = df['SQLDATE']
+
+df_test.to_csv (outputDataset, index = None, header=True)
+print("Module Completed: append label module after kmeans completed")
+
+'''
 #print(np.unique(kmeans.labels_[:]))
 u = kmeans.labels_[:]
 zeros = np.sum(u == 0)
 ones = np.sum(u == 1)
 #print(zeros)
 #print(ones)
+
 centroids = kmeans.cluster_centers_
 #print(centroids)
 #print(dfin)
-
-dfin.to_csv (outputDataset, index = None, header=True)
-print("Module Completed: append label module after kmeans completed")
+'''

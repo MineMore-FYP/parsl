@@ -66,8 +66,8 @@ When commiting - comment again
 
 #Gdelt FileSelection
 #datafilesLocation = '/home/amanda/FYP/data/'
-datafilesLocation = '/home/clusteruser/gdeltDataFiles/'
-#datafilesLocation = '/home/mpiuser/Downloads/data/'
+#datafilesLocation = '/home/clusteruser/gdeltDataFiles/'
+datafilesLocation = '/home/mpiuser/Downloads/data/'
 
 
 '''
@@ -83,7 +83,7 @@ outputLocation2 = "/home/amanda/FYP/acled/"
 outputLocation3 = "/home/amanda/FYP/gdelt/"
 '''
 
-
+'''
 #=========================CLUSTER==============================
 inputDataset1 = "/home/clusteruser/FYP/gdelt/countrySelection.csv"
 inputDataset2 = "/home/clusteruser/gdeltDataFiles/ACLED2019-Sri_Lanka.csv"
@@ -91,20 +91,20 @@ inputDataset3 = "/home/clusteruser/FYP/gdelt/missingValuesMode.csv"
 outputLocation1 = "/home/clusteruser/FYP/gdelt/"
 outputLocation2 = "/home/clusteruser/FYP/acled/"
 outputLocation3 = "/home/clusteruser/FYP/gdelt/"
-
-
 '''
+
+
 #=======================KALPANI===============================
 #input location
-inputDataset1 = "/home/mpiuser/Downloads/data/dropCountry.csv"
+inputDataset1 = "/home/mpiuser/Documents/FYP/gdelt/countrySelection.csv"
 inputDataset2 = "/home/mpiuser/Downloads/data/ACLED2019-Sri_Lanka.csv"
-inputDataset3 = "/home/mpiuser/Documents/FYP/gdelt/missingValuesMode.csv"
+inputDataset3 = "/home/mpiuser/Documents/FYP/gdelt/integrate.csv"
 
 #specify output locatiion
 outputLocation1 = "/home/mpiuser/Documents/FYP/gdelt/"
 outputLocation2 = "/home/mpiuser/Documents/FYP/acled/"
 outputLocation3 = "/home/mpiuser/Documents/FYP/gdelt/"
-'''
+
 
 '''
 #======================RAJINI=================================
@@ -125,8 +125,8 @@ outputLocation2 = "/home/mpiuser/FYP/acled/"
 '''#######################		SELECTION	####################################'''
 #GDELT variables
 #======================
-startingDate = '2019.08.01'
-endingDate = '2019.12.01'
+startingDate = '2019.04.19'
+endingDate = '2019.04.22'
 
 #select specific country records
 Actor1CountryCode = 'CE'
@@ -163,7 +163,7 @@ modeColumns1 = "all"
 modeColumns2 = "all"
 
 #drop columns
-dropCols3 = ["SQLDATE", "Actor1Geo_CountryCode", "Actor2Geo_CountryCode"]
+dropCols3 = ["ActorGeo_CountryCode", "year" , "month" , "date"]
 
 
 '''#######################		INTEGRATE LABEL	####################################'''
@@ -208,13 +208,13 @@ randomForestSplitRange1 = [2,3]
 randomForestFeaturesRange1 = [2,3]
 
 rfAccuracyJson1 = "rf.json"
-rfPredictFor1 = [[-0.25011820853917, 5.4, 2,2]]
+#rfPredictFor1 = [[-0.25011820853917, 5.4, 2,2]]
 
 
 #k_means
 numberOfClusters3 = [2,3,4,5,6,7]
-clusterLabel3 = 'QuadClass'
-otherInputs3 = ['AvgTone', 'GoldsteinScale', 'NumMentions']
+clusterLabel3 = 'label'
+otherInputs3 = ['AvgTone', 'GoldsteinScale', 'NumMentions', 'QuadClass']
 kmeansAccuracy3 = "kmeans.txt"
 
 #svm

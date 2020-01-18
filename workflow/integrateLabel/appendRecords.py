@@ -151,7 +151,10 @@ def main(x):
 	selectedFiles = []
 
 	for filename in allFiles:
-	    	selectedFiles.append(filename)
+		isFile = os.path.isfile(filename)
+		if(isFile != False):
+			#print(isDirectory)
+			selectedFiles.append(filename)
 
 	# Create new CSV file to write all CSV files generated from previous step
 	with open(outputLocation+currentModule+".csv", "w", newline='', encoding="utf8") as outcsv:

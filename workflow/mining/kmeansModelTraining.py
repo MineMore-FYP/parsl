@@ -88,12 +88,12 @@ def kmeans(n,clusterLabel, otherInputs, df):
 	#print(k_means.labels_[:])
 	#print(y_train[:])
 
-	k_means.predict(X_test)
+	kmeans.predict(X_test)
 
 	#print(k_means.labels_[:])
 	#print(y_test[:])
 
-	score = accuracy_score(y_test,k_means.predict(X_test))
+	score = accuracy_score(y_test,kmeans.predict(X_test))
 	#print('Accuracy:{0:f}'.format(score) + ' For ' + str(n) + ' clusters.\n' )
 
 

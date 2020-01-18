@@ -8,6 +8,7 @@ from matplotlib.backends.backend_pdf import PdfPages
 import sys
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 
 import os,sys,inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -27,20 +28,23 @@ if workflowNumber == "1":
 	#inputDataset = "/home/amanda/FYP/gdelt/rf.json"
 	outputLocation = userScript.outputLocation1
 	rfAccuracyJson = outputLocation + userScript.rfAccuracyJson1
-	rfPredictFor = userScript.rfPredictFor1
+	#rfPredictFor = userScript.rfPredictFor1
+	datafilesLocation = userScript.datafilesLocation
 elif workflowNumber == "2":
 	orderOfModules = userScript.orderOfModules2
 	#inputDataset = userScript.inputDataset2
 	outputLocation = userScript.outputLocation2
 	rfAccuracyJson = outputLocation + userScript.rfAccuracyJson2
-	rfPredictFor = userScript.rfPredictFor2
+	#rfPredictFor = userScript.rfPredictFor2
+	datafilesLocation = userScript.datafilesLocation
 elif workflowNumber == "3":
 	orderOfModules = userScript.orderOfModules3
 	#inputDataset = "/home/mpiuser/Documents/FYP/gdelt/test.txt"
 	#inputDataset = "/home/amanda/FYP/gdelt/test.txt"
 	outputLocation = userScript.outputLocation3
 	rfAccuracyJson = outputLocation + userScript.rfAccuracyJson3
-	rfPredictFor = userScript.rfPredictFor3
+	#rfPredictFor = userScript.rfPredictFor3
+	datafilesLocation = userScript.datafilesLocation
 
 df = pd.DataFrame()
 previousModule = "normalize"
@@ -75,6 +79,20 @@ X = sc.fit_transform(X)
 
 classifier = RandomForestClassifier(n_estimators=obj['estimators'], max_depth = obj['depth'], min_samples_split=obj['split'], max_features=obj['maxfeatures'], random_state=0)
 classifier.fit(X, y)
-y_pred = classifier.predict(rfPredictFor)
-print(y_pred)
+
+#preparing test set for prediction
+df_test = pd.read_csv(datafilesLocation + "test_rf.csv")
+test_selected = df_test.iloc[:, 1:5].values
+y_test = df_test.iloc[:, 9].values
+#print(test_selected)
+y_pred = classifier.predict(test_selected)
+
+df_test['predicted_label'] = y_pred
+
+accuracyScore = accuracy_score(y_test, y_pred)
+
+print("Accuracy : " + str(accuracyScore))
+
+df_test.to_csv(outputLocation + currentModule + '.csv', index = None, header=True)
+
 print("Module Completed: Rf knowledge presentation completed")

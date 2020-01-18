@@ -568,13 +568,15 @@ func main(){
 	pythonCall("workflow/"+commandsArray[12], outChannelModule26, "2")
 	messagePassing(outChannelModule26, outChannelModule27)
 	fmt.Println(<- outChannelModule27)
-/*
+
 	outChannelModule9 := make(chan string, 1)
 	//pythonCall("workflow/integrateLabels/integrate.py", outChannelModule5)
 	integratePythonCall("workflow/"+commandsArray[14], outChannelModule27, outChannelModule8, "1")
 	integrateMessagePassing(outChannelModule27, outChannelModule8, outChannelModule9)
 	fmt.Println(<- outChannelModule9)
-*/
+
+	
+
 	outChannelModule10 := make(chan string, 1)
 	pythonCall("workflow/"+commandsArray[8], outChannelModule27, "1")
 	//pythonCall("workflow/transformation/normalize.py", outChannelModule6)
@@ -602,8 +604,8 @@ func main(){
 	//inChannelModule31 := make(chan string,1)
 	outChannelModule31 := make(chan string, 1)
 	//pythonCall("workflow/cleaning/dropUserDefinedColumns.py", outChannelModule5)
-	go pythonCall("workflow/"+commandsArray[16], outChannelModule7, "3")
-	go messagePassing(outChannelModule7, outChannelModule31)
+	go pythonCall("workflow/"+commandsArray[16], outChannelModule9, "3")
+	go messagePassing(outChannelModule9, outChannelModule31)
 	fmt.Println(<- outChannelModule31)
 
 	outChannelModule32 := make(chan string, 1)
@@ -611,7 +613,7 @@ func main(){
 		x := miningPythonCall("workflow/" +commandsArray[17], "3", strconv.Itoa(i))
 		time.Sleep(5000 * time.Millisecond)
 		fmt.Println(x)
-  }
+  	}
 
 	accuracySelection(outChannelModule31, 3)
 	messagePassing(outChannelModule31, outChannelModule32)
@@ -622,14 +624,14 @@ func main(){
 	go pythonCall("workflow/"+commandsArray[18], outChannelModule32, "3")
 	go messagePassing(outChannelModule32, outChannelModule33)
 	fmt.Println(<- outChannelModule33)
-
+/*
 	outChannelModule34 := make(chan string, 1)
 	//pythonCall("workflow/mining/svm.py", outChannelModule5)
 	go pythonCall("workflow/"+commandsArray[19], outChannelModule33, "3")
 	//fmt.Println("svm started")
 	go messagePassing(outChannelModule33, outChannelModule34)
 	fmt.Println(<- outChannelModule34)
-
+*/
 	end := time.Now()
 
 	duration := end.Sub(start)
