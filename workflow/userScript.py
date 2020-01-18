@@ -49,6 +49,8 @@ import sys
 ##mining/knowledge_presentation_rf.py
 #22
 ##mining/svm_parsl.py
+#23
+##mining/test_svm.py
 
 orderOfModules1 = ["dataFilesIntegration", "countrySelection", "selectUserDefinedColumns", "dropUniqueColumns", "dropUserDefinedColumns",
 "dropColumnsCriteria","dropRowsCriteria","removeDuplicateRows",
@@ -60,7 +62,7 @@ orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns",
 
 orderOfModules3 = ["dropUserDefinedColumns","kmeansModelTraining","knowledge_presentation","svm"]
 
-orderOfModules4 = ["svm_parsl"]
+orderOfModules4 = ["svm_parsl", "test_svm"]
 
 maxThreads = 4
 
@@ -133,8 +135,8 @@ outputLocation2 = "/home/mpiuser/FYP/acled/"
 '''#######################		SELECTION	####################################'''
 #GDELT variables
 #======================
-startingDate = '2019.11.29'
-endingDate = '2019.12.01'
+startingDate = '2019.12.02'
+endingDate = '2019.12.05'
 
 #select specific country records
 Actor1CountryCode = 'CE'
@@ -238,3 +240,6 @@ kernel_list4 = ['linear', 'rbf' , 'poly']
 gammas4 = [10, 100]
 cs4 = [0.1, 1, 10,100]
 degrees4 = [1, 2, 3]
+
+
+svmAccuracyJson4 = "svm.json"

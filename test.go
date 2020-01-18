@@ -750,6 +750,12 @@ func main(){
 	fmt.Println(<- outChannelModule41)
 	
 	
+	outChannelModule42 := make(chan string, 1)
+	pythonCall("workflow/"+commandsArray[23], outChannelModule41, "4")
+	//pythonCall("workflow/mining/knowledge_presentation_rf.py", outChannelModule6)
+	messagePassing(outChannelModule41, outChannelModule42)
+	fmt.Println(<- outChannelModule42)
+
 /*
 	//inChannelModule31 := make(chan string,1)
 	outChannelModule31 := make(chan string, 1)
