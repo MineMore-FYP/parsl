@@ -87,6 +87,9 @@ accuracyScore = accuracy_score(y_test, y_pred)
 
 print("Accuracy : " + str(accuracyScore))
 
+f= open(outputLocation + 'TestingAccuracyRF.txt',"w+")
+f.write(str(accuracyScore))
+
 df_test.to_csv(outputLocation + currentModule + '.csv', index = None, header=True)
 
 print("Module Completed: Rf testing completed")

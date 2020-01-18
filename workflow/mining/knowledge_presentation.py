@@ -77,6 +77,9 @@ accuracyScore = accuracy_score(y_test, y_pred)
 
 print("Accuracy : " + str(accuracyScore))
 
+f= open(outputLocation + 'TestingAccuracyKmeans.txt',"w+")
+f.write(str(accuracyScore))
+
 #df_test['SQLDATE'] = df['SQLDATE']
 
 df_test.to_csv (outputDataset, index = None, header=True)
