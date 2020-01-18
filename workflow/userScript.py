@@ -14,39 +14,43 @@ import sys
 #4
 ##cleaning/dropColumnsCriteria.py
 #5
-##cleaning/dropRowsCriteria.py
-#6
-##cleaning/removeDuplicateRows.py
-#7
-##cleaning/missingValuesMode.py
-#8
-##transformation/normalize.py
-#9
-##transformation/combineColumns.py
-#10
-##integrateLabel/addLabelColumn.py
-#11
-##integrateLabel/assignCountryCode.py
-#12
-##integrateLabel/splitDate.py
-#13
-##integrateLabel/appendRecords.py
-#14
-##integrateLabel/integrate.py
-#15
-##mining/randomForestClassification.py
-#16
 ##cleaning/dropUserDefinedColumns.py
+#6
+##cleaning/dropRowsCriteria.py
+#7
+##cleaning/removeDuplicateRows.py
+#8
+##cleaning/missingValuesMode.py
+#9
+##transformation/normalize.py
+#10
+##transformation/combineColumns.py
+#11
+##integrateLabel/addLabelColumn.py
+#12
+##integrateLabel/assignCountryCode.py
+#13
+##integrateLabel/splitDate.py
+#14
+##integrateLabel/appendRecords.py
+#15
+##integrateLabel/integrate.py
+#16
+##mining/randomForestClassification.py
 #17
-##mining/kmeansModelTraining.py
+##cleaning/dropUserDefinedColumns.py
 #18
-##mining/knowledge_presentation.py
+##mining/kmeansModelTraining.py
 #19
-##mining/svm.py
+##mining/knowledge_presentation.py
 #20
+##mining/svm.py
+#21
 ##mining/knowledge_presentation_rf.py
+#22
+##mining/svm_parsl.py
 
-orderOfModules1 = ["dataFilesIntegration", "countrySelection", "selectUserDefinedColumns", "dropUniqueColumns",
+orderOfModules1 = ["dataFilesIntegration", "countrySelection", "selectUserDefinedColumns", "dropUniqueColumns", "dropUserDefinedColumns",
 "dropColumnsCriteria","dropRowsCriteria","removeDuplicateRows",
 "missingValuesMode", "combineColumns", "integrate", "normalize","randomForestClassification", "knowledge_presentation_rf"]
 
@@ -55,6 +59,8 @@ orderOfModules2 = ["selectUserDefinedColumns","dropUniqueColumns",
 "assignCountryCode", "splitDate", "appendRecords"]
 
 orderOfModules3 = ["dropUserDefinedColumns","kmeansModelTraining","knowledge_presentation","svm"]
+
+orderOfModules4 = ["svm_parsl"]
 
 maxThreads = 4
 
@@ -99,11 +105,13 @@ outputLocation3 = "/home/clusteruser/FYP/gdelt/"
 inputDataset1 = "/home/mpiuser/Documents/FYP/gdelt/countrySelection.csv"
 inputDataset2 = "/home/mpiuser/Downloads/data/ACLED2019-Sri_Lanka.csv"
 inputDataset3 = "/home/mpiuser/Documents/FYP/gdelt/integrate.csv"
+inputDataset4 = "/home/mpiuser/Documents/FYP/gdelt/normalize.csv"
 
 #specify output locatiion
 outputLocation1 = "/home/mpiuser/Documents/FYP/gdelt/"
 outputLocation2 = "/home/mpiuser/Documents/FYP/acled/"
 outputLocation3 = "/home/mpiuser/Documents/FYP/gdelt/"
+outputLocation4 = "/home/mpiuser/Documents/FYP/gdelt/"
 
 
 '''
@@ -125,8 +133,8 @@ outputLocation2 = "/home/mpiuser/FYP/acled/"
 '''#######################		SELECTION	####################################'''
 #GDELT variables
 #======================
-startingDate = '2019.04.19'
-endingDate = '2019.04.22'
+startingDate = '2019.11.29'
+endingDate = '2019.12.01'
 
 #select specific country records
 Actor1CountryCode = 'CE'
@@ -134,7 +142,7 @@ Actor2CountryCode = 'CE'
 
 #select columns
 #if "all" select everything. else give a list ["whatever1", "whatever2"]
-selectColumns1 = ["GLOBALEVENTID","SQLDATE", "Actor1Geo_CountryCode", "Actor2Geo_CountryCode", "Actor1EthnicCode", "Actor2EthnicCode", "QuadClass", "GoldsteinScale", "NumMentions", "AvgTone"]
+selectColumns1 = ["GLOBALEVENTID","SQLDATE", "Actor1Geo_CountryCode", "Actor2Geo_CountryCode", "QuadClass", "GoldsteinScale", "NumMentions", "AvgTone"]
 selectColumns2 = ["data_id", "event_date", "year", "country"]
 
 #select rows
@@ -163,6 +171,7 @@ modeColumns1 = "all"
 modeColumns2 = "all"
 
 #drop columns
+dropCols1 = ['GLOBALEVENTID']
 dropCols3 = ["ActorGeo_CountryCode", "year" , "month" , "date"]
 
 
@@ -195,6 +204,9 @@ userDefinedColumsToAggregate1 = [["Actor1Geo_CountryCode", "Actor2Geo_CountryCod
 userDefinedEncodeColumns = ["Actor1Geo_CountryCode"]
 
 
+#Rescale
+userDefinedRescaleColumns3 = ['AvgTone']
+
 '''#######################		MINING   	####################################'''
 
 #mining algorithm
@@ -220,3 +232,9 @@ kmeansAccuracy3 = "kmeans.txt"
 #svm
 label3 = 'clusterNo'
 value3 = [-0.25011820853917, 5.4, 2]
+
+#svm_parsl
+kernel_list4 = ['linear', 'rbf' , 'poly']
+gammas4 = [10, 100]
+cs4 = [0.1, 1, 10,100]
+degrees4 = [1, 2, 3]

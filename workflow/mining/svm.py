@@ -73,19 +73,6 @@ from sklearn.svm import SVC
 svm_model_linear = SVC(kernel = 'linear', C = 1).fit(X, y) 
 
 
-#preparing test set for prediction
-df_test = pd.read_csv(datafilesLocation + "test_kmeans.csv")
-test_selected = df_test.iloc[:, 1:5].values
-y_test = df_test.iloc[:, 9].values
-#print(test_selected)
-y_pred = classifier.predict(test_selected)
-
-df_test['predicted_label'] = y_pred
-
-accuracyScore = accuracy_score(y_test, y_pred)
-
-print("Accuracy : " + str(accuracyScore))
-
 svm_predictions = svm_model_linear.predict([value])
 print(svm_predictions) 
 
