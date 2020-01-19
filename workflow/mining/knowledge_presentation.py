@@ -14,7 +14,7 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir)
 
 import userScript
-
+import json
 
 currentModule = "knowledge_presentation"
 workflowNumber = sys.argv[1]
@@ -76,9 +76,18 @@ df_test['predicted_label'] = y_pred
 accuracyScore = accuracy_score(y_test, y_pred)
 
 print("Accuracy : " + str(accuracyScore))
-
-f= open(outputLocation + 'TestingAccuracyKmeans.txt',"w+")
+'''
+f= open(outputLocation + 'testingAccuracy/TestingAccuracyKmeans.txt',"w+")
 f.write(str(accuracyScore))
+'''
+
+Algodict = {"Algorithm": "Kmeans",
+"Accuracy": accuracyScore
+}
+
+
+with open(outputLocation + 'testingAccuracy/TestingAccuracyKmeans.json', 'w', encoding='utf-8') as f:
+    json.dump(Algodict, f, ensure_ascii=False, indent=4)
 
 #df_test['SQLDATE'] = df['SQLDATE']
 

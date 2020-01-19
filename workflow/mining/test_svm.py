@@ -93,14 +93,19 @@ df_test['predicted_label'] = y_pred
 accuracyScore = accuracy_score(y_test, y_pred)
 
 print("Accuracy : " + str(accuracyScore))
-
-f= open(outputLocation + 'TestingAccuracySVM.txt',"w+")
+'''
+f= open(outputLocation + 'testingAccuracy/TestingAccuracySVM.txt',"w+")
 f.write(str(accuracyScore))
+'''
 
-'''
-with open(outputLocation + 'TestingAccuracySVM.json', 'w', encoding='utf-8') as f:
-    json.dump(accuracyScore, f, ensure_ascii=False, indent=4)
-'''
+Algodict = {"Algorithm": "SVM",
+"Accuracy": accuracyScore
+}
+
+
+with open(outputLocation + 'testingAccuracy/TestingAccuracySVM.json', 'w', encoding='utf-8') as f:
+    json.dump(Algodict, f, ensure_ascii=False, indent=4)
+
 df_test.to_csv(outputLocation + currentModule + '.csv', index = None, header=True)
 
 print("Module Completed: SVM testing completed")

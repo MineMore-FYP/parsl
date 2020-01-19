@@ -14,6 +14,7 @@ import (
 	"path/filepath"
 	"encoding/csv"
 	"io"
+	//"reflect"
 )
 
 func pythonCall(progName string, inChannel chan <- string, workflowNumber string) {
@@ -51,6 +52,7 @@ func integratePythonCall(progName string, inChannel1 chan <- string, inChannel2 
 	inChannel1 <- msg
 	inChannel2 <- msg
 }
+
 
 
 func simplePythonCall1(progName string){
@@ -501,8 +503,124 @@ func writeAccuracyFile(n int64, accuracyKmeansFile string) {
 }
 
 
-///=====================================================
+///=======================Best algorithm selection==============================
 
+type Accuracy_class_algo struct {
+    Algorithm string `json:"Algorithm"`
+    Accuracy float64 `json:"Accuracy"`
+}
+
+func FindMaxAccuracy_algo(Accuracy_set []Accuracy_class_algo) (max Accuracy_class_algo) {
+
+	max = Accuracy_set[0]
+	for _, accuracy_obj := range Accuracy_set {
+		if accuracy_obj.Accuracy > max.Accuracy {
+			max = accuracy_obj
+		}
+	}
+	return max
+}
+
+func Display_algo(accuracy_obj Accuracy_class_algo){
+	fmt.Println("Best Algorithm: ", accuracy_obj.Algorithm)
+	fmt.Println("Accuracy: ", accuracy_obj.Accuracy)
+}
+
+
+func algorithmSelection (inChannel chan <- string, workflowNumber int) {
+	fmt.Println("Best mining algorithm selection started")
+	var files []string
+
+	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.outputLocation" + strconv.Itoa(workflowNumber))
+	out, err := cmd.CombinedOutput()
+
+	if err != nil {
+		fmt.Println(err)
+		// Exit with status 3.
+		os.Exit(3)
+	} else if out == nil{
+		os.Exit(3)
+	}
+	root := string(out)[:len(out)-1]  + "testingAccuracy/"
+	bestAlgoFile := string(out)[:len(out)-1] + "bestAlgoFile.json"
+
+
+	
+	  err1 := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+	  files = append(files, path)
+	  return nil})
+
+		fmt.Println(files)
+	  if err1 != nil {
+	  	panic(err1)
+	  }
+
+	var Accuracy_set []Accuracy_class_algo
+
+  	for _, file := range files {
+  	//if directory ignore
+		fi, err2 := os.Stat(file)
+		if err2 != nil {
+			fmt.Println(err2)
+			return
+		}
+
+		var mode = fi.Mode();
+		if mode.IsDir() == true {
+			continue
+		}
+
+		var accuracy_class_algo Accuracy_class_algo
+		jsonFile, err := os.Open(file)
+	    	// if we os.Open returns an error then handle it
+	    	if err != nil {
+			fmt.Println(err)
+	    	}
+		byteValue, _ := ioutil.ReadAll(jsonFile)
+	
+
+		json.Unmarshal(byteValue, &accuracy_class_algo)
+		fmt.Println(accuracy_class_algo)
+		
+			
+		//var algorithm string
+		//var accuracy float64
+		//fmt.Println(reflect.TypeOf(accuracy_class_algo.Algorithm))
+
+		algorithm := accuracy_class_algo.Algorithm
+		accuracy := accuracy_class_algo.Accuracy
+
+		//fmt.Println(reflect.TypeOf(algorithm))
+		//fmt.Println(reflect.TypeOf(accuracy))
+
+		Accuracy_set = append(Accuracy_set, Accuracy_class_algo{
+			Algorithm: algorithm,
+			Accuracy: accuracy,
+		})	
+	
+	}
+
+	var max = FindMaxAccuracy_algo(Accuracy_set)
+	writeAccuracyFile_algo(max, bestAlgoFile)
+	Display_algo(max)
+	//fmt.Println(display)
+
+	msg:= "Best algorithm selection completed"
+	fmt.Println(msg)
+	inChannel <- msg
+
+}
+
+func writeAccuracyFile_algo(accuracy_obj Accuracy_class_algo, accuracyJsonFile string) {
+
+    accuracyJson, _ := json.Marshal(accuracy_obj)
+    //ioutil.WriteFile("/home/mpiuser/Documents/FYP/gdelt/rf.json", accuracyJson, 0644)
+    //ioutil.WriteFile("/home/amanda/FYP/gdelt/rf.json", accuracyJson, 0644)
+		ioutil.WriteFile(accuracyJsonFile, accuracyJson, 0644)
+    fmt.Println(string(accuracyJson))
+}
+
+//=============================================================
 func messagePassing(inChannel <- chan string, outChannel chan <- string ){
 	msg := <- inChannel
 	outChannel <- msg
@@ -511,6 +629,13 @@ func integrateMessagePassing(inChannel1 <- chan string, inChannel2 <- chan strin
 	msg1 := <- inChannel1
 	msg2 := <- inChannel2
 	outChannel <- msg1 + msg2
+}
+
+func integrateMessagePassing2(inChannel1 <- chan string, inChannel2 <- chan string, inChannel3 <- chan string, outChannel chan <- string ){
+	msg1 := <- inChannel1
+	msg2 := <- inChannel2
+	msg3 := <- inChannel3
+	outChannel <- msg1 + msg2 + msg3
 }
 
 func numOfFiles(folder string) int{
@@ -780,6 +905,14 @@ func main(){
 	go pythonCall("workflow/"+commandsArray[19], outChannelModule32, "3")
 	go messagePassing(outChannelModule32, outChannelModule33)
 	fmt.Println(<- outChannelModule33)
+
+
+	outChannelModule14 := make(chan string, 1)
+	algorithmSelection(outChannelModule33, 1)
+	messagePassing(outChannelModule33, outChannelModule14)
+	fmt.Println(<- outChannelModule14)
+
+	//algorithmSelection(1)
 /*
 	outChannelModule34 := make(chan string, 1)
 	//pythonCall("workflow/mining/svm.py", outChannelModule5)

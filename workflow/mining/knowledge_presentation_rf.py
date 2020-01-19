@@ -86,10 +86,19 @@ df_test['predicted_label'] = y_pred
 accuracyScore = accuracy_score(y_test, y_pred)
 
 print("Accuracy : " + str(accuracyScore))
-
-f= open(outputLocation + 'TestingAccuracyRF.txt',"w+")
+'''
+f= open(outputLocation + 'testingAccuracy/TestingAccuracyRF.txt',"w+")
 f.write(str(accuracyScore))
+'''
 
-df_test.to_csv(outputLocation + currentModule + '.csv', index = None, header=True)
+Algodict = {"Algorithm": "RF",
+"Accuracy": accuracyScore
+}
+
+
+with open(outputLocation + 'testingAccuracy/TestingAccuracyRF.json', 'w', encoding='utf-8') as f:
+    json.dump(Algodict, f, ensure_ascii=False, indent=4)
+
+#df_test.to_csv(outputLocation + currentModule + '.csv', index = None, header=True)
 
 print("Module Completed: Rf testing completed")
