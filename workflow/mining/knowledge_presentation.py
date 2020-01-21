@@ -38,20 +38,20 @@ elif workflowNumber == "3":
 	outputLocation = userScript.outputLocation3
 	kmeansAccuracy = outputLocation + userScript.kmeansAccuracy3
 	datafilesLocation = userScript.datafilesLocation
-'''
+
 df = pd.DataFrame()
 previousModule = "dropUserDefinedColumns"
 df = pd.read_csv(outputLocation + previousModule + ".csv")
-'''
+
 
 outputDataset = outputLocation + currentModule + ".csv"
 
-'''
+
 #data = pd.read_csv('/home/mpiuser/Documents/FYP/gdelt/missingValuesMode.csv')
 dfin = DataFrame(df, columns = ['AvgTone', 'GoldsteinScale', 'NumMentions', 'QuadClass'])
 X = dfin.values
 y = df['label']
-'''
+
 
 #read json
 f= open(kmeansAccuracy, "r")
@@ -63,7 +63,7 @@ df_test = pd.read_csv(datafilesLocation + "kmeans_test_set.csv")
 X_test = DataFrame(df_test, columns = ['AvgTone', 'GoldsteinScale', 'NumMentions', 'QuadClass']).values
 y_test = df_test['label'].values
 
-kmeans = KMeans(n_clusters=n, random_state= 0).fit(X_test)
+kmeans = KMeans(n_clusters=n, random_state= 0).fit(X)
 #dfin['clusterNo'] = kmeans.labels_[:]
 #centroids = kmeans.cluster_centers_
 

@@ -45,11 +45,11 @@ elif workflowNumber == "3":
 	rfAccuracyJson = outputLocation + userScript.rfAccuracyJson3
 	#rfPredictFor = userScript.rfPredictFor3
 	datafilesLocation = userScript.datafilesLocation
-'''
+
 df = pd.DataFrame()
 previousModule = "normalize"
 df = pd.read_csv(outputLocation + previousModule + ".csv")
-'''
+
 #outputDataset = outputLocation + currentModule + ".csv"
 
 #read json file
@@ -64,10 +64,10 @@ print("usd: " + str(obj['usd']))
 print("eur: " + str(obj['eur']))
 print("gbp: " + str(obj['gbp']))
 '''
-'''
+
 X = df.iloc[:, 1:5].values
 y = df.iloc[:, 9].values
-'''
+
 
 #preparing test set for prediction
 df_test = pd.read_csv(datafilesLocation + "rf_test_set.csv")
@@ -75,7 +75,7 @@ X_test = df_test.iloc[:, 1:5].values
 y_test = df_test.iloc[:, 9].values
 
 classifier = RandomForestClassifier(n_estimators=obj['estimators'], max_depth = obj['depth'], min_samples_split=obj['split'], max_features=obj['maxfeatures'], random_state=0)
-classifier.fit(X_test, y_test)
+classifier.fit(X, y)
 
 
 #print(test_selected)
