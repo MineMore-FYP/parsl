@@ -49,10 +49,10 @@ for i in range(len(orderOfModules)):
 			df = pd.read_csv(outputLocation + previousModule + ".csv")
 			break
 
-outputLocation = outputLocation + "rf/"
+#outputLocation = outputLocation + "rf/"
 
 @python_app
-def rfClassifier(estimators, depth, split, features, dFrame):
+def rfClassifier(estimators, depth, split, features, dFrame, outputLocation, Iteration_no):
 	dataset = dFrame
 	dataset.head()
 
@@ -73,6 +73,14 @@ def rfClassifier(estimators, depth, split, features, dFrame):
 	from sklearn.ensemble import RandomForestClassifier
 	classifier = RandomForestClassifier(n_estimators=estimators, max_depth = depth, min_samples_split=split, max_features=features, random_state=0)
 	classifier.fit(X_train, y_train)
+
+	import pickle
+	# Save the model to a file in the rf directory
+	pkl_filename = Iteration_no + "_" + str(estimators) + str(depth) + str(split) + str(features) + "_pickle_model.pkl"
+	with open(outputLocation + "picklefiles_rf/" + pkl_filename, 'wb') as file:
+	    pickle.dump(classifier, file)
+
+
 	y_pred = classifier.predict(X_test)
 
 	from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
@@ -81,7 +89,7 @@ def rfClassifier(estimators, depth, split, features, dFrame):
 	#print(accuracy_score(y_test, y_pred))
 ##	return str(confusion_matrix(y_test,y_pred)) + '\n' + str(classification_report(y_test,y_pred)) + '\n' + str(accuracy_score(y_test, y_pred))
 	accuracyScore = accuracy_score(y_test, y_pred)
-	retArray = [estimators, depth, split,features, accuracyScore]
+	retArray = [estimators, depth, split,features, accuracyScore, pkl_filename]
 	return retArray
 
 results = []
@@ -96,7 +104,7 @@ for i in range(randomForestEstimatorRange[0], randomForestEstimatorRange[1]):
 	for j in range (randomForestDepthRange[0], randomForestDepthRange[1]):
 		for k in range(randomForestSplitRange[0],randomForestSplitRange[1]):
 			for l in range(randomForestFeaturesRange[0],randomForestFeaturesRange[1]):
-				x = rfClassifier(i,j,k,l,df)
+				x = rfClassifier(i,j,k,l,df, outputLocation, Iteration_no)
 				results.append(x)
 
 
@@ -104,10 +112,10 @@ for i in range(randomForestEstimatorRange[0], randomForestEstimatorRange[1]):
 return_array = [r.result() for r in results]
 
 dfa=pd.DataFrame(return_array)
-dfa.columns = ["Estimators","Depth","Split","MaxFeatures", "Accuracy"]
+dfa.columns = ["Estimators","Depth","Split","MaxFeatures", "Accuracy", "PickleFileName"]
 #print(dfa)
 
-dfa.to_csv (outputLocation + Iteration_no + '_rf.csv', index = None, header=True)
+dfa.to_csv (outputLocation + "rf/" + Iteration_no + '_rf.csv', index = None, header=True)
 print("Random forest classification ran for " + Iteration_no + " time(s).\n")
 
 # wait for all apps to complete

@@ -17,7 +17,7 @@ sys.path.insert(0,parentdir)
 
 import userScript
 import json
-
+import pickle
 
 currentModule = "test_svm"
 workflowNumber = sys.argv[1]
@@ -54,10 +54,11 @@ elif workflowNumber == "4":
 	#rfPredictFor = userScript.rfPredictFor3
 	datafilesLocation = userScript.datafilesLocation
 
+'''
 df = pd.DataFrame()
 previousModule = "normalize"
 df = pd.read_csv(outputLocation + previousModule + ".csv")
-
+'''
 #outputDataset = outputLocation + currentModule + ".csv"
 
 #read json file
@@ -72,21 +73,27 @@ print("usd: " + str(obj['usd']))
 print("eur: " + str(obj['eur']))
 print("gbp: " + str(obj['gbp']))
 '''
-
+'''
 X = df.iloc[:, 1:5].values
 y = df.iloc[:, 9].values #acled label
-
+'''
 
 #preparing test set for prediction
 df_test = pd.read_csv(datafilesLocation + "svm_test_set.csv")
 X_test = df_test.iloc[:, 1:5].values
 y_test = df_test.iloc[:, 9].values
 
+'''
 classifier = svm.SVC(kernel='rbf', C= obj['c'], gamma = 'auto')
 classifier.fit(X, y)
+'''
 
+pkl_filename = obj['model']
+# Load from file
+with open(outputLocation + "picklefiles_svm/" + pkl_filename, 'rb') as file:
+    pickle_model = pickle.load(file)
 
-y_pred = classifier.predict(X_test)
+y_pred = pickle_model.predict(X_test)
 
 df_test['predicted_label'] = y_pred
 

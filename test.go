@@ -70,6 +70,7 @@ type Accuracy_class_rf struct {
     Split int64 `json:"split"`
     MaxFeatures int64 `json:"maxfeatures"`
     Accuracy float64 `json:"accuracy"`
+    Model string `json:"model"`
 }
 
 func FindMaxAccuracy_rf(Accuracy_set []Accuracy_class_rf) (max Accuracy_class_rf) {
@@ -164,11 +165,13 @@ func accuracySelection_rf (inChannel chan <- string, workflowNumber int) {
 			var split int64
 			var maxfeatures int64
 			var accuracy float64
+			var model string
 			estimators, _ = strconv.ParseInt(line[0],10,0)
 			depth, _ = strconv.ParseInt(line[1],10,0)
 			split, _ = strconv.ParseInt(line[2],10,0)
 			maxfeatures, _ = strconv.ParseInt(line[3],10,0)
 			accuracy, _ = strconv.ParseFloat(line[4],64)
+			model = line[5]
 			//fmt.Println(reflect.TypeOf(newc))
 			Accuracy_set = append(Accuracy_set, Accuracy_class_rf{
 			    Estimators: estimators,
@@ -176,6 +179,7 @@ func accuracySelection_rf (inChannel chan <- string, workflowNumber int) {
 			    Split: split,
 			    MaxFeatures: maxfeatures,
 			    Accuracy: accuracy,
+			    Model: model,
 			})
 		}
 
@@ -207,6 +211,7 @@ func writeAccuracyFile_rf(accuracy_obj Accuracy_class_rf, accuracyJsonFile strin
 type Accuracy_class_svm struct {
     C float64 `json:"c"`
     Accuracy float64 `json:"accuracy"`
+    Model string `json:"model"`
 }
 
 func FindMaxAccuracy_svm(Accuracy_set []Accuracy_class_svm) (max Accuracy_class_svm) {
@@ -296,13 +301,15 @@ func accuracySelection_svm (inChannel chan <- string, workflowNumber int) {
 			
 			var c float64
 			var accuracy float64
-			
+			var model string
 			c, _ = strconv.ParseFloat(line[0],64)
 			accuracy, _ = strconv.ParseFloat(line[1],64)
+			model = line[2]
 			//fmt.Println(reflect.TypeOf(newc))
 			Accuracy_set = append(Accuracy_set, Accuracy_class_svm{
 			    C: c,
 			    Accuracy: accuracy,
+			    Model: model,
 			})
 		}
 
@@ -369,6 +376,7 @@ func removeIt(ss Accuracy_class, ssSlice []Accuracy_class) []Accuracy_class {
 type Accuracy_class struct {
     Clusters int64 `json:"clusters"`
     Accuracy float64 `json:"accuracy"`
+    Model string `json:"model"`
 }
 
 func FindMaxAccuracy(Accuracy_set []Accuracy_class) (max Accuracy_class) {
@@ -401,7 +409,7 @@ func accuracySelection (inChannel chan <- string, workflowNumber int) {
 		os.Exit(3)
 	}
 	root := string(out)[:len(out)-1]  + "kmeans/"
-	accuracyKmeansFile := string(out)[:len(out)-1] + "kmeans.txt"
+	accuracyKmeansFile := string(out)[:len(out)-1] + "kmeans.json"
 
 	/*
 	cmd := exec.Command("python", "-c", "from workflow import userScript; print userScript.outputLocation3")
@@ -455,12 +463,15 @@ func accuracySelection (inChannel chan <- string, workflowNumber int) {
 
 			var clusters int64
 			var accuracy float64
+			var model string
 			clusters, _ = strconv.ParseInt(line[0],10,0)
 			accuracy, _ = strconv.ParseFloat(line[1],64)
+			model = line[2]
 			//fmt.Println(reflect.TypeOf(newc))
 			Accuracy_set = append(Accuracy_set, Accuracy_class{
 			Clusters: clusters,
 			Accuracy: accuracy,
+			Model: model,
 			})
 		}
 
@@ -471,8 +482,8 @@ func accuracySelection (inChannel chan <- string, workflowNumber int) {
 	//fmt.Println(string(accuracyJson))
 	//fmt.Println(Accuracy_set)
 	var max = FindMaxAccuracy(Accuracy_set)
-	var n = max.Clusters
-	writeAccuracyFile(n, accuracyKmeansFile)
+	//var model = max.Model
+	writeAccuracyFile(max, accuracyKmeansFile)
 	Display(max)
 	//fmt.Println(display)
 
@@ -481,14 +492,15 @@ func accuracySelection (inChannel chan <- string, workflowNumber int) {
 
 }
 
-func writeAccuracyFile(n int64, accuracyKmeansFile string) {
+/*
+func writeAccuracyFile(model string, accuracyKmeansFile string) {
     //f, err := os.Create("/home/mpiuser/Documents/FYP/gdelt/kmeans.txt")
     f, err := os.Create(accuracyKmeansFile)
     if err != nil {
         fmt.Println(err)
         return
     }
-    l, err := f.WriteString(strconv.FormatInt(n,10))
+    l, err := f.WriteString(model)
     if err != nil {
         fmt.Println(err)
         f.Close()
@@ -500,6 +512,16 @@ func writeAccuracyFile(n int64, accuracyKmeansFile string) {
         fmt.Println(err)
         return
     }
+}
+*/
+
+func writeAccuracyFile(accuracy_obj Accuracy_class, accuracyJsonFile string) {
+
+    accuracyJson, _ := json.Marshal(accuracy_obj)
+    //ioutil.WriteFile("/home/mpiuser/Documents/FYP/gdelt/rf.json", accuracyJson, 0644)
+    //ioutil.WriteFile("/home/amanda/FYP/gdelt/rf.json", accuracyJson, 0644)
+		ioutil.WriteFile(accuracyJsonFile, accuracyJson, 0644)
+    fmt.Println(string(accuracyJson))
 }
 
 

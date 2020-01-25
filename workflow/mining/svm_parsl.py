@@ -56,10 +56,10 @@ for i in range(len(orderOfModules)):
 			df = pd.read_csv(outputLocation + previousModule + ".csv")
 			break
 
-outputLocation = outputLocation + "svm/"
+#outputLocation = outputLocation + "svm/"
 
 @python_app
-def svmClassifier(c, dFrame):
+def svmClassifier(c, dFrame, outputLocation, Iteration_no):
 	dataset = dFrame
 	dataset.head()
 
@@ -80,6 +80,13 @@ def svmClassifier(c, dFrame):
 	from sklearn import svm
 	classifier = svm.SVC(kernel='rbf', C= c)
 	classifier.fit(X_train, y_train)
+
+	import pickle
+	# Save the model to a file in the rf directory
+	pkl_filename = Iteration_no + "_" + str(c) + "_pickle_model.pkl"
+	with open(outputLocation + "picklefiles_svm/" + pkl_filename, 'wb') as file:
+	    pickle.dump(classifier, file)
+
 	y_pred = classifier.predict(X_test)
 
 	from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
@@ -88,14 +95,14 @@ def svmClassifier(c, dFrame):
 	#print(accuracy_score(y_test, y_pred))
 ##	return str(confusion_matrix(y_test,y_pred)) + '\n' + str(classification_report(y_test,y_pred)) + '\n' + str(accuracy_score(y_test, y_pred))
 	accuracyScore = accuracy_score(y_test, y_pred)
-	retArray = [c, accuracyScore]
+	retArray = [c, accuracyScore, pkl_filename]
 	return retArray
 
 results = []
 
 
 for i in cs:
-	x = svmClassifier(i,df)
+	x = svmClassifier(i,df,outputLocation, Iteration_no)
 	results.append(x)
 
 
@@ -103,10 +110,10 @@ for i in cs:
 return_array = [r.result() for r in results]
 
 dfa = pd.DataFrame(return_array)
-dfa.columns = ["C", "Accuracy"]
+dfa.columns = ["C", "Accuracy", "PickleFileName"]
 #print(dfa)
 
-dfa.to_csv (outputLocation + Iteration_no + '_svm.csv', index = None, header=True)
+dfa.to_csv (outputLocation + "svm/" + Iteration_no + '_svm.csv', index = None, header=True)
 print("SVM model selection ran for " + Iteration_no + " time(s)\n")
 
 # wait for all apps to complete

@@ -17,7 +17,7 @@ sys.path.insert(0,parentdir)
 
 import userScript
 import json
-
+import pickle
 
 currentModule = "knowledge_presentation_rf"
 workflowNumber = sys.argv[1]
@@ -46,10 +46,11 @@ elif workflowNumber == "3":
 	#rfPredictFor = userScript.rfPredictFor3
 	datafilesLocation = userScript.datafilesLocation
 
+'''
 df = pd.DataFrame()
 previousModule = "normalize"
 df = pd.read_csv(outputLocation + previousModule + ".csv")
-
+'''
 #outputDataset = outputLocation + currentModule + ".csv"
 
 #read json file
@@ -64,22 +65,30 @@ print("usd: " + str(obj['usd']))
 print("eur: " + str(obj['eur']))
 print("gbp: " + str(obj['gbp']))
 '''
-
+'''
 X = df.iloc[:, 1:5].values
 y = df.iloc[:, 9].values
-
+'''
 
 #preparing test set for prediction
 df_test = pd.read_csv(datafilesLocation + "rf_test_set.csv")
 X_test = df_test.iloc[:, 1:5].values
 y_test = df_test.iloc[:, 9].values
 
+'''
 classifier = RandomForestClassifier(n_estimators=obj['estimators'], max_depth = obj['depth'], min_samples_split=obj['split'], max_features=obj['maxfeatures'], random_state=0)
 classifier.fit(X, y)
+'''
+pkl_filename = obj['model']
+# Load from file
+with open(outputLocation + "picklefiles_rf/" + pkl_filename, 'rb') as file:
+    pickle_model = pickle.load(file)
+    
+# Calculate the accuracy score and predict target values
+#score = pickle_model.score(X_test, y_test)
+#print("Test accuracy: " + str(score))
+y_pred = pickle_model.predict(X_test)
 
-
-#print(test_selected)
-y_pred = classifier.predict(X_test)
 
 df_test['predicted_label'] = y_pred
 
@@ -99,6 +108,6 @@ Algodict = {"Algorithm": "RF",
 with open(outputLocation + 'testingAccuracy/TestingAccuracyRF.json', 'w', encoding='utf-8') as f:
     json.dump(Algodict, f, ensure_ascii=False, indent=4)
 
-#df_test.to_csv(outputLocation + currentModule + '.csv', index = None, header=True)
+df_test.to_csv(outputLocation + currentModule + '.csv', index = None, header=True)
 
 print("Module Completed: Rf testing completed")

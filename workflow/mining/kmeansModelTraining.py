@@ -57,7 +57,7 @@ for i in range(len(orderOfModules)):
 			previousModule = orderOfModules[i-1]
 			df = pd.read_csv(outputLocation + previousModule + ".csv")
 			break
-outputLocation = outputLocation + "kmeans/"
+#outputLocation = outputLocation + "kmeans/"
 
 
 #print(df)
@@ -67,7 +67,7 @@ outputLocation = outputLocation + "kmeans/"
 
 
 @python_app
-def kmeans(n,clusterLabel, otherInputs, df):
+def kmeans(n,clusterLabel, otherInputs, df, outputLocation, Iteration_no):
 	import pandas as pd
 	from sklearn.cluster import KMeans
 	import numpy as np
@@ -82,11 +82,18 @@ def kmeans(n,clusterLabel, otherInputs, df):
 
 	X_train, X_test,y_train,y_test =  train_test_split(X,y,test_size=0.20,random_state=70)
 
-	k_means = KMeans(n_clusters=n)
-	kmeans = k_means.fit(X_train)
+	kmeans = KMeans(n_clusters=n)
+	kmeans.fit(X_train)
 
 	#print(k_means.labels_[:])
 	#print(y_train[:])
+	
+	import pickle
+	# Save the model to a file in the rf directory
+	pkl_filename = Iteration_no + "_" + str(n) + "_pickle_model.pkl"
+	with open(outputLocation + "picklefiles_kmeans/" + pkl_filename, 'wb') as file:
+	    pickle.dump(kmeans, file)
+	
 
 	kmeans.predict(X_test)
 
@@ -99,13 +106,13 @@ def kmeans(n,clusterLabel, otherInputs, df):
 
 	#.reshape(-1, 1)
 	#pass all the input parameters and the score
-	ClusterNo_accuracy = [n,score]
+	ClusterNo_accuracy = [n,score,pkl_filename]
 	return ClusterNo_accuracy
 
 
 results = []
 for i in numberOfClusters:
-	app_future = kmeans(i, clusterLabel, otherInputs, df)
+	app_future = kmeans(i, clusterLabel, otherInputs, df, outputLocation, Iteration_no)
 	results.append(app_future)
 
 # print each job status, initially all are running
@@ -115,10 +122,10 @@ for i in numberOfClusters:
 return_array = [r.result() for r in results]
 
 dfa=pd.DataFrame(return_array)
-dfa.columns = ["No_of_clusters", "Accuracy"]
+dfa.columns = ["No_of_clusters", "Accuracy", "PickleFileName"]
 #print(dfa)
 
-dfa.to_csv (outputLocation + Iteration_no + '_kmeans.csv', index = None, header=True)
+dfa.to_csv (outputLocation + "kmeans/" + Iteration_no + '_kmeans.csv', index = None, header=True)
 print("Kmeans with clusters 2,3,4,5,6,7 ran for " + Iteration_no + " time(s).\n")
 
 # print each job status, they will now be finished

@@ -229,7 +229,7 @@ rfAccuracyJson1 = "rf.json"
 numberOfClusters3 = [2,3,4,5,6,7]
 clusterLabel3 = 'label'
 otherInputs3 = ['AvgTone', 'GoldsteinScale', 'NumMentions', 'QuadClass']
-kmeansAccuracy3 = "kmeans.txt"
+kmeansAccuracy3 = "kmeans.json"
 
 #svm
 label3 = 'clusterNo'
