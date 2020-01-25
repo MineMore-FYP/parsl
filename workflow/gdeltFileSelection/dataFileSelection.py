@@ -149,8 +149,12 @@ for filenameNew in modifiedSelectedFiles:
 	#select specific country records
 	df2 = df.loc[(df['Actor1Geo_CountryCode'] == userScript.Actor1CountryCode) | (df['Actor2Geo_CountryCode'] == userScript.Actor2CountryCode)]
 	#print(df2)
+	
+	#print(filenameNew)
+
+	dfnew = df2[df2.SQLDATE == int(filenameNew[0:8])]
 
 	#overwrite the csv file
-	df2.to_csv(path+  "modifiedSelectedFiles/" + filenameNew, index = False, header=True)
+	dfnew.to_csv(path+  "modifiedSelectedFiles/" + filenameNew, index = False, header=True)
 
 #print("Select country completed")

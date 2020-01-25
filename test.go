@@ -885,7 +885,7 @@ func main(){
 	//inChannelModule31 := make(chan string,1)
 	outChannelModule31 := make(chan string, 1)
 	//pythonCall("workflow/cleaning/dropUserDefinedColumns.py", outChannelModule5)
-	go pythonCall("workflow/"+commandsArray[5], outChannelModule10, "3")
+	go pythonCall("workflow/"+commandsArray[4], outChannelModule10, "3")
 	go messagePassing(outChannelModule10, outChannelModule31)
 	fmt.Println(<- outChannelModule31)
 

@@ -12,9 +12,9 @@ import sys
 #3
 ##cleaning/dropUniqueColumns.py
 #4
-##cleaning/dropColumnsCriteria.py
-#5
 ##cleaning/dropUserDefinedColumns.py
+#5
+##cleaning/dropColumnsCriteria.py
 #6
 ##cleaning/dropRowsCriteria.py
 #7
